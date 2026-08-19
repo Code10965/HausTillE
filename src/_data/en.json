@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "title_home": "Home. Arrive.",
+    "description_home": "Bright pre-war apartment in Berlin-Kreuzberg with its own garden – available from December 1st.",
+    "title_imprint": "Imprint — Home. Arrive.",
+    "description_imprint": "Imprint according to § 5 TMG.",
+    "title_privacy": "Privacy Policy — Home. Arrive.",
+    "description_privacy": "Privacy policy according to Art. 13 GDPR."
+  },
+  "nav": {
+    "menu_aria": "Open menu",
+    "lang_aria": "Change language",
+    "contact_aria": "Contact",
+    "contact_email_label": "Email",
+    "copy_button": "Copy address",
+    "copied_button": "Copied ✓",
+    "back_to_home": "Back to homepage",
+    "menu_overview": "Overview",
+    "menu_neighborhood": "Location",
+    "menu_photos": "Photos",
+    "menu_floorplan": "Floor plan",
+    "menu_features": "Details",
+    "menu_contact": "Contact",
+    "lang_de": "Deutsch",
+    "lang_en": "English",
+    "lang_nl": "Nederlands"
+  },
+  "home": {
+    "hero": {
+      "tag": "Available from December 1st",
+      "title_line1": "Arrive.",
+      "title_line2": "Be home.",
+      "sub": "Open, loft-like rooms. High ceilings. Your own little garden in the courtyard. Right in the heart of the nicest part of Kreuzberg. With a house and courtyard community that truly lives up to its name.",
+      "scroll_hint": "Scroll to read"
+    },
+    "overview": {
+      "eyebrow": "01 — At a glance",
+      "title": "A space to arrive in",
+      "p1": "The bright apartment is spread across two units: one in the front building with windows facing the street and the courtyard, one in the side wing overlooking the green courtyard.",
+      "p2": "Both units impress with loft-like, open rooms that flow into one another and let in plenty of light. An old wooden door connects the two areas.",
+      "p3": "The front unit has a guest bathroom, kitchenette and garden access; the side wing has a bathroom, sleeping nook, walk-in wardrobe and, likewise, direct access to the garden.",
+      "facts": [
+        { "label": "Rooms", "value": "2" },
+        { "label": "Size", "value": "130 m²" },
+        { "label": "Building", "value": "Pre-war, ground floor" },
+        { "label": "Energy certificate", "value": "on request" },
+        { "label": "Base rent", "value": "€1,430" },
+        { "label": "Utilities", "value": "€320" },
+        { "label": "Special feature", "value": "2 separate entrances" }
+      ]
+    },
+    "neighborhood": {
+      "eyebrow": "02 — Life around it",
+      "title": "A neighbourhood to feel good in",
+      "p1_label": "Relaxation: ",
+      "p1": "It's just a three-minute walk to Viktoriapark or Gleisdreieckpark for fresh air, with restaurants inviting you to linger all around. Bergmannkiez is seven minutes away, and Yorck cinema is right around the corner.",
+      "p2_label": "Everyday needs: ",
+      "p2": "Everything important is within walking distance: LPG, Rewe, Lidl and Aldi close by, the bus stop right outside the door, and the S-Bahn and U-Bahn five minutes away.",
+      "p3_label": "House and courtyard community: ",
+      "p3": "Shared courtyard parties are simply part of it – life together in the building is friendly, relaxed and anything but anonymous.",
+      "grid": ["Shopping<br>around the corner", "S-Bahn & U-Bahn<br>within walking distance", "Parks & restaurants<br>nearby"]
+    },
+    "photos": {
+      "eyebrow": "03 — What it looks like",
+      "title": "A place to linger",
+      "intro": "Imagine wandering through the rooms with a cup of coffee in hand. Have you already found your favourite spot?",
+      "labels": {
+        "Garten": "Photo — Garden",
+        "Vorne": "Photo — Front",
+        "Hinten": "Photo — Back",
+        "Bad": "Photo — Bathroom",
+        "Video vorne": "Video — Front",
+        "Video hinten": "Video — Back"
+      }
+    },
+    "floorplan": {
+      "eyebrow": "04 — Keeping the overview",
+      "title": "Lines that become home",
+      "intro": "Two apartments were combined into one generous home – resulting in a floor plan that is truly special.",
+      "labels": {
+        "Grundriss Vorne": "Floor plan — Front",
+        "Grundriss Hinten": "Floor plan — Back",
+        "Grundriss Gesamt": "Floor plan — Overall"
+      }
+    },
+    "features": {
+      "eyebrow": "05 — An eye for detail",
+      "title": "Does this sound like you?",
+      "p1": "Every apartment has its own character – this one is especially suited to people who appreciate practical fittings and a genuine home.",
+      "p2": "What makes it special:",
+      "list": [
+        "For people who enjoy underfloor heating in winter",
+        "For couples or singles who value the generosity of open spaces",
+        "For those who like variety and can't decide between two bathrooms with a shower, then end up stepping into the freestanding bathtub anyway",
+        "For people who enjoy having neighbours",
+        "For people who like walking on parquet flooring",
+        "For people who need storage space in their own, lockable cellar area",
+        "For people who like living independently and without complications",
+        "For people who want water heated on demand (instantaneous water heater)",
+        "For people who want to store their bike safely in the building's own bike room",
+        "For green-thumbed people who dream of a small, private garden with a terrace"
+      ]
+    },
+    "contact": {
+      "eyebrow": "06 — We look forward to hearing from you",
+      "title": "It clicked, didn't it?",
+      "text": "Then write to us briefly – who you are and why you're a great fit here.",
+      "hint": "The address is stored as an image so spam bots can't read it out — the easiest way is to copy it via the button."
+    },
+    "footer": {
+      "line1": "Available from Dec 1 · Viewing by appointment · No mass-application casting"
+    }
+  },
+  "imprint": {
+    "eyebrow": "Information according to § 5 TMG",
+    "title": "Imprint",
+    "intro": "This website serves the private rental of a single apartment, from one private individual to another. It is not operated commercially. Nevertheless, we voluntarily provide the following information for transparency.",
+    "responsible_title": "Responsible for the content",
+    "address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel), Germany",
+    "contact_title": "Contact",
+    "liability_title": "Liability for content and links",
+    "liability_text": "The content of this page was created with care. However, no guarantee can be given for the accuracy, completeness or currency of the information — particularly regarding the apartment. This page contains no links to external third-party websites.",
+    "dispute_title": "Dispute resolution",
+    "dispute_text": "As this page serves exclusively the private rental of an apartment and does not constitute a commercial offer, the regulations on online dispute resolution (the EU Commission's ODR platform) and on consumer dispute resolution do not apply."
+  },
+  "privacy": {
+    "eyebrow": "According to Art. 13 GDPR",
+    "title": "Privacy Policy",
+    "intro": "Protecting your personal data is important to us. Below we inform you about which data is processed when you visit this website.",
+    "s1_title": "1. Data controller",
+    "s1_address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel), Germany",
+    "s2_title": "2. Hosting",
+    "s2_p1": "This website is hosted via GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, USA, or its European group company). The domain is registered with Namecheap Inc. When you access the site, GitHub automatically processes technical information in so-called server log files transmitted by your browser. This usually includes the IP address, date and time of the request, the page accessed, the browser used and the operating system.",
+    "s2_p2": "This data is used exclusively for technical operation, delivering the website and protecting against misuse. We do not combine it with other data sources. The legal basis is our legitimate interest in a secure and functional provision of the website (Art. 6(1)(f) GDPR).",
+    "s3_title": "3. Fonts",
+    "s3_p1": "The fonts used on this website (Fraunces, Space Grotesk, JetBrains Mono) are hosted locally as part of the website. This means no connection is made to servers operated by Google or other third parties, and no data is transmitted to third parties.",
+    "s4_title": "4. Cookies and tracking",
+    "s4_p1": "This website does not use cookies and does not use any tracking or analytics tools (e.g. Google Analytics, Facebook Pixel, etc.). No usage profiles are created.",
+    "s5_title": "5. Contacting us by email",
+    "s5_p1": "If you contact us by email, we will store the data you provide (e.g. name, email address, content of your message) in order to process your request. We do not pass this data on without your consent.",
+    "s5_p2": "The legal basis is Art. 6(1)(b) GDPR if your request relates to the initiation of a tenancy, or otherwise Art. 6(1)(f) GDPR (legitimate interest in processing your request). The data will be deleted as soon as it is no longer required for processing, at the latest once the rental has been concluded or finally declined.",
+    "s6_title": "6. SSL/TLS encryption",
+    "s6_p1": "For security reasons, this website uses SSL/TLS encryption. You can recognise an encrypted connection by the prefix <em>https://</em> in your browser's address bar.",
+    "s7_title": "7. Your rights",
+    "s7_intro": "As a data subject, you have the following rights towards us, provided the respective legal requirements are met:",
+    "s7_list": [
+      "Access to the data stored about you (Art. 15 GDPR)",
+      "Rectification of inaccurate data (Art. 16 GDPR)",
+      "Erasure of your data (Art. 17 GDPR)",
+      "Restriction of processing (Art. 18 GDPR)",
+      "Objection to processing (Art. 21 GDPR)",
+      "Data portability (Art. 20 GDPR)",
+      "Lodging a complaint with a data protection supervisory authority, e.g. the one responsible for your place of residence"
+    ]
+  }
+}

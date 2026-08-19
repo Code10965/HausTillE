@@ -1,0 +1,76 @@
+{% if page_key == "home" %}
+<nav class="site-nav" id="site-nav">
+  <div class="nav-item" id="nav-contact" data-nav-item data-nav-slot="2">
+    <button class="nav-ball" id="contact-toggle" aria-label="{{ t.nav.contact_aria }}" aria-expanded="false">
+      <span class="nav-ball-visual"><span class="nav-ball-glyph">@</span></span>
+    </button>
+    <div class="nav-dropdown" id="contact-dropdown">
+      <a class="nav-link" href="#section-contact">{{ t.nav.contact_email_label }}</a>
+    </div>
+  </div>
+
+  {# ---------- Sprachumschalter ----------
+     pages[page_key] liefert z.B. { de: "/de/impressum/", en: "/en/imprint/",
+     nl: "/nl/colofon/" } - also die URL DERSELBEN Seite in jeder Sprache,
+     nicht einfach die jeweilige Startseite. Die aktuell aktive Sprache wird
+     per CSS-Klasse "nav-link-active" hervorgehoben und nicht verlinkt. #}
+  <div class="nav-item" id="nav-globe" data-nav-item data-nav-slot="1">
+    <button class="nav-ball" id="globe-toggle" aria-label="{{ t.nav.lang_aria }}" aria-expanded="false">
+      <span class="nav-ball-visual">
+        <svg class="nav-ball-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <circle cx="12" cy="12" r="8.5"></circle>
+          <ellipse cx="12" cy="12" rx="3.6" ry="8.5"></ellipse>
+          <line x1="3.5" y1="12" x2="20.5" y2="12"></line>
+        </svg>
+      </span>
+    </button>
+    <div class="nav-dropdown" id="globe-dropdown">
+      {% for altLang, url in pages[page_key] %}
+        {% if altLang == lang %}
+        <span class="nav-link nav-link-active">{{ t.nav["lang_" + altLang] }}</span>
+        {% else %}
+        <a class="nav-link" href="{{ url }}">{{ t.nav["lang_" + altLang] }}</a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="nav-item" id="nav-menu" data-nav-item data-nav-slot="0">
+    <button class="nav-ball" id="nav-toggle" aria-label="{{ t.nav.menu_aria }}" aria-expanded="false">
+      <span class="nav-ball-visual">
+        <svg class="nav-ball-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <line class="nav-toggle-line nav-toggle-line-1" x1="4" y1="7" x2="20" y2="7"></line>
+          <line class="nav-toggle-line nav-toggle-line-2" x1="4" y1="12" x2="20" y2="12"></line>
+          <line class="nav-toggle-line nav-toggle-line-3" x1="4" y1="17" x2="20" y2="17"></line>
+        </svg>
+      </span>
+    </button>
+    {# Die Menü-Links werden HIER direkt aus t.nav gerendert (statt wie im
+       Original per JS mit hart codierten, deutschen Texten). nav.js
+       überschreibt diesen Inhalt jetzt NICHT mehr - siehe Erklärung im Chat. #}
+    <div class="nav-dropdown" id="nav-dropdown" data-nav-links>
+      <a class="nav-link" href="#section-overview">{{ t.nav.menu_overview }}</a>
+      <a class="nav-link" href="#section-neighborhood">{{ t.nav.menu_neighborhood }}</a>
+      <a class="nav-link" href="#section-photos">{{ t.nav.menu_photos }}</a>
+      <a class="nav-link" href="#section-floorplan">{{ t.nav.menu_floorplan }}</a>
+      <a class="nav-link" href="#section-features">{{ t.nav.menu_features }}</a>
+      <a class="nav-link" href="#section-contact">{{ t.nav.menu_contact }}</a>
+    </div>
+  </div>
+
+  <div class="nav-logo-peek" id="nav-logo-peek">
+    <img src="/assets/media/logo/Logo_NeuesZuhause.png" alt="{{ t.meta.title_home }}" />
+  </div>
+</nav>
+{% else %}
+{# Impressum/Datenschutz (bzw. Imprint/Privacy Policy, Colofon/Privacybeleid)
+   brauchen keine große Navigation - nur den "Zurück"-Link, wie im Original. #}
+<div class="legal-topbar">
+  <div class="legal-topbar-inner">
+    <a class="legal-back" href="{{ pages.home[lang] }}">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
+      {{ t.nav.back_to_home }}
+    </a>
+  </div>
+</div>
+{% endif %}

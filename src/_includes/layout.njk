@@ -1,0 +1,100 @@
+{#
+  layout.njk ist die EINZIGE Datei, die das komplette <html>-Gerüst enthält.
+  Jede Seite (de/index.njk, en/imprint.njk, ...) liefert per Front Matter
+  nur noch "lang" und "page_key" - der Rest (Kopf, Navigation, Footer,
+  hreflang) kommt von hier. Genau das ist der Kern der Aufgabe: eine
+  Änderung hier wirkt sich automatisch auf ALLE Sprachversionen aus.
+#}
+{# ---------- Sprach-Umschaltvariable ----------
+   Die drei Übersetzungsdateien (de.json, en.json, nl.json) werden von
+   Eleventy automatisch als globale Daten geladen - sie heißen im Template
+   einfach "de", "en" und "nl". Damit Kopf/Navigation/Footer (die für ALLE
+   Sprachen gelten) nicht dreimal geschrieben werden müssen, zeigen wir mit
+   der Variable "t" ("translations") einfach auf die passende Datei. #}
+{% set t = de %}
+{% if lang == "en" %}{% set t = en %}{% endif %}
+{% if lang == "nl" %}{% set t = nl %}{% endif %}
+
+{# Meta-Titel/-Beschreibung sind pro Seite unterschiedlich (Start/Impressum/
+   Datenschutz) - deshalb hier über page_key ausgewählt. #}
+{% set meta_title = t.meta["title_" + page_key] %}
+{% set meta_description = t.meta["description_" + page_key] %}
+
+<!doctype html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ meta_title }}</title>
+    <meta name="description" content="{{ meta_description }}" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'self'">
+
+    {# Absolute statt relative Pfade (/assets/... statt favicon/...): die
+       Original-Seiten lagen alle im selben Ordner, jetzt liegt jede Seite
+       eine Ebene tiefer (/de/, /en/, /nl/). Ein relativer Pfad "favicon/..."
+       würde der Browser dann fälschlich als "/de/favicon/..." auflösen. #}
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon/favicon-32x32-dark.png" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon/favicon-32x32.png" media="(prefers-color-scheme: dark)">
+    <link rel="shortcut icon" href="/assets/media/favicon/favicon-dark.ico">
+    <meta name="theme-color" content="#ffffff">
+
+    {# ---------- hreflang: sagt Suchmaschinen "diese Seite gibt es auch
+       auf Englisch/Niederländisch, hier ist die jeweilige URL" ----------
+       pages.json (globale Daten, hier als "pages" verfügbar) hält pro
+       page_key die URL je Sprache fest, z.B. pages.imprint.en. Damit
+       müssen wir die Sprach-URLs nicht von Hand tippen und nichts kann
+       auseinanderlaufen. #}
+    {% set page_urls = pages[page_key] %}
+    {% for altLang, url in page_urls %}
+    <link rel="alternate" hreflang="{{ altLang }}" href="{{ site.baseUrl }}{{ url }}" />
+    {% endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ site.baseUrl }}{{ page_urls.de }}" />
+    <link rel="canonical" href="{{ site.baseUrl }}{{ page_urls[lang] }}" />
+
+    <link rel="stylesheet" href="/assets/styles.css" />
+  </head>
+  <body>
+    {% include "nav.njk" %}
+
+    {{ content | safe }}
+
+    <footer class="site-footer">
+      {% if page_key == "home" %}
+      <p class="mono-label footer-label">{{ t.home.footer.line1 }}</p>
+      <p class="mono-label footer-label footer-label-spaced">
+        <a href="{{ pages.imprint[lang] }}" class="footer-link">{{ t.imprint.title }}</a>
+        · <a href="{{ pages.privacy[lang] }}" class="footer-link">{{ t.privacy.title | safe }}</a>
+      </p>
+      {% else %}
+      <p class="mono-label footer-label">
+        <a href="{{ pages.home[lang] }}" class="footer-link">{{ t.meta.title_home }}</a>
+        · <a href="{{ pages.imprint[lang] }}" class="footer-link">{{ t.imprint.title }}</a>
+        · <a href="{{ pages.privacy[lang] }}" class="footer-link">{{ t.privacy.title | safe }}</a>
+      </p>
+      {% endif %}
+    </footer>
+
+    {% if page_key == "home" %}
+    {# Menü, Sprach-Kugel, Kontakt-Kugel + Lightbox nur auf der Startseite,
+       genau wie im Original (Impressum/Datenschutz hatten nur die
+       "Zurück"-Leiste). #}
+    <div class="lightbox" id="lightbox">
+      <div class="lightbox-frame">
+        <button class="lightbox-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+        </button>
+        <button class="lightbox-prev" aria-label="Previous photo">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
+        </button>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+        <video class="lightbox-video" id="lightbox-video" controls playsinline></video>
+        <button class="lightbox-next" aria-label="Next photo">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+        </button>
+      </div>
+    </div>
+    {% endif %}
+
+    <script type="module" src="/assets/media/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,811 @@
+/* ---------- Lokal gehostete Schriften (statt Google Fonts CDN) ----------
+   Jede Variable Font deckt mit EINER Datei alle benötigten Schnitte ab
+   (z.B. Fraunces 300-500), daher genügt hier je eine @font-face-Regel
+   pro Stil statt einer Regel pro Schriftschnitt. */
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 300 500;   /* deckt 300, 400 und 500 ab */
+  font-display: swap;
+  src: url('media/fonts/Fraunces-Variable.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Fraunces';
+  font-style: italic;
+  font-weight: 300 500;
+  font-display: swap;
+  src: url('media/fonts/Fraunces-Italic-Variable.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400 600;   /* deckt 400, 500 und 600 ab */
+  font-display: swap;
+  src: url('media/fonts/SpaceGrotesk-Variable.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('media/fonts/JetBrainsMono-Variable.ttf') format('truetype');
+}
+
+/* ---------- Farb-Tokens ---------- */
+:root {
+  --ink: #1C1C1A;
+  --slate: #5C5D58;
+  --fog: #9C9D97;
+  --paper: #FFFFFF;
+  --cloud: #FAFAF8;
+  --line: #E7E5DF;
+  --gold: #A6803F;
+  --gold-soft: #C9A768;
+  --font-mono: 'JetBrains Mono', monospace;
+  /* Rand-Abstand für Kugel/Panel/Logo: NUR auf Mobile exakt gleich dem
+     Innenabstand der Foto-Kacheln (24px, siehe .section-inner), damit die
+     Kugel dort wirklich auf der Kante zwischen Foto-Kachel und weißem Rand
+     sitzt. Auf Desktop bleibt es beim einfachen, festen 20px-Rand - dort
+     wirkte die exakte Berechnung zu weit innen. */
+  --nav-edge: 24px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --nav-edge: 20px;
+  }
+}
+
+html { scroll-behavior: smooth; }
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.font-display, h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
+.mono-label { font-family: var(--font-mono); }
+
+::selection { background: var(--gold); color: var(--paper); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- gemeinsame Bausteine ---------- */
+.mono-label {
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+.gold-label { color: var(--gold); }
+.fog-label { color: var(--fog); }
+.light-label { color: #C7C6C1; }
+.light-gold-label { color: var(--gold-soft); }
+
+.eyebrow-row { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.eyebrow-line { width: 40px; height: 1px; background: var(--line); }
+.eyebrow-line.light-line { background: rgba(255,255,255,0.25); }
+
+.section-title {
+  font-weight: 300;
+  font-size: 2.5rem;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin: 0 0 48px 0;
+  color: var(--ink);
+}
+@media (min-width: 640px) {
+  .section-title { font-size: 3.75rem; }
+}
+
+.lorem-block { display: flex; flex-direction: column; gap: 20px; }
+.lorem-p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--slate);
+  margin: 0;
+}
+@media (min-width: 640px) { .lorem-p { font-size: 18px; } }
+.mb-gallery-intro { margin-bottom: 48px; }
+
+/* ---------- Section-Layout & Scroll-Reveal ---------- */
+.reveal-section {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+.reveal-section.tone-paper { background: var(--paper); }
+.reveal-section.tone-cloud { background: var(--cloud); }
+
+.section-inner {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 112px 24px;
+}
+@media (min-width: 640px) {
+  .section-inner { padding: 160px 40px; }
+}
+
+/* Kontakt-Sektion: unterer Innenabstand bewusst reduziert (statt der
+   üblichen 112px/160px) - direkt danach kommt schon der Footer, ein so
+   großer Leerraum dazwischen war unnötig und drückte die Section über den
+   sichtbaren Bereich hinaus. */
+.contact .section-inner { padding-bottom: 40px; }
+@media (min-width: 640px) {
+  .contact .section-inner { padding-bottom: 56px; }
+}
+
+.fade-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal-section.visible .fade-item { opacity: 1; transform: translateY(0); }
+.reveal-section.visible .fade-item:nth-child(1) { transition-delay: 0ms; }
+.reveal-section.visible .fade-item:nth-child(2) { transition-delay: 110ms; }
+.reveal-section.visible .fade-item:nth-child(3) { transition-delay: 220ms; }
+
+/* ---------- Fact rows (Section 1) ---------- */
+.fact-list { margin-top: 56px; }
+.fact-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.fact-value {
+  font-family: var(--font-mono);
+  font-size: clamp(0.78rem, 3.4vw, 1rem);
+  color: var(--ink);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* ---------- Nachbarschafts-Grid (Section 2) ---------- */
+.neighborhood-grid {
+  margin-top: 56px;
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) { .neighborhood-grid { grid-template-columns: repeat(3, 1fr); } }
+.neighborhood-item {
+  background: var(--cloud);
+  color: var(--slate);
+  padding: 28px 20px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  text-align: center;
+}
+
+/* ---------- Fotorahmen ---------- */
+.photo-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  background-color: var(--cloud);
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 0 16px;
+  position: relative;
+  cursor: pointer;
+}
+.photo-frame.wide { aspect-ratio: 16 / 9; }
+
+/* dunkler Schleier über Vorschaubildern, damit das Label lesbar bleibt */
+.photo-frame[data-gallery]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  transition: background 0.3s ease;
+}
+.photo-frame[data-gallery]:hover::before {
+  background: rgba(0,0,0,0.4);
+}
+.photo-frame[data-gallery] .mono-label {
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+.photo-grid {
+  margin-top: 24px;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) { .photo-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* ---------- Crossfade (Hero + Galerie) ---------- */
+.crossfade-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+}
+
+.hero-bg { position: absolute; inset: 0; }
+.hero-bg .crossfade-img { transition: opacity 2800ms ease-in-out; }
+.hero-bg .crossfade-img.active { opacity: 0.55; }
+
+/* Unter 640px: Portrait-Crops statt der 21:9 Desktop-Bilder zeigen */
+.hero-bg-mobile { display: none; }
+@media (max-width: 640px) {
+  .hero-bg-desktop { display: none; }
+  .hero-bg-mobile { display: block; }
+
+  /* Der Verlauf/die Deckkraft oben ist auf % der Container-Höhe berechnet.
+     Im Hochformat ist der Hero-Bereich viel höher als im Querformat, darum
+     deckt derselbe Verlauf hier proportional deutlich mehr vom Bild ab.
+     Für Mobile daher heller: mehr Bild-Deckkraft, dunkler Bereich setzt
+     später ein und ist selbst weniger dunkel. */
+  .hero-bg-mobile .crossfade-img.active { opacity: 0.8; }
+  .hero-bg-mobile ~ .hero-gradient {
+    /* WICHTIG: durchgängig dunkler werdend von oben nach unten, keine
+       "Delle" in der Mitte. Der vorige Verlauf wurde ab 45vh erst heller
+       und danach erst wieder dunkler - genau dort, wo wegen
+       justify-content: flex-end der Titel sitzt. Dadurch war die Stelle
+       hinter dem Text die hellste im ganzen Bild statt die kontrastreichste. */
+    background: linear-gradient(180deg, rgba(28,28,26,0.35) 0vh, rgba(28,28,26,0.5) 20vh, rgba(28,28,26,0.68) 50vh, var(--ink) 90vh);
+  }
+}
+
+.gallery {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--cloud);
+}
+.gallery .crossfade-img { transition: opacity 2200ms ease-in-out; }
+.gallery .crossfade-img.active { opacity: 1; }
+
+/* ---------- Feature-Liste (Section 5) ---------- */
+.feature-list { list-style: none; margin: 56px 0 0 0; padding: 0; }
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  font-size: 1rem;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.feature-list .dot {
+  width: 4px; height: 4px; border-radius: 9999px;
+  background: var(--gold); flex-shrink: 0;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: var(--ink);
+}
+.hero-gradient {
+  position: absolute;
+  inset: 0;
+  /* vh statt % verankert den Verlauf an der sichtbaren Bildschirmhöhe,
+     nicht an der Höhe von .hero selbst - die kann durch min-height: 100vh
+     zwar meist gleich sein, aber bei viel Textumbruch auch mal darüber
+     hinauswachsen. Mit vh bleibt der Übergang an derselben Bildschirm-
+     position, egal wie hoch die Box durch den Inhalt wird. */
+  background: linear-gradient(180deg, rgba(28,28,26,0.55) 0vh, rgba(28,28,26,0.35) 35vh, var(--ink) 92vh);
+}
+.hero-content {
+  position: relative;
+  max-width: 48rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 24px 96px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1.1s cubic-bezier(0.16,1,0.3,1), transform 1.1s cubic-bezier(0.16,1,0.3,1);
+}
+@media (min-width: 640px) { .hero-content { padding: 0 40px 128px; } }
+.hero-content.loaded { opacity: 1; transform: translateY(0); }
+
+.hero-tag { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+.hero-dot { width: 4px; height: 4px; border-radius: 9999px; background: var(--gold-soft); }
+
+.hero-title {
+  font-weight: 300;
+  font-size: 13vw;
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+  margin: 0 0 40px 0;
+  color: var(--paper);
+  /* Schatten statt dunklerem Bild: sichert die Lesbarkeit unabhängig davon,
+     wie hell die Stelle im Foto gerade ist, ohne dass das ganze Bild wieder
+     verdunkelt werden muss. */
+  text-shadow: 0 2px 24px rgba(0,0,0,0.75), 0 1px 4px rgba(0,0,0,0.6);
+}
+@media (min-width: 640px) { .hero-title { font-size: 4.5rem; } }
+@media (min-width: 768px) { .hero-title { font-size: 6rem; } }
+.hero-title-italic {
+  font-style: italic;
+  /* Etwas kräftigeres Schriftgewicht als der Rest der Überschrift (500
+     statt 300): dickt die extrem dünnen Haarlinien der Fraunces-Kursive
+     auf, wodurch sie sich robuster gegen unruhige/helle Fotohintergründe
+     behaupten - trifft denselben Schwachpunkt, der vorher schon die
+     text-stroke-Rendering-Lücken verursacht hat. */
+  font-weight: 300;
+  /* Der hellere --gold-soft-Ton hat zu wenig Eigenkontrast auf hellen
+     Fotostellen. Statt das mit einer Kontur zu kompensieren (die bei
+     dieser Schrift zu Rendering-Lücken an den Haarlinien führt, siehe
+     unten), nutzen wir hier direkt den dunkleren, kräftigeren --gold-Ton -
+     der ist von Haus aus lesbar, ganz ohne Kontur-Tricks. */
+  color: var(--gold);
+  /* Kein text-stroke mehr: Fraunces Italic hat sehr dünne Haarlinien
+     zwischen den dicken Rundungen. Eine gleichmäßig breite Kontur passt
+     nicht zu diesem Strich-Kontrast und lässt manche Haarlinien in der
+     Berechnung verschwinden. Nur noch ein sehr sanfter Tiefenschatten. */
+  text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+
+.hero-sub {
+  max-width: 28rem;
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: #D5D4CF;
+  margin: 0;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.45);
+  /* Blocksatz: jede Zeile außer der letzten reicht bis zum rechten Rand.
+     hyphens: auto sorgt für Silbentrennung, damit dabei nicht zu große
+     Lücken zwischen den Wörtern entstehen (v.a. bei schmaler Spalte auf
+     Mobile). lang="de" steht bereits im <html>-Tag, das braucht der
+     Browser, um deutsche Trennregeln anzuwenden. */
+  text-align: justify;
+  hyphens: auto;
+}
+@media (min-width: 640px) { .hero-sub { font-size: 1.25rem; } }
+
+.hero-scroll-hint {
+  position: relative;
+  max-width: 48rem;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 24px 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+@media (min-width: 640px) { .hero-scroll-hint { padding: 0 40px 40px; } }
+.hero-scroll-hint .mono-label { color: #8A8A86; }
+.hero-scroll-line { width: 40px; height: 1px; background: rgba(255,255,255,0.2); }
+
+/* ---------- Kontakt ---------- */
+.contact { position: relative; background: var(--ink); color: var(--paper); }
+.contact-title { color: var(--paper); }
+.contact-text {
+  line-height: 1.7;
+  margin: 0 0 56px 0;
+  max-width: 28rem;
+  font-size: 1.125rem;
+  color: #C7C6C1;
+}
+.contact-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+@media (min-width: 640px) { .contact-row { flex-direction: row; align-items: center; } }
+.contact-email {
+  font-family: var(--font-mono);
+  font-size: clamp(0.68rem, 3.6vw, 1rem);
+  white-space: nowrap;
+  padding: 16px 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.contact-email canvas { display: block; }
+.copy-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  padding: 16px 24px;
+  background: transparent;
+  color: var(--gold-soft);
+  border: 1px solid var(--gold-soft);
+  cursor: pointer;
+}
+.contact-hint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: #7A7A76;
+  margin-top: 24px;
+}
+
+/* ---------- Rechtstexte (Impressum / Datenschutz) ---------- */
+.legal-topbar {
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+}
+.legal-topbar-inner {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 24px 24px;
+}
+@media (min-width: 640px) { .legal-topbar-inner { padding: 24px 40px; } }
+.legal-back {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--slate);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.legal-back:hover { color: var(--ink); }
+
+.legal-block { margin-top: 48px; }
+.legal-block:first-child { margin-top: 0; }
+.legal-block-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 16px 0;
+}
+.legal-list { list-style: none; margin: 20px 0 0 0; padding: 0; }
+.legal-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--slate);
+  border-bottom: 1px solid var(--line);
+}
+.legal-list .dot {
+  width: 4px; height: 4px; border-radius: 9999px;
+  background: var(--gold); flex-shrink: 0; margin-top: 10px;
+}
+.email-box {
+  display: inline-block;
+  padding: 16px 20px;
+  background: var(--cloud);
+  border: 1px solid var(--line);
+  margin-top: 8px;
+}
+.email-box canvas { display: block; }
+
+/* ---------- Menü, Sprache, Kontakt: drei goldene Kugeln ---------- */
+.site-nav { position: relative; z-index: 500; }
+
+/* Jede Kugel steckt in einem eigenen .nav-item (Wrapper um Button + Panel) -
+   das ist die Einheit, auf der nav.js Hover/Klick UND das "open" bzw.
+   :focus-within auswertet. Position (top/right) wird komplett per JS als
+   Inline-Style gesetzt, nicht mehr per CSS-Variable - bei drei Kugeln, die
+   je nach Scroll-Zustand mal nebeneinander (Reihe) und mal übereinander
+   (Stapel) stehen, plus individueller Drift pro Kugel, wäre eine reine
+   CSS-Lösung kaum wartbar gewesen. */
+.nav-item { position: relative; }
+
+/* Die Kugel ist gleichzeitig Klickfläche UND sichtbares Element (bei 44px
+   Durchmesser als Ziel für Maus/Finger von Haus aus groß genug). */
+.nav-ball {
+  position: fixed;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 501;
+
+  /* Basis-Übergang für den (seltenen) Fall, dass sich top/right aus anderem
+     Grund ändern. Der auffällige "Auffächern/Einklappen"-Effekt beim Wechsel
+     Reihe <-> Stapel läuft NICHT über diese Regel, sondern wird gezielt
+     einmalig pro Kugel in nav.js gesetzt (transition-delay + -duration
+     inline, siehe playStagger dort) - nur so bleibt die Bewegung bei
+     kontinuierlichem Scrollen zuverlässig sichtbar statt sich ständig selbst
+     zu unterbrechen. */
+  transition: right 0.2s ease-out, top 0.2s ease-out;
+}
+
+/* Eigener, dezenter Fokusring statt des blauen Browser-Standards - nur bei
+   Tastatur-Navigation sichtbar (:focus-visible), nicht bei Maus-Klick. Sitzt
+   am äußeren Button (volle 44px), nicht an der ggf. verkleinerten Optik. */
+.nav-ball:focus-visible {
+  outline: 2px solid var(--gold-soft);
+  outline-offset: 6px;
+}
+
+/* Die eigentliche Optik (Farbe, Kreisform, Schatten) UND das Schrumpfen
+   beim Scrollen sitzen bewusst auf diesem inneren Element, nicht auf dem
+   Button selbst: transform: scale() verkleinert nicht nur die Optik, sondern
+   auch die Hover-/Klickfläche des Elements, auf dem es steht. Würde die
+   Kugel selbst schrumpfen, würde damit auch ihre Klickfläche schrumpfen -
+   beim Bewegen der Maus von der (winzigen) Kugel zum Panel entstünde eine
+   "tote Zone" dazwischen. Der äußere Button bleibt dagegen immer bei voller
+   44px-Größe klickbar/hoverbar, nur diese innere Ebene wird optisch kleiner. */
+.nav-ball-visual {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  transform: scale(1);
+  transform-origin: center;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), background 0.25s ease;
+}
+.nav-ball:hover .nav-ball-visual { background: var(--gold-soft); }
+
+/* "@"-Symbol des Kontakt-Buttons - dieselbe Mono-Schrift wie der Rest der
+   Bedienelemente auf der Seite, keine eigene Icon-Datei nötig. */
+.nav-ball-glyph {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  line-height: 1;
+}
+
+/* Im Stillstand ganz oben (Hero) ODER ganz unten (Kontakt-Sektion) sind alle
+   drei Kugeln in voller Größe zu sehen. Sobald gescrollt wird - derselbe
+   Moment, in dem auch das Logo verschwindet (Klassen "nav-at-top"/
+   "nav-at-bottom" fallen weg, siehe nav.js) - schrumpfen sie auf kleine
+   Punkte zusammen. Bewusst OHNE Media Query: einheitliches Verhalten auf
+   Mobile UND Desktop, und identisch für alle drei Buttons. */
+.site-nav:not(.nav-at-top):not(.nav-at-bottom) .nav-ball-visual {
+  transform: scale(0.32);
+}
+
+/* Die drei Linien morphen sanft zum "X", wenn das Menü-Panel offen ist */
+.nav-toggle-line {
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease;
+  /* transform-origin: center bezieht sich sonst auf die Bounding-Box der
+     einzelnen Linie (z.B. y=7 bei der obersten), nicht auf die Mitte des
+     ganzen 24x24-Icons (12,12) - dadurch würde das X beim Drehen schief
+     ("asymmetrisch") wirken. transform-box: view-box verankert den
+     Drehpunkt stattdessen am viewBox-Koordinatensystem. */
+  transform-box: view-box;
+  transform-origin: 12px 12px;
+}
+/* Reihenfolge bewusst "rotate translate" statt "translate rotate": CSS wertet
+   die Transform-Liste von rechts nach links aus, d.h. hier wird zuerst
+   verschoben (Linie landet exakt auf dem Mittelpunkt) und erst danach um
+   diesen Punkt gedreht. Andersherum würde erst gedreht und danach entlang
+   der ursprünglichen (nicht gedrehten) Achse verschoben - dadurch würde die
+   Linie am Ende leicht am Mittelpunkt vorbeilaufen und das X windschief wirken. */
+.nav-ball[aria-expanded="true"] .nav-toggle-line-1 { transform: rotate(45deg) translateY(5px); }
+.nav-ball[aria-expanded="true"] .nav-toggle-line-2 { opacity: 0; }
+.nav-ball[aria-expanded="true"] .nav-toggle-line-3 { transform: rotate(-45deg) translateY(-5px); }
+
+/* Logo: sichtbar ganz oben (Hero, "nav-at-top") UND ganz unten
+   ("nav-at-bottom", Kontakt-Sektion) - beide Klassen von nav.js beim
+   Scrollen gesetzt, unabhängig von den Dropdowns. Sitzt auf der LINKEN
+   Seite (gleicher Rand wie die Menü-Kugel rechts), Größe/Fade-Verhalten
+   unverändert. Niedrigerer z-index als die Panels, damit es beim Aufklappen
+   sauber dahinter verschwindet statt sich zu überlagern. */
+.nav-logo-peek {
+  position: fixed;
+  top: var(--nav-track-top, 20px);
+  left: var(--nav-edge);
+  width: 44px;
+  height: 44px;
+  z-index: 499;
+  opacity: 0;
+  transform: translateY(-6px);
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.16,1,0.3,1),
+              transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+.nav-logo-peek img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.3));
+}
+.site-nav.nav-at-top .nav-logo-peek,
+.site-nav.nav-at-bottom .nav-logo-peek {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Panel öffnet/schließt sich zur Ecke bei der eigenen Kugel hin - Ursprung
+   oben rechts oder unten rechts (transform-origin, von nav.js pro Panel
+   inline gesetzt, je nachdem ob genug Platz nach unten ist). "scale" (beide
+   Achsen gleichzeitig) statt nur "scaleY", damit es wirklich zu einem Punkt
+   an der Kugel hin verschwindet statt zu einer schräg gezogenen Linie.
+   Ausgelöst über :focus-within (Tastatur) UND die "open"-Klasse (Hover/Klick
+   - siehe nav.js) - beide jetzt auf dem einzelnen .nav-item, nicht mehr
+   global auf <nav>, damit die drei Panels unabhängig voneinander auf-/
+   zugehen (immer nur eins gleichzeitig, siehe nav.js).
+   z-index bewusst HÖHER als .nav-ball (501): im gestapelten (kleinen)
+   Zustand sitzen die drei Kugeln eng übereinander - ein geöffnetes Panel
+   soll die darunter liegenden Kugeln sichtbar überlagern, nicht darunter
+   verschwinden. */
+.nav-dropdown {
+  position: fixed;
+  min-width: 200px;
+  background: var(--cloud);
+  border: 1px solid var(--line);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+  padding: 8px 0;
+  z-index: 502;
+
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease;
+}
+.nav-item:focus-within .nav-dropdown,
+.nav-item.open .nav-dropdown {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.nav-link {
+  display: block;
+  padding: 14px 24px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--slate);
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s ease;
+}
+.nav-link:last-child { border-bottom: none; }
+
+/* Platzhalter für noch nicht verfügbare Menüpunkte (z.B. englische Version,
+   solange es die Seite noch nicht gibt) - optisch erkennbar deaktiviert,
+   aber Klick schließt das Dropdown trotzdem ganz normal (kein Link, also
+   keine Navigation). */
+.nav-link.nav-link-disabled {
+  color: var(--line);
+  cursor: default;
+}
+.nav-link.nav-link-disabled:hover { color: var(--line); }
+.nav-link:hover { color: var(--gold); }
+
+/* ---------- Footer ---------- */
+.site-footer { padding: 40px 0; background: var(--ink); }
+
+/* Auf Mobile stehen die drei Kugeln (Menü/Sprache/Kontakt) bzw. deren
+   Zwischenzustände öfter genau über dem unteren Seitenrand - ohne
+   zusätzlichen Platz überlagern sie sonst "Impressum · Datenschutz". Der
+   Wert (110px) ist bewusst großzügig: deckt sowohl die volle Kugel-Reihe
+   (44px) als auch etwas Randabstand ab. */
+@media (max-width: 639px) {
+  .site-footer { padding-bottom: 130px; }
+}
+
+.footer-label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-align: center;
+  color: #4E4E4A;
+}
+
+.footer-label-spaced {
+  margin-top: 12px;
+}
+
+.footer-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.lightbox.active { display: flex; }
+
+.lightbox-frame {
+  position: relative;
+  display: inline-flex;
+  max-width: 92vw;
+  max-height: 85vh;
+}
+.lightbox-img {
+  max-width: 92vw;
+  max-height: 85vh;
+  object-fit: contain;
+  display: block;
+}
+.lightbox-video {
+  max-width: 92vw;
+  max-height: 85vh;
+  display: none;
+  background: #000;
+}
+
+/* Play-Icon auf den Video-Vorschaukacheln */
+.photo-frame.video-frame::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 11px 0 11px 18px;
+  border-color: transparent transparent transparent rgba(255,255,255,0.92);
+  z-index: 1;
+  transform: translateX(2px);
+}
+
+.lightbox-prev,
+.lightbox-next,
+.lightbox-close {
+  position: absolute;
+  background: rgba(28,28,26,0.55);
+  /* Milchglas-Effekt: verwischt, was hinter dem Button liegt, statt es nur
+     halbtransparent durchscheinen zu lassen. Dadurch bleibt der Button auf
+     hellen UND dunklen Fotos gleichermaßen gut erkennbar. */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 9999px;
+  cursor: pointer;
+  color: var(--paper);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.25);
+  opacity: 0.9;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.lightbox-prev:hover,
+.lightbox-next:hover,
+.lightbox-close:hover {
+  opacity: 1;
+  background: rgba(28,28,26,0.75);
+}
+
+.lightbox-close {
+  top: 10px;
+  right: 10px;
+  padding: 7px;
+}
+
+.lightbox-prev, .lightbox-next {
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 9px;
+}
+.lightbox-prev { left: 8px; }
+.lightbox-next { right: 8px; }

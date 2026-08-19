@@ -1,0 +1,158 @@
+---
+layout: layout.njk
+page_key: home
+pagination:
+  data: languageList
+  size: 1
+  alias: lang
+permalink: "{{ pages.home[lang] }}"
+---
+{#
+  EIN Template statt drei: "pagination" läuft languageList.js (["de","en","nl"])
+  durch und erzeugt für jeden Eintrag eine eigene Ausgabedatei - der jeweilige
+  Wert landet in der Variable "lang" (weil "alias: lang"). "permalink" nutzt
+  dieselbe pages.json wie der Sprachumschalter, damit die Zuordnung
+  Sprache -> URL nur an EINER Stelle im Projekt gepflegt werden muss.
+#}
+{% set t = de %}
+{% if lang == "en" %}{% set t = en %}{% endif %}
+{% if lang == "nl" %}{% set t = nl %}{% endif %}
+
+<header class="hero">
+  <div class="hero-bg hero-bg-desktop crossfade-group" data-interval="7500">
+    <img class="crossfade-img active" src="/assets/media/Hero/Living_back_4.jpg" alt="" />
+    <img class="crossfade-img" src="/assets/media/Hero/Garden_1.jpg" alt="" />
+    <img class="crossfade-img" src="/assets/media/Hero/Living_front_3.jpg" alt="" />
+    <img class="crossfade-img" src="/assets/media/Hero/Living_back_3.jpg" alt="" />
+    <img class="crossfade-img" src="/assets/media/Hero/Living_front_5.jpg" alt="" />
+  </div>
+  <div class="hero-bg hero-bg-mobile crossfade-group" data-interval="7500">
+    <img class="crossfade-img active" src="/assets/media/Hero/mobile/Garden_1_mobile.jpg" alt="" />
+    <img class="crossfade-img" src="/assets/media/Hero/mobile/Living_back_4_mobile.jpg" alt="" />
+    <img class="crossfade-img" src="/assets/media/Hero/mobile/Living_front_3_mobile.jpg" alt="" />
+    <img class="crossfade-img" src="/assets/media/Hero/mobile/Living_back_1_mobile.jpg" alt="" />
+    <img class="crossfade-img" src="/assets/media/Hero/mobile/Living_front_5_mobile.jpg" alt="" />
+  </div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content" id="hero-content">
+    <div class="hero-tag">
+      <span class="hero-dot"></span>
+      <span class="mono-label light-label">{{ t.home.hero.tag }}</span>
+    </div>
+    <h1 class="hero-title">
+      {{ t.home.hero.title_line1 }}<br />
+      <span class="hero-title-italic">{{ t.home.hero.title_line2 }}</span>
+    </h1>
+    <p class="hero-sub">{{ t.home.hero.sub }}</p>
+  </div>
+  <div class="hero-scroll-hint">
+    <span class="mono-label light-label">{{ t.home.hero.scroll_hint }}</span>
+    <span class="hero-scroll-line"></span>
+  </div>
+</header>
+
+<section id="section-overview" class="reveal-section tone-paper" data-reveal>
+  <div class="section-inner">
+    <div class="fade-item eyebrow-row">
+      <span class="mono-label gold-label">{{ t.home.overview.eyebrow }}</span>
+      <span class="eyebrow-line"></span>
+    </div>
+    <h2 class="fade-item section-title">{{ t.home.overview.title }}</h2>
+    <div class="fade-item">
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.home.overview.p1 }}</p>
+        <p class="lorem-p">{{ t.home.overview.p2 }}</p>
+        <p class="lorem-p">{{ t.home.overview.p3 }}</p>
+      </div>
+      <div class="fact-list">
+        {% for fact in t.home.overview.facts %}
+        <div class="fact-row"><span class="mono-label fog-label">{{ fact.label }}</span><span class="fact-value">{{ fact.value }}</span></div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="section-neighborhood" class="reveal-section tone-cloud" data-reveal>
+  <div class="section-inner">
+    <div class="fade-item eyebrow-row">
+      <span class="mono-label gold-label">{{ t.home.neighborhood.eyebrow }}</span>
+      <span class="eyebrow-line"></span>
+    </div>
+    <h2 class="fade-item section-title">{{ t.home.neighborhood.title }}</h2>
+    <div class="fade-item">
+      <div class="lorem-block">
+        <p class="lorem-p"><strong>{{ t.home.neighborhood.p1_label }}</strong>{{ t.home.neighborhood.p1 }}</p>
+        <p class="lorem-p"><strong>{{ t.home.neighborhood.p2_label }}</strong>{{ t.home.neighborhood.p2 }}</p>
+        <p class="lorem-p"><strong>{{ t.home.neighborhood.p3_label }}</strong>{{ t.home.neighborhood.p3 }}</p>
+      </div>
+      <div class="neighborhood-grid">
+        {% for item in t.home.neighborhood.grid %}
+        <div class="neighborhood-item">{{ item | safe }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="section-photos" class="reveal-section tone-paper" data-reveal>
+  <div class="section-inner">
+    <div class="fade-item eyebrow-row">
+      <span class="mono-label gold-label">{{ t.home.photos.eyebrow }}</span>
+      <span class="eyebrow-line"></span>
+    </div>
+    <h2 class="fade-item section-title">{{ t.home.photos.title }}</h2>
+    <div class="fade-item">
+      <p class="lorem-p mb-gallery-intro">{{ t.home.photos.intro }}</p>
+      <div class="photo-grid" data-photo-grid="Garten, Vorne, Hinten, Bad, Video vorne, Video hinten" data-photo-labels='{{ t.home.photos.labels | dump | safe }}'></div>
+    </div>
+  </div>
+</section>
+
+<section id="section-floorplan" class="reveal-section tone-cloud" data-reveal>
+  <div class="section-inner">
+    <div class="fade-item eyebrow-row">
+      <span class="mono-label gold-label">{{ t.home.floorplan.eyebrow }}</span>
+      <span class="eyebrow-line"></span>
+    </div>
+    <h2 class="fade-item section-title">{{ t.home.floorplan.title }}</h2>
+    <div class="fade-item">
+      <p class="lorem-p mb-gallery-intro">{{ t.home.floorplan.intro }}</p>
+      <div class="photo-grid" data-photo-grid="Grundriss Vorne, Grundriss Hinten, Grundriss Gesamt" data-photo-labels='{{ t.home.floorplan.labels | dump | safe }}'></div>
+    </div>
+  </div>
+</section>
+
+<section id="section-features" class="reveal-section tone-paper" data-reveal>
+  <div class="section-inner">
+    <div class="fade-item eyebrow-row">
+      <span class="mono-label gold-label">{{ t.home.features.eyebrow }}</span>
+      <span class="eyebrow-line"></span>
+    </div>
+    <h2 class="fade-item section-title">{{ t.home.features.title }}</h2>
+    <div class="fade-item">
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.home.features.p1 }}</p>
+        <p class="lorem-p">{{ t.home.features.p2 }}</p>
+      </div>
+      <ul class="feature-list">
+        {% for item in t.home.features.list %}
+        <li><span class="dot"></span>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="section-contact" class="contact">
+  <div class="section-inner">
+    <div class="eyebrow-row">
+      <span class="mono-label light-gold-label">{{ t.home.contact.eyebrow }}</span>
+      <span class="eyebrow-line light-line"></span>
+    </div>
+    <h2 class="section-title contact-title">{{ t.home.contact.title }}</h2>
+    <p class="contact-text">{{ t.home.contact.text }}</p>
+    <div data-email-contact-theme="dark" data-copy-label="{{ t.nav.copy_button }}" data-copied-label="{{ t.nav.copied_button }}"></div>
+    <p class="contact-hint">{{ t.home.contact.hint }}</p>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+---
+permalink: /index.html
+---
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content="0; url={{ pages.home.de }}" />
+    <link rel="canonical" href="{{ pages.home.de }}" />
+    <title>Zuhause. Ankommen.</title>
+    <script>window.location.replace("{{ pages.home.de }}");</script>
+  </head>
+  <body>
+    {# Fallback für Browser/Bots ohne JS und ohne meta-refresh: eine simple,
+       sprachneutrale Auswahl. Kommt praktisch nie zum Einsatz, ist aber
+       die korrekte, zugängliche Absicherung. #}
+    <p>
+      <a href="{{ pages.home.de }}">Deutsch</a> ·
+      <a href="{{ pages.home.en }}">English</a> ·
+      <a href="{{ pages.home.nl }}">Nederlands</a>
+    </p>
+  </body>
+</html>

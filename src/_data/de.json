@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "title_home": "Zuhause. Ankommen.",
+    "description_home": "Helle Altbauwohnung in Berlin-Kreuzberg mit eigenem Garten – frei ab 01. Dezember.",
+    "title_imprint": "Impressum — Zuhause. Ankommen.",
+    "description_imprint": "Impressum gemäß § 5 TMG.",
+    "title_privacy": "Datenschutzerklärung — Zuhause. Ankommen.",
+    "description_privacy": "Datenschutzerklärung gemäß Art. 13 DSGVO."
+  },
+  "nav": {
+    "menu_aria": "Menü öffnen",
+    "lang_aria": "Sprache wechseln",
+    "contact_aria": "Kontakt",
+    "contact_email_label": "Email",
+    "copy_button": "Adresse kopieren",
+    "copied_button": "Kopiert ✓",
+    "back_to_home": "Zurück zur Startseite",
+    "menu_overview": "Überblick",
+    "menu_neighborhood": "Lage",
+    "menu_photos": "Fotos",
+    "menu_floorplan": "Grundriss",
+    "menu_features": "Details",
+    "menu_contact": "Kontakt",
+    "lang_de": "Deutsch",
+    "lang_en": "English",
+    "lang_nl": "Nederlands"
+  },
+  "home": {
+    "hero": {
+      "tag": "Frei ab 01. Dezember",
+      "title_line1": "Ankommen.",
+      "title_line2": "Zuhause sein.",
+      "sub": "Offene, loftartige Räume. Hohe Decken. Ein eigener, kleiner Garten im Innenhof. Mittendrin im schönsten Teil von Kreuzberg. Mit einer Haus- und Hofgemeinschaft, die diesen Namen auch verdient.",
+      "scroll_hint": "Zum Lesen scrollen"
+    },
+    "overview": {
+      "eyebrow": "01 — Auf einen Blick",
+      "title": "Ein Raum zum Ankommen",
+      "p1": "Die helle Wohnung verteilt sich auf zwei Einheiten: eine im Vorderhaus mit Fensterfront zur Straße und zum Innenhof, eine im Seitenflügel mit Blick in den grünen Hof.",
+      "p2": "Beide Einheiten überzeugen mit loftartigen, offenen Räumen, die ineinander übergehen und viel Licht hereinlassen. Eine alte Holztüre verbindet die beiden Bereiche miteinander.",
+      "p3": "Vorne warten Gäste-Bad, Küchenzeile und Gartenzugang, im Seitenflügel Bad, Schlafnische, begehbarer Kleiderschrank und ebenfalls direkter Zugang zum Garten.",
+      "facts": [
+        { "label": "Zimmer", "value": "2" },
+        { "label": "Fläche", "value": "130 m²" },
+        { "label": "Haus", "value": "Altbau, Erdgeschoss" },
+        { "label": "Energieausweis", "value": "auf Anfrage" },
+        { "label": "Grundmiete", "value": "1.410 Euro" },
+        { "label": "Nebenkosten", "value": "320 Euro" },
+        { "label": "Besonderheit", "value": "2 separate Eingänge" }
+      ]
+    },
+    "neighborhood": {
+      "eyebrow": "02 — Das Leben drumherum",
+      "title": "Ein Kiez zum Wohlfühlen",
+      "p1_label": "Erholung: ",
+      "p1": "Zum Durchatmen sind es nur drei Minuten in den Viktoria- oder Gleisdreieckpark, ringsherum laden Restaurants zum Verweilen ein. Der Bergmannkiez liegt sieben Minuten entfernt, das Yorck-Kino ist direkt um die Ecke.",
+      "p2_label": "Versorgung: ",
+      "p2": "Alles Wichtige ist fußläufig erreichbar: LPG, Rewe, Lidl und Aldi in direkter Nähe, die Bushaltestelle direkt vor der Tür und die S- und U-Bahn fünf Minuten entfernt.",
+      "p3_label": "Haus- und Hofgemeinschaft: ",
+      "p3": "Gemeinsame Hoffeste gehören einfach dazu – das Miteinander im Haus ist freundlich, entspannt und alles andere als anonym.",
+      "grid": ["Einkaufen<br>ums Eck", "S- & U-Bahn<br>fußläufig", "Parks & Restaurants<br>in der Nähe"]
+    },
+    "photos": {
+      "eyebrow": "03 — So sieht's aus",
+      "title": "Ein Ort zum Verweilen",
+      "intro": "Stell Dir vor, du wandelst mit einem Becher Kaffee in der Hand durch die Räume. Hast Du schon Deinen Lieblingsplatz entdeckt?",
+      "labels": {
+        "Garten": "Foto — Garten",
+        "Vorne": "Foto — Vorne",
+        "Hinten": "Foto — Hinten",
+        "Bad": "Foto — Bad",
+        "Video vorne": "Video — Vorne",
+        "Video hinten": "Video — Hinten"
+      }
+    },
+    "floorplan": {
+      "eyebrow": "04 — Den Überblick behalten",
+      "title": "Linien, die Zuhause werden",
+      "intro": "Zwei Wohnungen wurden zu einem großzügigen Zuhause vereint – für einen Grundriss, der wirklich besonders ist.",
+      "labels": {
+        "Grundriss Vorne": "Grundriss — Vorne",
+        "Grundriss Hinten": "Grundriss — Hinten",
+        "Grundriss Gesamt": "Grundriss — Gesamt"
+      }
+    },
+    "features": {
+      "eyebrow": "05 — Ein Auge fürs Detail",
+      "title": "Klingt das nach dir?",
+      "p1": "Jede Wohnung hat ihren eigenen Charakter – diese hier passt besonders gut zu Menschen, die praktische Ausstattung und ein echtes Zuhause zu schätzen wissen.",
+      "p2": "Das macht sie aus:",
+      "list": [
+        "Für Menschen, die im Winter gerne eine Fussbodenheizung genießen",
+        "Für Paare oder Singles, die die Großzügigkeit offener Räume schätzen",
+        "Für Abwechslungssuchende, die sich nicht zwischen zwei Bädern mit Dusche entscheiden wollen und dann doch lieber in die freistehende Badewanne steigen",
+        "Für Menschen, die Lust auf Nachbarschaft haben",
+        "Für Menschen, die gerne über Parkettfussboden laufen",
+        "Für Menschen, die Stauraum in einem eigenen, abschließbaren Kellerbereich brauchen",
+        "Für Menschen, die gerne eigenständig und unkompliziert wohnen",
+        "Für Menschen, die warmes Wasser bedarfsgerecht aufbereiten wollen (Durchlauferhitzer)",
+        "Für Menschen, die ihr Bike sicher im hauseigenen Fahrradraum abstellen wollen",
+        "Für Menschen mit grünem Daumen, die von einem kleinen, eigenen Garten mit Terrasse träumen"
+      ]
+    },
+    "contact": {
+      "eyebrow": "06 — Wir freuen uns auf Dich",
+      "title": "Es hat gefunkt, oder?",
+      "text": "Dann schreib uns kurz, wer du bist und warum du gut hierher passt.",
+      "hint": "Die Adresse ist als Bild hinterlegt, damit Spam-Bots sie nicht auslesen können — am einfachsten über den Button kopieren."
+    },
+    "footer": {
+      "line1": "Verfügbar ab 01.12. · Besichtigung nach Absprache · Kein Massenbewerbungs-Casting"
+    }
+  },
+  "imprint": {
+    "eyebrow": "Angaben gemäß § 5 TMG",
+    "title": "Impressum",
+    "intro": "Diese Website dient der privaten Vermietung einer einzelnen Wohnung von privat an privat. Sie wird nicht gewerblich betrieben. Die folgenden Angaben stellen wir dennoch freiwillig zur Transparenz bereit.",
+    "responsible_title": "Verantwortlich für den Inhalt",
+    "address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel)",
+    "contact_title": "Kontakt",
+    "liability_title": "Haftung für Inhalte und Links",
+    "liability_text": "Die Inhalte dieser Seite wurden mit Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Angaben — insbesondere zur Wohnung — kann jedoch keine Gewähr übernommen werden. Diese Seite enthält keine Links zu externen Websites Dritter.",
+    "dispute_title": "Streitschlichtung",
+    "dispute_text": "Da diese Seite ausschließlich der privaten Vermietung dient und kein gewerbliches Angebot darstellt, sind die Vorschriften zur Online-Streitbeilegung (OS-Plattform der EU-Kommission) und zur Verbraucherstreitbeilegung nicht anwendbar."
+  },
+  "privacy": {
+    "eyebrow": "Gemäß Art. 13 DSGVO",
+    "title": "Datenschutz&shy;erklärung",
+    "intro": "Der Schutz Ihrer persönlichen Daten ist uns wichtig. Nachfolgend informieren wir Sie darüber, welche Daten beim Besuch dieser Website verarbeitet werden.",
+    "s1_title": "1. Verantwortlicher",
+    "s1_address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel)",
+    "s2_title": "2. Hosting",
+    "s2_p1": "Diese Website wird über GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, USA, bzw. deren europäische Konzerngesellschaft) bereitgestellt. Die Domain ist bei Namecheap Inc. registriert. Beim Aufruf der Seite verarbeitet GitHub automatisch technische Informationen in sogenannten Server-Logfiles, die Ihr Browser übermittelt. Dazu gehören üblicherweise IP-Adresse, Datum und Uhrzeit der Anfrage, aufgerufene Seite, verwendeter Browser sowie das Betriebssystem.",
+    "s2_p2": "Diese Daten dienen ausschließlich dem technischen Betrieb, der Auslieferung der Website und der Absicherung vor Missbrauch. Eine Zusammenführung mit anderen Datenquellen findet durch uns nicht statt. Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren und funktionsfähigen Bereitstellung der Website (Art. 6 Abs. 1 lit. f DSGVO).",
+    "s3_title": "3. Schriftarten",
+    "s3_p1": "Die auf dieser Website verwendeten Schriftarten (Fraunces, Space Grotesk, JetBrains Mono) sind lokal in die Website eingebunden. Es findet dabei keine Verbindung zu Servern von Google oder anderen Drittanbietern statt, und es werden keine Daten von Ihnen an Dritte übertragen.",
+    "s4_title": "4. Cookies und Tracking",
+    "s4_p1": "Diese Website setzt keine Cookies und keine Tracking- oder Analyse-Werkzeuge (z. B. Google Analytics, Facebook-Pixel o. Ä.) ein. Es findet keine Erstellung von Nutzungsprofilen statt.",
+    "s5_title": "5. Kontaktaufnahme per E-Mail",
+    "s5_p1": "Wenn Sie uns per E-Mail kontaktieren, werden die von Ihnen mitgeteilten Daten (z. B. Name, E-Mail-Adresse, Inhalt Ihrer Nachricht) von uns gespeichert, um Ihre Anfrage zu bearbeiten. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.",
+    "s5_p2": "Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage der Anbahnung eines Mietverhältnisses dient, andernfalls Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung Ihrer Anfrage). Die Daten werden gelöscht, sobald sie für die Bearbeitung nicht mehr erforderlich sind, spätestens nach Abschluss der Vermietung bzw. endgültiger Absage.",
+    "s6_title": "6. SSL-/TLS-Verschlüsselung",
+    "s6_p1": "Diese Website nutzt aus Sicherheitsgründen eine SSL-/TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie am Präfix <em>https://</em> in der Adresszeile Ihres Browsers.",
+    "s7_title": "7. Ihre Rechte",
+    "s7_intro": "Ihnen stehen als betroffener Person gegenüber uns folgende Rechte zu, sofern die jeweiligen gesetzlichen Voraussetzungen vorliegen:",
+    "s7_list": [
+      "Auskunft über die zu Ihrer Person gespeicherten Daten (Art. 15 DSGVO)",
+      "Berichtigung unrichtiger Daten (Art. 16 DSGVO)",
+      "Löschung Ihrer Daten (Art. 17 DSGVO)",
+      "Einschränkung der Verarbeitung (Art. 18 DSGVO)",
+      "Widerspruch gegen die Verarbeitung (Art. 21 DSGVO)",
+      "Datenübertragbarkeit (Art. 20 DSGVO)",
+      "Beschwerde bei einer Datenschutz-Aufsichtsbehörde, z. B. der für Ihren Wohnort zuständigen Landesdatenschutzbehörde"
+    ]
+  }
+}

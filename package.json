@@ -1,0 +1,17 @@
+{
+  "name": "Zuhause an der Mosel",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mehrsprachige statische Website (DE/EN/NL), gebaut mit 11ty (Eleventy)",
+  "scripts": {
+    "build": "eleventy",
+    "start": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  },
+  "overrides": {
+    "linkify-it": "5.0.2",
+    "markdown-it": "14.2.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "home": {
+    "de": "/de/",
+    "en": "/en/",
+    "nl": "/nl/"
+  },
+  "imprint": {
+    "de": "/de/impressum/",
+    "en": "/en/imprint/",
+    "nl": "/nl/colofon/"
+  },
+  "privacy": {
+    "de": "/de/datenschutz/",
+    "en": "/en/privacypolicy/",
+    "nl": "/nl/privacybeleid/"
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "meta": {
+    "title_home": "Thuis. Aankomen.",
+    "description_home": "Lichte woning in een oud pand in Berlijn-Kreuzberg met eigen tuin – beschikbaar vanaf 1 december.",
+    "title_imprint": "Colofon — Thuis. Aankomen.",
+    "description_imprint": "Colofon conform § 5 TMG.",
+    "title_privacy": "Privacybeleid — Thuis. Aankomen.",
+    "description_privacy": "Privacybeleid conform art. 13 AVG."
+  },
+  "nav": {
+    "menu_aria": "Menu openen",
+    "lang_aria": "Taal wijzigen",
+    "contact_aria": "Contact",
+    "contact_email_label": "E-mail",
+    "copy_button": "Adres kopiëren",
+    "copied_button": "Gekopieerd ✓",
+    "back_to_home": "Terug naar de homepage",
+    "menu_overview": "Overzicht",
+    "menu_neighborhood": "Ligging",
+    "menu_photos": "Foto's",
+    "menu_floorplan": "Plattegrond",
+    "menu_features": "Details",
+    "menu_contact": "Contact",
+    "lang_de": "Deutsch",
+    "lang_en": "English",
+    "lang_nl": "Nederlands"
+  },
+  "home": {
+    "hero": {
+      "tag": "Beschikbaar vanaf 1 december",
+      "title_line1": "Aankomen.",
+      "title_line2": "Thuis zijn.",
+      "sub": "Open, loft-achtige ruimtes. Hoge plafonds. Een eigen, kleine tuin in de binnenplaats. Middenin het mooiste deel van Kreuzberg. Met een huis- en hofgemeenschap die die naam ook echt verdient.",
+      "scroll_hint": "Scroll om te lezen"
+    },
+    "overview": {
+      "eyebrow": "01 — In het kort",
+      "title": "Een plek om aan te komen",
+      "p1": "De lichte woning bestaat uit twee eenheden: één in het voorhuis met ramen naar de straat en naar de binnenplaats, één in de zijvleugel met uitzicht op de groene hof.",
+      "p2": "Beide eenheden overtuigen met loft-achtige, open ruimtes die in elkaar overlopen en veel licht binnenlaten. Een oude houten deur verbindt de twee delen met elkaar.",
+      "p3": "Voorin bevinden zich een gasten-badkamer, kitchenette en toegang tot de tuin; in de zijvleugel een badkamer, slaapnis, inloopkast en eveneens directe toegang tot de tuin.",
+      "facts": [
+        { "label": "Kamers", "value": "2" },
+        { "label": "Oppervlakte", "value": "130 m²" },
+        { "label": "Pand", "value": "Oudbouw, begane grond" },
+        { "label": "Energielabel", "value": "op aanvraag" },
+        { "label": "Kale huur", "value": "1.410 euro" },
+        { "label": "Servicekosten", "value": "320 euro" },
+        { "label": "Bijzonderheid", "value": "2 aparte ingangen" }
+      ]
+    },
+    "neighborhood": {
+      "eyebrow": "02 — Het leven eromheen",
+      "title": "Een buurt om je thuis te voelen",
+      "p1_label": "Ontspanning: ",
+      "p1": "Voor een frisse neus ben je in drie minuten in het Viktoriapark of Gleisdreieckpark, en overal rondom nodigen restaurants uit om te blijven hangen. De Bergmannkiez ligt zeven minuten verderop, en de Yorck-bioscoop zit vlak om de hoek.",
+      "p2_label": "Voorzieningen: ",
+      "p2": "Alles wat belangrijk is, is te voet bereikbaar: LPG, Rewe, Lidl en Aldi in de directe omgeving, de bushalte vlak voor de deur en de S-Bahn en U-Bahn op vijf minuten lopen.",
+      "p3_label": "Huis- en hofgemeenschap: ",
+      "p3": "Gezamenlijke hoffeesten horen er gewoon bij – het samenleven in het huis is vriendelijk, ontspannen en allesbehalve anoniem.",
+      "grid": ["Boodschappen<br>om de hoek", "S- & U-Bahn<br>op loopafstand", "Parken & restaurants<br>in de buurt"]
+    },
+    "photos": {
+      "eyebrow": "03 — Zo ziet het eruit",
+      "title": "Een plek om te vertoeven",
+      "intro": "Stel je voor: je loopt met een kop koffie in de hand door de ruimtes. Heb je je favoriete plekje al ontdekt?",
+      "labels": {
+        "Garten": "Foto — Tuin",
+        "Vorne": "Foto — Voor",
+        "Hinten": "Foto — Achter",
+        "Bad": "Foto — Badkamer",
+        "Video vorne": "Video — Voor",
+        "Video hinten": "Video — Achter"
+      }
+    },
+    "floorplan": {
+      "eyebrow": "04 — Het overzicht behouden",
+      "title": "Lijnen die thuis worden",
+      "intro": "Twee woningen zijn samengevoegd tot één ruim thuis – dat resulteert in een plattegrond die echt bijzonder is.",
+      "labels": {
+        "Grundriss Vorne": "Plattegrond — Voor",
+        "Grundriss Hinten": "Plattegrond — Achter",
+        "Grundriss Gesamt": "Plattegrond — Totaal"
+      }
+    },
+    "features": {
+      "eyebrow": "05 — Oog voor detail",
+      "title": "Klinkt dit als jij?",
+      "p1": "Elke woning heeft zijn eigen karakter – deze past bijzonder goed bij mensen die praktische voorzieningen en een echt thuis waarderen.",
+      "p2": "Dit maakt haar bijzonder:",
+      "list": [
+        "Voor mensen die 's winters graag vloerverwarming hebben",
+        "Voor stellen of alleenstaanden die de ruimte van open vertrekken waarderen",
+        "Voor mensen die van afwisseling houden en niet kunnen kiezen tussen twee badkamers met douche, en dan toch liever in het vrijstaande bad stappen",
+        "Voor mensen die zin hebben in buren",
+        "Voor mensen die graag over een parketvloer lopen",
+        "Voor mensen die opbergruimte nodig hebben in een eigen, afsluitbare kelderruimte",
+        "Voor mensen die graag zelfstandig en ongecompliceerd wonen",
+        "Voor mensen die warm water op aanvraag willen (geiser)",
+        "Voor mensen die hun fiets veilig willen stallen in de eigen fietsenberging van het pand",
+        "Voor mensen met groene vingers die dromen van een kleine, eigen tuin met terras"
+      ]
+    },
+    "contact": {
+      "eyebrow": "06 — We kijken naar je uit",
+      "title": "Het klikte, toch?",
+      "text": "Schrijf ons dan kort wie je bent en waarom je hier goed bij past.",
+      "hint": "Het adres staat als afbeelding op de pagina zodat spam-bots het niet kunnen uitlezen — kopieer het gemakkelijkst via de knop."
+    },
+    "footer": {
+      "line1": "Beschikbaar vanaf 1-12 · Bezichtiging op afspraak · Geen massale sollicitatie-casting"
+    }
+  },
+  "imprint": {
+    "eyebrow": "Gegevens conform § 5 TMG",
+    "title": "Colofon",
+    "intro": "Deze website dient voor de particuliere verhuur van één enkele woning, van particulier aan particulier. Zij wordt niet commercieel geëxploiteerd. Onderstaande gegevens verstrekken wij desondanks vrijwillig, uit transparantie.",
+    "responsible_title": "Verantwoordelijk voor de inhoud",
+    "address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel), Duitsland",
+    "contact_title": "Contact",
+    "liability_title": "Aansprakelijkheid voor inhoud en links",
+    "liability_text": "De inhoud van deze pagina is met zorg samengesteld. Voor de juistheid, volledigheid en actualiteit van de gegevens — met name over de woning — kan echter geen garantie worden gegeven. Deze pagina bevat geen links naar externe websites van derden.",
+    "dispute_title": "Geschillenbeslechting",
+    "dispute_text": "Omdat deze pagina uitsluitend dient voor de particuliere verhuur en geen commercieel aanbod vormt, zijn de regels voor online geschillenbeslechting (het ODR-platform van de Europese Commissie) en voor consumentengeschillenbeslechting niet van toepassing."
+  },
+  "privacy": {
+    "eyebrow": "Conform art. 13 AVG",
+    "title": "Privacybeleid",
+    "intro": "De bescherming van uw persoonsgegevens is belangrijk voor ons. Hieronder informeren wij u over welke gegevens worden verwerkt bij een bezoek aan deze website.",
+    "s1_title": "1. Verantwoordelijke",
+    "s1_address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel), Duitsland",
+    "s2_title": "2. Hosting",
+    "s2_p1": "Deze website wordt aangeboden via GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, VS, of de Europese groepsmaatschappij daarvan). Het domein is geregistreerd bij Namecheap Inc. Bij het bezoeken van de pagina verwerkt GitHub automatisch technische informatie in zogenoemde server-logbestanden die uw browser verzendt. Dit omvat gewoonlijk het IP-adres, datum en tijdstip van de aanvraag, de opgevraagde pagina, de gebruikte browser en het besturingssysteem.",
+    "s2_p2": "Deze gegevens dienen uitsluitend voor de technische werking, het leveren van de website en de bescherming tegen misbruik. Wij combineren deze niet met andere gegevensbronnen. Rechtsgrondslag is ons gerechtvaardigd belang bij een veilige en functionerende website (art. 6, lid 1, onder f AVG).",
+    "s3_title": "3. Lettertypen",
+    "s3_p1": "De op deze website gebruikte lettertypen (Fraunces, Space Grotesk, JetBrains Mono) zijn lokaal in de website ingebonden. Er wordt daarbij geen verbinding gemaakt met servers van Google of andere derden, en er worden geen gegevens van u aan derden doorgegeven.",
+    "s4_title": "4. Cookies en tracking",
+    "s4_p1": "Deze website gebruikt geen cookies en geen tracking- of analysetools (bijv. Google Analytics, Facebook-pixel e.d.). Er worden geen gebruikersprofielen aangemaakt.",
+    "s5_title": "5. Contact opnemen per e-mail",
+    "s5_p1": "Als u per e-mail contact met ons opneemt, slaan wij de door u verstrekte gegevens (bijv. naam, e-mailadres, inhoud van uw bericht) op om uw aanvraag te kunnen verwerken. Wij geven deze gegevens niet door zonder uw toestemming.",
+    "s5_p2": "Rechtsgrondslag is art. 6, lid 1, onder b AVG, voor zover uw aanvraag dient ter voorbereiding van een huurovereenkomst, anders art. 6, lid 1, onder f AVG (gerechtvaardigd belang bij het verwerken van uw aanvraag). De gegevens worden gewist zodra ze niet meer nodig zijn voor de verwerking, uiterlijk na afronding van de verhuur of definitieve afwijzing.",
+    "s6_title": "6. SSL-/TLS-versleuteling",
+    "s6_p1": "Deze website gebruikt om veiligheidsredenen SSL-/TLS-versleuteling. Een versleutelde verbinding herkent u aan het voorvoegsel <em>https://</em> in de adresbalk van uw browser.",
+    "s7_title": "7. Uw rechten",
+    "s7_intro": "U heeft als betrokkene tegenover ons de volgende rechten, voor zover aan de betreffende wettelijke voorwaarden is voldaan:",
+    "s7_list": [
+      "Inzage in de over u opgeslagen gegevens (art. 15 AVG)",
+      "Rectificatie van onjuiste gegevens (art. 16 AVG)",
+      "Wissing van uw gegevens (art. 17 AVG)",
+      "Beperking van de verwerking (art. 18 AVG)",
+      "Bezwaar tegen de verwerking (art. 21 AVG)",
+      "Gegevensoverdraagbaarheid (art. 20 AVG)",
+      "Het indienen van een klacht bij een toezichthoudende autoriteit voor gegevensbescherming, bijv. de voor uw woonplaats bevoegde instantie"
+    ]
+  }
+}

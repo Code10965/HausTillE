@@ -1,0 +1,82 @@
+---
+layout: layout.njk
+page_key: privacy
+pagination:
+  data: languageList
+  size: 1
+  alias: lang
+permalink: "{{ pages.privacy[lang] }}"
+---
+{% set t = de %}
+{% if lang == "en" %}{% set t = en %}{% endif %}
+{% if lang == "nl" %}{% set t = nl %}{% endif %}
+<section class="reveal-section tone-paper visible">
+  <div class="section-inner">
+    <div class="eyebrow-row">
+      <span class="mono-label gold-label">{{ t.privacy.eyebrow }}</span>
+      <span class="eyebrow-line"></span>
+    </div>
+    <h1 class="section-title">{{ t.privacy.title | safe }}</h1>
+
+    <div class="lorem-block">
+      <p class="lorem-p">{{ t.privacy.intro }}</p>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.privacy.s1_title }}</p>
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.privacy.s1_address | safe }}</p>
+      </div>
+      <div data-email-contact-theme="light"></div>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.privacy.s2_title }}</p>
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.privacy.s2_p1 }}</p>
+        <p class="lorem-p">{{ t.privacy.s2_p2 }}</p>
+      </div>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.privacy.s3_title }}</p>
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.privacy.s3_p1 }}</p>
+      </div>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.privacy.s4_title }}</p>
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.privacy.s4_p1 }}</p>
+      </div>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.privacy.s5_title }}</p>
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.privacy.s5_p1 }}</p>
+        <p class="lorem-p">{{ t.privacy.s5_p2 }}</p>
+      </div>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.privacy.s6_title }}</p>
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.privacy.s6_p1 | safe }}</p>
+      </div>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.privacy.s7_title }}</p>
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.privacy.s7_intro }}</p>
+      </div>
+      <ul class="legal-list">
+        {% for item in t.privacy.s7_list %}
+        <li><span class="dot"></span>{{ item }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>

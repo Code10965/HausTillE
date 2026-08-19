@@ -1,0 +1,51 @@
+---
+layout: layout.njk
+page_key: imprint
+pagination:
+  data: languageList
+  size: 1
+  alias: lang
+permalink: "{{ pages.imprint[lang] }}"
+---
+{% set t = de %}
+{% if lang == "en" %}{% set t = en %}{% endif %}
+{% if lang == "nl" %}{% set t = nl %}{% endif %}
+<section class="reveal-section tone-paper visible">
+  <div class="section-inner">
+    <div class="eyebrow-row">
+      <span class="mono-label gold-label">{{ t.imprint.eyebrow }}</span>
+      <span class="eyebrow-line"></span>
+    </div>
+    <h1 class="section-title">{{ t.imprint.title }}</h1>
+
+    <div class="lorem-block">
+      <p class="lorem-p">{{ t.imprint.intro }}</p>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.imprint.responsible_title }}</p>
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.imprint.address | safe }}</p>
+      </div>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.imprint.contact_title }}</p>
+      <div data-email-contact-theme="light"></div>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.imprint.liability_title }}</p>
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.imprint.liability_text }}</p>
+      </div>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.imprint.dispute_title }}</p>
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.imprint.dispute_text }}</p>
+      </div>
+    </div>
+  </div>
+</section>
