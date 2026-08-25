@@ -1,10 +1,10 @@
 {
   "meta": {
-    "title_home": "Zuhause. Ankommen.",
-    "description_home": "Helle Altbauwohnung in Berlin-Kreuzberg mit eigenem Garten – frei ab 01. Dezember.",
-    "title_imprint": "Impressum — Zuhause. Ankommen.",
+    "title_home": "Haus Till E",
+    "description_home": "Dein Zuhause an der Mosel. Ein Hotel-garni der Extraklasse",
+    "title_imprint": "Impressum — Haus Till E",
     "description_imprint": "Impressum gemäß § 5 TMG.",
-    "title_privacy": "Datenschutzerklärung — Zuhause. Ankommen.",
+    "title_privacy": "Datenschutzerklärung — Haus Till E",
     "description_privacy": "Datenschutzerklärung gemäß Art. 13 DSGVO."
   },
   "nav": {
@@ -15,11 +15,10 @@
     "copy_button": "Adresse kopieren",
     "copied_button": "Kopiert ✓",
     "back_to_home": "Zurück zur Startseite",
-    "menu_overview": "Überblick",
-    "menu_neighborhood": "Lage",
-    "menu_photos": "Fotos",
-    "menu_floorplan": "Grundriss",
-    "menu_features": "Details",
+    "menu_home_details": "Zuhause",
+    "menu_rooms": "Zimmer",
+    "menu_hosts": "Gastgeber",
+    "menu_area": "Umgebung",
     "menu_contact": "Kontakt",
     "lang_de": "Deutsch",
     "lang_en": "English",
@@ -27,88 +26,197 @@
   },
   "home": {
     "hero": {
+      "eyebrow": "Haus Till E an der Moselschleife in Zell",
       "tag": "Frei ab 01. Dezember",
       "title_line1": "Ankommen.",
       "title_line2": "Zuhause sein.",
-      "sub": "Offene, loftartige Räume. Hohe Decken. Ein eigener, kleiner Garten im Innenhof. Mittendrin im schönsten Teil von Kreuzberg. Mit einer Haus- und Hofgemeinschaft, die diesen Namen auch verdient.",
+      "sub": "Im denkmalgeschützten Art-Deco-Haus mit eigener Geschichte erwarten Euch fünf individuelle Doppelzimmer voller Charme und Charakter. Startet den Tag bei einem leckeren Frühstück in unserem gemütlichen Frühstücksraum – bevor Ihr im wildromantischen Garten die Zeit vergesst.",
       "scroll_hint": "Zum Lesen scrollen"
     },
-    "overview": {
-      "eyebrow": "01 — Auf einen Blick",
-      "title": "Ein Raum zum Ankommen",
-      "p1": "Die helle Wohnung verteilt sich auf zwei Einheiten: eine im Vorderhaus mit Fensterfront zur Straße und zum Innenhof, eine im Seitenflügel mit Blick in den grünen Hof.",
-      "p2": "Beide Einheiten überzeugen mit loftartigen, offenen Räumen, die ineinander übergehen und viel Licht hereinlassen. Eine alte Holztüre verbindet die beiden Bereiche miteinander.",
-      "p3": "Vorne warten Gäste-Bad, Küchenzeile und Gartenzugang, im Seitenflügel Bad, Schlafnische, begehbarer Kleiderschrank und ebenfalls direkter Zugang zum Garten.",
-      "facts": [
-        { "label": "Zimmer", "value": "2" },
-        { "label": "Fläche", "value": "130 m²" },
-        { "label": "Haus", "value": "Altbau, Erdgeschoss" },
-        { "label": "Energieausweis", "value": "auf Anfrage" },
-        { "label": "Grundmiete", "value": "1.410 Euro" },
-        { "label": "Nebenkosten", "value": "320 Euro" },
-        { "label": "Besonderheit", "value": "2 separate Eingänge" }
-      ]
-    },
-    "neighborhood": {
-      "eyebrow": "02 — Das Leben drumherum",
-      "title": "Ein Kiez zum Wohlfühlen",
-      "p1_label": "Erholung: ",
-      "p1": "Zum Durchatmen sind es nur drei Minuten in den Viktoria- oder Gleisdreieckpark, ringsherum laden Restaurants zum Verweilen ein. Der Bergmannkiez liegt sieben Minuten entfernt, das Yorck-Kino ist direkt um die Ecke.",
-      "p2_label": "Versorgung: ",
-      "p2": "Alles Wichtige ist fußläufig erreichbar: LPG, Rewe, Lidl und Aldi in direkter Nähe, die Bushaltestelle direkt vor der Tür und die S- und U-Bahn fünf Minuten entfernt.",
-      "p3_label": "Haus- und Hofgemeinschaft: ",
-      "p3": "Gemeinsame Hoffeste gehören einfach dazu – das Miteinander im Haus ist freundlich, entspannt und alles andere als anonym.",
-      "grid": ["Einkaufen<br>ums Eck", "S- & U-Bahn<br>fußläufig", "Parks & Restaurants<br>in der Nähe"]
-    },
-    "photos": {
-      "eyebrow": "03 — So sieht's aus",
-      "title": "Ein Ort zum Verweilen",
-      "intro": "Stell Dir vor, du wandelst mit einem Becher Kaffee in der Hand durch die Räume. Hast Du schon Deinen Lieblingsplatz entdeckt?",
-      "labels": {
+
+    "home_details": {
+      "eyebrow": "01 — Euer Zuhause an der Mosel",
+      "title_line1": "Ein Zuhause.",
+      "title_line2": "Nicht bloß ein Hotel.",
+      "text": [
+        "Es war einmal ein Schlossbesitzer, der hatte drei Töchter – und jeder vererbte er einen Teil des Zeller Schlosses, das im 16. Jahrhundert erbaut wurde: der einen den Seitenflügel, der anderen das Haupthaus, und für die dritte ließ er ein neues Gebäude errichten, das sich in Stil und Anmutung harmonisch in das Schlossensemble einfügt.",
+        "Was wie ein Märchen klingt, ist eine wahre Geschichte aus den 1920er-Jahren in Zell. So entstand das Anwesen, das heute als Haus Till E bekannt und geschätzt ist. Unser denkmalgeschütztes Gebäude stammt aus der Zeit des Art Deco und wurde im typischen Stil dieser Epoche liebevoll restauriert. Fenster, Türen, Holzböden und Treppenhaus sind original erhalten und verleihen ihm sein einmaliges Flair.",
+        "Vor dem Haus erwartet Euch ein wildromantischer, idyllischer Garten. Bei einer Flasche Wein könnt Ihr hier eure Seele baumeln lassen und die Zeit vergessen, bevor Ihr zurück in die Geschichte des Gemäuers eintaucht."
+      ],
+      "photo_labels": {
+        "Haus": "Foto — Haus",
         "Garten": "Foto — Garten",
-        "Vorne": "Foto — Vorne",
-        "Hinten": "Foto — Hinten",
-        "Bad": "Foto — Bad",
-        "Video vorne": "Video — Vorne",
-        "Video hinten": "Video — Hinten"
-      }
-    },
-    "floorplan": {
-      "eyebrow": "04 — Den Überblick behalten",
-      "title": "Linien, die Zuhause werden",
-      "intro": "Zwei Wohnungen wurden zu einem großzügigen Zuhause vereint – für einen Grundriss, der wirklich besonders ist.",
-      "labels": {
-        "Grundriss Vorne": "Grundriss — Vorne",
-        "Grundriss Hinten": "Grundriss — Hinten",
-        "Grundriss Gesamt": "Grundriss — Gesamt"
-      }
-    },
-    "features": {
-      "eyebrow": "05 — Ein Auge fürs Detail",
-      "title": "Klingt das nach dir?",
-      "p1": "Jede Wohnung hat ihren eigenen Charakter – diese hier passt besonders gut zu Menschen, die praktische Ausstattung und ein echtes Zuhause zu schätzen wissen.",
-      "p2": "Das macht sie aus:",
-      "list": [
-        "Für Menschen, die im Winter gerne eine Fussbodenheizung genießen",
-        "Für Paare oder Singles, die die Großzügigkeit offener Räume schätzen",
-        "Für Abwechslungssuchende, die sich nicht zwischen zwei Bädern mit Dusche entscheiden wollen und dann doch lieber in die freistehende Badewanne steigen",
-        "Für Menschen, die Lust auf Nachbarschaft haben",
-        "Für Menschen, die gerne über Parkettfussboden laufen",
-        "Für Menschen, die Stauraum in einem eigenen, abschließbaren Kellerbereich brauchen",
-        "Für Menschen, die gerne eigenständig und unkompliziert wohnen",
-        "Für Menschen, die warmes Wasser bedarfsgerecht aufbereiten wollen (Durchlauferhitzer)",
-        "Für Menschen, die ihr Bike sicher im hauseigenen Fahrradraum abstellen wollen",
-        "Für Menschen mit grünem Daumen, die von einem kleinen, eigenen Garten mit Terrasse träumen"
+        "Eingangsbereich": "Foto — Eingangsbereich",
+        "Frühstücksraum": "Foto — Frühstücksraum",
+        "Treppenhaus": "Foto — Treppenhaus"
+      },
+      "photo_infos": {
+        "Haus": "",
+        "Garten": "",
+        "Eingangsbereich": "",
+        "Frühstücksraum": "",
+        "Treppenhaus": ""
+      },
+      "info_tiles": {
+        "Info": ""
+      },
+      "accordion": [
+        { "title": "Anfahrt", "content": "Haus Till E liegt fußläufig an der Mosel, mitten in der Zeller Altstadt, in der Schloßstraße. Von Bullay kommend überquert Ihr die Mosel über die Autobrücke und fahrt durch Merl in die Zeller Altstadt. Weitere Anfahrtsmöglichkeiten führen über den Zeller Berg und Grenderich (L199), durch das Altlayer Bachtal (L194) oder von Kappel kommend über die B421. Mit dem Zug erreicht Ihr uns über den Umweltbahnhof Bullay – von dort bringt Euch der Bus in rund 3 km bis zur Haltestelle Lindenplatz, nur einen kurzen Fußweg von Haus Till E entfernt. Der nächstgelegene Flughafen ist Frankfurt-Hahn (ca. 20 km). Egal ob ab Bahnhof oder Flughafen: Sagt uns gerne Bescheid, wir holen Euch mit dem Auto ab." },
+        { "title": "Adresse", "content": "Haus Till E findet Ihr in der Schloßstraße 10, 56856 Zell (Mosel) – direkt am Fuße der Steillage „Zeller Schwarze Katz“, nur wenige Gehminuten von Moselpromenade und Altstadt entfernt." },
+        { "title": "Parken", "content": "Am Moselufer stehen Euch zahlreiche kostenfreie Parkplätze zur Verfügung. Direkt in der Schloßstraße könnt Ihr mit Parkschein parken – zum Ein- und Ausladen Eures Gepäcks reicht meist schon das kostenlose 30-Minuten-Ticket. Ab Anfang 2027 bieten wir Euch außerdem eigene Garagenstellplätze direkt am Haus an." },
+        { "title": "Haustiere", "content": "Wir beide lieben Hunde von Herzen – über die Jahre haben wir jedoch einige Erfahrungen gemacht, die uns zum Umdenken bewogen haben. Deshalb ist das Mitbringen von Hunden in Haus Till E derzeit leider nicht möglich. Wir bitten um Euer Verständnis." },
+        { "title": "Einschränkungen", "content": "Haus Till E ist ein denkmalgeschütztes Gebäude aus den 1920er-Jahren ohne Aufzug – die Zimmer sind ausschließlich über die Treppe erreichbar. Im Haus, einschließlich der Balkone, ist Rauchen leider nicht gestattet; in unserem Garten dürft Ihr dafür gerne und jederzeit rauchen." },
+        { "title": "Fahrräder", "content": "Eure Bio- oder Elektro-Fahrräder könnt Ihr sicher in unserem Nebengebäude parken und laden. Wer lieber vor Ort ausleiht: Unsere Gäste sind besonders zufrieden mit dem Radverleih von Wanderland (Balduinstraße 95) und Moselglück (Balduinstraße 43) – beide bieten gut geprüfte Räder direkt in Zell." },
+        { "title": "Klimatisierung", "content": "Eine klassische Klimaanlage gibt es in unserem historischen Haus nicht. An besonders warmen Tagen bringen wir Euch auf Wunsch gerne einen modernen, rotorlosen Turmventilator (8 Geschwindigkeitsstufen) aufs Zimmer – sagt uns einfach kurz Bescheid." },
+        { "title": "Laktose, Gluten, etc.", "content": "Als kleines, familiär geführtes Haus haben wir nicht immer alle Produkte für jede Unverträglichkeit standardmäßig vorrätig. Teilt uns Eure Bedürfnisse am besten schon bei der Buchung mit – wir stellen uns gerne und mit Freude auf Euch ein." },
+        { "title": "Familie und Kinder", "content": "Haus Till E wird immer wieder von ganzen Familien gebucht – wir durften schon so manchen 80. Geburtstag miterleben und drei oder vier Generationen gleichzeitig im ganzen Haus beherbergen. Es macht uns große Freude, den Rahmen für unvergessliche gemeinsame Familienzeiten zu schaffen." },
+        { "title": "An- und Abreisezeiten", "content": "Der Check-in ist zwischen 16 und 18 Uhr möglich, der Check-out spätestens bis 11 Uhr. Diese Zeit dazwischen brauchen wir, um alle fünf Zimmer liebevoll für Euch herzurichten und zu reinigen. Wenn Ihr Euer Gepäck schon früher abstellen oder den Schlüssel vorab abholen möchtet, sprecht uns gerne rechtzeitig darauf an – wir finden meist eine Lösung." }
       ]
     },
+
+    "rooms": {
+      "eyebrow": "02 — Zwischen fünf Zimmern könnt Ihr wählen",
+      "title_line1": "Individuelle Zimmer.",
+      "title_line2": "So individuell wie Ihr.",
+      "text": [
+        "Jedes unserer fünf Zimmer ist liebevoll und einzigartig für Euch eingerichtet. Im zweiten Stock erwarten Euch zwei Zimmer mit eigenem Balkon (Zimmer 1 & 2) sowie ein großzügiges Studio ohne Balkon (Zimmer 3). Im dritten Stock findet Ihr einen großen Raum mit herrlichem Ausblick auf Schloss und Mosel (Zimmer 4) sowie ein gemütliches Zimmer mit charmanten Dachschrägen (Zimmer 5).",
+        "Antike Kleinmöbel, original Art-Deco-Kugellampen und echte Pflanzen schaffen eine stimmungsvolle Atmosphäre in Euren Räumen – ergänzt durch exklusive Kunstwerke, die eine internationale Künstlerin eigens für jedes Zimmer gestaltet hat. 'Die Zimmer verbinden den Luxus von 1920 mit allen Annehmlichkeiten der Gegenwart' – so beschrieb es einmal ein Gast. Eine Beschreibung, die uns sehr gefällt.",
+        "Bitte beachtet: Unser Haus verfügt über keinen Aufzug – die Zimmer sind ausschließlich über die Treppe erreichbar."
+      ],
+      "photo_labels": {
+        "Zimmer_1": "Foto — Zimmer 1",
+        "Zimmer_2": "Foto — Zimmer 2",
+        "Zimmer_3": "Foto — Zimmer 3",
+        "Zimmer_4": "Foto — Zimmer 4",
+        "Zimmer_5": "Foto — Zimmer 5"
+      },
+      "photo_infos": {
+        "Zimmer_1": {
+          "text": "• Sunt in culpa qui officia deserunt mollit anim id est laborum.\n• Curabitur pretium tincidunt lacus, ut interdum tellus elit sed risus.\n• Maecenas eget condimentum velit, sit amet feugiat lectus.",
+          "position": 1
+        },
+        "Zimmer_2": "",
+        "Zimmer_3": "",
+        "Zimmer_4": "",
+        "Zimmer_5": ""
+      }
+    },
+
+    "hosts": {
+      "eyebrow": "03 — Eure Gastgeber freuen sich auf Euch",
+      "title_line1": "Für Euch da.",
+      "title_line2": "Wenn Ihr wollt.",
+      "text": [
+        "Wir sind Jan und René – und Haus Till E ist unser Herzensprojekt. Das Haus gibt es schon seit vielen Jahrzehnten. Als wir es im April 2022 zum ersten Mal betraten, war es um uns geschehen: Wir haben uns auf der Stelle in dieses wunderschöne Art-Deco-Anwesen verliebt – in die authentischen Glasmalereien, das alte Holztreppenhaus und den idyllischen Garten, den Jan seitdem mit viel Hingabe pflegt.",
+        "Aus Berlin sind wir an die Mosel gezogen, um genau das zu finden, was Zell so besonders macht: Ruhe und Entschleunigung, gute Luft, weite und hügelige Natur, herzliche Menschen und den ein oder anderen Schluck guten Moselwein. Diese Liebe auf den ersten Blick möchten wir mit Euch teilen und Euch für dieses großartige Gebäude aus den 1920er-Jahren begeistern.",
+        "Deshalb laden wir Euch herzlich ein, unsere Gäste zu sein."
+      ],
+      "photo_labels": {
+        "Rosa": "we love Rosa",
+        "Bjorn": "we love Bjørn",
+        "Romina": "we love Romina"
+      },
+      "photo_infos": {
+        "Rosa": "",
+        "Bjorn": "",
+        "Romina": ""
+      },
+      "info_tiles": {
+        "Info": ""
+      }
+    },
+
+    "area": {
+      "eyebrow": "04 — Zell und Umgebung",
+      "title_line1": "Ein Ort.",
+      "title_line2": "Zahllose Möglichkeiten",
+      "text": [
+        "Bei uns im Haus Till E dreht sich alles um das, wonach man sich still und heimlich sehnt: Ruhe zum Ankommen, Zeit zum Nichtstun – und auf Wunsch auch ein bisschen Bewegung zwischendurch. Von unserer Lieblings-Aussichtsbank (unserem persönlichen 'Moselkino'), nur 10 Gehminuten von Haus Till E entfernt, schaut Ihr dem Treiben auf der Mosel zu und lasst die Zeit einfach verstreichen.",
+        "Wer lieber aktiv wird, findet direkt vor der Haustür von Haus Till E Wanderwege wie die Liebesschlucht (11,1 km) oder den Marienburg-Rundwanderweg (15,2 km), entspannte Radtouren an der Mosel oder sportliche Etappen hinauf in die Steillagen der 'Zeller Schwarze Katz'. Und zur Belohnung erwarten Euch in Zell (Mosel) mehr als 20 leidenschaftliche Winzerinnen und Winzer sowie Restaurants für jeden Geschmack – von griechisch bis asiatisch, von Eisbecher bis Schokolade.",
+        "Und wer genau hinschaut, entdeckt kulturelle Geheimtipps direkt bei Haus Till E: klassische Konzerte im Gewölbekeller, Bandauftritte im Garten, Krimidinner mit Mehrgangmenü – Erlebnisse, die man nicht googelt, sondern nur findet, wenn man bei uns zu Gast ist."
+      ],
+      "accordion": [
+        {
+          "title": "Stadt",
+          "content": "In der Stadt genießen wir am liebsten die Moselpromenade und schlendern die Balduinstraße entlang mit ihren kleinen Läden und Cafés. Und von Kaimt aus, auf der anderen Moselseite, habt Ihr den schönsten Blick auf die Zeller Altstadt – mit ihren Türmen, Fachwerkhäusern und der über 2000 Jahre alten Weingeschichte, die man der Stadt an jeder Ecke ansieht."
+        },
+        {
+          "title": "Land",
+          "content": "Rund um Zell treffen zwei ganz unterschiedliche Landschaften aufeinander: die Eifel und der Hunsrück. Hier weite Sichten über sanfte Hügel, dort dichte Wälder mit Lichtungen, die zum Verweilen einladen. Ein Highlight im Hunsrück ist die Hängeseilbrücke Geierlay bei Sosberg – mit 360 Metern Länge und bis zu 100 Metern Höhe eine der spektakulärsten Hängeseilbrücken Deutschlands und pures Adrenalin für alle, die schwindelfrei sind."
+        },
+        {
+          "title": "Fluss",
+          "content": "Mit dem Schiff geht es ab Zell nach Cochem, Beilstein, Traben-Trarbach oder Bernkastel-Kues – vorbei an Burgen und Weinbergen, fast wie durch eine Märklin-Landschaft. Und weil Ihr Eure Fahrräder mit an Bord nehmen könnt, lässt sich eine Tour bequem auf dem Schiff und die andere sportlich auf dem Bike gestalten – ganz wie Ihr Lust habt."
+        },
+        {
+          "title": "Berge",
+          "content": "Direkt am Fuße von Haus Till E liegt die berühmte Steillage „Zeller Schwarze Katz“ – und genau hier, im Herzen des Weinbergs, steht unser Haus. Direkt hinter Haus Till E startet der Collis-Rundwanderweg (7,9 km, ca. 2 Std. 30 Min., 210 Höhenmeter) hinauf zum 1906 erbauten Collis-Turm mit einer tollen Aussicht über die Stadt, und auch in Merl und Briedel warten Berge mit spektakulären Ausblicken auf Euch. Nur 10 Gehminuten von Haus Till E entfernt liegt unsere Aussichtsbank, unser ganz persönliches „Moselkino“: Von hier aus könnt Ihr dem Treiben auf dem Wasser und in den Weinbergen zuschauen – der schönste und entschleunigendste Film, den die Natur zu bieten hat."
+        },
+        {
+          "title": "Wandern",
+          "content": "Wer die Natur zu Fuß erleben möchte, ist bei Haus Till E goldrichtig. Die Liebesschlucht (11,1 km, mittel, ca. 3 Std. 15 Min., 266 Höhenmeter) führt Euch vorbei am Wallfahrtsort Marienhöhe durch den Wald hinab in eine romantische Felsschlucht. Der Marienburg-Rundwanderweg (15,2 km, mittel, ca. 4 Std. 35 Min., 383 Höhenmeter) belohnt Euch mit einem Abstecher zum Prinzenkopfturm und grandiosen Panoramablicken auf Deutschlands engste Moselschleife. Und der Collis-Rundwanderweg (7,9 km, mittel, ca. 2 Std. 30 Min., 210 Höhenmeter) führt hinauf zum historischen Collis-Turm mit Blick über Zell und das Zellerland. Drei ganz unterschiedliche Wege – und alle in Reichweite von Haus Till E."
+        },
+        {
+          "title": "Radwandern",
+          "content": "Ob entspannt oder sportlich – bei Haus Till E findet Ihr die passende Strecke. Direkt an der Mosel entlang geht es flach und steigungsarm dahin, ideal für einen gemütlichen Radausflug. Wer es lieber sportlich mag, wagt sich hinauf in die Steillagen und Weinberge – kurze knackige Anstiege inklusive, dafür mit Aussicht als Belohnung."
+        },
+        {
+          "title": "Wellness",
+          "content": "Rund 30 Autominuten von Haus Till E entfernt liegt die Vulkaneifel Therme in Bad Bertrich – Deutschlands einzige Glaubersalztherme mit Thermalbad, sechs Saunen und vielfältigen Wellnessanwendungen. Ein perfekter Ausflug, wenn Ihr Euch nach Wasser, Wärme und ein bisschen Verwöhnprogramm sehnt."
+        },
+        {
+          "title": "Wein genießen",
+          "content": "Mehr als 20 Winzerinnen und Winzer prägen unser Zeller Land mit Leidenschaft, Professionalität und Können – und erzeugen dabei ausgezeichnete, mehrfach prämierte Weine. In den Steillagen wird von Hand gelesen, mit einer Liebe zum Produkt, die man beim Verkosten schmeckt. Unsere Winzer setzen Trends, und die junge Generation probiert mutig Neues aus. In zahlreichen Weinstuben und Vinotheken könnt Ihr die Weine probieren, verkosten und natürlich auch direkt mit nach Hause nehmen."
+        },
+        {
+          "title": "Essen genießen",
+          "content": "Für jeden Geschmack ist etwas dabei: griechisch beim El Grego, italienisch bei Giovanni, indisch in der La Terrazza, deutsch im Hotel zum Grünen Kranz und asiatisch mit Spitzen-Sushi im Koi – alles Restaurants, die seit Jahren mit guter Qualität überzeugen. Die besten Eisbecher der Stadt bekommt Ihr bei Stülb, Venezia oder Perilli, die leckersten Kuchen im Stadtcafé Stülb – und wer noch eine süße Verführung sucht, wird beim DaKo fündig, unserem belgischen Chocolatier."
+        },
+        {
+          "title": "Kultur genießen",
+          "content": "In den Sommermonaten erwartet Euch „Summer in the City“ – Donnerstagabende mit chilliger Live-Musik an wechselnden Locations in Zell, mal am Weingut, mal direkt bei Haus Till E im Garten. Von Herbst bis Frühling zieht es uns ins KulturKino Kaimt mit seinem liebevoll kuratierten Filmprogramm. Und dazwischen gibt es immer wieder kleine Konzerte bei Haus Till E oder bei Freunden – im Garten, im Wohnzimmer oder im Gewölbekeller, von klassischer Gitarre über Big Band bis zu minimalistischem Elektrobeat, dazu Krimidinner mit Mehrgangmenü. Die aktuellen Termine findet Ihr auf unserer Veranstaltungsseite."
+        }
+      ],
+      "faq": {
+        "heading": "Häufige Fragen",
+        "items": [
+          {
+            "title": "Wie weit ist die Aussichtsbank von Haus Till E entfernt?",
+            "content": "Die Aussichtsbank, unser \"Moselkino\", liegt 10 Gehminuten von Haus Till E entfernt."
+          },
+          {
+            "title": "Welche Wanderwege starten in der Nähe von Haus Till E?",
+            "content": "Direkt vor der Haustür von Haus Till E beginnen der Collis-Rundwanderweg (7,9 km), die Liebesschlucht (11,1 km) und der Marienburg-Rundwanderweg (15,2 km)."
+          },
+          {
+            "title": "Wie lang und schwer ist der Marienburg-Rundwanderweg?",
+            "content": "Der Marienburg-Rundwanderweg ist 15,2 km lang, mittelschwer und dauert etwa 4 Stunden 35 Minuten bei 383 Höhenmetern."
+          },
+          {
+            "title": "Wo liegt Haus Till E?",
+            "content": "Haus Till E liegt am Fuße der Steillage \"Zeller Schwarze Katz\" in Zell (Mosel), direkt an der Mosel."
+          },
+          {
+            "title": "Wie weit ist die Vulkaneifel Therme in Bad Bertrich entfernt?",
+            "content": "Die Vulkaneifel Therme in Bad Bertrich ist rund 30 Autominuten von Haus Till E entfernt."
+          },
+          {
+            "title": "Wie lang ist die Hängeseilbrücke Geierlay?",
+            "content": "Die Hängeseilbrücke Geierlay im Hunsrück ist 360 Meter lang und führt bis zu 100 Meter über das Tal zwischen Sosberg und Mörsdorf."
+          }
+        ]
+      }
+    },
+
+    "footer": {
+      "line1": "© 2026 Haus Till E"
+    },
+
     "contact": {
-      "eyebrow": "06 — Wir freuen uns auf Dich",
-      "title": "Es hat gefunkt, oder?",
+      "eyebrow": "05 — der direkte Draht zu uns",
+      "title": "Na, habt Ihr Lust bekommen?",
       "text": "Dann schreib uns kurz, wer du bist und warum du gut hierher passt.",
       "hint": "Die Adresse ist als Bild hinterlegt, damit Spam-Bots sie nicht auslesen können — am einfachsten über den Button kopieren."
-    },
-    "footer": {
-      "line1": "Verfügbar ab 01.12. · Besichtigung nach Absprache · Kein Massenbewerbungs-Casting"
     }
   },
   "imprint": {

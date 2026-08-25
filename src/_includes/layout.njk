@@ -32,10 +32,18 @@
     {# Absolute statt relative Pfade (/assets/... statt favicon/...): die
        Original-Seiten lagen alle im selben Ordner, jetzt liegt jede Seite
        eine Ebene tiefer (/de/, /en/, /nl/). Ein relativer Pfad "favicon/..."
-       würde der Browser dann fälschlich als "/de/favicon/..." auflösen. #}
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon/favicon-32x32-dark.png" media="(prefers-color-scheme: light)">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon/favicon-32x32.png" media="(prefers-color-scheme: dark)">
-    <link rel="shortcut icon" href="/assets/media/favicon/favicon-dark.ico">
+       würde der Browser dann fälschlich als "/de/favicon/..." auflösen.
+
+       Bewusst OHNE Hell/Dunkel-Unterscheidung (kein
+       prefers-color-scheme) - ein einziges Icon-Set für alle
+       Browser-Modi, passend zu den tatsächlich vorhandenen Dateien im
+       favicon-Ordner. #}
+    <link rel="icon" type="image/x-icon" href="/assets/media/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/media/favicon/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/media/favicon/favicon-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/favicon/apple-touch-icon.png">
     <meta name="theme-color" content="#ffffff">
 
     {# ---------- hreflang: sagt Suchmaschinen "diese Seite gibt es auch
@@ -52,6 +60,58 @@
     <link rel="canonical" href="{{ site.baseUrl }}{{ page_urls[lang] }}" />
 
     <link rel="stylesheet" href="/assets/styles.css" />
+
+    {# ---------- Strukturierte Daten (Schema.org / JSON-LD) ----------
+       Nur auf der Startseite, weil dort die relevanten Inhalte (Haus,
+       FAQ) stehen. Beide Blöcke werden aus "t" (der aktiven Sprachdatei)
+       generiert - ändert sich ein Text/eine Frage in de.json/en.json/
+       nl.json, zieht das JSON-LD automatisch nach, ohne dass hier
+       irgendetwas von Hand angepasst werden muss.
+
+       Der "dump"-Filter von Nunjucks wandelt einen Wert sicher in
+       valides JSON um (inkl. Anführungszeichen/Sonderzeichen) - so
+       muss nichts manuell escaped werden und es kann kein kaputtes
+       JSON entstehen, selbst wenn in den Texten Anführungszeichen
+       vorkommen (z.B. „Zeller Schwarze Katz“). #}
+    {% if page_key == "home" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
+      "name": "Haus Till E",
+      "description": {{ t.meta.description_home | dump | safe }},
+      "url": "{{ site.baseUrl }}{{ pages.home[lang] }}",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Schloßstraße 10",
+        "postalCode": "56856",
+        "addressLocality": "Zell (Mosel)",
+        "addressCountry": "DE"
+      }
+    }
+    </script>
+
+    {% if t.home.area.faq %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {% for item in t.home.area.faq.items %}
+        {
+          "@type": "Question",
+          "name": {{ item.title | dump | safe }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ item.content | dump | safe }}
+          }
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+    </script>
+    {% endif %}
+    {% endif %}
   </head>
   <body>
     {% include "nav.njk" %}
@@ -88,6 +148,7 @@
         </button>
         <img class="lightbox-img" id="lightbox-img" src="" alt="" />
         <video class="lightbox-video" id="lightbox-video" controls playsinline></video>
+        <div class="lightbox-info-slide" id="lightbox-info-slide"></div>
         <button class="lightbox-next" aria-label="Next photo">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
         </button>
@@ -96,5 +157,7 @@
     {% endif %}
 
     <script type="module" src="/assets/media/js/main.js"></script>
+    <script src="/assets/media/js/heroAmbient.js" defer></script>
+    <script src="/assets/media/js/accordion.js" defer></script>
   </body>
 </html>

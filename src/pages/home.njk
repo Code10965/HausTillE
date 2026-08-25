@@ -13,137 +13,281 @@ permalink: "{{ pages.home[lang] }}"
   Wert landet in der Variable "lang" (weil "alias: lang"). "permalink" nutzt
   dieselbe pages.json wie der Sprachumschalter, damit die Zuordnung
   Sprache -> URL nur an EINER Stelle im Projekt gepflegt werden muss.
+
+  STRUKTUR (überarbeitete Fassung):
+  1. Hero
+  2. section-home-details  (Zuhause / Haus, Fotos, Akkordeon mit Praktischem)
+  3. section-rooms         (fünf Zimmer, Fotos)
+  4. section-hosts         (Gastgeber, Fotos)
+  5. section-area          (Zell & Umgebung, Akkordeon + Häufige Fragen)
+  6. section-contact
 #}
 {% set t = de %}
 {% if lang == "en" %}{% set t = en %}{% endif %}
 {% if lang == "nl" %}{% set t = nl %}{% endif %}
 
 <header class="hero">
-  <div class="hero-bg hero-bg-desktop crossfade-group" data-interval="7500">
-    <img class="crossfade-img active" src="/assets/media/Hero/Living_back_4.jpg" alt="" />
-    <img class="crossfade-img" src="/assets/media/Hero/Garden_1.jpg" alt="" />
-    <img class="crossfade-img" src="/assets/media/Hero/Living_front_3.jpg" alt="" />
-    <img class="crossfade-img" src="/assets/media/Hero/Living_back_3.jpg" alt="" />
-    <img class="crossfade-img" src="/assets/media/Hero/Living_front_5.jpg" alt="" />
+  <div class="ambient-bg ambient-bg--hero" aria-hidden="true">
+    <div class="ambient-layer ambient-layer-1"></div>
+    <div class="ambient-layer ambient-layer-2"></div>
+    <div class="ambient-layer ambient-layer-3"></div>
+    <div class="ambient-layer ambient-layer-4"></div>
+    <div class="ambient-layer ambient-layer-5"></div>
   </div>
-  <div class="hero-bg hero-bg-mobile crossfade-group" data-interval="7500">
-    <img class="crossfade-img active" src="/assets/media/Hero/mobile/Garden_1_mobile.jpg" alt="" />
-    <img class="crossfade-img" src="/assets/media/Hero/mobile/Living_back_4_mobile.jpg" alt="" />
-    <img class="crossfade-img" src="/assets/media/Hero/mobile/Living_front_3_mobile.jpg" alt="" />
-    <img class="crossfade-img" src="/assets/media/Hero/mobile/Living_back_1_mobile.jpg" alt="" />
-    <img class="crossfade-img" src="/assets/media/Hero/mobile/Living_front_5_mobile.jpg" alt="" />
-  </div>
-  <div class="hero-gradient"></div>
-  <div class="hero-content" id="hero-content">
-    <div class="hero-tag">
-      <span class="hero-dot"></span>
-      <span class="mono-label light-label">{{ t.home.hero.tag }}</span>
+
+  <div class="hero-grid">
+
+    <div class="hero-text" id="hero-content">
+      <div class="eyebrow-row hero-eyebrow-row">
+        <span class="mono-label wine-label">{{ t.home.hero.eyebrow }}</span>
+        <span class="eyebrow-line"></span>
+      </div>
+
+      <h1 class="hero-heading">
+        {{ t.home.hero.title_line1 }}<br />
+        <span class="hero-heading-italic">{{ t.home.hero.title_line2 }}</span>
+      </h1>
+      <div class="lorem-block">
+        <p class="lorem-p">{{ t.home.hero.sub }}</p>
+      </div>
+
+      <div class="hero-scroll-hint">
+        <span class="mono-label">{{ t.home.hero.scroll_hint }}</span>
+        <span class="eyebrow-line"></span>
+      </div>
     </div>
-    <h1 class="hero-title">
-      {{ t.home.hero.title_line1 }}<br />
-      <span class="hero-title-italic">{{ t.home.hero.title_line2 }}</span>
-    </h1>
-    <p class="hero-sub">{{ t.home.hero.sub }}</p>
-  </div>
-  <div class="hero-scroll-hint">
-    <span class="mono-label light-label">{{ t.home.hero.scroll_hint }}</span>
-    <span class="hero-scroll-line"></span>
+
+    <div class="hero-media crossfade-group" data-interval="7500">
+      <img class="crossfade-img active" src="/assets/media/Hero/Haus_3x4_1.jpg" alt="" />
+      <img class="crossfade-img" src="/assets/media/Hero/Haus_3x4_2.jpg" alt="" />
+      <img class="crossfade-img" src="/assets/media/Hero/Haus_3x4_3.jpg" alt="" />
+      <img class="crossfade-img" src="/assets/media/Hero/Haus_3x4_4.jpg" alt="" />
+    </div>
   </div>
 </header>
 
-<section id="section-overview" class="reveal-section tone-paper" data-reveal>
+
+<!-- 2. Zuhause / Haus: Text, fünf Fotos, Akkordeon mit Praktischem -->
+<section id="section-home-details" class="reveal-section tone-paper" data-reveal>
   <div class="section-inner">
     <div class="fade-item eyebrow-row">
-      <span class="mono-label gold-label">{{ t.home.overview.eyebrow }}</span>
+      <span class="mono-label wine-label">{{ t.home.home_details.eyebrow }}</span>
       <span class="eyebrow-line"></span>
     </div>
-    <h2 class="fade-item section-title">{{ t.home.overview.title }}</h2>
+    <h2 class="fade-item section-title">{{ t.home.home_details.title_line1 }}<br /><span class="section-title-line2">{{ t.home.home_details.title_line2 }}</span></h2>
     <div class="fade-item">
-      <div class="lorem-block">
-        <p class="lorem-p">{{ t.home.overview.p1 }}</p>
-        <p class="lorem-p">{{ t.home.overview.p2 }}</p>
-        <p class="lorem-p">{{ t.home.overview.p3 }}</p>
+      <div class="lorem-block mb-gallery-intro">
+        {% for p in t.home.home_details.text %}
+        <p class="lorem-p">{{ p }}</p>
+        {% endfor %}
       </div>
-      <div class="fact-list">
-        {% for fact in t.home.overview.facts %}
-        <div class="fact-row"><span class="mono-label fog-label">{{ fact.label }}</span><span class="fact-value">{{ fact.value }}</span></div>
+
+      <div class="photo-grid" data-photo-grid="Haus, Info, Garten, Eingangsbereich, Frühstücksraum, Treppenhaus" data-photo-labels='{{ t.home.home_details.photo_labels | dump | safe }}' data-photo-infos='{{ t.home.home_details.photo_infos | dump | safe }}' data-photo-info-tiles='{{ t.home.home_details.info_tiles | dump | safe }}'></div>
+
+      <div class="accordion">
+        {% for entry in t.home.home_details.accordion %}
+        <div class="accordion-item">
+          <h3>
+            <button
+              type="button"
+              class="accordion-trigger"
+              aria-expanded="false"
+              aria-controls="accordion-panel-details-{{ loop.index }}"
+              id="accordion-trigger-details-{{ loop.index }}"
+            >
+              <span class="accordion-trigger-label mono-label">{{ entry.title }}</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div
+            class="accordion-panel"
+            id="accordion-panel-details-{{ loop.index }}"
+            role="region"
+            aria-labelledby="accordion-trigger-details-{{ loop.index }}"
+            aria-hidden="true"
+          >
+            <div class="accordion-panel-inner">
+              <div class="accordion-panel-body">
+                <p class="accordion-panel-content">{{ entry.content }}</p>
+                {% if entry.images %}
+                <div class="accordion-panel-images">
+                  {% for img in entry.images %}
+                  <img class="accordion-panel-image" src="{{ img.src }}" alt="{{ img.alt }}" />
+                  {% endfor %}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
         {% endfor %}
       </div>
     </div>
   </div>
 </section>
 
-<section id="section-neighborhood" class="reveal-section tone-cloud" data-reveal>
+
+<!-- 3. Zimmer: Text, fünf Fotos -->
+<section id="section-rooms" class="reveal-section tone-cloud" data-reveal>
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-layer ambient-layer-1"></div>
+    <div class="ambient-layer ambient-layer-2"></div>
+    <div class="ambient-layer ambient-layer-3"></div>
+    <div class="ambient-layer ambient-layer-4"></div>
+    <div class="ambient-layer ambient-layer-5"></div>
+  </div>
   <div class="section-inner">
     <div class="fade-item eyebrow-row">
-      <span class="mono-label gold-label">{{ t.home.neighborhood.eyebrow }}</span>
+      <span class="mono-label wine-label">{{ t.home.rooms.eyebrow }}</span>
       <span class="eyebrow-line"></span>
     </div>
-    <h2 class="fade-item section-title">{{ t.home.neighborhood.title }}</h2>
+    <h2 class="fade-item section-title">{{ t.home.rooms.title_line1 }}<br /><span class="section-title-line2">{{ t.home.rooms.title_line2 }}</span></h2>
     <div class="fade-item">
-      <div class="lorem-block">
-        <p class="lorem-p"><strong>{{ t.home.neighborhood.p1_label }}</strong>{{ t.home.neighborhood.p1 }}</p>
-        <p class="lorem-p"><strong>{{ t.home.neighborhood.p2_label }}</strong>{{ t.home.neighborhood.p2 }}</p>
-        <p class="lorem-p"><strong>{{ t.home.neighborhood.p3_label }}</strong>{{ t.home.neighborhood.p3 }}</p>
-      </div>
-      <div class="neighborhood-grid">
-        {% for item in t.home.neighborhood.grid %}
-        <div class="neighborhood-item">{{ item | safe }}</div>
+      <div class="lorem-block mb-gallery-intro">
+        {% for p in t.home.rooms.text %}
+        <p class="lorem-p">{{ p }}</p>
         {% endfor %}
       </div>
+
+      <div class="photo-grid" data-photo-grid="Zimmer_1, Zimmer_2, Zimmer_3, Zimmer_4, Zimmer_5" data-photo-labels='{{ t.home.rooms.photo_labels | dump | safe }}' data-photo-infos='{{ t.home.rooms.photo_infos | dump | safe }}'></div>
     </div>
   </div>
 </section>
 
-<section id="section-photos" class="reveal-section tone-paper" data-reveal>
+
+<!-- 4. Gastgeber: Text, drei Fotos -->
+<section id="section-hosts" class="reveal-section tone-paper" data-reveal>
   <div class="section-inner">
     <div class="fade-item eyebrow-row">
-      <span class="mono-label gold-label">{{ t.home.photos.eyebrow }}</span>
+      <span class="mono-label wine-label">{{ t.home.hosts.eyebrow }}</span>
       <span class="eyebrow-line"></span>
     </div>
-    <h2 class="fade-item section-title">{{ t.home.photos.title }}</h2>
+    <h2 class="fade-item section-title">{{ t.home.hosts.title_line1 }}<br /><span class="section-title-line2">{{ t.home.hosts.title_line2 }}</span></h2>
     <div class="fade-item">
-      <p class="lorem-p mb-gallery-intro">{{ t.home.photos.intro }}</p>
-      <div class="photo-grid" data-photo-grid="Garten, Vorne, Hinten, Bad, Video vorne, Video hinten" data-photo-labels='{{ t.home.photos.labels | dump | safe }}'></div>
+      <div class="lorem-block mb-gallery-intro">
+        {% for p in t.home.hosts.text %}
+        <p class="lorem-p">{{ p }}</p>
+        {% endfor %}
+      </div>
+
+      <div class="photo-grid" data-photo-grid="Rosa, Info, Bjorn, Romina" data-photo-labels='{{ t.home.hosts.photo_labels | dump | safe }}' data-photo-infos='{{ t.home.hosts.photo_infos | dump | safe }}' data-photo-info-tiles='{{ t.home.hosts.info_tiles | dump | safe }}'></div>
     </div>
   </div>
 </section>
 
-<section id="section-floorplan" class="reveal-section tone-cloud" data-reveal>
-  <div class="section-inner">
-    <div class="fade-item eyebrow-row">
-      <span class="mono-label gold-label">{{ t.home.floorplan.eyebrow }}</span>
-      <span class="eyebrow-line"></span>
-    </div>
-    <h2 class="fade-item section-title">{{ t.home.floorplan.title }}</h2>
-    <div class="fade-item">
-      <p class="lorem-p mb-gallery-intro">{{ t.home.floorplan.intro }}</p>
-      <div class="photo-grid" data-photo-grid="Grundriss Vorne, Grundriss Hinten, Grundriss Gesamt" data-photo-labels='{{ t.home.floorplan.labels | dump | safe }}'></div>
-    </div>
-  </div>
-</section>
 
-<section id="section-features" class="reveal-section tone-paper" data-reveal>
+<!-- 5. Zell & Umgebung: Text, Akkordeon (inkl. "Häufige Fragen" als letzter Eintrag) -->
+<section id="section-area" class="reveal-section tone-cloud" data-reveal>
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-layer ambient-layer-1"></div>
+    <div class="ambient-layer ambient-layer-2"></div>
+    <div class="ambient-layer ambient-layer-3"></div>
+    <div class="ambient-layer ambient-layer-4"></div>
+    <div class="ambient-layer ambient-layer-5"></div>
+  </div>
   <div class="section-inner">
     <div class="fade-item eyebrow-row">
-      <span class="mono-label gold-label">{{ t.home.features.eyebrow }}</span>
+      <span class="mono-label wine-label">{{ t.home.area.eyebrow }}</span>
       <span class="eyebrow-line"></span>
     </div>
-    <h2 class="fade-item section-title">{{ t.home.features.title }}</h2>
+    <h2 class="fade-item section-title">{{ t.home.area.title_line1 }}<br /><span class="section-title-line2">{{ t.home.area.title_line2 }}</span></h2>
     <div class="fade-item">
       <div class="lorem-block">
-        <p class="lorem-p">{{ t.home.features.p1 }}</p>
-        <p class="lorem-p">{{ t.home.features.p2 }}</p>
-      </div>
-      <ul class="feature-list">
-        {% for item in t.home.features.list %}
-        <li><span class="dot"></span>{{ item }}</li>
+        {% for p in t.home.area.text %}
+        <p class="lorem-p">{{ p }}</p>
         {% endfor %}
-      </ul>
+      </div>
+
+      <div class="accordion">
+        {% for entry in t.home.area.accordion %}
+        <div class="accordion-item">
+          <h3>
+            <button
+              type="button"
+              class="accordion-trigger"
+              aria-expanded="false"
+              aria-controls="accordion-panel-area-{{ loop.index }}"
+              id="accordion-trigger-area-{{ loop.index }}"
+            >
+              <span class="accordion-trigger-label mono-label">{{ entry.title }}</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div
+            class="accordion-panel"
+            id="accordion-panel-area-{{ loop.index }}"
+            role="region"
+            aria-labelledby="accordion-trigger-area-{{ loop.index }}"
+            aria-hidden="true"
+          >
+            <div class="accordion-panel-inner">
+              <div class="accordion-panel-body">
+                <p class="accordion-panel-content">{{ entry.content }}</p>
+                {% if entry.images %}
+                <div class="accordion-panel-images">
+                  {% for img in entry.images %}
+                  <img class="accordion-panel-image" src="{{ img.src }}" alt="{{ img.alt }}" />
+                  {% endfor %}
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        {# ---------- Häufige Fragen (FAQ) ----------
+           EIN zusätzlicher Akkordeon-Eintrag auf derselben Ebene wie
+           "Stadt", "Wandern" usw. - kein eigener Abschnitt, kein
+           verschachteltes Akkordeon. Beim Öffnen stehen alle Fragen mit
+           Antworten einfach untereinander im selben Panel (eigene
+           Klassen .faq-entry/.faq-question/.faq-answer statt einer
+           Mischung aus .mono-label + .accordion-panel-content, um
+           Konflikte in der CSS-Kaskade zu vermeiden). Der Eintrag wird
+           übersprungen, falls in einer Sprachdatei noch kein
+           "faq"-Objekt existiert (z.B. während en.json/nl.json noch
+           nachgezogen werden). #}
+        {% if t.home.area.faq %}
+        <div class="accordion-item">
+          <h3>
+            <button
+              type="button"
+              class="accordion-trigger"
+              aria-expanded="false"
+              aria-controls="accordion-panel-area-faq"
+              id="accordion-trigger-area-faq"
+            >
+              <span class="accordion-trigger-label mono-label">{{ t.home.area.faq.heading }}</span>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div
+            class="accordion-panel"
+            id="accordion-panel-area-faq"
+            role="region"
+            aria-labelledby="accordion-trigger-area-faq"
+            aria-hidden="true"
+          >
+            <div class="accordion-panel-inner">
+              <div class="accordion-panel-body">
+                {% for entry in t.home.area.faq.items %}
+                <div class="faq-entry">
+                  <p class="faq-question">{{ entry.title }}</p>
+                  <p class="faq-answer">{{ entry.content }}</p>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
     </div>
   </div>
 </section>
 
+
+<!-- 6. Kontakt -->
 <section id="section-contact" class="contact">
   <div class="section-inner">
     <div class="eyebrow-row">

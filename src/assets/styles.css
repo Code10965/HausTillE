@@ -1,12 +1,9 @@
-/* ---------- Lokal gehostete Schriften (statt Google Fonts CDN) ----------
-   Jede Variable Font deckt mit EINER Datei alle benötigten Schnitte ab
-   (z.B. Fraunces 300-500), daher genügt hier je eine @font-face-Regel
-   pro Stil statt einer Regel pro Schriftschnitt. */
+/* ---------- Lokal gehostete Schriften (statt Google Fonts CDN) ---------- */
 
 @font-face {
   font-family: 'Fraunces';
   font-style: normal;
-  font-weight: 300 500;   /* deckt 300, 400 und 500 ab */
+  font-weight: 300 500;
   font-display: swap;
   src: url('media/fonts/Fraunces-Variable.ttf') format('truetype');
 }
@@ -21,7 +18,7 @@
 @font-face {
   font-family: 'Space Grotesk';
   font-style: normal;
-  font-weight: 400 600;   /* deckt 400, 500 und 600 ab */
+  font-weight: 400 600;
   font-display: swap;
   src: url('media/fonts/SpaceGrotesk-Variable.ttf') format('truetype');
 }
@@ -42,14 +39,37 @@
   --paper: #FFFFFF;
   --cloud: #FAFAF8;
   --line: #E7E5DF;
+
+  --wine: #66001A;
+  --wine-deep: #3D0010;
   --gold: #A6803F;
   --gold-soft: #C9A768;
+
+  --ink-rgb: 28, 28, 26;
+  --slate-rgb: 92, 93, 88;
+  --fog-rgb: 156, 157, 151;
+  --paper-rgb: 255, 255, 255;
+  --cloud-rgb: 250, 250, 248;
+  --wine-rgb: 102, 0, 26;
+  --wine-deep-rgb: 61, 0, 16;
+  --gold-rgb: 166, 128, 63;
+  --gold-soft-rgb: 201, 167, 104;
+
+  --blob-blur-neighborhood: 12px;
+  --blob-opacity-neighborhood-1: 0.30;
+  --blob-opacity-neighborhood-2: 0.40;
+
+  --blob-opacity-photo-1: 0.30;
+  --blob-opacity-photo-2: 0.40;
+
+  --blob-opacity-btn-1: 0.30;
+  --blob-opacity-btn-2: 0.40;
+
+  --blob-blur-accordion: 10px;
+  --blob-opacity-accordion-1: 0.30;
+  --blob-opacity-accordion-2: 0.40;
+
   --font-mono: 'JetBrains Mono', monospace;
-  /* Rand-Abstand für Kugel/Panel/Logo: NUR auf Mobile exakt gleich dem
-     Innenabstand der Foto-Kacheln (24px, siehe .section-inner), damit die
-     Kugel dort wirklich auf der Kante zwischen Foto-Kachel und weißem Rand
-     sitzt. Auf Desktop bleibt es beim einfachen, festen 20px-Rand - dort
-     wirkte die exakte Berechnung zu weit innen. */
   --nav-edge: 24px;
 }
 
@@ -71,6 +91,7 @@ body {
 }
 
 .font-display, h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
+
 .mono-label { font-family: var(--font-mono); }
 
 ::selection { background: var(--gold); color: var(--paper); }
@@ -80,20 +101,17 @@ body {
   html { scroll-behavior: auto; }
 }
 
-/* ---------- gemeinsame Bausteine ---------- */
 .mono-label {
   font-size: 10px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
 }
-.gold-label { color: var(--gold); }
-.fog-label { color: var(--fog); }
-.light-label { color: #C7C6C1; }
+.wine-label { color: var(--wine); }
 .light-gold-label { color: var(--gold-soft); }
 
 .eyebrow-row { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
 .eyebrow-line { width: 40px; height: 1px; background: var(--line); }
-.eyebrow-line.light-line { background: rgba(255,255,255,0.25); }
+.eyebrow-line.light-line { background: rgba(var(--paper-rgb), 0.25); }
 
 .section-title {
   font-weight: 300;
@@ -103,11 +121,33 @@ body {
   margin: 0 0 48px 0;
   color: var(--ink);
 }
+.section-title-line2 {
+  font-style: italic;
+  color: var(--wine);
+}
 @media (min-width: 640px) {
   .section-title { font-size: 3.75rem; }
 }
 
 .lorem-block { display: flex; flex-direction: column; gap: 20px; }
+/* Avenir Next für den Fließtext (Prosa-Absätze) - gleiches
+   Fallback-Prinzip wie zuvor bei den Headern getestet: Avenir Next ist
+   nicht selbst gehostet (keine Lizenz/Dateien im Projekt), auf
+   Mac/iPhone/iPad zeigt der Browser die echte Schrift. Als Fallback
+   bewusst Space Grotesk statt einer System-Schrift wie Helvetica Neue -
+   das ist die Schrift, die auch sonst auf der Seite (body, Buttons)
+   läuft, damit der Fallback-Fall optisch zur restlichen Seite passt
+   statt fremd zu wirken. Bewusst NUR auf die eigentlichen Textblöcke
+   angewendet (Absätze, Akkordeon-Inhalt, Kontakttext, Info-Kachel/-Slide)
+   - Labels, Buttons und Navigation bleiben unverändert. */
+.lorem-p,
+.accordion-panel-content,
+.contact-text,
+.info-frame-text,
+.lightbox-info-slide-content {
+  font-family: 'Avenir Next', 'Space Grotesk', sans-serif;
+}
+
 .lorem-p {
   font-size: 17px;
   line-height: 1.7;
@@ -117,9 +157,10 @@ body {
 @media (min-width: 640px) { .lorem-p { font-size: 18px; } }
 .mb-gallery-intro { margin-bottom: 48px; }
 
-/* ---------- Section-Layout & Scroll-Reveal ---------- */
 .reveal-section {
   position: relative;
+  z-index: 0;
+  overflow: hidden;
   border-bottom: 1px solid var(--line);
 }
 .reveal-section.tone-paper { background: var(--paper); }
@@ -134,10 +175,6 @@ body {
   .section-inner { padding: 160px 40px; }
 }
 
-/* Kontakt-Sektion: unterer Innenabstand bewusst reduziert (statt der
-   üblichen 112px/160px) - direkt danach kommt schon der Footer, ein so
-   großer Leerraum dazwischen war unnötig und drückte die Section über den
-   sichtbaren Bereich hinaus. */
 .contact .section-inner { padding-bottom: 40px; }
 @media (min-width: 640px) {
   .contact .section-inner { padding-bottom: 56px; }
@@ -153,7 +190,6 @@ body {
 .reveal-section.visible .fade-item:nth-child(2) { transition-delay: 110ms; }
 .reveal-section.visible .fade-item:nth-child(3) { transition-delay: 220ms; }
 
-/* ---------- Fact rows (Section 1) ---------- */
 .fact-list { margin-top: 56px; }
 .fact-row {
   display: flex;
@@ -170,7 +206,182 @@ body {
   white-space: nowrap;
 }
 
-/* ---------- Nachbarschafts-Grid (Section 2) ---------- */
+.accordion {
+  margin-top: 56px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  border-top: 1px solid var(--line);
+}
+.accordion-item {
+  border-bottom: 1px solid var(--line);
+}
+.accordion-item > h3 {
+  margin: 0;
+}
+
+.accordion-trigger {
+  all: unset;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 4px;
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 13px; /* TEST: an Eyebrow-Formatierung angeglichen (vorher 11px) */
+  letter-spacing: 0.4em; /* TEST: an Eyebrow-Formatierung angeglichen (vorher 0.2em) */
+  text-transform: uppercase;
+  transition: background-color 0.55s cubic-bezier(0.16,1,0.3,1),
+              color 0.55s cubic-bezier(0.16,1,0.3,1);
+}
+.accordion-trigger:focus-visible {
+  outline: 2px solid var(--gold-soft);
+  outline-offset: -2px;
+}
+
+.accordion-trigger::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  filter: blur(var(--blob-blur-accordion));
+  background-repeat: no-repeat;
+  background-size: 200% 200%, 180% 180%;
+  background-image:
+    radial-gradient(circle, rgba(var(--gold-rgb), 0), transparent 55%),
+    radial-gradient(circle, rgba(var(--slate-rgb), 0), transparent 50%);
+  transition: background-image 0.4s ease;
+  animation: accordion-blob-drift 13s ease-in-out infinite;
+}
+.accordion-trigger:hover::before,
+.accordion-trigger[aria-expanded="true"]::before {
+  background-image:
+    radial-gradient(circle, rgba(var(--gold-rgb), var(--blob-opacity-accordion-1)), transparent 55%),
+    radial-gradient(circle, rgba(var(--cloud-rgb), var(--blob-opacity-accordion-2)), transparent 50%);
+}
+.accordion-item:nth-child(3n+2) .accordion-trigger::before { animation-delay: -4s; }
+.accordion-item:nth-child(3n+3) .accordion-trigger::before { animation-delay: -9s; }
+@keyframes accordion-blob-drift {
+  0%   { background-position: 25% 30%, 75% 70%; }
+  33%  { background-position: 65% 20%, 25% 65%; }
+  66%  { background-position: 20% 70%, 70% 25%; }
+  100% { background-position: 25% 30%, 75% 70%; }
+}
+
+.accordion-trigger-label {
+  position: relative;
+  z-index: 1;
+  font-size: 13px; /* explizit gesetzt, sonst gewinnt .mono-label mit 10px direkt auf diesem Element */
+  letter-spacing: 0.4em;
+}
+
+.accordion-icon {
+  position: relative;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-left: 24px;
+}
+.accordion-icon::before,
+.accordion-icon::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.accordion-icon::before {
+  top: 50%; left: 0; width: 100%; height: 1px;
+  transform: translateY(-50%);
+}
+.accordion-icon::after {
+  left: 50%; top: 0; width: 1px; height: 100%;
+  transform: translateX(-50%);
+  transition: opacity 0.35s ease;
+}
+.accordion-trigger[aria-expanded="true"] .accordion-icon::after {
+  opacity: 0;
+}
+
+.accordion-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.6s cubic-bezier(0.16,1,0.3,1);
+}
+.accordion-item.is-open .accordion-panel {
+  grid-template-rows: 1fr;
+}
+.accordion-panel-inner {
+  overflow: hidden;
+  min-height: 0;
+  background-color: rgba(var(--fog-rgb), 0.1);
+}
+.accordion-panel-body {
+  padding: 16px 20px 24px;
+}
+.accordion-panel-content {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.accordion-panel-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+.accordion-panel-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ---------- FAQ (Häufige Fragen) ----------
+   Eigenständige, bewusst schlanke Klassen statt Kombination aus
+   .mono-label + .accordion-panel-content: beide Klassen haben an
+   verschiedenen Stellen im Stylesheet konkurrierende font-size-/
+   font-family-Regeln - bei gleicher Spezifität hätte die zuletzt
+   definierte Regel gewonnen, was schwer vorhersehbar gewesen wäre.
+   Eigene Klassen machen das Ergebnis eindeutig und unabhängig von der
+   Reihenfolge weiterer Änderungen an dieser Datei.
+
+   Farbe der Frage: var(--wine-deep) (#3D0010) - der festgelegte
+   Weinrot-Akzentton für diese Website. */
+.faq-entry {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.faq-entry:first-child {
+  padding-top: 0;
+}
+.faq-entry:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.faq-question {
+  margin: 0 0 8px 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--wine-deep);
+}
+.faq-answer {
+  margin: 0;
+  font-family: 'Avenir Next', 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
 .neighborhood-grid {
   margin-top: 56px;
   display: grid;
@@ -180,6 +391,8 @@ body {
 }
 @media (min-width: 640px) { .neighborhood-grid { grid-template-columns: repeat(3, 1fr); } }
 .neighborhood-item {
+  position: relative;
+  overflow: hidden;
   background: var(--cloud);
   color: var(--slate);
   padding: 28px 20px;
@@ -188,9 +401,47 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.15em;
   text-align: center;
+  transition: color 0.35s ease;
 }
 
-/* ---------- Fotorahmen ---------- */
+.neighborhood-item::after {
+  content: "";
+  position: absolute;
+  inset: -8%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  filter: blur(var(--blob-blur-neighborhood));
+  background: radial-gradient(closest-side, rgba(var(--gold-rgb), var(--blob-opacity-neighborhood-1)), rgba(var(--cloud-rgb), var(--blob-opacity-neighborhood-2)) 55%, transparent 78%);
+  transition: opacity 0.5s ease;
+  animation: neighborhood-blob-drift 17s ease-in-out infinite;
+}
+.neighborhood-item:hover::after {
+  opacity: 1;
+}
+.neighborhood-item:hover {
+  color: var(--ink);
+}
+.neighborhood-item:nth-child(3n+1)::after {
+  border-radius: 62% 38% 55% 45% / 45% 60% 40% 55%;
+  animation-delay: -3s;
+}
+.neighborhood-item:nth-child(3n+2)::after {
+  border-radius: 40% 60% 45% 55% / 58% 38% 62% 42%;
+  animation-delay: -8s;
+}
+.neighborhood-item:nth-child(3n+3)::after {
+  border-radius: 55% 45% 35% 65% / 50% 55% 45% 50%;
+  animation-delay: -13s;
+}
+@keyframes neighborhood-blob-drift {
+  0%   { transform: translate(0%, 0%) scale(0.85) rotate(0deg); }
+  22%  { transform: translate(7%, -6%) scale(1) rotate(5deg); }
+  47%  { transform: translate(-5%, 5%) scale(0.92) rotate(-4deg); }
+  68%  { transform: translate(4%, 7%) scale(1.06) rotate(3deg); }
+  100% { transform: translate(0%, 0%) scale(0.85) rotate(0deg); }
+}
+
 .photo-frame {
   display: flex;
   align-items: center;
@@ -202,20 +453,66 @@ body {
   text-align: center;
   padding: 0 16px;
   position: relative;
+  overflow: hidden;
   cursor: pointer;
 }
 .photo-frame.wide { aspect-ratio: 16 / 9; }
 
-/* dunkler Schleier über Vorschaubildern, damit das Label lesbar bleibt */
+.photo-frame.info-frame {
+  cursor: default;
+  padding: 28px;
+}
+.info-frame-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+.info-frame-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--slate);
+}
+
 .photo-frame[data-gallery]::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.25);
-  transition: background 0.3s ease;
+  background-repeat: no-repeat;
+  background-size: 220% 220%, 200% 200%, 100% 100%;
+  background-image:
+    radial-gradient(circle, rgba(var(--gold-rgb), 0), transparent 60%),
+    radial-gradient(circle, rgba(var(--slate-rgb), 0), transparent 55%),
+    linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25));
+  transition: background-image 0.45s ease;
+  animation: photo-blob-drift 25s ease-in-out infinite;
 }
 .photo-frame[data-gallery]:hover::before {
-  background: rgba(0,0,0,0.4);
+  background-image:
+    radial-gradient(circle, rgba(var(--gold-rgb), var(--blob-opacity-photo-1)), transparent 60%),
+    radial-gradient(circle, rgba(var(--cloud-rgb), var(--blob-opacity-photo-2)), transparent 55%),
+    linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25));
+}
+.photo-frame[data-gallery]:nth-child(3n+2)::before {
+  animation-delay: -8s;
+}
+.photo-frame[data-gallery]:nth-child(3n+3)::before {
+  animation-delay: -17s;
+}
+@keyframes photo-blob-drift {
+  0%   { background-position: 30% 35%, 72% 68%, 0 0; }
+  25%  { background-position: 62% 18%, 24% 55%, 0 0; }
+  50%  { background-position: 18% 66%, 68% 24%, 0 0; }
+  75%  { background-position: 70% 58%, 30% 30%, 0 0; }
+  100% { background-position: 30% 35%, 72% 68%, 0 0; }
+}
+
+.photo-frame {
+  transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.photo-frame[data-gallery]:hover {
+  transform: translateY(-2px);
 }
 .photo-frame[data-gallery] .mono-label {
   position: relative;
@@ -228,9 +525,17 @@ body {
   gap: 24px;
   grid-template-columns: 1fr;
 }
-@media (min-width: 640px) { .photo-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 640px) {
+  .photo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .photo-grid .photo-frame {
+    flex: 0 1 calc((100% - 48px) / 3);
+  }
+}
 
-/* ---------- Crossfade (Hero + Galerie) ---------- */
 .crossfade-img {
   position: absolute;
   inset: 0;
@@ -238,32 +543,6 @@ body {
   height: 100%;
   object-fit: cover;
   opacity: 0;
-}
-
-.hero-bg { position: absolute; inset: 0; }
-.hero-bg .crossfade-img { transition: opacity 2800ms ease-in-out; }
-.hero-bg .crossfade-img.active { opacity: 0.55; }
-
-/* Unter 640px: Portrait-Crops statt der 21:9 Desktop-Bilder zeigen */
-.hero-bg-mobile { display: none; }
-@media (max-width: 640px) {
-  .hero-bg-desktop { display: none; }
-  .hero-bg-mobile { display: block; }
-
-  /* Der Verlauf/die Deckkraft oben ist auf % der Container-Höhe berechnet.
-     Im Hochformat ist der Hero-Bereich viel höher als im Querformat, darum
-     deckt derselbe Verlauf hier proportional deutlich mehr vom Bild ab.
-     Für Mobile daher heller: mehr Bild-Deckkraft, dunkler Bereich setzt
-     später ein und ist selbst weniger dunkel. */
-  .hero-bg-mobile .crossfade-img.active { opacity: 0.8; }
-  .hero-bg-mobile ~ .hero-gradient {
-    /* WICHTIG: durchgängig dunkler werdend von oben nach unten, keine
-       "Delle" in der Mitte. Der vorige Verlauf wurde ab 45vh erst heller
-       und danach erst wieder dunkler - genau dort, wo wegen
-       justify-content: flex-end der Titel sitzt. Dadurch war die Stelle
-       hinter dem Text die hellste im ganzen Bild statt die kontrastreichste. */
-    background: linear-gradient(180deg, rgba(28,28,26,0.35) 0vh, rgba(28,28,26,0.5) 20vh, rgba(28,28,26,0.68) 50vh, var(--ink) 90vh);
-  }
 }
 
 .gallery {
@@ -275,7 +554,6 @@ body {
 .gallery .crossfade-img { transition: opacity 2200ms ease-in-out; }
 .gallery .crossfade-img.active { opacity: 1; }
 
-/* ---------- Feature-Liste (Section 5) ---------- */
 .feature-list { list-style: none; margin: 56px 0 0 0; padding: 0; }
 .feature-list li {
   display: flex;
@@ -291,109 +569,221 @@ body {
   background: var(--gold); flex-shrink: 0;
 }
 
-/* ---------- Hero ---------- */
 .hero {
   position: relative;
+  z-index: 0;
   min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  align-items: stretch;
   overflow: hidden;
-  background: var(--ink);
 }
-.hero-gradient {
-  position: absolute;
-  inset: 0;
-  /* vh statt % verankert den Verlauf an der sichtbaren Bildschirmhöhe,
-     nicht an der Höhe von .hero selbst - die kann durch min-height: 100vh
-     zwar meist gleich sein, aber bei viel Textumbruch auch mal darüber
-     hinauswachsen. Mit vh bleibt der Übergang an derselben Bildschirm-
-     position, egal wie hoch die Box durch den Inhalt wird. */
-  background: linear-gradient(180deg, rgba(28,28,26,0.55) 0vh, rgba(28,28,26,0.35) 35vh, var(--ink) 92vh);
-}
-.hero-content {
-  position: relative;
-  max-width: 48rem;
-  margin: 0 auto;
+
+.hero-grid {
   width: 100%;
-  padding: 0 24px 96px;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .hero {
+    height: 100vh;
+  }
+  .hero-grid {
+    grid-template-columns: 1.618fr 1fr;
+    height: 100%;
+  }
+}
+
+.hero-text {
+  position: relative;
   opacity: 0;
   transform: translateY(16px);
+  padding: 0 24px 64px 40px;
   transition: opacity 1.1s cubic-bezier(0.16,1,0.3,1), transform 1.1s cubic-bezier(0.16,1,0.3,1);
 }
-@media (min-width: 640px) { .hero-content { padding: 0 40px 128px; } }
-.hero-content.loaded { opacity: 1; transform: translateY(0); }
+.hero-text.loaded { opacity: 1; transform: translateY(0); }
+@media (min-width: 900px) {
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 56px 0 96px;
+  }
+}
 
-.hero-tag { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
-.hero-dot { width: 4px; height: 4px; border-radius: 9999px; background: var(--gold-soft); }
+.ambient-bg {
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  right: -10%;
+  bottom: -10%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  filter: blur(30px);
+}
+@media (min-width: 900px) {
+  .ambient-bg--hero {
+    right: 38%;
+  }
+}
 
-.hero-title {
+.ambient-layer {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(var(--drift-x, 0%), var(--drift-y, 0%))
+             scale(var(--drift-scale, 1))
+             rotate(var(--drift-rotate, 0deg));
+  transition: transform var(--drift-duration, 9s) cubic-bezier(0.45, 0, 0.15, 1);
+  will-change: transform;
+}
+
+.ambient-layer-1 {
+  width: 60%;
+  height: 60%;
+  top: 0%;
+  left: -6%;
+  background: radial-gradient(circle, rgba(var(--gold-soft-rgb), 1), transparent 62%);
+  animation: ambient-fade-1 9s ease-in-out infinite;
+}
+@keyframes ambient-fade-1 {
+  0%, 100% { opacity: 0.18; }
+  50%      { opacity: 0.32; }
+}
+
+.ambient-layer-2 {
+  width: 50%;
+  height: 50%;
+  top: 40%;
+  left: 62%;
+  background: radial-gradient(circle, rgba(var(--gold-rgb), 1), transparent 80%);
+  animation: ambient-fade-2 14s ease-in-out infinite;
+}
+@keyframes ambient-fade-2 {
+  0%, 100% { opacity: 0.10; }
+  50%      { opacity: 0.22; }
+}
+
+.ambient-layer-3 {
+  width: 58%;
+  height: 58%;
+  top: 46%;
+  left: 30%;
+  background: radial-gradient(circle, rgba(var(--wine-deep-rgb), 1), transparent 65%);
+  animation: ambient-fade-3 7s ease-in-out infinite;
+}
+@keyframes ambient-fade-3 {
+  0%, 100% { opacity: 0.10; }
+  50%      { opacity: 0.20; }
+}
+
+.ambient-layer-4 {
+  width: 52%;
+  height: 52%;
+  top: 78%;
+  left: -4%;
+  background: radial-gradient(circle, rgba(var(--wine-rgb), 1), transparent 68%);
+  animation: ambient-fade-4 11s ease-in-out infinite;
+}
+@keyframes ambient-fade-4 {
+  0%, 100% { opacity: 0.10; }
+  50%      { opacity: 0.22; }
+}
+
+.ambient-layer-5 {
+  width: 46%;
+  height: 46%;
+  top: 18%;
+  left: 55%;
+  background: radial-gradient(circle, rgba(var(--gold-soft-rgb), 1), transparent 70%);
+  animation: ambient-fade-5 16s ease-in-out infinite;
+}
+@keyframes ambient-fade-5 {
+  0%, 100% { opacity: 0.10; }
+  50%      { opacity: 0.20; }
+}
+
+.hero-heading {
   font-weight: 300;
-  font-size: 13vw;
-  line-height: 0.96;
-  letter-spacing: -0.02em;
-  margin: 0 0 40px 0;
-  color: var(--paper);
-  /* Schatten statt dunklerem Bild: sichert die Lesbarkeit unabhängig davon,
-     wie hell die Stelle im Foto gerade ist, ohne dass das ganze Bild wieder
-     verdunkelt werden muss. */
-  text-shadow: 0 2px 24px rgba(0,0,0,0.75), 0 1px 4px rgba(0,0,0,0.6);
+  font-size: 2.75rem;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: 0 0 32px 0;
+  color: var(--ink);
 }
-@media (min-width: 640px) { .hero-title { font-size: 4.5rem; } }
-@media (min-width: 768px) { .hero-title { font-size: 6rem; } }
-.hero-title-italic {
-  font-style: italic;
-  /* Etwas kräftigeres Schriftgewicht als der Rest der Überschrift (500
-     statt 300): dickt die extrem dünnen Haarlinien der Fraunces-Kursive
-     auf, wodurch sie sich robuster gegen unruhige/helle Fotohintergründe
-     behaupten - trifft denselben Schwachpunkt, der vorher schon die
-     text-stroke-Rendering-Lücken verursacht hat. */
-  font-weight: 300;
-  /* Der hellere --gold-soft-Ton hat zu wenig Eigenkontrast auf hellen
-     Fotostellen. Statt das mit einer Kontur zu kompensieren (die bei
-     dieser Schrift zu Rendering-Lücken an den Haarlinien führt, siehe
-     unten), nutzen wir hier direkt den dunkleren, kräftigeren --gold-Ton -
-     der ist von Haus aus lesbar, ganz ohne Kontur-Tricks. */
-  color: var(--gold);
-  /* Kein text-stroke mehr: Fraunces Italic hat sehr dünne Haarlinien
-     zwischen den dicken Rundungen. Eine gleichmäßig breite Kontur passt
-     nicht zu diesem Strich-Kontrast und lässt manche Haarlinien in der
-     Berechnung verschwinden. Nur noch ein sehr sanfter Tiefenschatten. */
-  text-shadow: 0 2px 10px rgba(0,0,0,0.25);
-}
+@media (min-width: 640px) { .hero-heading { font-size: 4.5rem; } }
 
-.hero-sub {
-  max-width: 28rem;
-  font-size: 1.125rem;
-  line-height: 1.7;
-  color: #D5D4CF;
-  margin: 0;
-  text-shadow: 0 1px 12px rgba(0,0,0,0.45);
-  /* Blocksatz: jede Zeile außer der letzten reicht bis zum rechten Rand.
-     hyphens: auto sorgt für Silbentrennung, damit dabei nicht zu große
-     Lücken zwischen den Wörtern entstehen (v.a. bei schmaler Spalte auf
-     Mobile). lang="de" steht bereits im <html>-Tag, das braucht der
-     Browser, um deutsche Trennregeln anzuwenden. */
-  text-align: justify;
-  hyphens: auto;
+.hero-eyebrow-row {
+  margin-bottom: 24px;
 }
-@media (min-width: 640px) { .hero-sub { font-size: 1.25rem; } }
+/* Editorial-Styling für ALLE Eyebrows (Hero + jede Section-Eyebrow +
+   Kontakt) - .eyebrow-row ist die gemeinsame Basisklasse überall, die
+   Hero-Variante hat zusätzlich .hero-eyebrow-row nur für den eigenen
+   Abstand (siehe oben), nicht für die Typografie. */
+.eyebrow-row .mono-label {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+}
 
 .hero-scroll-hint {
-  position: relative;
-  max-width: 48rem;
-  margin: 0 auto;
-  width: 100%;
-  padding: 0 24px 40px;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  margin-top: 40px;
+  color: var(--slate);
 }
-@media (min-width: 640px) { .hero-scroll-hint { padding: 0 40px 40px; } }
-.hero-scroll-hint .mono-label { color: #8A8A86; }
-.hero-scroll-line { width: 40px; height: 1px; background: rgba(255,255,255,0.2); }
+.hero-scroll-hint .mono-label {
+  font-size: 13px;
+  letter-spacing: 0.4em;
+}
+@media (min-width: 900px) {
+  .hero-scroll-hint {
+    position: absolute;
+    left: 96px;
+    bottom: 48px;
+    margin-top: 0;
+  }
+}
+.hero-heading-italic {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--wine);
+}
 
-/* ---------- Kontakt ---------- */
+.hero-media {
+  position: relative;
+  order: -1;
+  aspect-ratio: 3 / 4;
+  max-height: 42vh;
+  min-height: 220px;
+  background-color: var(--cloud);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin: 96px 24px;
+}
+@media (min-width: 900px) {
+  .hero-media {
+    order: 0;
+    aspect-ratio: auto;
+    max-height: none;
+    min-height: 0;
+    height: 100%;
+    border: none;
+    margin: 0;
+  }
+}
+.hero-media .crossfade-img {
+  transform: scale(1);
+  transition: opacity 2800ms ease-in-out, transform 400ms ease-out 2800ms;
+}
+.hero-media .crossfade-img.active {
+  opacity: 1;
+  transform: scale(1.08);
+  transition: opacity 2800ms ease-in-out, transform 9000ms ease-out;
+}
+
 .contact { position: relative; background: var(--ink); color: var(--paper); }
 .contact-title { color: var(--paper); }
 .contact-text {
@@ -413,22 +803,57 @@ body {
 .contact-email {
   font-family: var(--font-mono);
   font-size: clamp(0.68rem, 3.6vw, 1rem);
+  color: var(--gold-soft);
   white-space: nowrap;
   padding: 16px 20px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(var(--paper-rgb), 0.01);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 .contact-email canvas { display: block; }
+
 .copy-btn {
+  position: relative;
+  overflow: hidden;
   font-family: var(--font-mono);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.25em;
   padding: 16px 24px;
-  background: transparent;
+  background: rgba(var(--paper-rgb), 0.04);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   color: var(--gold-soft);
   border: 1px solid var(--gold-soft);
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.copy-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-repeat: no-repeat;
+  background-size: 240% 240%, 220% 220%;
+  background-image:
+    radial-gradient(circle, rgba(var(--gold-rgb), 0), transparent 55%),
+    radial-gradient(circle, rgba(var(--slate-rgb), 0), transparent 50%);
+  transition: background-image 0.4s ease;
+  animation: btn-blob-drift 11s ease-in-out infinite;
+}
+.copy-btn:hover::before {
+  background-image:
+    radial-gradient(circle, rgba(var(--gold-rgb), var(--blob-opacity-btn-1)), transparent 55%),
+    radial-gradient(circle, rgba(var(--cloud-rgb), var(--blob-opacity-btn-2)), transparent 50%);
+}
+@keyframes btn-blob-drift {
+  0%   { background-position: 30% 35%, 75% 70%; }
+  30%  { background-position: 66% 18%, 20% 60%; }
+  60%  { background-position: 14% 64%, 64% 22%; }
+  100% { background-position: 30% 35%, 75% 70%; }
+}
+.copy-btn:hover {
+  transform: translateY(-1px);
 }
 .contact-hint {
   font-family: var(--font-mono);
@@ -438,7 +863,6 @@ body {
   margin-top: 24px;
 }
 
-/* ---------- Rechtstexte (Impressum / Datenschutz) ---------- */
 .legal-topbar {
   border-bottom: 1px solid var(--line);
   background: var(--paper);
@@ -496,20 +920,10 @@ body {
 }
 .email-box canvas { display: block; }
 
-/* ---------- Menü, Sprache, Kontakt: drei goldene Kugeln ---------- */
 .site-nav { position: relative; z-index: 500; }
 
-/* Jede Kugel steckt in einem eigenen .nav-item (Wrapper um Button + Panel) -
-   das ist die Einheit, auf der nav.js Hover/Klick UND das "open" bzw.
-   :focus-within auswertet. Position (top/right) wird komplett per JS als
-   Inline-Style gesetzt, nicht mehr per CSS-Variable - bei drei Kugeln, die
-   je nach Scroll-Zustand mal nebeneinander (Reihe) und mal übereinander
-   (Stapel) stehen, plus individueller Drift pro Kugel, wäre eine reine
-   CSS-Lösung kaum wartbar gewesen. */
 .nav-item { position: relative; }
 
-/* Die Kugel ist gleichzeitig Klickfläche UND sichtbares Element (bei 44px
-   Durchmesser als Ziel für Maus/Finger von Haus aus groß genug). */
 .nav-ball {
   position: fixed;
   width: 44px;
@@ -522,38 +936,22 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 501;
-
-  /* Basis-Übergang für den (seltenen) Fall, dass sich top/right aus anderem
-     Grund ändern. Der auffällige "Auffächern/Einklappen"-Effekt beim Wechsel
-     Reihe <-> Stapel läuft NICHT über diese Regel, sondern wird gezielt
-     einmalig pro Kugel in nav.js gesetzt (transition-delay + -duration
-     inline, siehe playStagger dort) - nur so bleibt die Bewegung bei
-     kontinuierlichem Scrollen zuverlässig sichtbar statt sich ständig selbst
-     zu unterbrechen. */
   transition: right 0.2s ease-out, top 0.2s ease-out;
 }
 
-/* Eigener, dezenter Fokusring statt des blauen Browser-Standards - nur bei
-   Tastatur-Navigation sichtbar (:focus-visible), nicht bei Maus-Klick. Sitzt
-   am äußeren Button (volle 44px), nicht an der ggf. verkleinerten Optik. */
 .nav-ball:focus-visible {
   outline: 2px solid var(--gold-soft);
   outline-offset: 6px;
 }
 
-/* Die eigentliche Optik (Farbe, Kreisform, Schatten) UND das Schrumpfen
-   beim Scrollen sitzen bewusst auf diesem inneren Element, nicht auf dem
-   Button selbst: transform: scale() verkleinert nicht nur die Optik, sondern
-   auch die Hover-/Klickfläche des Elements, auf dem es steht. Würde die
-   Kugel selbst schrumpfen, würde damit auch ihre Klickfläche schrumpfen -
-   beim Bewegen der Maus von der (winzigen) Kugel zum Panel entstünde eine
-   "tote Zone" dazwischen. Der äußere Button bleibt dagegen immer bei voller
-   44px-Größe klickbar/hoverbar, nur diese innere Ebene wird optisch kleiner. */
 .nav-ball-visual {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: var(--gold);
+  background: linear-gradient(135deg, rgba(140,31,61,0.55), rgba(var(--wine-rgb), 0.75));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(var(--paper-rgb), 0.25);
   color: var(--paper);
   display: flex;
   align-items: center;
@@ -563,59 +961,45 @@ body {
   transform-origin: center;
   transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), background 0.25s ease;
 }
-.nav-ball:hover .nav-ball-visual { background: var(--gold-soft); }
+.nav-ball:hover .nav-ball-visual {
+  background: linear-gradient(120deg, rgba(var(--wine-rgb), 0.65), rgba(var(--wine-deep-rgb), 0.85));
+}
 
-/* "@"-Symbol des Kontakt-Buttons - dieselbe Mono-Schrift wie der Rest der
-   Bedienelemente auf der Seite, keine eigene Icon-Datei nötig. */
 .nav-ball-glyph {
   font-family: var(--font-mono);
   font-size: 17px;
   line-height: 1;
 }
 
-/* Im Stillstand ganz oben (Hero) ODER ganz unten (Kontakt-Sektion) sind alle
-   drei Kugeln in voller Größe zu sehen. Sobald gescrollt wird - derselbe
-   Moment, in dem auch das Logo verschwindet (Klassen "nav-at-top"/
-   "nav-at-bottom" fallen weg, siehe nav.js) - schrumpfen sie auf kleine
-   Punkte zusammen. Bewusst OHNE Media Query: einheitliches Verhalten auf
-   Mobile UND Desktop, und identisch für alle drei Buttons. */
 .site-nav:not(.nav-at-top):not(.nav-at-bottom) .nav-ball-visual {
   transform: scale(0.32);
 }
 
-/* Die drei Linien morphen sanft zum "X", wenn das Menü-Panel offen ist */
 .nav-toggle-line {
   transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s ease;
-  /* transform-origin: center bezieht sich sonst auf die Bounding-Box der
-     einzelnen Linie (z.B. y=7 bei der obersten), nicht auf die Mitte des
-     ganzen 24x24-Icons (12,12) - dadurch würde das X beim Drehen schief
-     ("asymmetrisch") wirken. transform-box: view-box verankert den
-     Drehpunkt stattdessen am viewBox-Koordinatensystem. */
   transform-box: view-box;
   transform-origin: 12px 12px;
 }
-/* Reihenfolge bewusst "rotate translate" statt "translate rotate": CSS wertet
-   die Transform-Liste von rechts nach links aus, d.h. hier wird zuerst
-   verschoben (Linie landet exakt auf dem Mittelpunkt) und erst danach um
-   diesen Punkt gedreht. Andersherum würde erst gedreht und danach entlang
-   der ursprünglichen (nicht gedrehten) Achse verschoben - dadurch würde die
-   Linie am Ende leicht am Mittelpunkt vorbeilaufen und das X windschief wirken. */
 .nav-ball[aria-expanded="true"] .nav-toggle-line-1 { transform: rotate(45deg) translateY(5px); }
 .nav-ball[aria-expanded="true"] .nav-toggle-line-2 { opacity: 0; }
 .nav-ball[aria-expanded="true"] .nav-toggle-line-3 { transform: rotate(-45deg) translateY(-5px); }
 
-/* Logo: sichtbar ganz oben (Hero, "nav-at-top") UND ganz unten
-   ("nav-at-bottom", Kontakt-Sektion) - beide Klassen von nav.js beim
-   Scrollen gesetzt, unabhängig von den Dropdowns. Sitzt auf der LINKEN
-   Seite (gleicher Rand wie die Menü-Kugel rechts), Größe/Fade-Verhalten
-   unverändert. Niedrigerer z-index als die Panels, damit es beim Aufklappen
-   sauber dahinter verschwindet statt sich zu überlagern. */
 .nav-logo-peek {
   position: fixed;
   top: var(--nav-track-top, 20px);
   left: var(--nav-edge);
   width: 44px;
   height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(120deg, rgba(var(--wine-rgb), 0.65), rgba(var(--wine-deep-rgb), 0.85));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(var(--paper-rgb), 0.25);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px;
   z-index: 499;
   opacity: 0;
   transform: translateY(-6px);
@@ -628,7 +1012,6 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 1px 6px rgba(0,0,0,0.3));
 }
 .site-nav.nav-at-top .nav-logo-peek,
 .site-nav.nav-at-bottom .nav-logo-peek {
@@ -636,28 +1019,16 @@ body {
   transform: translateY(0);
 }
 
-/* Panel öffnet/schließt sich zur Ecke bei der eigenen Kugel hin - Ursprung
-   oben rechts oder unten rechts (transform-origin, von nav.js pro Panel
-   inline gesetzt, je nachdem ob genug Platz nach unten ist). "scale" (beide
-   Achsen gleichzeitig) statt nur "scaleY", damit es wirklich zu einem Punkt
-   an der Kugel hin verschwindet statt zu einer schräg gezogenen Linie.
-   Ausgelöst über :focus-within (Tastatur) UND die "open"-Klasse (Hover/Klick
-   - siehe nav.js) - beide jetzt auf dem einzelnen .nav-item, nicht mehr
-   global auf <nav>, damit die drei Panels unabhängig voneinander auf-/
-   zugehen (immer nur eins gleichzeitig, siehe nav.js).
-   z-index bewusst HÖHER als .nav-ball (501): im gestapelten (kleinen)
-   Zustand sitzen die drei Kugeln eng übereinander - ein geöffnetes Panel
-   soll die darunter liegenden Kugeln sichtbar überlagern, nicht darunter
-   verschwinden. */
 .nav-dropdown {
   position: fixed;
   min-width: 200px;
-  background: var(--cloud);
-  border: 1px solid var(--line);
+  background: rgba(var(--cloud-rgb), 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(var(--paper-rgb), 0.4);
   box-shadow: 0 12px 32px rgba(0,0,0,0.18);
   padding: 8px 0;
   z-index: 502;
-
   transform: scale(0);
   opacity: 0;
   pointer-events: none;
@@ -684,25 +1055,21 @@ body {
 }
 .nav-link:last-child { border-bottom: none; }
 
-/* Platzhalter für noch nicht verfügbare Menüpunkte (z.B. englische Version,
-   solange es die Seite noch nicht gibt) - optisch erkennbar deaktiviert,
-   aber Klick schließt das Dropdown trotzdem ganz normal (kein Link, also
-   keine Navigation). */
 .nav-link.nav-link-disabled {
   color: var(--line);
   cursor: default;
 }
 .nav-link.nav-link-disabled:hover { color: var(--line); }
-.nav-link:hover { color: var(--gold); }
+.nav-link {
+  background: linear-gradient(90deg, rgba(140,31,61,0.08), rgba(140,31,61,0));
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  transition: color 0.25s ease, background-size 0.3s ease;
+}
+.nav-link:hover { color: var(--gold); background-size: 100% 100%; }
 
-/* ---------- Footer ---------- */
 .site-footer { padding: 40px 0; background: var(--ink); }
 
-/* Auf Mobile stehen die drei Kugeln (Menü/Sprache/Kontakt) bzw. deren
-   Zwischenzustände öfter genau über dem unteren Seitenrand - ohne
-   zusätzlichen Platz überlagern sie sonst "Impressum · Datenschutz". Der
-   Wert (110px) ist bewusst großzügig: deckt sowohl die volle Kugel-Reihe
-   (44px) als auch etwas Randabstand ab. */
 @media (max-width: 639px) {
   .site-footer { padding-bottom: 130px; }
 }
@@ -754,7 +1121,28 @@ body {
   background: #000;
 }
 
-/* Play-Icon auf den Video-Vorschaukacheln */
+.lightbox-info-slide {
+  display: none;
+  box-sizing: border-box;
+  width: min(92vw, 640px);
+  aspect-ratio: 1 / 1;
+  max-height: 85vh;
+  padding: 56px;
+  background: var(--ink);
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+.lightbox-info-slide.active { display: flex; }
+.lightbox-info-slide-content {
+  max-width: 520px;
+  color: var(--paper);
+  font-size: 16px;
+  line-height: 1.8;
+  white-space: pre-line;
+  text-align: left;
+}
+
 .photo-frame.video-frame::after {
   content: "";
   position: absolute;
@@ -762,7 +1150,7 @@ body {
   height: 0;
   border-style: solid;
   border-width: 11px 0 11px 18px;
-  border-color: transparent transparent transparent rgba(255,255,255,0.92);
+  border-color: transparent transparent transparent rgba(var(--paper-rgb), 0.92);
   z-index: 1;
   transform: translateX(2px);
 }
@@ -771,13 +1159,10 @@ body {
 .lightbox-next,
 .lightbox-close {
   position: absolute;
-  background: rgba(28,28,26,0.55);
-  /* Milchglas-Effekt: verwischt, was hinter dem Button liegt, statt es nur
-     halbtransparent durchscheinen zu lassen. Dadurch bleibt der Button auf
-     hellen UND dunklen Fotos gleichermaßen gut erkennbar. */
+  background: rgba(var(--ink-rgb), 0.55);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.22);
+  border: 1px solid rgba(var(--paper-rgb), 0.22);
   border-radius: 9999px;
   cursor: pointer;
   color: var(--paper);
@@ -793,7 +1178,7 @@ body {
 .lightbox-next:hover,
 .lightbox-close:hover {
   opacity: 1;
-  background: rgba(28,28,26,0.75);
+  background: rgba(var(--ink-rgb), 0.75);
 }
 
 .lightbox-close {

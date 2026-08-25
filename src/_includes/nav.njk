@@ -47,19 +47,22 @@
     </button>
     {# Die Menü-Links werden HIER direkt aus t.nav gerendert (statt wie im
        Original per JS mit hart codierten, deutschen Texten). nav.js
-       überschreibt diesen Inhalt jetzt NICHT mehr - siehe Erklärung im Chat. #}
+       überschreibt diesen Inhalt jetzt NICHT mehr - siehe Erklärung im Chat.
+
+       Angepasst an die überarbeitete Seitenstruktur: fünf Sections statt
+       sechs (Grundriss und Features sind entfallen, dafür neu: Zimmer,
+       Gastgeber, Umgebung). #}
     <div class="nav-dropdown" id="nav-dropdown" data-nav-links>
-      <a class="nav-link" href="#section-overview">{{ t.nav.menu_overview }}</a>
-      <a class="nav-link" href="#section-neighborhood">{{ t.nav.menu_neighborhood }}</a>
-      <a class="nav-link" href="#section-photos">{{ t.nav.menu_photos }}</a>
-      <a class="nav-link" href="#section-floorplan">{{ t.nav.menu_floorplan }}</a>
-      <a class="nav-link" href="#section-features">{{ t.nav.menu_features }}</a>
+      <a class="nav-link" href="#section-home-details">{{ t.nav.menu_home_details }}</a>
+      <a class="nav-link" href="#section-rooms">{{ t.nav.menu_rooms }}</a>
+      <a class="nav-link" href="#section-hosts">{{ t.nav.menu_hosts }}</a>
+      <a class="nav-link" href="#section-area">{{ t.nav.menu_area }}</a>
       <a class="nav-link" href="#section-contact">{{ t.nav.menu_contact }}</a>
     </div>
   </div>
 
   <div class="nav-logo-peek" id="nav-logo-peek">
-    <img src="/assets/media/logo/Logo_NeuesZuhause.png" alt="{{ t.meta.title_home }}" />
+    <img src="/assets/media/logo/Logo_Till_E.png" alt="{{ t.meta.title_home }}" />
   </div>
 </nav>
 {% else %}

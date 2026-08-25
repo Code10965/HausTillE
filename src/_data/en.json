@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title_home": "Home. Arrive.",
-    "description_home": "Bright pre-war apartment in Berlin-Kreuzberg with its own garden – available from December 1st.",
-    "title_imprint": "Imprint — Home. Arrive.",
-    "description_imprint": "Imprint according to § 5 TMG.",
-    "title_privacy": "Privacy Policy — Home. Arrive.",
-    "description_privacy": "Privacy policy according to Art. 13 GDPR."
+    "title_home": "Haus Till E",
+    "description_home": "Your home on the Moselle. A boutique hotel-garni of the finest kind",
+    "title_imprint": "Imprint — Haus Till E",
+    "description_imprint": "Imprint pursuant to § 5 TMG.",
+    "title_privacy": "Privacy Policy — Haus Till E",
+    "description_privacy": "Privacy policy pursuant to Art. 13 GDPR."
   },
   "nav": {
     "menu_aria": "Open menu",
@@ -15,11 +15,10 @@
     "copy_button": "Copy address",
     "copied_button": "Copied ✓",
     "back_to_home": "Back to homepage",
-    "menu_overview": "Overview",
-    "menu_neighborhood": "Location",
-    "menu_photos": "Photos",
-    "menu_floorplan": "Floor plan",
-    "menu_features": "Details",
+    "menu_home_details": "Home",
+    "menu_rooms": "Rooms",
+    "menu_hosts": "Hosts",
+    "menu_area": "Surroundings",
     "menu_contact": "Contact",
     "lang_de": "Deutsch",
     "lang_en": "English",
@@ -27,130 +26,239 @@
   },
   "home": {
     "hero": {
+      "eyebrow": "Haus Till E on the Moselle loop in Zell",
       "tag": "Available from December 1st",
       "title_line1": "Arrive.",
-      "title_line2": "Be home.",
-      "sub": "Open, loft-like rooms. High ceilings. Your own little garden in the courtyard. Right in the heart of the nicest part of Kreuzberg. With a house and courtyard community that truly lives up to its name.",
+      "title_line2": "Feel at home.",
+      "sub": "In our listed Art Deco house with its own history, five individual double rooms full of charm and character await you. Start the day with a delicious breakfast in our cosy breakfast room – before losing track of time in our wildly romantic garden.",
       "scroll_hint": "Scroll to read"
     },
-    "overview": {
-      "eyebrow": "01 — At a glance",
-      "title": "A space to arrive in",
-      "p1": "The bright apartment is spread across two units: one in the front building with windows facing the street and the courtyard, one in the side wing overlooking the green courtyard.",
-      "p2": "Both units impress with loft-like, open rooms that flow into one another and let in plenty of light. An old wooden door connects the two areas.",
-      "p3": "The front unit has a guest bathroom, kitchenette and garden access; the side wing has a bathroom, sleeping nook, walk-in wardrobe and, likewise, direct access to the garden.",
-      "facts": [
-        { "label": "Rooms", "value": "2" },
-        { "label": "Size", "value": "130 m²" },
-        { "label": "Building", "value": "Pre-war, ground floor" },
-        { "label": "Energy certificate", "value": "on request" },
-        { "label": "Base rent", "value": "€1,430" },
-        { "label": "Utilities", "value": "€320" },
-        { "label": "Special feature", "value": "2 separate entrances" }
-      ]
-    },
-    "neighborhood": {
-      "eyebrow": "02 — Life around it",
-      "title": "A neighbourhood to feel good in",
-      "p1_label": "Relaxation: ",
-      "p1": "It's just a three-minute walk to Viktoriapark or Gleisdreieckpark for fresh air, with restaurants inviting you to linger all around. Bergmannkiez is seven minutes away, and Yorck cinema is right around the corner.",
-      "p2_label": "Everyday needs: ",
-      "p2": "Everything important is within walking distance: LPG, Rewe, Lidl and Aldi close by, the bus stop right outside the door, and the S-Bahn and U-Bahn five minutes away.",
-      "p3_label": "House and courtyard community: ",
-      "p3": "Shared courtyard parties are simply part of it – life together in the building is friendly, relaxed and anything but anonymous.",
-      "grid": ["Shopping<br>around the corner", "S-Bahn & U-Bahn<br>within walking distance", "Parks & restaurants<br>nearby"]
-    },
-    "photos": {
-      "eyebrow": "03 — What it looks like",
-      "title": "A place to linger",
-      "intro": "Imagine wandering through the rooms with a cup of coffee in hand. Have you already found your favourite spot?",
-      "labels": {
+
+    "home_details": {
+      "eyebrow": "01 — Your home on the Moselle",
+      "title_line1": "A home.",
+      "title_line2": "Not just a hotel.",
+      "text": [
+        "Once upon a time there was a castle owner who had three daughters – and he bequeathed each of them a part of the Zell castle, built in the 16th century: to one the side wing, to another the main building, and for the third he had a new building erected that blends harmoniously in style and character into the castle ensemble.",
+        "What sounds like a fairy tale is a true story from the 1920s in Zell. This is how the estate came into being that is known and cherished today as Haus Till E. Our listed building dates from the Art Deco era and has been lovingly restored in the style typical of that period. Windows, doors, wooden floors and the staircase are all original and give the house its unique flair.",
+        "In front of the house awaits a wildly romantic, idyllic garden. Over a bottle of wine, you can let your soul unwind here and lose all sense of time, before diving back into the story of these old walls."
+      ],
+      "photo_labels": {
+        "Haus": "Photo — House",
         "Garten": "Photo — Garden",
-        "Vorne": "Photo — Front",
-        "Hinten": "Photo — Back",
-        "Bad": "Photo — Bathroom",
-        "Video vorne": "Video — Front",
-        "Video hinten": "Video — Back"
-      }
-    },
-    "floorplan": {
-      "eyebrow": "04 — Keeping the overview",
-      "title": "Lines that become home",
-      "intro": "Two apartments were combined into one generous home – resulting in a floor plan that is truly special.",
-      "labels": {
-        "Grundriss Vorne": "Floor plan — Front",
-        "Grundriss Hinten": "Floor plan — Back",
-        "Grundriss Gesamt": "Floor plan — Overall"
-      }
-    },
-    "features": {
-      "eyebrow": "05 — An eye for detail",
-      "title": "Does this sound like you?",
-      "p1": "Every apartment has its own character – this one is especially suited to people who appreciate practical fittings and a genuine home.",
-      "p2": "What makes it special:",
-      "list": [
-        "For people who enjoy underfloor heating in winter",
-        "For couples or singles who value the generosity of open spaces",
-        "For those who like variety and can't decide between two bathrooms with a shower, then end up stepping into the freestanding bathtub anyway",
-        "For people who enjoy having neighbours",
-        "For people who like walking on parquet flooring",
-        "For people who need storage space in their own, lockable cellar area",
-        "For people who like living independently and without complications",
-        "For people who want water heated on demand (instantaneous water heater)",
-        "For people who want to store their bike safely in the building's own bike room",
-        "For green-thumbed people who dream of a small, private garden with a terrace"
+        "Eingangsbereich": "Photo — Entrance",
+        "Frühstücksraum": "Photo — Breakfast room",
+        "Treppenhaus": "Photo — Staircase"
+      },
+      "photo_infos": {
+        "Haus": "",
+        "Garten": "",
+        "Eingangsbereich": "",
+        "Frühstücksraum": "",
+        "Treppenhaus": ""
+      },
+      "info_tiles": {
+        "Info": ""
+      },
+      "accordion": [
+        { "title": "Directions", "content": "Haus Till E is a short walk from the Moselle, right in the heart of Zell's old town, on Schloßstraße. Coming from Bullay, you cross the Moselle via the road bridge and drive through Merl into Zell's old town. Other routes lead via the Zeller Berg and Grenderich (L199), through the Altlay valley (L194), or from Kappel via the B421. By train, you can reach us via Bullay's 'Umweltbahnhof' – from there, the bus takes you about 3 km to the Lindenplatz stop, just a short walk from Haus Till E. The nearest airport is Frankfurt-Hahn (approx. 20 km). Whether arriving by train or plane, just let us know – we're happy to pick you up by car." },
+        { "title": "Address", "content": "You'll find Haus Till E at Schloßstraße 10, 56856 Zell (Moselle) – right at the foot of the steep vineyard 'Zeller Schwarze Katz', just a few minutes' walk from the Moselle promenade and the old town." },
+        { "title": "Parking", "content": "Along the Moselle riverside there are numerous free parking spaces. Right on Schloßstraße you can park with a pay-and-display ticket – for loading and unloading your luggage, the free 30-minute ticket is usually enough. From early 2027, we'll also offer our own garage parking spaces right at the house." },
+        { "title": "Pets", "content": "We both love dogs dearly – but over the years we've had some experiences that led us to rethink. That's why bringing dogs to Haus Till E is unfortunately no longer possible. Thank you for your understanding." },
+        { "title": "Restrictions", "content": "Haus Till E is a listed building from the 1920s with no lift – the rooms are only accessible via the stairs. Smoking is not permitted inside the house, including on the balconies; you're welcome to smoke in our garden at any time." },
+        { "title": "Bicycles", "content": "You can safely park and charge your regular or electric bikes in our outbuilding. Prefer to rent locally? Our guests are particularly happy with the bike rentals at Wanderland (Balduinstraße 95) and Moselglück (Balduinstraße 43) – both offer well-maintained bikes right in Zell." },
+        { "title": "Air conditioning", "content": "Our historic house doesn't have classic air conditioning. On especially warm days, we're happy to bring a modern, bladeless tower fan (8 speed settings) to your room on request – just let us know." },
+        { "title": "Lactose, gluten, etc.", "content": "As a small, family-run house, we don't always have every product for every intolerance in stock as standard. Let us know your needs when booking – we're happy to accommodate you." },
+        { "title": "Family and children", "content": "Haus Till E is regularly booked by entire families – we've been lucky enough to witness many an 80th birthday and host three or four generations under one roof at the same time. We love creating the setting for unforgettable family time together." },
+        { "title": "Check-in and check-out times", "content": "Check-in is possible between 4 and 6 pm, check-out is by 11 am at the latest. We need the time in between to lovingly prepare and clean all five rooms for you. If you'd like to drop off your luggage earlier or collect the key in advance, just let us know ahead of time – we can usually find a solution." }
       ]
     },
-    "contact": {
-      "eyebrow": "06 — We look forward to hearing from you",
-      "title": "It clicked, didn't it?",
-      "text": "Then write to us briefly – who you are and why you're a great fit here.",
-      "hint": "The address is stored as an image so spam bots can't read it out — the easiest way is to copy it via the button."
+
+    "rooms": {
+      "eyebrow": "02 — Choose from five rooms",
+      "title_line1": "Individual rooms.",
+      "title_line2": "As individual as you.",
+      "text": [
+        "Each of our five rooms is lovingly and uniquely furnished for you. On the second floor, two rooms with their own balcony await you (Rooms 1 & 2), as well as a spacious studio without a balcony (Room 3). On the third floor you'll find a large room with a wonderful view of the castle and the Moselle (Room 4), as well as a cosy room with charming sloped ceilings (Room 5).",
+        "Antique small furniture, original Art Deco globe lamps and real plants create an atmospheric feel in your room – complemented by exclusive artworks that an international artist created especially for each room. 'The rooms combine the luxury of the 1920s with all the comforts of the present' – that's how a guest once described it. A description we're very fond of.",
+        "Please note: our house has no lift – the rooms are only accessible via the stairs."
+      ],
+      "photo_labels": {
+        "Zimmer_1": "Photo — Room 1",
+        "Zimmer_2": "Photo — Room 2",
+        "Zimmer_3": "Photo — Room 3",
+        "Zimmer_4": "Photo — Room 4",
+        "Zimmer_5": "Photo — Room 5"
+      },
+      "photo_infos": {
+        "Zimmer_1": {
+          "text": "• Sunt in culpa qui officia deserunt mollit anim id est laborum.\n• Curabitur pretium tincidunt lacus, ut interdum tellus elit sed risus.\n• Maecenas eget condimentum velit, sit amet feugiat lectus.",
+          "position": 1
+        },
+        "Zimmer_2": "",
+        "Zimmer_3": "",
+        "Zimmer_4": "",
+        "Zimmer_5": ""
+      }
     },
+
+    "hosts": {
+      "eyebrow": "03 — Your hosts look forward to welcoming you",
+      "title_line1": "Here for you.",
+      "title_line2": "If you'd like.",
+      "text": [
+        "We are Jan and René – and Haus Till E is our labour of love. The house has been around for many decades. When we first walked through its doors in April 2022, it was love at first sight: we instantly fell for this beautiful Art Deco estate – for the authentic stained-glass windows, the old wooden staircase and the idyllic garden, which Jan has lovingly tended ever since.",
+        "We moved from Berlin to the Moselle to find exactly what makes Zell so special: peace and quiet, fresh air, wide, hilly countryside, warm-hearted people, and the occasional glass of good Moselle wine. We'd love to share this love at first sight with you and get you just as excited about this wonderful 1920s building.",
+        "So we warmly invite you to be our guests."
+      ],
+      "photo_labels": {
+        "Rosa": "we love Rosa",
+        "Bjorn": "we love Bjørn",
+        "Romina": "we love Romina"
+      },
+      "photo_infos": {
+        "Rosa": "",
+        "Bjorn": "",
+        "Romina": ""
+      },
+      "info_tiles": {
+        "Info": ""
+      }
+    },
+
+    "area": {
+      "eyebrow": "04 — Zell and its surroundings",
+      "title_line1": "One place.",
+      "title_line2": "Countless possibilities",
+      "text": [
+        "At Haus Till E, everything revolves around what you secretly long for: peace to arrive, time to do nothing – and, if you wish, a little activity in between. From our favourite viewing bench (our personal 'Moselle cinema'), just a 10-minute walk from Haus Till E, you can watch the goings-on on the Moselle and simply let time drift by.",
+        "If you'd rather be active, you'll find hiking trails right on Haus Till E's doorstep such as the Liebesschlucht ('Lovers' Gorge', 11.1 km) or the Marienburg circular trail (15.2 km), relaxed cycling tours along the Moselle, or sportier stretches up into the steep vineyards of the 'Zeller Schwarze Katz'. And as a reward, more than 20 passionate winemakers as well as restaurants for every taste await you in Zell (Moselle) – from Greek to Asian, from ice cream sundaes to chocolate.",
+        "And if you look closely, you'll discover cultural hidden gems right at Haus Till E: classical concerts in the vaulted cellar, band performances in the garden, murder-mystery dinners with a multi-course menu – experiences you won't find on Google, only by being our guest."
+      ],
+      "accordion": [
+        {
+          "title": "Town",
+          "content": "In town, we love strolling along the Moselle promenade and along Balduinstraße with its small shops and cafés. And from Kaimt, on the other side of the Moselle, you get the finest view of Zell's old town – with its towers, half-timbered houses and the more than 2,000-year-old winemaking history you can sense on every corner."
+        },
+        {
+          "title": "Countryside",
+          "content": "Two very different landscapes meet around Zell: the Eifel and the Hunsrück. Here, wide views over gentle hills; there, dense forests with clearings that invite you to linger. A highlight in the Hunsrück is the Geierlay suspension bridge near Sosberg – at 360 metres long and up to 100 metres high, one of Germany's most spectacular suspension bridges, and pure adrenaline for anyone who isn't afraid of heights."
+        },
+        {
+          "title": "River",
+          "content": "By boat, you can travel from Zell to Cochem, Beilstein, Traben-Trarbach or Bernkastel-Kues – past castles and vineyards, almost like passing through a model railway landscape. And since you can take your bikes on board, you can enjoy one leg comfortably by boat and cycle the other more actively – whichever you fancy."
+        },
+        {
+          "title": "Hills",
+          "content": "At the foot of Haus Till E lies the famous steep vineyard 'Zeller Schwarze Katz' – and it is here, in the heart of the vineyard, that our house stands. Right behind Haus Till E starts the Collis circular trail (7.9 km, approx. 2 h 30 min, 210 metres of ascent) up to the Collis Tower, built in 1906, with a wonderful view over the town, and Merl and Briedel also offer hills with spectacular views. Just a 10-minute walk from Haus Till E lies our viewing bench, our very own 'Moselle cinema': from here you can watch the goings-on on the water and in the vineyards – the most beautiful and calming film nature has to offer."
+        },
+        {
+          "title": "Hiking",
+          "content": "If you want to experience nature on foot, Haus Till E is the perfect base. The Liebesschlucht (11.1 km, moderate, approx. 3 h 15 min, 266 metres of ascent) takes you past the pilgrimage site of Marienhöhe through the forest down into a romantic rocky gorge. The Marienburg circular trail (15.2 km, moderate, approx. 4 h 35 min, 383 metres of ascent) rewards you with a detour to the Prinzenkopf tower and grand panoramic views of Germany's tightest Moselle loop. And the Collis circular trail (7.9 km, moderate, approx. 2 h 30 min, 210 metres of ascent) leads up to the historic Collis Tower with views over Zell and the Zeller Land. Three very different routes – all within easy reach of Haus Till E."
+        },
+        {
+          "title": "Cycling",
+          "content": "Whether relaxed or sporty – Haus Till E has the right route for you. Right along the Moselle, the terrain is flat and gently sloping, ideal for a leisurely bike ride. If you prefer it more athletic, head up into the steep vineyards – short, sharp climbs included, rewarded with great views."
+        },
+        {
+          "title": "Wellness",
+          "content": "About a 30-minute drive from Haus Till E lies the Vulkaneifel Therme in Bad Bertrich – Germany's only Glauber's salt thermal spa, with a thermal pool, six saunas and a wide range of wellness treatments. A perfect trip whenever you're craving water, warmth and a little pampering."
+        },
+        {
+          "title": "Enjoying wine",
+          "content": "More than 20 winemakers shape our Zeller Land with passion, professionalism and skill – producing excellent, multi-award-winning wines. In the steep vineyards, grapes are hand-picked with a love for the product you can taste. Our winemakers set trends, and the younger generation is bold enough to try new things. In numerous wine bars and vinotheques you can taste, sample and, of course, take the wines home with you."
+        },
+        {
+          "title": "Enjoying food",
+          "content": "There's something for every taste: Greek at El Grego, Italian at Giovanni's, Indian at La Terrazza, German at Hotel zum Grünen Kranz, and Asian with top-notch sushi at Koi – all restaurants that have impressed with great quality for years. The best ice cream sundaes in town can be found at Stülb, Venezia or Perilli, the tastiest cakes at Café Stülb – and if you're after a sweet indulgence, head to DaKo, our Belgian chocolatier."
+        },
+        {
+          "title": "Enjoying culture",
+          "content": "In the summer months, 'Summer in the City' awaits you – Thursday evenings with chill live music at changing locations in Zell, sometimes at a vineyard, sometimes right here in our garden at Haus Till E. From autumn to spring, we love heading to KulturKino Kaimt with its lovingly curated film programme. And in between, there are always small concerts at Haus Till E or with friends – in the garden, the living room, or the vaulted cellar, ranging from classical guitar to big band to minimalist electro beats, plus murder-mystery dinners with a multi-course menu. You'll find current dates on our events page."
+        }
+      ],
+      "faq": {
+        "heading": "Frequently asked questions",
+        "items": [
+          {
+            "title": "How far is the viewing bench from Haus Till E?",
+            "content": "The viewing bench, our \"Moselle cinema\", is a 10-minute walk from Haus Till E."
+          },
+          {
+            "title": "Which hiking trails start near Haus Till E?",
+            "content": "Right on Haus Till E's doorstep begin the Collis circular trail (7.9 km), the Liebesschlucht (11.1 km) and the Marienburg circular trail (15.2 km)."
+          },
+          {
+            "title": "How long and how difficult is the Marienburg circular trail?",
+            "content": "The Marienburg circular trail is 15.2 km long, moderately difficult, and takes about 4 hours 35 minutes with 383 metres of ascent."
+          },
+          {
+            "title": "Where is Haus Till E located?",
+            "content": "Haus Till E is located at the foot of the \"Zeller Schwarze Katz\" steep vineyard in Zell (Moselle), directly on the river."
+          },
+          {
+            "title": "How far is the Vulkaneifel Therme in Bad Bertrich?",
+            "content": "The Vulkaneifel Therme in Bad Bertrich is about a 30-minute drive from Haus Till E."
+          },
+          {
+            "title": "How long is the Geierlay suspension bridge?",
+            "content": "The Geierlay suspension bridge in the Hunsrück is 360 metres long and reaches up to 100 metres above the valley between Sosberg and Mörsdorf."
+          }
+        ]
+      }
+    },
+
     "footer": {
-      "line1": "Available from Dec 1 · Viewing by appointment · No mass-application casting"
+      "line1": "© 2026 Haus Till E"
+    },
+
+    "contact": {
+      "eyebrow": "05 — get in touch directly",
+      "title": "So, feel like coming?",
+      "text": "Then drop us a quick line about who you are and why you'd be a great fit here.",
+      "hint": "The address is stored as an image so spam bots can't read it — easiest to copy it via the button."
     }
   },
   "imprint": {
-    "eyebrow": "Information according to § 5 TMG",
+    "eyebrow": "Information pursuant to § 5 TMG",
     "title": "Imprint",
-    "intro": "This website serves the private rental of a single apartment, from one private individual to another. It is not operated commercially. Nevertheless, we voluntarily provide the following information for transparency.",
+    "intro": "This website serves the private rental of a single apartment from one private individual to another. It is not operated commercially. We nevertheless voluntarily provide the following information for transparency.",
     "responsible_title": "Responsible for the content",
     "address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel), Germany",
     "contact_title": "Contact",
     "liability_title": "Liability for content and links",
-    "liability_text": "The content of this page was created with care. However, no guarantee can be given for the accuracy, completeness or currency of the information — particularly regarding the apartment. This page contains no links to external third-party websites.",
+    "liability_text": "The content of this page has been prepared with care. However, no guarantee can be given for the accuracy, completeness and topicality of the information provided — in particular regarding the apartment. This page contains no links to external third-party websites.",
     "dispute_title": "Dispute resolution",
-    "dispute_text": "As this page serves exclusively the private rental of an apartment and does not constitute a commercial offer, the regulations on online dispute resolution (the EU Commission's ODR platform) and on consumer dispute resolution do not apply."
+    "dispute_text": "As this page serves exclusively private rental purposes and does not constitute a commercial offer, the regulations on online dispute resolution (EU Commission's ODR platform) and consumer dispute resolution do not apply."
   },
   "privacy": {
-    "eyebrow": "According to Art. 13 GDPR",
+    "eyebrow": "Pursuant to Art. 13 GDPR",
     "title": "Privacy Policy",
-    "intro": "Protecting your personal data is important to us. Below we inform you about which data is processed when you visit this website.",
-    "s1_title": "1. Data controller",
+    "intro": "The protection of your personal data is important to us. Below we inform you about which data is processed when you visit this website.",
+    "s1_title": "1. Controller",
     "s1_address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel), Germany",
     "s2_title": "2. Hosting",
-    "s2_p1": "This website is hosted via GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, USA, or its European group company). The domain is registered with Namecheap Inc. When you access the site, GitHub automatically processes technical information in so-called server log files transmitted by your browser. This usually includes the IP address, date and time of the request, the page accessed, the browser used and the operating system.",
-    "s2_p2": "This data is used exclusively for technical operation, delivering the website and protecting against misuse. We do not combine it with other data sources. The legal basis is our legitimate interest in a secure and functional provision of the website (Art. 6(1)(f) GDPR).",
+    "s2_p1": "This website is provided via GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, USA, or its European group company). The domain is registered with Namecheap Inc. When you access the site, GitHub automatically processes technical information in so-called server log files transmitted by your browser. This typically includes the IP address, date and time of the request, the page accessed, the browser used, and the operating system.",
+    "s2_p2": "This data is used exclusively for the technical operation, delivery of the website and protection against misuse. We do not combine it with other data sources. The legal basis is our legitimate interest in a secure and functional provision of the website (Art. 6(1)(f) GDPR).",
     "s3_title": "3. Fonts",
-    "s3_p1": "The fonts used on this website (Fraunces, Space Grotesk, JetBrains Mono) are hosted locally as part of the website. This means no connection is made to servers operated by Google or other third parties, and no data is transmitted to third parties.",
+    "s3_p1": "The fonts used on this website (Fraunces, Space Grotesk, JetBrains Mono) are embedded locally. No connection is made to servers operated by Google or other third parties, and no data is transmitted to third parties.",
     "s4_title": "4. Cookies and tracking",
-    "s4_p1": "This website does not use cookies and does not use any tracking or analytics tools (e.g. Google Analytics, Facebook Pixel, etc.). No usage profiles are created.",
-    "s5_title": "5. Contacting us by email",
-    "s5_p1": "If you contact us by email, we will store the data you provide (e.g. name, email address, content of your message) in order to process your request. We do not pass this data on without your consent.",
-    "s5_p2": "The legal basis is Art. 6(1)(b) GDPR if your request relates to the initiation of a tenancy, or otherwise Art. 6(1)(f) GDPR (legitimate interest in processing your request). The data will be deleted as soon as it is no longer required for processing, at the latest once the rental has been concluded or finally declined.",
+    "s4_p1": "This website does not use cookies or any tracking or analytics tools (e.g. Google Analytics, Facebook Pixel, etc.). No user profiles are created.",
+    "s5_title": "5. Contact by email",
+    "s5_p1": "If you contact us by email, the data you provide (e.g. name, email address, content of your message) will be stored by us in order to process your enquiry. We do not pass on this data without your consent.",
+    "s5_p2": "The legal basis is Art. 6(1)(b) GDPR, provided your enquiry relates to the initiation of a rental agreement, or otherwise Art. 6(1)(f) GDPR (legitimate interest in processing your enquiry). The data will be deleted as soon as it is no longer required for processing, at the latest upon completion of the rental or final refusal.",
     "s6_title": "6. SSL/TLS encryption",
     "s6_p1": "For security reasons, this website uses SSL/TLS encryption. You can recognise an encrypted connection by the prefix <em>https://</em> in your browser's address bar.",
     "s7_title": "7. Your rights",
-    "s7_intro": "As a data subject, you have the following rights towards us, provided the respective legal requirements are met:",
+    "s7_intro": "As a data subject, you have the following rights against us, provided the respective legal requirements are met:",
     "s7_list": [
-      "Access to the data stored about you (Art. 15 GDPR)",
-      "Rectification of inaccurate data (Art. 16 GDPR)",
-      "Erasure of your data (Art. 17 GDPR)",
-      "Restriction of processing (Art. 18 GDPR)",
-      "Objection to processing (Art. 21 GDPR)",
-      "Data portability (Art. 20 GDPR)",
-      "Lodging a complaint with a data protection supervisory authority, e.g. the one responsible for your place of residence"
+      "Right to information about the data stored about you (Art. 15 GDPR)",
+      "Right to rectification of inaccurate data (Art. 16 GDPR)",
+      "Right to erasure of your data (Art. 17 GDPR)",
+      "Right to restriction of processing (Art. 18 GDPR)",
+      "Right to object to processing (Art. 21 GDPR)",
+      "Right to data portability (Art. 20 GDPR)",
+      "Right to lodge a complaint with a data protection supervisory authority, e.g. the authority responsible for your place of residence"
     ]
   }
 }

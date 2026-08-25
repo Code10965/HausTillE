@@ -1,11 +1,11 @@
 {
   "meta": {
-    "title_home": "Thuis. Aankomen.",
-    "description_home": "Lichte woning in een oud pand in Berlijn-Kreuzberg met eigen tuin – beschikbaar vanaf 1 december.",
-    "title_imprint": "Colofon — Thuis. Aankomen.",
+    "title_home": "Haus Till E",
+    "description_home": "Jouw thuis aan de Moezel. Een hotel-garni van de bovenste plank",
+    "title_imprint": "Colofon — Haus Till E",
     "description_imprint": "Colofon conform § 5 TMG.",
-    "title_privacy": "Privacybeleid — Thuis. Aankomen.",
-    "description_privacy": "Privacybeleid conform art. 13 AVG."
+    "title_privacy": "Privacyverklaring — Haus Till E",
+    "description_privacy": "Privacyverklaring conform art. 13 AVG."
   },
   "nav": {
     "menu_aria": "Menu openen",
@@ -14,12 +14,11 @@
     "contact_email_label": "E-mail",
     "copy_button": "Adres kopiëren",
     "copied_button": "Gekopieerd ✓",
-    "back_to_home": "Terug naar de homepage",
-    "menu_overview": "Overzicht",
-    "menu_neighborhood": "Ligging",
-    "menu_photos": "Foto's",
-    "menu_floorplan": "Plattegrond",
-    "menu_features": "Details",
+    "back_to_home": "Terug naar startpagina",
+    "menu_home_details": "Thuis",
+    "menu_rooms": "Kamers",
+    "menu_hosts": "Gastheren",
+    "menu_area": "Omgeving",
     "menu_contact": "Contact",
     "lang_de": "Deutsch",
     "lang_en": "English",
@@ -27,130 +26,239 @@
   },
   "home": {
     "hero": {
-      "tag": "Beschikbaar vanaf 1 december",
+      "eyebrow": "Haus Till E aan de Moezelbocht bij Zell",
+      "tag": "Vrij vanaf 1 december",
       "title_line1": "Aankomen.",
       "title_line2": "Thuis zijn.",
-      "sub": "Open, loft-achtige ruimtes. Hoge plafonds. Een eigen, kleine tuin in de binnenplaats. Middenin het mooiste deel van Kreuzberg. Met een huis- en hofgemeenschap die die naam ook echt verdient.",
+      "sub": "In ons monumentale art-decohuis met een eigen geschiedenis wachten vijf individuele tweepersoonskamers vol charme en karakter op je. Begin de dag met een heerlijk ontbijt in onze gezellige ontbijtruimte – voordat je in de wild-romantische tuin de tijd vergeet.",
       "scroll_hint": "Scroll om te lezen"
     },
-    "overview": {
-      "eyebrow": "01 — In het kort",
-      "title": "Een plek om aan te komen",
-      "p1": "De lichte woning bestaat uit twee eenheden: één in het voorhuis met ramen naar de straat en naar de binnenplaats, één in de zijvleugel met uitzicht op de groene hof.",
-      "p2": "Beide eenheden overtuigen met loft-achtige, open ruimtes die in elkaar overlopen en veel licht binnenlaten. Een oude houten deur verbindt de twee delen met elkaar.",
-      "p3": "Voorin bevinden zich een gasten-badkamer, kitchenette en toegang tot de tuin; in de zijvleugel een badkamer, slaapnis, inloopkast en eveneens directe toegang tot de tuin.",
-      "facts": [
-        { "label": "Kamers", "value": "2" },
-        { "label": "Oppervlakte", "value": "130 m²" },
-        { "label": "Pand", "value": "Oudbouw, begane grond" },
-        { "label": "Energielabel", "value": "op aanvraag" },
-        { "label": "Kale huur", "value": "1.410 euro" },
-        { "label": "Servicekosten", "value": "320 euro" },
-        { "label": "Bijzonderheid", "value": "2 aparte ingangen" }
-      ]
-    },
-    "neighborhood": {
-      "eyebrow": "02 — Het leven eromheen",
-      "title": "Een buurt om je thuis te voelen",
-      "p1_label": "Ontspanning: ",
-      "p1": "Voor een frisse neus ben je in drie minuten in het Viktoriapark of Gleisdreieckpark, en overal rondom nodigen restaurants uit om te blijven hangen. De Bergmannkiez ligt zeven minuten verderop, en de Yorck-bioscoop zit vlak om de hoek.",
-      "p2_label": "Voorzieningen: ",
-      "p2": "Alles wat belangrijk is, is te voet bereikbaar: LPG, Rewe, Lidl en Aldi in de directe omgeving, de bushalte vlak voor de deur en de S-Bahn en U-Bahn op vijf minuten lopen.",
-      "p3_label": "Huis- en hofgemeenschap: ",
-      "p3": "Gezamenlijke hoffeesten horen er gewoon bij – het samenleven in het huis is vriendelijk, ontspannen en allesbehalve anoniem.",
-      "grid": ["Boodschappen<br>om de hoek", "S- & U-Bahn<br>op loopafstand", "Parken & restaurants<br>in de buurt"]
-    },
-    "photos": {
-      "eyebrow": "03 — Zo ziet het eruit",
-      "title": "Een plek om te vertoeven",
-      "intro": "Stel je voor: je loopt met een kop koffie in de hand door de ruimtes. Heb je je favoriete plekje al ontdekt?",
-      "labels": {
+
+    "home_details": {
+      "eyebrow": "01 — Jouw thuis aan de Moezel",
+      "title_line1": "Een thuis.",
+      "title_line2": "Geen gewoon hotel.",
+      "text": [
+        "Er was eens een kasteelheer met drie dochters – en aan elk van hen liet hij een deel na van het Zeller kasteel, dat in de 16e eeuw werd gebouwd: aan de ene de zijvleugel, aan de andere het hoofdgebouw, en voor de derde liet hij een nieuw gebouw optrekken dat qua stijl en uitstraling harmonieus aansluit bij het kasteelcomplex.",
+        "Wat als een sprookje klinkt, is een waargebeurd verhaal uit de jaren 1920 in Zell. Zo ontstond het pand dat vandaag bekendstaat als Haus Till E en zeer gewaardeerd wordt. Ons monumentale pand dateert uit de art-decoperiode en is liefdevol gerestaureerd in de voor die tijd typerende stijl. Ramen, deuren, houten vloeren en het trappenhuis zijn origineel en geven het pand zijn unieke sfeer.",
+        "Voor het huis wacht een wild-romantische, idyllische tuin op je. Bij een fles wijn kun je hier je ziel tot rust laten komen en de tijd vergeten, voordat je terugkeert in de geschiedenis van dit oude gebouw."
+      ],
+      "photo_labels": {
+        "Haus": "Foto — Huis",
         "Garten": "Foto — Tuin",
-        "Vorne": "Foto — Voor",
-        "Hinten": "Foto — Achter",
-        "Bad": "Foto — Badkamer",
-        "Video vorne": "Video — Voor",
-        "Video hinten": "Video — Achter"
-      }
-    },
-    "floorplan": {
-      "eyebrow": "04 — Het overzicht behouden",
-      "title": "Lijnen die thuis worden",
-      "intro": "Twee woningen zijn samengevoegd tot één ruim thuis – dat resulteert in een plattegrond die echt bijzonder is.",
-      "labels": {
-        "Grundriss Vorne": "Plattegrond — Voor",
-        "Grundriss Hinten": "Plattegrond — Achter",
-        "Grundriss Gesamt": "Plattegrond — Totaal"
-      }
-    },
-    "features": {
-      "eyebrow": "05 — Oog voor detail",
-      "title": "Klinkt dit als jij?",
-      "p1": "Elke woning heeft zijn eigen karakter – deze past bijzonder goed bij mensen die praktische voorzieningen en een echt thuis waarderen.",
-      "p2": "Dit maakt haar bijzonder:",
-      "list": [
-        "Voor mensen die 's winters graag vloerverwarming hebben",
-        "Voor stellen of alleenstaanden die de ruimte van open vertrekken waarderen",
-        "Voor mensen die van afwisseling houden en niet kunnen kiezen tussen twee badkamers met douche, en dan toch liever in het vrijstaande bad stappen",
-        "Voor mensen die zin hebben in buren",
-        "Voor mensen die graag over een parketvloer lopen",
-        "Voor mensen die opbergruimte nodig hebben in een eigen, afsluitbare kelderruimte",
-        "Voor mensen die graag zelfstandig en ongecompliceerd wonen",
-        "Voor mensen die warm water op aanvraag willen (geiser)",
-        "Voor mensen die hun fiets veilig willen stallen in de eigen fietsenberging van het pand",
-        "Voor mensen met groene vingers die dromen van een kleine, eigen tuin met terras"
+        "Eingangsbereich": "Foto — Entree",
+        "Frühstücksraum": "Foto — Ontbijtruimte",
+        "Treppenhaus": "Foto — Trappenhuis"
+      },
+      "photo_infos": {
+        "Haus": "",
+        "Garten": "",
+        "Eingangsbereich": "",
+        "Frühstücksraum": "",
+        "Treppenhaus": ""
+      },
+      "info_tiles": {
+        "Info": ""
+      },
+      "accordion": [
+        { "title": "Aankomst", "content": "Haus Till E ligt op loopafstand van de Moezel, midden in de oude binnenstad van Zell, aan de Schloßstraße. Vanuit Bullay steek je de Moezel over via de verkeersbrug en rijd je door Merl de oude binnenstad van Zell in. Andere routes lopen via de Zeller Berg en Grenderich (L199), door het Altlay-dal (L194), of vanuit Kappel via de B421. Met de trein bereik je ons via het 'Umweltbahnhof' Bullay – vandaar brengt de bus je circa 3 km verder tot halte Lindenplatz, een korte loopafstand van Haus Till E. De dichtstbijzijnde luchthaven is Frankfurt-Hahn (ca. 20 km). Of je nu met de trein of het vliegtuig komt: laat het ons gewoon weten, we halen je graag met de auto op." },
+        { "title": "Adres", "content": "Haus Till E vind je aan de Schloßstraße 10, 56856 Zell (Moezel) – aan de voet van de steile wijngaard 'Zeller Schwarze Katz', op enkele minuten lopen van de Moezelpromenade en de oude binnenstad." },
+        { "title": "Parkeren", "content": "Aan de Moezeloever zijn tal van gratis parkeerplaatsen. Direct in de Schloßstraße kun je met een parkeerkaart parkeren – voor het in- en uitladen van je bagage volstaat meestal het gratis 30-minutenticket. Vanaf begin 2027 bieden we ook eigen garageplekken direct bij het huis aan." },
+        { "title": "Huisdieren", "content": "Wij houden allebei enorm van honden – maar door de jaren heen hebben we ervaringen opgedaan die ons aan het denken hebben gezet. Daarom is het meenemen van honden naar Haus Till E helaas niet meer mogelijk. Bedankt voor je begrip." },
+        { "title": "Beperkingen", "content": "Haus Till E is een monumentaal pand uit de jaren 1920 zonder lift – de kamers zijn uitsluitend via de trap bereikbaar. Roken is niet toegestaan in huis, ook niet op de balkons; in onze tuin mag je juist wel altijd roken." },
+        { "title": "Fietsen", "content": "Je gewone of elektrische fiets kun je veilig stallen en opladen in ons bijgebouw. Liever ter plekke huren? Onze gasten zijn bijzonder tevreden over de fietsverhuur van Wanderland (Balduinstraße 95) en Moselglück (Balduinstraße 43) – beide bieden goed onderhouden fietsen direct in Zell aan." },
+        { "title": "Airconditioning", "content": "Ons historische pand heeft geen klassieke airconditioning. Op bijzonder warme dagen zetten we op verzoek graag een moderne, rotorloze torenventilator (8 snelheidsstanden) op je kamer – laat het ons gewoon even weten." },
+        { "title": "Lactose, gluten, enz.", "content": "Als klein, familiair gerund huis hebben we niet altijd standaard alle producten voor elke intolerantie op voorraad. Laat je wensen het beste al bij het boeken weten – we stemmen graag op je af." },
+        { "title": "Familie en kinderen", "content": "Haus Till E wordt regelmatig geboekt door hele families – we mochten al menige 80e verjaardag meemaken en drie of vier generaties tegelijk in het hele huis verwelkomen. We vinden het heerlijk om het decor te scheppen voor onvergetelijke familiemomenten." },
+        { "title": "Aankomst- en vertrektijden", "content": "Inchecken kan tussen 16.00 en 18.00 uur, uitchecken uiterlijk om 11.00 uur. De tijd daartussen hebben we nodig om alle vijf kamers weer liefdevol voor je klaar te maken en schoon te maken. Wil je je koffers eerder neerzetten of de sleutel eerder ophalen? Laat het ons van tevoren weten – meestal vinden we een oplossing." }
       ]
     },
-    "contact": {
-      "eyebrow": "06 — We kijken naar je uit",
-      "title": "Het klikte, toch?",
-      "text": "Schrijf ons dan kort wie je bent en waarom je hier goed bij past.",
-      "hint": "Het adres staat als afbeelding op de pagina zodat spam-bots het niet kunnen uitlezen — kopieer het gemakkelijkst via de knop."
+
+    "rooms": {
+      "eyebrow": "02 — Kies uit vijf kamers",
+      "title_line1": "Individuele kamers.",
+      "title_line2": "Net zo uniek als jij.",
+      "text": [
+        "Elk van onze vijf kamers is liefdevol en uniek voor jou ingericht. Op de tweede verdieping vind je twee kamers met eigen balkon (kamer 1 & 2) en een royale studio zonder balkon (kamer 3). Op de derde verdieping vind je een grote kamer met prachtig uitzicht op kasteel en Moezel (kamer 4) en een gezellige kamer met sfeervolle schuine wanden (kamer 5).",
+        "Antieke kleine meubelstukken, originele art-decobollampen en echte planten zorgen voor een sfeervolle uitstraling in je kamer – aangevuld met exclusieve kunstwerken die een internationale kunstenares speciaal voor elke kamer heeft gemaakt. 'De kamers combineren de luxe van 1920 met alle gemakken van nu' – zo omschreef een gast het ooit. Een omschrijving die ons erg bevalt.",
+        "Let op: ons huis heeft geen lift – de kamers zijn uitsluitend via de trap bereikbaar."
+      ],
+      "photo_labels": {
+        "Zimmer_1": "Foto — Kamer 1",
+        "Zimmer_2": "Foto — Kamer 2",
+        "Zimmer_3": "Foto — Kamer 3",
+        "Zimmer_4": "Foto — Kamer 4",
+        "Zimmer_5": "Foto — Kamer 5"
+      },
+      "photo_infos": {
+        "Zimmer_1": {
+          "text": "• Sunt in culpa qui officia deserunt mollit anim id est laborum.\n• Curabitur pretium tincidunt lacus, ut interdum tellus elit sed risus.\n• Maecenas eget condimentum velit, sit amet feugiat lectus.",
+          "position": 1
+        },
+        "Zimmer_2": "",
+        "Zimmer_3": "",
+        "Zimmer_4": "",
+        "Zimmer_5": ""
+      }
     },
+
+    "hosts": {
+      "eyebrow": "03 — Jouw gastheren verheugen zich op je komst",
+      "title_line1": "Er voor jou.",
+      "title_line2": "Als je dat wilt.",
+      "text": [
+        "Wij zijn Jan en René – en Haus Till E is ons hartenproject. Het huis bestaat al vele decennia. Toen we het in april 2022 voor het eerst binnenstapten, was het meteen gebeurd: we werden op slag verliefd op dit prachtige art-decopand – op de authentieke glas-in-loodramen, de oude houten trap en de idyllische tuin, die Jan sindsdien met veel toewijding onderhoudt.",
+        "Vanuit Berlijn zijn we naar de Moezel verhuisd om precies te vinden wat Zell zo bijzonder maakt: rust en ontspanning, frisse lucht, weidse en glooiende natuur, hartelijke mensen en af en toe een goed glas Moezelwijn. Deze liefde op het eerste gezicht willen we met je delen en jou net zo enthousiast maken voor dit prachtige pand uit de jaren 1920.",
+        "Daarom nodigen we je van harte uit om onze gast te zijn."
+      ],
+      "photo_labels": {
+        "Rosa": "we love Rosa",
+        "Bjorn": "we love Bjørn",
+        "Romina": "we love Romina"
+      },
+      "photo_infos": {
+        "Rosa": "",
+        "Bjorn": "",
+        "Romina": ""
+      },
+      "info_tiles": {
+        "Info": ""
+      }
+    },
+
+    "area": {
+      "eyebrow": "04 — Zell en omgeving",
+      "title_line1": "Eén plek.",
+      "title_line2": "Talloze mogelijkheden",
+      "text": [
+        "Bij Haus Till E draait alles om waar je in het geheim naar verlangt: rust om aan te komen, tijd om niets te doen – en desgewenst ook wat beweging tussendoor. Vanaf onze favoriete uitzichtbank (onze persoonlijke 'Moezelbioscoop'), slechts 10 minuten lopen van Haus Till E, kijk je naar de bedrijvigheid op de Moezel en laat je de tijd voorbijglijden.",
+        "Wie liever actief is, vindt vlak voor de deur van Haus Till E wandelroutes zoals de Liebesschlucht (11,1 km) of de Marienburg-rondwandeling (15,2 km), ontspannen fietstochten langs de Moezel, of sportievere etappes de steile wijnbergen van de 'Zeller Schwarze Katz' in. En als beloning wachten er in Zell (Moezel) meer dan 20 gepassioneerde wijnbouwers en restaurants voor elke smaak op je – van Grieks tot Aziatisch, van ijscoupe tot chocolade.",
+        "En wie goed oplet, ontdekt culturele geheimtips vlak bij Haus Till E: klassieke concerten in de gewelfkelder, bandoptredens in de tuin, moordspeldiners met een meergangenmenu – belevenissen die je niet googelt, maar alleen vindt als je bij ons te gast bent."
+      ],
+      "accordion": [
+        {
+          "title": "Stad",
+          "content": "In de stad genieten we het liefst van de Moezelpromenade en slenteren we door de Balduinstraße met haar kleine winkeltjes en cafés. En vanuit Kaimt, aan de overkant van de Moezel, heb je het mooiste uitzicht op de oude binnenstad van Zell – met torens, vakwerkhuizen en een meer dan 2000 jaar oude wijngeschiedenis die je op elke hoek voelt."
+        },
+        {
+          "title": "Land",
+          "content": "Rond Zell komen twee heel verschillende landschappen samen: de Eifel en de Hunsrück. Hier weidse uitzichten over glooiende heuvels, daar dichte bossen met open plekken die uitnodigen om te vertoeven. Een hoogtepunt in de Hunsrück is de hangbrug Geierlay bij Sosberg – met een lengte van 360 meter en tot 100 meter hoogte een van de meest spectaculaire hangbruggen van Duitsland, en pure adrenaline voor wie niet bang is voor hoogtes."
+        },
+        {
+          "title": "Rivier",
+          "content": "Met de boot vaar je vanuit Zell naar Cochem, Beilstein, Traben-Trarbach of Bernkastel-Kues – langs burchten en wijngaarden, bijna als door een modeltreinlandschap. En omdat je je fietsen mee aan boord kunt nemen, kun je het ene stuk gemakkelijk per boot afleggen en het andere sportief per fiets – helemaal zoals jij dat wilt."
+        },
+        {
+          "title": "Bergen",
+          "content": "Aan de voet van Haus Till E ligt de beroemde steile wijngaard 'Zeller Schwarze Katz' – en precies hier, in het hart van de wijngaard, staat ons huis. Vlak achter Haus Till E begint de Collis-rondwandeling (7,9 km, ca. 2 uur 30 min, 210 hoogtemeters) naar boven, naar de in 1906 gebouwde Collis-toren met een prachtig uitzicht over de stad. Ook in Merl en Briedel wachten heuvels met spectaculaire uitzichten op je. Slechts 10 minuten lopen van Haus Till E ligt onze uitzichtbank, onze persoonlijke 'Moezelbioscoop': van hieruit kijk je naar de bedrijvigheid op het water en in de wijngaarden – de mooiste en meest ontspannende film die de natuur te bieden heeft."
+        },
+        {
+          "title": "Wandelen",
+          "content": "Wie de natuur te voet wil beleven, zit bij Haus Till E helemaal goed. De Liebesschlucht (11,1 km, gemiddeld, ca. 3 uur 15 min, 266 hoogtemeters) voert je langs de bedevaartsplaats Marienhöhe door het bos naar beneden, een romantische rotskloof in. De Marienburg-rondwandeling (15,2 km, gemiddeld, ca. 4 uur 35 min, 383 hoogtemeters) beloont je met een uitstapje naar de Prinzenkopftoren en groots panoramisch uitzicht op de scherpste Moezelbocht van Duitsland. En de Collis-rondwandeling (7,9 km, gemiddeld, ca. 2 uur 30 min, 210 hoogtemeters) voert naar boven, naar de historische Collis-toren met uitzicht over Zell en het Zeller Land. Drie heel verschillende routes – en allemaal op loopafstand van Haus Till E."
+        },
+        {
+          "title": "Fietsen",
+          "content": "Of je nu ontspannen of sportief wilt fietsen – bij Haus Till E vind je de juiste route. Vlak langs de Moezel is het terrein vlak en licht glooiend, ideaal voor een rustige fietstocht. Wie het liever sportiever heeft, waagt zich de steile wijngaarden in – korte, pittige klimmetjes inbegrepen, met een prachtig uitzicht als beloning."
+        },
+        {
+          "title": "Wellness",
+          "content": "Op ongeveer 30 autominuten van Haus Till E ligt de Vulkaneifel Therme in Bad Bertrich – de enige glauberzouttherme van Duitsland, met een thermaalbad, zes sauna's en tal van wellnessbehandelingen. Een perfect uitje als je zin hebt in water, warmte en wat verwennerij."
+        },
+        {
+          "title": "Genieten van wijn",
+          "content": "Meer dan 20 wijnbouwers geven ons Zeller Land vorm met passie, vakmanschap en kunde – en produceren daarbij uitstekende, veelvuldig bekroonde wijnen. In de steile wijngaarden wordt met de hand geoogst, met een liefde voor het product die je proeft. Onze wijnbouwers zetten trends, en de jonge generatie experimenteert moedig met nieuwe dingen. In talrijke wijnbars en vinotheken kun je de wijnen proeven, keuren en natuurlijk ook rechtstreeks mee naar huis nemen."
+        },
+        {
+          "title": "Genieten van eten",
+          "content": "Voor elke smaak is er wel iets: Grieks bij El Grego, Italiaans bij Giovanni, Indiaas in La Terrazza, Duits in Hotel zum Grünen Kranz en Aziatisch met topsushi bij Koi – allemaal restaurants die al jaren overtuigen met goede kwaliteit. De beste ijscoupes van de stad vind je bij Stülb, Venezia of Perilli, de lekkerste taarten in Stadtcafé Stülb – en wie op zoek is naar een zoete verleiding, vindt zijn geluk bij DaKo, onze Belgische chocolatier."
+        },
+        {
+          "title": "Genieten van cultuur",
+          "content": "In de zomermaanden wacht 'Summer in the City' op je – donderdagavonden met relaxte livemuziek op wisselende locaties in Zell, soms bij een wijngoed, soms gewoon bij ons in de tuin. Van herfst tot voorjaar trekken we graag naar KulturKino Kaimt met zijn liefdevol samengestelde filmprogramma. En daartussenin zijn er steeds weer kleine concerten bij ons of bij vrienden – in de tuin, in de woonkamer of in de gewelfkelder, van klassieke gitaar tot bigband tot minimalistische elektrobeats, plus moordspeldiners met een meergangenmenu. De actuele data vind je op onze evenementenpagina."
+        }
+      ],
+      "faq": {
+        "heading": "Veelgestelde vragen",
+        "items": [
+          {
+            "title": "Hoe ver is de uitzichtbank van Haus Till E verwijderd?",
+            "content": "De uitzichtbank, onze \"Moezelbioscoop\", ligt 10 minuten lopen van Haus Till E."
+          },
+          {
+            "title": "Welke wandelroutes beginnen in de buurt van Haus Till E?",
+            "content": "Vlak voor de deur van Haus Till E beginnen de Collis-rondwandeling (7,9 km), de Liebesschlucht (11,1 km) en de Marienburg-rondwandeling (15,2 km)."
+          },
+          {
+            "title": "Hoe lang en hoe zwaar is de Marienburg-rondwandeling?",
+            "content": "De Marienburg-rondwandeling is 15,2 km lang, gemiddeld zwaar en duurt ongeveer 4 uur 35 minuten met 383 hoogtemeters."
+          },
+          {
+            "title": "Waar ligt Haus Till E?",
+            "content": "Haus Till E ligt aan de voet van de steile wijngaard \"Zeller Schwarze Katz\" in Zell (Moezel), direct aan de rivier."
+          },
+          {
+            "title": "Hoe ver is de Vulkaneifel Therme in Bad Bertrich?",
+            "content": "De Vulkaneifel Therme in Bad Bertrich ligt op ongeveer 30 autominuten van Haus Till E."
+          },
+          {
+            "title": "Hoe lang is de hangbrug Geierlay?",
+            "content": "De hangbrug Geierlay in de Hunsrück is 360 meter lang en overspant tot 100 meter hoogte het dal tussen Sosberg en Mörsdorf."
+          }
+        ]
+      }
+    },
+
     "footer": {
-      "line1": "Beschikbaar vanaf 1-12 · Bezichtiging op afspraak · Geen massale sollicitatie-casting"
+      "line1": "© 2026 Haus Till E"
+    },
+
+    "contact": {
+      "eyebrow": "05 — rechtstreeks contact met ons",
+      "title": "Zin gekregen?",
+      "text": "Stuur ons dan even kort wie je bent en waarom je goed bij ons past.",
+      "hint": "Het adres staat als afbeelding vermeld, zodat spambots het niet kunnen uitlezen — kopieer het eenvoudig via de knop."
     }
   },
   "imprint": {
     "eyebrow": "Gegevens conform § 5 TMG",
     "title": "Colofon",
-    "intro": "Deze website dient voor de particuliere verhuur van één enkele woning, van particulier aan particulier. Zij wordt niet commercieel geëxploiteerd. Onderstaande gegevens verstrekken wij desondanks vrijwillig, uit transparantie.",
+    "intro": "Deze website dient voor de particuliere verhuur van één enkele woning, van particulier aan particulier. Zij wordt niet commercieel geëxploiteerd. De onderstaande gegevens verstrekken wij niettemin vrijwillig, voor transparantie.",
     "responsible_title": "Verantwoordelijk voor de inhoud",
     "address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel), Duitsland",
     "contact_title": "Contact",
     "liability_title": "Aansprakelijkheid voor inhoud en links",
     "liability_text": "De inhoud van deze pagina is met zorg samengesteld. Voor de juistheid, volledigheid en actualiteit van de gegevens — met name over de woning — kan echter geen garantie worden gegeven. Deze pagina bevat geen links naar externe websites van derden.",
     "dispute_title": "Geschillenbeslechting",
-    "dispute_text": "Omdat deze pagina uitsluitend dient voor de particuliere verhuur en geen commercieel aanbod vormt, zijn de regels voor online geschillenbeslechting (het ODR-platform van de Europese Commissie) en voor consumentengeschillenbeslechting niet van toepassing."
+    "dispute_text": "Aangezien deze pagina uitsluitend dient voor particuliere verhuur en geen commercieel aanbod vormt, zijn de bepalingen inzake online geschillenbeslechting (ODR-platform van de Europese Commissie) en consumentengeschillenbeslechting niet van toepassing."
   },
   "privacy": {
     "eyebrow": "Conform art. 13 AVG",
-    "title": "Privacybeleid",
-    "intro": "De bescherming van uw persoonsgegevens is belangrijk voor ons. Hieronder informeren wij u over welke gegevens worden verwerkt bij een bezoek aan deze website.",
-    "s1_title": "1. Verantwoordelijke",
+    "title": "Privacyverklaring",
+    "intro": "De bescherming van uw persoonsgegevens is voor ons belangrijk. Hieronder informeren wij u over welke gegevens er bij een bezoek aan deze website worden verwerkt.",
+    "s1_title": "1. Verwerkingsverantwoordelijke",
     "s1_address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel), Duitsland",
     "s2_title": "2. Hosting",
-    "s2_p1": "Deze website wordt aangeboden via GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, VS, of de Europese groepsmaatschappij daarvan). Het domein is geregistreerd bij Namecheap Inc. Bij het bezoeken van de pagina verwerkt GitHub automatisch technische informatie in zogenoemde server-logbestanden die uw browser verzendt. Dit omvat gewoonlijk het IP-adres, datum en tijdstip van de aanvraag, de opgevraagde pagina, de gebruikte browser en het besturingssysteem.",
-    "s2_p2": "Deze gegevens dienen uitsluitend voor de technische werking, het leveren van de website en de bescherming tegen misbruik. Wij combineren deze niet met andere gegevensbronnen. Rechtsgrondslag is ons gerechtvaardigd belang bij een veilige en functionerende website (art. 6, lid 1, onder f AVG).",
+    "s2_p1": "Deze website wordt aangeboden via GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, VS, of de Europese groepsmaatschappij daarvan). Het domein is geregistreerd bij Namecheap Inc. Bij het bezoeken van de website verwerkt GitHub automatisch technische informatie in zogenoemde serverlogbestanden die door uw browser worden verzonden. Dit omvat doorgaans het IP-adres, datum en tijdstip van het verzoek, de opgevraagde pagina, de gebruikte browser en het besturingssysteem.",
+    "s2_p2": "Deze gegevens worden uitsluitend gebruikt voor de technische werking, de levering van de website en de bescherming tegen misbruik. Wij combineren deze gegevens niet met andere gegevensbronnen. De rechtsgrondslag is ons gerechtvaardigd belang bij een veilige en functionele beschikbaarstelling van de website (art. 6, lid 1, onder f, AVG).",
     "s3_title": "3. Lettertypen",
-    "s3_p1": "De op deze website gebruikte lettertypen (Fraunces, Space Grotesk, JetBrains Mono) zijn lokaal in de website ingebonden. Er wordt daarbij geen verbinding gemaakt met servers van Google of andere derden, en er worden geen gegevens van u aan derden doorgegeven.",
+    "s3_p1": "De op deze website gebruikte lettertypen (Fraunces, Space Grotesk, JetBrains Mono) zijn lokaal in de website geïntegreerd. Er wordt geen verbinding gemaakt met servers van Google of andere derde partijen, en er worden geen gegevens van u aan derden doorgegeven.",
     "s4_title": "4. Cookies en tracking",
-    "s4_p1": "Deze website gebruikt geen cookies en geen tracking- of analysetools (bijv. Google Analytics, Facebook-pixel e.d.). Er worden geen gebruikersprofielen aangemaakt.",
-    "s5_title": "5. Contact opnemen per e-mail",
-    "s5_p1": "Als u per e-mail contact met ons opneemt, slaan wij de door u verstrekte gegevens (bijv. naam, e-mailadres, inhoud van uw bericht) op om uw aanvraag te kunnen verwerken. Wij geven deze gegevens niet door zonder uw toestemming.",
-    "s5_p2": "Rechtsgrondslag is art. 6, lid 1, onder b AVG, voor zover uw aanvraag dient ter voorbereiding van een huurovereenkomst, anders art. 6, lid 1, onder f AVG (gerechtvaardigd belang bij het verwerken van uw aanvraag). De gegevens worden gewist zodra ze niet meer nodig zijn voor de verwerking, uiterlijk na afronding van de verhuur of definitieve afwijzing.",
+    "s4_p1": "Deze website maakt geen gebruik van cookies en geen tracking- of analysetools (bijv. Google Analytics, Facebook Pixel e.d.). Er worden geen gebruikersprofielen aangemaakt.",
+    "s5_title": "5. Contact per e-mail",
+    "s5_p1": "Als u per e-mail contact met ons opneemt, worden de door u verstrekte gegevens (bijv. naam, e-mailadres, inhoud van uw bericht) door ons opgeslagen om uw aanvraag te kunnen behandelen. Wij geven deze gegevens niet door zonder uw toestemming.",
+    "s5_p2": "De rechtsgrondslag is art. 6, lid 1, onder b, AVG, voor zover uw aanvraag betrekking heeft op het aangaan van een huurovereenkomst, of anders art. 6, lid 1, onder f, AVG (gerechtvaardigd belang bij de behandeling van uw aanvraag). De gegevens worden gewist zodra ze niet meer nodig zijn voor de verwerking, uiterlijk na afronding van de verhuur of definitieve afwijzing.",
     "s6_title": "6. SSL-/TLS-versleuteling",
-    "s6_p1": "Deze website gebruikt om veiligheidsredenen SSL-/TLS-versleuteling. Een versleutelde verbinding herkent u aan het voorvoegsel <em>https://</em> in de adresbalk van uw browser.",
+    "s6_p1": "Deze website maakt om veiligheidsredenen gebruik van SSL-/TLS-versleuteling. Een versleutelde verbinding herkent u aan het voorvoegsel <em>https://</em> in de adresbalk van uw browser.",
     "s7_title": "7. Uw rechten",
-    "s7_intro": "U heeft als betrokkene tegenover ons de volgende rechten, voor zover aan de betreffende wettelijke voorwaarden is voldaan:",
+    "s7_intro": "Als betrokkene heeft u ten opzichte van ons de volgende rechten, voor zover aan de betreffende wettelijke voorwaarden is voldaan:",
     "s7_list": [
-      "Inzage in de over u opgeslagen gegevens (art. 15 AVG)",
-      "Rectificatie van onjuiste gegevens (art. 16 AVG)",
-      "Wissing van uw gegevens (art. 17 AVG)",
-      "Beperking van de verwerking (art. 18 AVG)",
-      "Bezwaar tegen de verwerking (art. 21 AVG)",
-      "Gegevensoverdraagbaarheid (art. 20 AVG)",
-      "Het indienen van een klacht bij een toezichthoudende autoriteit voor gegevensbescherming, bijv. de voor uw woonplaats bevoegde instantie"
+      "Recht op inzage in de over u opgeslagen gegevens (art. 15 AVG)",
+      "Recht op rectificatie van onjuiste gegevens (art. 16 AVG)",
+      "Recht op verwijdering van uw gegevens (art. 17 AVG)",
+      "Recht op beperking van de verwerking (art. 18 AVG)",
+      "Recht van bezwaar tegen de verwerking (art. 21 AVG)",
+      "Recht op overdraagbaarheid van gegevens (art. 20 AVG)",
+      "Recht om een klacht in te dienen bij een toezichthoudende autoriteit voor gegevensbescherming, bijv. de autoriteit die verantwoordelijk is voor uw woonplaats"
     ]
   }
 }
