@@ -6,6 +6,7 @@
     </button>
     <div class="nav-dropdown" id="contact-dropdown">
       <a class="nav-link" href="#section-contact">{{ t.nav.contact_email_label }}</a>
+      <a class="nav-link" href="#section-contact">{{ t.nav.contact_phone_label }}</a>
     </div>
   </div>
 
@@ -67,9 +68,19 @@
 </nav>
 {% else %}
 {# Impressum/Datenschutz (bzw. Imprint/Privacy Policy, Colofon/Privacybeleid)
-   brauchen keine große Navigation - nur den "Zurück"-Link, wie im Original. #}
+   brauchen keine große Navigation - nur den "Zurück"-Link, wie im Original.
+
+   NEU: zusätzlich das Logo, genau wie auf der Startseite (gleiche
+   Kreis-Optik wie .nav-logo-peek: Farbverlauf, Blur, Schatten), diesmal
+   aber bewusst NICHT fix positioniert, sondern normaler Teil der
+   .legal-topbar-inner - es soll beim Scrollen mit der Leiste wegscrollen,
+   nicht oben kleben bleiben. Anders als auf der Startseite ist es hier
+   ein <a>, kein <div>: ein Klick führt zurück zur Startseite. #}
 <div class="legal-topbar">
   <div class="legal-topbar-inner">
+    <a class="legal-logo-peek" href="{{ pages.home[lang] }}" aria-label="{{ t.meta.title_home }}">
+      <img src="/assets/media/logo/Logo_Till_E.png" alt="{{ t.meta.title_home }}" />
+    </a>
     <a class="legal-back" href="{{ pages.home[lang] }}">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
       {{ t.nav.back_to_home }}

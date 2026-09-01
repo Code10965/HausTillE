@@ -137,3 +137,8 @@
     });
   });
 })();
+
+var heroVideo = document.getElementById("hero_Video_loop");
+if (heroVideo) {
+  heroVideo.playbackRate = 0.5; // 1 = normal
+}

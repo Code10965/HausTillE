@@ -12,7 +12,9 @@
     "lang_aria": "Sprache wechseln",
     "contact_aria": "Kontakt",
     "contact_email_label": "Email",
+    "contact_phone_label": "Telefon",
     "copy_button": "Adresse kopieren",
+    "copy_phone_button": "Nummer kopieren",
     "copied_button": "Kopiert ✓",
     "back_to_home": "Zurück zur Startseite",
     "menu_home_details": "Zuhause",
@@ -27,10 +29,9 @@
   "home": {
     "hero": {
       "eyebrow": "Haus Till E an der Moselschleife in Zell",
-      "tag": "Frei ab 01. Dezember",
       "title_line1": "Ankommen.",
       "title_line2": "Zuhause sein.",
-      "sub": "Im denkmalgeschützten Art-Deco-Haus mit eigener Geschichte erwarten Euch fünf individuelle Doppelzimmer voller Charme und Charakter. Startet den Tag bei einem leckeren Frühstück in unserem gemütlichen Frühstücksraum – bevor Ihr im wildromantischen Garten die Zeit vergesst.",
+      "sub": "Im denkmalgeschützten Art-Deco-Haus mit eigener Geschichte erwarten Euch fünf individuelle Doppelzimmer voller Charme und Charakter. Startet den Tag mit einem leckeren Frühstück in unserem gemütlichen Frühstücksraum – bevor Ihr im wildromantischen Garten die Zeit vergesst.",
       "scroll_hint": "Zum Lesen scrollen"
     },
 
@@ -39,16 +40,16 @@
       "title_line1": "Ein Zuhause.",
       "title_line2": "Nicht bloß ein Hotel.",
       "text": [
-        "Es war einmal ein Schlossbesitzer, der hatte drei Töchter – und jeder vererbte er einen Teil des Zeller Schlosses, das im 16. Jahrhundert erbaut wurde: der einen den Seitenflügel, der anderen das Haupthaus, und für die dritte ließ er ein neues Gebäude errichten, das sich in Stil und Anmutung harmonisch in das Schlossensemble einfügt.",
+        "Es war einmal ein Schlossbesitzer, der hatte drei Töchter – und jeder vererbte er einen Teil des Zeller Schlosses, das im 16. Jahrhundert erbaut wurde: der einen den Seitenflügel, der anderen das Haupthaus, und für die Dritte ließ er ein neues Gebäude errichten, das sich in Stil und Anmutung harmonisch in das Schlossensemble einfügen sollte.",
         "Was wie ein Märchen klingt, ist eine wahre Geschichte aus den 1920er-Jahren in Zell. So entstand das Anwesen, das heute als Haus Till E bekannt und geschätzt ist. Unser denkmalgeschütztes Gebäude stammt aus der Zeit des Art Deco und wurde im typischen Stil dieser Epoche liebevoll restauriert. Fenster, Türen, Holzböden und Treppenhaus sind original erhalten und verleihen ihm sein einmaliges Flair.",
         "Vor dem Haus erwartet Euch ein wildromantischer, idyllischer Garten. Bei einer Flasche Wein könnt Ihr hier eure Seele baumeln lassen und die Zeit vergessen, bevor Ihr zurück in die Geschichte des Gemäuers eintaucht."
       ],
       "photo_labels": {
-        "Haus": "Foto — Haus",
-        "Garten": "Foto — Garten",
-        "Eingangsbereich": "Foto — Eingangsbereich",
-        "Frühstücksraum": "Foto — Frühstücksraum",
-        "Treppenhaus": "Foto — Treppenhaus"
+        "Haus": "Haus",
+        "Garten": "Garten",
+        "Eingangsbereich": "Foyer",
+        "Frühstücksraum": "Frühstück",
+        "Treppenhaus": "Treppe"
       },
       "photo_infos": {
         "Haus": "",
@@ -61,16 +62,16 @@
         "Info": ""
       },
       "accordion": [
-        { "title": "Anfahrt", "content": "Haus Till E liegt fußläufig an der Mosel, mitten in der Zeller Altstadt, in der Schloßstraße. Von Bullay kommend überquert Ihr die Mosel über die Autobrücke und fahrt durch Merl in die Zeller Altstadt. Weitere Anfahrtsmöglichkeiten führen über den Zeller Berg und Grenderich (L199), durch das Altlayer Bachtal (L194) oder von Kappel kommend über die B421. Mit dem Zug erreicht Ihr uns über den Umweltbahnhof Bullay – von dort bringt Euch der Bus in rund 3 km bis zur Haltestelle Lindenplatz, nur einen kurzen Fußweg von Haus Till E entfernt. Der nächstgelegene Flughafen ist Frankfurt-Hahn (ca. 20 km). Egal ob ab Bahnhof oder Flughafen: Sagt uns gerne Bescheid, wir holen Euch mit dem Auto ab." },
-        { "title": "Adresse", "content": "Haus Till E findet Ihr in der Schloßstraße 10, 56856 Zell (Mosel) – direkt am Fuße der Steillage „Zeller Schwarze Katz“, nur wenige Gehminuten von Moselpromenade und Altstadt entfernt." },
-        { "title": "Parken", "content": "Am Moselufer stehen Euch zahlreiche kostenfreie Parkplätze zur Verfügung. Direkt in der Schloßstraße könnt Ihr mit Parkschein parken – zum Ein- und Ausladen Eures Gepäcks reicht meist schon das kostenlose 30-Minuten-Ticket. Ab Anfang 2027 bieten wir Euch außerdem eigene Garagenstellplätze direkt am Haus an." },
-        { "title": "Haustiere", "content": "Wir beide lieben Hunde von Herzen – über die Jahre haben wir jedoch einige Erfahrungen gemacht, die uns zum Umdenken bewogen haben. Deshalb ist das Mitbringen von Hunden in Haus Till E derzeit leider nicht möglich. Wir bitten um Euer Verständnis." },
-        { "title": "Einschränkungen", "content": "Haus Till E ist ein denkmalgeschütztes Gebäude aus den 1920er-Jahren ohne Aufzug – die Zimmer sind ausschließlich über die Treppe erreichbar. Im Haus, einschließlich der Balkone, ist Rauchen leider nicht gestattet; in unserem Garten dürft Ihr dafür gerne und jederzeit rauchen." },
-        { "title": "Fahrräder", "content": "Eure Bio- oder Elektro-Fahrräder könnt Ihr sicher in unserem Nebengebäude parken und laden. Wer lieber vor Ort ausleiht: Unsere Gäste sind besonders zufrieden mit dem Radverleih von Wanderland (Balduinstraße 95) und Moselglück (Balduinstraße 43) – beide bieten gut geprüfte Räder direkt in Zell." },
+        { "title": "Anfahrt", "content": "Das Haus Till E liegt fußläufig an der Mosel, mitten in der Zeller Altstadt, in der Schloßstraße 10. Von Bullay kommend fahrt Ihr durch den Stadtteil Zell-Merl in die Zeller Altstadt. Weitere Anfahrtsmöglichkeiten führen über den Zeller Berg und Grenderich (L199), durch das Altlayer Bachtal (L194) oder von Kappel kommend über die B421. Mit dem Zug erreicht Ihr uns über den Umweltbahnhof Bullay – von dort bringt Euch der Bus in rund 3 km bis zur Haltestelle Lindenplatz, nur einen kurzen Fußweg von Haus Till E entfernt. Der nächstgelegene Flughafen ist Frankfurt-Hahn (ca. 20 km). Egal ob vom Bahnhof oder Flughafen: Sagt uns einfach Bescheid – wir holen Euch gerne mit dem Auto ab! (gegen einen kleinen Unkostenbeitrag)" },
+        { "title": "Adresse", "content": "Das Haus Till E befindet sich in der Schloßstraße 10, 56856 Zell (Mosel) – direkt am Fuße der Steillage „Zeller Schwarze Katz“, nur wenige Gehminuten von Moselpromenade und Altstadt entfernt." },
+        { "title": "Parken", "content": "Am Moselufer stehen Euch zahlreiche kostenfreie Parkplätze zur Verfügung. Direkt in der Schloßstraße könnt Ihr mit Parkschein parken – zum Ein- und Ausladen Eures Gepäcks reicht meist schon das kostenlose 30-Minuten-Ticket." },
+        { "title": "Haustiere", "content": "Wir beide lieben Hunde von Herzen – über die Jahre haben wir jedoch einige Erfahrungen gemacht, die uns zum Umdenken bewogen haben. Deshalb ist das Mitbringen von Hunden in Haus Till E derzeit leider nicht möglich. Wir danken für Euer Verständnis." },
+        { "title": "Einschränkungen", "content": "Das Haus Till E ist ein denkmalgeschütztes Gebäude aus den 1920er-Jahren ohne Aufzug – die Zimmer sind ausschließlich über die Treppe erreichbar. <br><br>Im Haus, einschließlich der Balkone, ist das Rauchen nicht gestattet; in unserem Garten dürft Ihr dafür gerne und jederzeit rauchen." },
+        { "title": "Fahrräder", "content": "Eure Bio- oder Elektro-Fahrräder könnt Ihr sicher in unserem Nebengebäude parken und laden. <br><br>Wer lieber vor Ort ausleiht: Unsere Gäste sind besonders zufrieden mit dem Radverleih von Wanderland (Balduinstraße 95) und Moselglück (Balduinstraße 43) – beide bieten gut geprüfte Räder direkt in Zell." },
         { "title": "Klimatisierung", "content": "Eine klassische Klimaanlage gibt es in unserem historischen Haus nicht. An besonders warmen Tagen bringen wir Euch auf Wunsch gerne einen modernen, rotorlosen Turmventilator (8 Geschwindigkeitsstufen) aufs Zimmer – sagt uns einfach kurz Bescheid." },
-        { "title": "Laktose, Gluten, etc.", "content": "Als kleines, familiär geführtes Haus haben wir nicht immer alle Produkte für jede Unverträglichkeit standardmäßig vorrätig. Teilt uns Eure Bedürfnisse am besten schon bei der Buchung mit – wir stellen uns gerne und mit Freude auf Euch ein." },
-        { "title": "Familie und Kinder", "content": "Haus Till E wird immer wieder von ganzen Familien gebucht – wir durften schon so manchen 80. Geburtstag miterleben und drei oder vier Generationen gleichzeitig im ganzen Haus beherbergen. Es macht uns große Freude, den Rahmen für unvergessliche gemeinsame Familienzeiten zu schaffen." },
-        { "title": "An- und Abreisezeiten", "content": "Der Check-in ist zwischen 16 und 18 Uhr möglich, der Check-out spätestens bis 11 Uhr. Diese Zeit dazwischen brauchen wir, um alle fünf Zimmer liebevoll für Euch herzurichten und zu reinigen. Wenn Ihr Euer Gepäck schon früher abstellen oder den Schlüssel vorab abholen möchtet, sprecht uns gerne rechtzeitig darauf an – wir finden meist eine Lösung." }
+        { "title": "Laktose, Gluten, etc.", "content": "Wir haben ggf. nicht immer alle Produkte für jede Unverträglichkeit standardmäßig vorrätig. Teilt uns Eure Bedürfnisse am besten schon bei der Buchung mit – wir stellen uns gerne und mit Freude auf Euch ein." },
+        { "title": "Familie und Kinder", "content": "Das Haus Till E wird immer wieder von ganzen Familien oder Freundeskreisen gebucht – wir durften schon so manchen runden Geburtstag miterleben und drei oder vier Generationen gleichzeitig im ganzen Haus beherbergen. Es macht uns große Freude, den Rahmen für unvergessliche, gemeinsame Momente zu schaffen." },
+        { "title": "An- und Abreisezeiten", "content": "Da wir das Hotel mit einem kleinen Team betreiben, ist der Check-in zwischen 16:00 und 18:00 Uhr möglich. Ist euer Zimmer schon früher bereit, hört ihr selbstverständlich sofort von uns. Wir wünschten, wir könnten zaubern – solange das noch nicht klappt, arbeiten wir eben schnell und sorgfältig, damit die Zimmer bis 16:00 Uhr bereit für euren Check-in sind.​​​​​​​​​​​​​​​​ <br><br>Wir bitten Euch, bis 11 Uhr auszuchecken."}
       ]
     },
 
@@ -80,25 +81,37 @@
       "title_line2": "So individuell wie Ihr.",
       "text": [
         "Jedes unserer fünf Zimmer ist liebevoll und einzigartig für Euch eingerichtet. Im zweiten Stock erwarten Euch zwei Zimmer mit eigenem Balkon (Zimmer 1 & 2) sowie ein großzügiges Studio ohne Balkon (Zimmer 3). Im dritten Stock findet Ihr einen großen Raum mit herrlichem Ausblick auf Schloss und Mosel (Zimmer 4) sowie ein gemütliches Zimmer mit charmanten Dachschrägen (Zimmer 5).",
-        "Antike Kleinmöbel, original Art-Deco-Kugellampen und echte Pflanzen schaffen eine stimmungsvolle Atmosphäre in Euren Räumen – ergänzt durch exklusive Kunstwerke, die eine internationale Künstlerin eigens für jedes Zimmer gestaltet hat. 'Die Zimmer verbinden den Luxus von 1920 mit allen Annehmlichkeiten der Gegenwart' – so beschrieb es einmal ein Gast. Eine Beschreibung, die uns sehr gefällt.",
+        "Antike Kleinmöbel, original Art-Deco-Kugellampen und echte Pflanzen schaffen eine stimmungsvolle Atmosphäre in Euren Räumen – ergänzt durch exklusive Kunstwerke, die eine internationale Künstlerin eigens für jedes Zimmer gestaltet hat. 'Die Zimmer verbinden den Luxus von 1920 mit allen Annehmlichkeiten der Gegenwart' – so beschrieb es ein Gast vor kurzer Zeit. Eine Beschreibung, die uns sehr gefällt.",
         "Bitte beachtet: Unser Haus verfügt über keinen Aufzug – die Zimmer sind ausschließlich über die Treppe erreichbar."
       ],
       "photo_labels": {
-        "Zimmer_1": "Foto — Zimmer 1",
-        "Zimmer_2": "Foto — Zimmer 2",
-        "Zimmer_3": "Foto — Zimmer 3",
-        "Zimmer_4": "Foto — Zimmer 4",
-        "Zimmer_5": "Foto — Zimmer 5"
+        "Zimmer_1": "Zimmer 1",
+        "Zimmer_2": "Zimmer 2",
+        "Zimmer_3": "Zimmer 3",
+        "Zimmer_4": "Zimmer 4",
+        "Zimmer_5": "Zimmer 5"
       },
       "photo_infos": {
         "Zimmer_1": {
-          "text": "• Sunt in culpa qui officia deserunt mollit anim id est laborum.\n• Curabitur pretium tincidunt lacus, ut interdum tellus elit sed risus.\n• Maecenas eget condimentum velit, sit amet feugiat lectus.",
+          "text": "- Doppelbett: 160 (ohne Fußende) \n\n- Balkon/ Loggia \n\n - 18 qm \n\n - 2. Etage (kein Aufzug) \n\n - Blick auf Berge und ein bisschen Mosel",
           "position": 1
         },
-        "Zimmer_2": "",
-        "Zimmer_3": "",
-        "Zimmer_4": "",
-        "Zimmer_5": ""
+        "Zimmer_2": {
+          "text": "- Doppelbett: 180 (ohne Fußende) \n\n- Balkon/ Loggia \n\n - 22 qm \n\n - 2. Etage (kein Aufzug) \n\n - Blick auf Berge, Schloss und ein bisschen Mosel",
+          "position": 1
+        },
+        "Zimmer_3": {
+          "text": "- Doppelbett: 180 (ohne Fußende) \n\n- 2 Zimmer, das zweite nur durch das erste erreichbar \n\n - 33 qm \n\n - 2. Etage (kein Aufzug) \n\n - Blick auf Berge, Häuser und Gasse hinter dem Haus",
+          "position": 1
+        },
+        "Zimmer_4": {
+          "text": "- Doppelbett: 180 (ohne Fußende) \n\n - 23 qm \n\n - 3. Etage (kein Aufzug) \n\n - Blick auf Berge, Schloss und ein bisschen Mosel",
+          "position": 1
+        },
+        "Zimmer_5": {
+          "text": "- Doppelbett: 180 (ohne Fußende) \n\n - 21 qm \n\n - 3. Etage (kein Aufzug) \n\n - Blick auf Berge, Schloss & Gasse hinter dem Haus",
+          "position": 1
+        }
       }
     },
 
@@ -108,21 +121,27 @@
       "title_line2": "Wenn Ihr wollt.",
       "text": [
         "Wir sind Jan und René – und Haus Till E ist unser Herzensprojekt. Das Haus gibt es schon seit vielen Jahrzehnten. Als wir es im April 2022 zum ersten Mal betraten, war es um uns geschehen: Wir haben uns auf der Stelle in dieses wunderschöne Art-Deco-Anwesen verliebt – in die authentischen Glasmalereien, das alte Holztreppenhaus und den idyllischen Garten, den Jan seitdem mit viel Hingabe pflegt.",
-        "Aus Berlin sind wir an die Mosel gezogen, um genau das zu finden, was Zell so besonders macht: Ruhe und Entschleunigung, gute Luft, weite und hügelige Natur, herzliche Menschen und den ein oder anderen Schluck guten Moselwein. Diese Liebe auf den ersten Blick möchten wir mit Euch teilen und Euch für dieses großartige Gebäude aus den 1920er-Jahren begeistern.",
-        "Deshalb laden wir Euch herzlich ein, unsere Gäste zu sein."
+        "Aus Berlin sind wir an die Mosel gezogen, um genau das zu finden, was Zell so besonders macht: Ruhe und Entschleunigung, gute Luft, weite und hügelige Natur, herzliche Menschen und den ein oder anderen Schluck guten Moselwein. Diese Liebe auf den ersten Blick möchten wir mit Euch teilen und Euch für dieses großartige Gebäude aus den 1920er-Jahren begeistern. Deshalb laden wir Euch herzlich ein, unsere Gäste zu sein.",
+        "Am Schluss möchten wir mit Euch ein paar Details teilen, die uns und das Leben im Haus Till E begleiten und inspirieren."
       ],
       "photo_labels": {
-        "Rosa": "we love Rosa",
-        "Bjorn": "we love Bjørn",
-        "Romina": "we love Romina"
-      },
-      "photo_infos": {
         "Rosa": "",
         "Bjorn": "",
         "Romina": ""
       },
-      "info_tiles": {
-        "Info": ""
+      "photo_infos": {
+        "Rosa": {
+          "text": "LICHT ERLEBBAR MACHEN - ROSA M HESSLING \n\nKennengelernt haben wir Rosa M Hessling auf unserem ersten Weihnachtsmarkt im Garten des Hauses Till E – und es hat sofort 'klick' gemacht. Seitdem sind wir stolz, ihre Werke bei uns zeigen zu dürfen. \n\nRosa wurde in Zell an der Mosel geboren, demselben Ort, in dem auch unser Hotel beheimatet ist. Sie studierte an der Kunstakademie Düsseldorf bei Prof. Christian Megert und Prof. Nam June Paik. Neben zahlreichen Einzel- und Gruppenausstellungen in Europa zeigte sie ihre Werke in den vergangenen vier Jahrzehnten unter anderem in Australien, den USA und Südafrika. Heute ist Rosa eine Künstlerin, deren Arbeiten in zahlreichen renommierten öffentlichen und privaten Sammlungen vertreten sind – und die sich zugleich mit ihren Wurzeln an der Mosel eng verbunden fühlt. \n\nIm Zentrum ihres Schaffens stehen Licht und Wandel. Mit ausgefeilten Techniken und unterschiedlichsten Materialien erforscht sie, wie Licht sich bricht und reflektiert, so dass ihre Werke je nach Blickwinkel und Lichteinfall stets neu erscheinen. \n\nFür uns ist das mehr als Wanddekoration: Unsere Gäste erleben die Kunst einer Künstlerin, die aus genau jenem Moseltal stammt, in dem sie ihren Aufenthalt verbringen – und die zugleich international geschätzt wird.",
+          "position": 0
+        },
+        "Bjorn": {
+          "text": "GESELLSCHAFTSKRITIK ERLEBBAR GEZEICHNET - BJØRN WIINBLAD \n\nEntdeckt haben wir Bjørn Wiinblad über das Rosenthal Porzellan – eher zufällig, und doch mit großen Folgen. Am Tag, an dem wir das Hotel gekauft haben, hatte Jan Geburtstag, und René war auf der Suche nach einem Geschenk mit Bezug zu Till Eulenspiegel. Dabei stieß er auf das Porzellan von Bjørn – und was als Geschenkidee begann, wurde schnell zur Leidenschaft. \n\nRené hat einzelne ausgewählte Sammlerstücke zusammengetragen, um dem Design von Bjørn und den Geschichten von Till im gesamten Haus Raum zu geben. \n\nDas Besondere an diesen Geschichten: Till hält seinen Mitmenschen als schlauer Narr einen Spiegel vor und deckt dabei mit Witz die Schwächen und Ungerechtigkeiten der Gesellschaft auf. Genau diesen Witz und diese Liebe zum Detail finden wir in den Zeichnungen von Bjørn wieder: Im typischen Design-Stil der 1970er Jahre erzählt er die Figuren und Geschichten verspielt, filigran und mit viel Liebe zum Detail. \n\nWarum unser Haus eigentlich 'Till E' heißt? Diese Geschichte erzählen wir Euch gerne persönlich – wenn Ihr bei uns seid.",
+          "position": 1
+        },
+        "Romina": {
+          "text": "VERGANGENHEIT UND GEGENWART VEREINT - ROMINA RESSIA \n\nAufmerksam geworden sind wir auf Romina Ressia bereits in den 2010er Jahren – und ihre Kunstwerke haben uns von Anfang an nicht mehr losgelassen. Die argentinische Fotografin greift in ihren Porträts klassische Kompositionen im Stil der Renaissance und des Barock auf – Formalität und Strenge – nur um sie mit unerwarteten Motiven des Alltags zu durchbrechen: Kaugummi, Popcorn, ein Burger. Ihre Werke wurden unter anderem in London, New York und Paris ausgestellt; 2017 kürten die International Color Awards sie zur Photographer of the Year. \n\nGenau diese Verbindung von Vergangenheit und Gegenwart wollten wir auch im Haus Till E schaffen. \n\nAls wir unser Hotel eröffnet haben, wussten wir sofort: Das ist der perfekte Ort, an dem Rominas Kunst sich entfalten kann. Denn auch unser Haus verbindet nachgotische Gewölbe mit Flachbildschirm, Art-déco-Lampen mit Betontischen, antikes Schlossmobiliar mit Eierschalensollbruchstellenverursacher. \n\nDadurch wird die Vergangenheit bei uns nicht zum Museum, sondern bleibt lebendig und relevant im Heute – genau wie in Rominas Bildern.",
+          "position": 1
+        }
       }
     },
 
@@ -142,7 +161,7 @@
         },
         {
           "title": "Land",
-          "content": "Rund um Zell treffen zwei ganz unterschiedliche Landschaften aufeinander: die Eifel und der Hunsrück. Hier weite Sichten über sanfte Hügel, dort dichte Wälder mit Lichtungen, die zum Verweilen einladen. Ein Highlight im Hunsrück ist die Hängeseilbrücke Geierlay bei Sosberg – mit 360 Metern Länge und bis zu 100 Metern Höhe eine der spektakulärsten Hängeseilbrücken Deutschlands und pures Adrenalin für alle, die schwindelfrei sind."
+          "content": "Rund um Zell treffen zwei ganz unterschiedliche Landschaften aufeinander: die Eifel und der Hunsrück. Hier weite Sichten über sanfte Hügel, dort dichte Wälder mit Lichtungen, die zum Verweilen einladen. <br><br>Ein Highlight im Hunsrück ist die Hängeseilbrücke Geierlay bei Sosberg – mit 360 Metern Länge und bis zu 100 Metern Höhe eine der spektakulärsten Hängeseilbrücken Deutschlands und pures Adrenalin für alle, die schwindelfrei sind."
         },
         {
           "title": "Fluss",
@@ -150,15 +169,15 @@
         },
         {
           "title": "Berge",
-          "content": "Direkt am Fuße von Haus Till E liegt die berühmte Steillage „Zeller Schwarze Katz“ – und genau hier, im Herzen des Weinbergs, steht unser Haus. Direkt hinter Haus Till E startet der Collis-Rundwanderweg (7,9 km, ca. 2 Std. 30 Min., 210 Höhenmeter) hinauf zum 1906 erbauten Collis-Turm mit einer tollen Aussicht über die Stadt, und auch in Merl und Briedel warten Berge mit spektakulären Ausblicken auf Euch. Nur 10 Gehminuten von Haus Till E entfernt liegt unsere Aussichtsbank, unser ganz persönliches „Moselkino“: Von hier aus könnt Ihr dem Treiben auf dem Wasser und in den Weinbergen zuschauen – der schönste und entschleunigendste Film, den die Natur zu bieten hat."
+          "content": "Direkt am Fuße von Haus Till E liegt die berühmte Steillage „Zeller Schwarze Katz“ – und genau hier, im Herzen des Weinbergs, steht unser Haus. <br><br>Direkt hinter Haus Till E startet der Collis-Rundwanderweg (7,9 km, ca. 2 Std. 30 Min., 210 Höhenmeter) hinauf zum 1906 erbauten Collis-Turm mit einer tollen Aussicht über die Stadt, und auch in Merl und Briedel warten Berge mit spektakulären Ausblicken auf Euch. <br><br>Nur 10 Gehminuten von Haus Till E entfernt liegt unsere Aussichtsbank, unser ganz persönliches „Moselkino“: Von hier aus könnt Ihr dem Treiben auf dem Wasser und in den Weinbergen zuschauen – der schönste und entschleunigendste Film, den die Natur zu bieten hat."
         },
         {
           "title": "Wandern",
-          "content": "Wer die Natur zu Fuß erleben möchte, ist bei Haus Till E goldrichtig. Die Liebesschlucht (11,1 km, mittel, ca. 3 Std. 15 Min., 266 Höhenmeter) führt Euch vorbei am Wallfahrtsort Marienhöhe durch den Wald hinab in eine romantische Felsschlucht. Der Marienburg-Rundwanderweg (15,2 km, mittel, ca. 4 Std. 35 Min., 383 Höhenmeter) belohnt Euch mit einem Abstecher zum Prinzenkopfturm und grandiosen Panoramablicken auf Deutschlands engste Moselschleife. Und der Collis-Rundwanderweg (7,9 km, mittel, ca. 2 Std. 30 Min., 210 Höhenmeter) führt hinauf zum historischen Collis-Turm mit Blick über Zell und das Zellerland. Drei ganz unterschiedliche Wege – und alle in Reichweite von Haus Till E."
+          "content": "Wer die Natur zu Fuß erleben möchte, ist bei Haus Till E goldrichtig. <br><br> Die Liebesschlucht (11,1 km, mittel, ca. 3 Std. 15 Min., 266 Höhenmeter) führt Euch vorbei am Wallfahrtsort Marienhöhe durch den Wald hinab in eine romantische Felsschlucht. <br><br>Der Marienburg-Rundwanderweg (15,2 km, mittel, ca. 4 Std. 35 Min., 383 Höhenmeter) belohnt Euch mit einem Abstecher zum Prinzenkopfturm und grandiosen Panoramablicken auf Deutschlands engste Moselschleife. <br><br>Und der Collis-Rundwanderweg (7,9 km, mittel, ca. 2 Std. 30 Min., 210 Höhenmeter) führt hinauf zum historischen Collis-Turm mit Blick über Zell und das Zellerland. Drei ganz unterschiedliche Wege – und alle in Reichweite von Haus Till E."
         },
         {
           "title": "Radwandern",
-          "content": "Ob entspannt oder sportlich – bei Haus Till E findet Ihr die passende Strecke. Direkt an der Mosel entlang geht es flach und steigungsarm dahin, ideal für einen gemütlichen Radausflug. Wer es lieber sportlich mag, wagt sich hinauf in die Steillagen und Weinberge – kurze knackige Anstiege inklusive, dafür mit Aussicht als Belohnung."
+          "content": "Ob entspannt oder sportlich – bei Haus Till E findet Ihr die passende Strecke. <br><br>Direkt an der Mosel entlang geht es flach und steigungsarm dahin, ideal für einen gemütlichen Radausflug. <br><br>Wer es lieber sportlich mag, wagt sich hinauf in die Steillagen und Weinberge – kurze knackige Anstiege inklusive, dafür mit Aussicht als Belohnung."
         },
         {
           "title": "Wellness",
@@ -166,15 +185,15 @@
         },
         {
           "title": "Wein genießen",
-          "content": "Mehr als 20 Winzerinnen und Winzer prägen unser Zeller Land mit Leidenschaft, Professionalität und Können – und erzeugen dabei ausgezeichnete, mehrfach prämierte Weine. In den Steillagen wird von Hand gelesen, mit einer Liebe zum Produkt, die man beim Verkosten schmeckt. Unsere Winzer setzen Trends, und die junge Generation probiert mutig Neues aus. In zahlreichen Weinstuben und Vinotheken könnt Ihr die Weine probieren, verkosten und natürlich auch direkt mit nach Hause nehmen."
+          "content": "Mehr als 20 Winzerinnen und Winzer prägen unser Zeller Land mit Leidenschaft, Professionalität und Können – und erzeugen dabei ausgezeichnete, mehrfach prämierte Weine. In den Steillagen wird von Hand gelesen, mit einer Liebe zum Produkt, die man beim Verkosten schmeckt. Unsere Winzer setzen Trends, und die junge Generation probiert mutig Neues aus.<br><br> In zahlreichen Weinstuben und Vinotheken könnt Ihr die Weine probieren, verkosten und natürlich auch direkt mit nach Hause nehmen."
         },
         {
           "title": "Essen genießen",
-          "content": "Für jeden Geschmack ist etwas dabei: griechisch beim El Grego, italienisch bei Giovanni, indisch in der La Terrazza, deutsch im Hotel zum Grünen Kranz und asiatisch mit Spitzen-Sushi im Koi – alles Restaurants, die seit Jahren mit guter Qualität überzeugen. Die besten Eisbecher der Stadt bekommt Ihr bei Stülb, Venezia oder Perilli, die leckersten Kuchen im Stadtcafé Stülb – und wer noch eine süße Verführung sucht, wird beim DaKo fündig, unserem belgischen Chocolatier."
+          "content": "Für jeden Geschmack ist etwas dabei: griechisch beim 'El Grego', italienisch bei 'Giovanni', indisch bei 'La Terrazza', deutsch im Hotel 'Zum Grünen Kranz' und asiatisch mit Spitzen-Sushi im 'Koi' – alles Restaurants, die seit Jahren mit guter Qualität überzeugen. <br><br>Die besten Eisbecher der Stadt bekommt Ihr bei 'Stülb', 'Venezia' oder 'Perilli', die leckersten Kuchen im 'Stadtcafé Stülb' – und wer noch eine süße Verführung sucht, wird bei 'DaKo' fündig, unserem belgischen Chocolatier."
         },
         {
           "title": "Kultur genießen",
-          "content": "In den Sommermonaten erwartet Euch „Summer in the City“ – Donnerstagabende mit chilliger Live-Musik an wechselnden Locations in Zell, mal am Weingut, mal direkt bei Haus Till E im Garten. Von Herbst bis Frühling zieht es uns ins KulturKino Kaimt mit seinem liebevoll kuratierten Filmprogramm. Und dazwischen gibt es immer wieder kleine Konzerte bei Haus Till E oder bei Freunden – im Garten, im Wohnzimmer oder im Gewölbekeller, von klassischer Gitarre über Big Band bis zu minimalistischem Elektrobeat, dazu Krimidinner mit Mehrgangmenü. Die aktuellen Termine findet Ihr auf unserer Veranstaltungsseite."
+          "content": "In den Sommermonaten erwartet Euch 'Summer in the City' – Donnerstagabende mit chilliger Live-Musik an wechselnden Locations in Zell, mal an einem Weingut, mal direkt bei Haus Till E im Garten. <br><br>Von Herbst bis Frühling zieht es uns ins KulturKino Kaimt mit seinem liebevoll kuratierten Filmprogramm. Und dazwischen gibt es immer wieder kleine Konzerte bei Haus Till E oder bei Freunden – im Garten, im Wohnzimmer oder im Gewölbekeller, von klassischer Gitarre über Big Band bis zu minimalistischem Elektrobeat, dazu Krimidinner mit Mehrgangmenü. <br><br>Die aktuellen Termine findet Ihr auf unserer Veranstaltungsseite."
         }
       ],
       "faq": {
@@ -215,21 +234,27 @@
     "contact": {
       "eyebrow": "05 — der direkte Draht zu uns",
       "title": "Na, habt Ihr Lust bekommen?",
-      "text": "Dann schreib uns kurz, wer du bist und warum du gut hierher passt.",
-      "hint": "Die Adresse ist als Bild hinterlegt, damit Spam-Bots sie nicht auslesen können — am einfachsten über den Button kopieren."
+      "text": "Dann schreibt uns doch eine Email, ruft uns an, schreibt uns eine WhatsApp oder folgt uns auf <a class=\"contact-inline-link\" href=\"https://www.instagram.com/till_e_zell/\" target=\"_blank\" rel=\"noopener noreferrer\">Instagram</a>.",
+      "hint": "Die Email-Adresse und Telefonnummern sind als Bild hinterlegt, damit Spam-Bots sie nicht auslesen können — am einfachsten über den Button kopieren."
     }
   },
   "imprint": {
-    "eyebrow": "Angaben gemäß § 5 TMG",
+    "eyebrow": "Rechtliches",
     "title": "Impressum",
-    "intro": "Diese Website dient der privaten Vermietung einer einzelnen Wohnung von privat an privat. Sie wird nicht gewerblich betrieben. Die folgenden Angaben stellen wir dennoch freiwillig zur Transparenz bereit.",
-    "responsible_title": "Verantwortlich für den Inhalt",
-    "address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel)",
+    "intro": "Angaben zu Anbieter, Kontakt und rechtlichem Rahmen dieser Website.",
+    "provider_title": "Angaben gemäß § 5 DDG",
+    "provider_address": "Haus Till E<br>Jan Hohmann und René Müller GbR<br>Schloßstraße 10<br>56856 Zell (Mosel)<br>Gerichtsstand: Cochem<br><br>Steuernummer: 40/072/31431<br>USt-IdNr.: DE355477398<br>IBAN: DE64 5875 1230 0032 9013 73",
+    "responsible_title": "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV",
+    "responsible_address": "Jan Hohmann und René Müller GbR<br>Schloßstraße 10<br>56856 Zell (Mosel)",
     "contact_title": "Kontakt",
-    "liability_title": "Haftung für Inhalte und Links",
-    "liability_text": "Die Inhalte dieser Seite wurden mit Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Angaben — insbesondere zur Wohnung — kann jedoch keine Gewähr übernommen werden. Diese Seite enthält keine Links zu externen Websites Dritter.",
+    "liability_content_title": "Haftung für Inhalte",
+    "liability_content_text": "Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Die Haftungsprivilegien für die Durchleitung, das Caching und das Hosting fremder Informationen ergeben sich seit Inkrafttreten des Digital Services Act (DSA) aus Art. 4 bis 6 der Verordnung (EU) 2022/2065. Wir sind als Diensteanbieter nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.",
+    "liability_links_title": "Haftung für Links",
+    "liability_links_text": "Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.",
+    "copyright_title": "Urheberrecht",
+    "copyright_text": "Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.",
     "dispute_title": "Streitschlichtung",
-    "dispute_text": "Da diese Seite ausschließlich der privaten Vermietung dient und kein gewerbliches Angebot darstellt, sind die Vorschriften zur Online-Streitbeilegung (OS-Plattform der EU-Kommission) und zur Verbraucherstreitbeilegung nicht anwendbar."
+    "dispute_text": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
   },
   "privacy": {
     "eyebrow": "Gemäß Art. 13 DSGVO",
@@ -238,8 +263,8 @@
     "s1_title": "1. Verantwortlicher",
     "s1_address": "René Müller<br>Schlossstraße 10<br>56856 Zell (Mosel)",
     "s2_title": "2. Hosting",
-    "s2_p1": "Diese Website wird über GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, USA, bzw. deren europäische Konzerngesellschaft) bereitgestellt. Die Domain ist bei Namecheap Inc. registriert. Beim Aufruf der Seite verarbeitet GitHub automatisch technische Informationen in sogenannten Server-Logfiles, die Ihr Browser übermittelt. Dazu gehören üblicherweise IP-Adresse, Datum und Uhrzeit der Anfrage, aufgerufene Seite, verwendeter Browser sowie das Betriebssystem.",
-    "s2_p2": "Diese Daten dienen ausschließlich dem technischen Betrieb, der Auslieferung der Website und der Absicherung vor Missbrauch. Eine Zusammenführung mit anderen Datenquellen findet durch uns nicht statt. Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren und funktionsfähigen Bereitstellung der Website (Art. 6 Abs. 1 lit. f DSGVO).",
+    "s2_p1": "Diese Website wird über GitHub Pages bereitgestellt, einen Dienst der GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA. Beim Aufruf der Seite verarbeitet GitHub automatisch technische Informationen in sogenannten Server-Logfiles, die Ihr Browser übermittelt. Dazu gehören üblicherweise IP-Adresse, Datum und Uhrzeit der Anfrage, aufgerufene Seite, verwendeter Browser sowie das Betriebssystem. Da GitHub, Inc. ihren Sitz in den USA hat, erfolgt diese Datenverarbeitung auf Grundlage von Standardvertragsklauseln gemäß Art. 46 Abs. 2 und 3 DSGVO.",
+    "s2_p2": "Domain-Registrierung und E-Mail-Versand erfolgen über die manitu GmbH, Welvertstraße 2, 66606 St. Wendel, Deutschland. Diese Daten dienen ausschließlich dem technischen Betrieb, der Auslieferung der Website und der Absicherung vor Missbrauch. Eine Zusammenführung mit anderen Datenquellen findet durch uns nicht statt. Rechtsgrundlage ist unser berechtigtes Interesse an einer sicheren und funktionsfähigen Bereitstellung der Website (Art. 6 Abs. 1 lit. f DSGVO).",
     "s3_title": "3. Schriftarten",
     "s3_p1": "Die auf dieser Website verwendeten Schriftarten (Fraunces, Space Grotesk, JetBrains Mono) sind lokal in die Website eingebunden. Es findet dabei keine Verbindung zu Servern von Google oder anderen Drittanbietern statt, und es werden keine Daten von Ihnen an Dritte übertragen.",
     "s4_title": "4. Cookies und Tracking",

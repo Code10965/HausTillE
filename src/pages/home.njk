@@ -47,8 +47,8 @@ permalink: "{{ pages.home[lang] }}"
         {{ t.home.hero.title_line1 }}<br />
         <span class="hero-heading-italic">{{ t.home.hero.title_line2 }}</span>
       </h1>
-      <div class="lorem-block">
-        <p class="lorem-p">{{ t.home.hero.sub }}</p>
+      <div class="prose-block">
+        <p class="prose-paragraph">{{ t.home.hero.sub }}</p>
       </div>
 
       <div class="hero-scroll-hint">
@@ -56,12 +56,17 @@ permalink: "{{ pages.home[lang] }}"
         <span class="eyebrow-line"></span>
       </div>
     </div>
-
+{#
     <div class="hero-media crossfade-group" data-interval="7500">
       <img class="crossfade-img active" src="/assets/media/Hero/Haus_3x4_1.jpg" alt="" />
       <img class="crossfade-img" src="/assets/media/Hero/Haus_3x4_2.jpg" alt="" />
       <img class="crossfade-img" src="/assets/media/Hero/Haus_3x4_3.jpg" alt="" />
       <img class="crossfade-img" src="/assets/media/Hero/Haus_3x4_4.jpg" alt="" />
+    </div> #}
+    <div class="hero-media">
+      <video id="hero_Video_loop" class="hero_Video_loop" autoplay muted loop playsinline poster="/assets/media/Hero/Haus_3x4_1.jpg">
+        <source src="/assets/media/Hero/hero_Video_loop.mp4" type="video/mp4">
+      </video>
     </div>
   </div>
 </header>
@@ -76,13 +81,13 @@ permalink: "{{ pages.home[lang] }}"
     </div>
     <h2 class="fade-item section-title">{{ t.home.home_details.title_line1 }}<br /><span class="section-title-line2">{{ t.home.home_details.title_line2 }}</span></h2>
     <div class="fade-item">
-      <div class="lorem-block mb-gallery-intro">
+      <div class="prose-block mb-gallery-intro">
         {% for p in t.home.home_details.text %}
-        <p class="lorem-p">{{ p }}</p>
+        <p class="prose-paragraph">{{ p }}</p>
         {% endfor %}
       </div>
 
-      <div class="photo-grid" data-photo-grid="Haus, Info, Garten, Eingangsbereich, Frühstücksraum, Treppenhaus" data-photo-labels='{{ t.home.home_details.photo_labels | dump | safe }}' data-photo-infos='{{ t.home.home_details.photo_infos | dump | safe }}' data-photo-info-tiles='{{ t.home.home_details.info_tiles | dump | safe }}'></div>
+      <div class="photo-grid" data-photo-grid="Haus, Info, Garten, Eingangsbereich, Frühstücksraum, Treppenhaus" data-photo-labels='{{ t.home.home_details.photo_labels | dump }}' data-photo-infos='{{ t.home.home_details.photo_infos | dump }}' data-photo-info-tiles='{{ t.home.home_details.info_tiles | dump }}'></div>
 
       <div class="accordion">
         {% for entry in t.home.home_details.accordion %}
@@ -108,7 +113,7 @@ permalink: "{{ pages.home[lang] }}"
           >
             <div class="accordion-panel-inner">
               <div class="accordion-panel-body">
-                <p class="accordion-panel-content">{{ entry.content }}</p>
+                <p class="accordion-panel-content">{{ entry.content | safe }}</p>
                 {% if entry.images %}
                 <div class="accordion-panel-images">
                   {% for img in entry.images %}
@@ -143,13 +148,13 @@ permalink: "{{ pages.home[lang] }}"
     </div>
     <h2 class="fade-item section-title">{{ t.home.rooms.title_line1 }}<br /><span class="section-title-line2">{{ t.home.rooms.title_line2 }}</span></h2>
     <div class="fade-item">
-      <div class="lorem-block mb-gallery-intro">
+      <div class="prose-block mb-gallery-intro">
         {% for p in t.home.rooms.text %}
-        <p class="lorem-p">{{ p }}</p>
+        <p class="prose-paragraph">{{ p }}</p>
         {% endfor %}
       </div>
 
-      <div class="photo-grid" data-photo-grid="Zimmer_1, Zimmer_2, Zimmer_3, Zimmer_4, Zimmer_5" data-photo-labels='{{ t.home.rooms.photo_labels | dump | safe }}' data-photo-infos='{{ t.home.rooms.photo_infos | dump | safe }}'></div>
+      <div class="photo-grid" data-photo-grid="Zimmer_1, Zimmer_2, Zimmer_3, Zimmer_4, Zimmer_5" data-photo-labels='{{ t.home.rooms.photo_labels | dump }}' data-photo-infos='{{ t.home.rooms.photo_infos | dump }}'></div>
     </div>
   </div>
 </section>
@@ -164,19 +169,19 @@ permalink: "{{ pages.home[lang] }}"
     </div>
     <h2 class="fade-item section-title">{{ t.home.hosts.title_line1 }}<br /><span class="section-title-line2">{{ t.home.hosts.title_line2 }}</span></h2>
     <div class="fade-item">
-      <div class="lorem-block mb-gallery-intro">
+      <div class="prose-block mb-gallery-intro">
         {% for p in t.home.hosts.text %}
-        <p class="lorem-p">{{ p }}</p>
+        <p class="prose-paragraph">{{ p }}</p>
         {% endfor %}
       </div>
 
-      <div class="photo-grid" data-photo-grid="Rosa, Info, Bjorn, Romina" data-photo-labels='{{ t.home.hosts.photo_labels | dump | safe }}' data-photo-infos='{{ t.home.hosts.photo_infos | dump | safe }}' data-photo-info-tiles='{{ t.home.hosts.info_tiles | dump | safe }}'></div>
+      <div class="photo-grid photo-grid-plain" data-photo-grid="Rosa, Info, Bjorn, Romina" data-photo-labels='{{ t.home.hosts.photo_labels | dump }}' data-photo-infos='{{ t.home.hosts.photo_infos | dump }}' data-photo-info-tiles='{{ t.home.hosts.info_tiles | dump }}'></div>
     </div>
   </div>
 </section>
 
 
-<!-- 5. Zell & Umgebung: Text, Akkordeon (inkl. "Häufige Fragen" als letzter Eintrag) -->
+<!-- 5. Zell & Umgebung: Text, Akkordeon, Häufige Fragen -->
 <section id="section-area" class="reveal-section tone-cloud" data-reveal>
   <div class="ambient-bg" aria-hidden="true">
     <div class="ambient-layer ambient-layer-1"></div>
@@ -192,9 +197,9 @@ permalink: "{{ pages.home[lang] }}"
     </div>
     <h2 class="fade-item section-title">{{ t.home.area.title_line1 }}<br /><span class="section-title-line2">{{ t.home.area.title_line2 }}</span></h2>
     <div class="fade-item">
-      <div class="lorem-block">
+      <div class="prose-block">
         {% for p in t.home.area.text %}
-        <p class="lorem-p">{{ p }}</p>
+        <p class="prose-paragraph">{{ p }}</p>
         {% endfor %}
       </div>
 
@@ -222,7 +227,7 @@ permalink: "{{ pages.home[lang] }}"
           >
             <div class="accordion-panel-inner">
               <div class="accordion-panel-body">
-                <p class="accordion-panel-content">{{ entry.content }}</p>
+                <p class="accordion-panel-content">{{ entry.content | safe }}</p>
                 {% if entry.images %}
                 <div class="accordion-panel-images">
                   {% for img in entry.images %}
@@ -295,8 +300,10 @@ permalink: "{{ pages.home[lang] }}"
       <span class="eyebrow-line light-line"></span>
     </div>
     <h2 class="section-title contact-title">{{ t.home.contact.title }}</h2>
-    <p class="contact-text">{{ t.home.contact.text }}</p>
+    <p class="contact-text">{{ t.home.contact.text | safe }}</p>
     <div data-email-contact-theme="dark" data-copy-label="{{ t.nav.copy_button }}" data-copied-label="{{ t.nav.copied_button }}"></div>
+    <div data-phone-contact-theme="dark" data-copy-label="{{ t.nav.copy_phone_button }}" data-copied-label="{{ t.nav.copied_button }}"></div>
+    <div data-phone-2-contact-theme="dark" data-copy-label="{{ t.nav.copy_phone_button }}" data-copied-label="{{ t.nav.copied_button }}"></div>
     <p class="contact-hint">{{ t.home.contact.hint }}</p>
   </div>
 </section>

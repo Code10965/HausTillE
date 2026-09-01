@@ -55,10 +55,6 @@
   --gold-rgb: 166, 128, 63;
   --gold-soft-rgb: 201, 167, 104;
 
-  --blob-blur-neighborhood: 12px;
-  --blob-opacity-neighborhood-1: 0.30;
-  --blob-opacity-neighborhood-2: 0.40;
-
   --blob-opacity-photo-1: 0.30;
   --blob-opacity-photo-2: 0.40;
 
@@ -90,8 +86,7 @@ body {
   font-family: 'Space Grotesk', sans-serif;
 }
 
-.font-display, h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
-
+h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
 .mono-label { font-family: var(--font-mono); }
 
 ::selection { background: var(--gold); color: var(--paper); }
@@ -129,32 +124,21 @@ body {
   .section-title { font-size: 3.75rem; }
 }
 
-.lorem-block { display: flex; flex-direction: column; gap: 20px; }
-/* Avenir Next für den Fließtext (Prosa-Absätze) - gleiches
-   Fallback-Prinzip wie zuvor bei den Headern getestet: Avenir Next ist
-   nicht selbst gehostet (keine Lizenz/Dateien im Projekt), auf
-   Mac/iPhone/iPad zeigt der Browser die echte Schrift. Als Fallback
-   bewusst Space Grotesk statt einer System-Schrift wie Helvetica Neue -
-   das ist die Schrift, die auch sonst auf der Seite (body, Buttons)
-   läuft, damit der Fallback-Fall optisch zur restlichen Seite passt
-   statt fremd zu wirken. Bewusst NUR auf die eigentlichen Textblöcke
-   angewendet (Absätze, Akkordeon-Inhalt, Kontakttext, Info-Kachel/-Slide)
-   - Labels, Buttons und Navigation bleiben unverändert. */
-.lorem-p,
-.accordion-panel-content,
-.contact-text,
-.info-frame-text,
-.lightbox-info-slide-content {
-  font-family: 'Avenir Next', 'Space Grotesk', sans-serif;
-}
-
-.lorem-p {
+/* ---------- Fließtext-Block (Prosa) ----------
+   Wiederverwendbarer Textbaustein für mehrere Absätze normaler Prosa -
+   Hero-Unterzeile, Sektions-Einleitungen (Zuhause, Zimmer, Gastgeber,
+   Zell & Umgebung) UND die Rechtstexte im Impressum. Vorher
+   ".lorem-block"/".lorem-p" genannt (Platzhaltername nach "Lorem
+   Ipsum"), jetzt an den tatsächlichen Zweck angelehnt: ein Block aus
+   Fließtext-Absätzen ("Prosa"), unabhängig vom jeweiligen Inhalt. */
+.prose-block { display: flex; flex-direction: column; gap: 20px; }
+.prose-paragraph {
   font-size: 17px;
   line-height: 1.7;
   color: var(--slate);
   margin: 0;
 }
-@media (min-width: 640px) { .lorem-p { font-size: 18px; } }
+@media (min-width: 640px) { .prose-paragraph { font-size: 18px; } }
 .mb-gallery-intro { margin-bottom: 48px; }
 
 .reveal-section {
@@ -163,7 +147,7 @@ body {
   overflow: hidden;
   border-bottom: 1px solid var(--line);
 }
-.reveal-section.tone-paper { background: var(--paper); }
+.reveal-section.tone-paper { background: var(--cloud); }
 .reveal-section.tone-cloud { background: var(--cloud); }
 
 .section-inner {
@@ -189,22 +173,6 @@ body {
 .reveal-section.visible .fade-item:nth-child(1) { transition-delay: 0ms; }
 .reveal-section.visible .fade-item:nth-child(2) { transition-delay: 110ms; }
 .reveal-section.visible .fade-item:nth-child(3) { transition-delay: 220ms; }
-
-.fact-list { margin-top: 56px; }
-.fact-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--line);
-}
-.fact-value {
-  font-family: var(--font-mono);
-  font-size: clamp(0.78rem, 3.4vw, 1rem);
-  color: var(--ink);
-  text-align: right;
-  white-space: nowrap;
-}
 
 .accordion {
   margin-top: 56px;
@@ -234,8 +202,8 @@ body {
   background-color: transparent;
   color: var(--ink);
   font-family: var(--font-mono);
-  font-size: 13px; /* TEST: an Eyebrow-Formatierung angeglichen (vorher 11px) */
-  letter-spacing: 0.4em; /* TEST: an Eyebrow-Formatierung angeglichen (vorher 0.2em) */
+  font-size: 11px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   transition: background-color 0.55s cubic-bezier(0.16,1,0.3,1),
               color 0.55s cubic-bezier(0.16,1,0.3,1);
@@ -278,8 +246,6 @@ body {
 .accordion-trigger-label {
   position: relative;
   z-index: 1;
-  font-size: 13px; /* explizit gesetzt, sonst gewinnt .mono-label mit 10px direkt auf diesem Element */
-  letter-spacing: 0.4em;
 }
 
 .accordion-icon {
@@ -320,7 +286,7 @@ body {
 .accordion-panel-inner {
   overflow: hidden;
   min-height: 0;
-  background-color: rgba(var(--fog-rgb), 0.1);
+  background-color: var(--paper);
 }
 .accordion-panel-body {
   padding: 16px 20px 24px;
@@ -342,104 +308,6 @@ body {
   height: 120px;
   object-fit: cover;
   flex-shrink: 0;
-}
-
-/* ---------- FAQ (Häufige Fragen) ----------
-   Eigenständige, bewusst schlanke Klassen statt Kombination aus
-   .mono-label + .accordion-panel-content: beide Klassen haben an
-   verschiedenen Stellen im Stylesheet konkurrierende font-size-/
-   font-family-Regeln - bei gleicher Spezifität hätte die zuletzt
-   definierte Regel gewonnen, was schwer vorhersehbar gewesen wäre.
-   Eigene Klassen machen das Ergebnis eindeutig und unabhängig von der
-   Reihenfolge weiterer Änderungen an dieser Datei.
-
-   Farbe der Frage: var(--wine-deep) (#3D0010) - der festgelegte
-   Weinrot-Akzentton für diese Website. */
-.faq-entry {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
-}
-.faq-entry:first-child {
-  padding-top: 0;
-}
-.faq-entry:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
-}
-.faq-question {
-  margin: 0 0 8px 0;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--wine-deep);
-}
-.faq-answer {
-  margin: 0;
-  font-family: 'Avenir Next', 'Space Grotesk', sans-serif;
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--ink);
-}
-
-.neighborhood-grid {
-  margin-top: 56px;
-  display: grid;
-  gap: 1px;
-  background: var(--line);
-  grid-template-columns: 1fr;
-}
-@media (min-width: 640px) { .neighborhood-grid { grid-template-columns: repeat(3, 1fr); } }
-.neighborhood-item {
-  position: relative;
-  overflow: hidden;
-  background: var(--cloud);
-  color: var(--slate);
-  padding: 28px 20px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  text-align: center;
-  transition: color 0.35s ease;
-}
-
-.neighborhood-item::after {
-  content: "";
-  position: absolute;
-  inset: -8%;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0;
-  filter: blur(var(--blob-blur-neighborhood));
-  background: radial-gradient(closest-side, rgba(var(--gold-rgb), var(--blob-opacity-neighborhood-1)), rgba(var(--cloud-rgb), var(--blob-opacity-neighborhood-2)) 55%, transparent 78%);
-  transition: opacity 0.5s ease;
-  animation: neighborhood-blob-drift 17s ease-in-out infinite;
-}
-.neighborhood-item:hover::after {
-  opacity: 1;
-}
-.neighborhood-item:hover {
-  color: var(--ink);
-}
-.neighborhood-item:nth-child(3n+1)::after {
-  border-radius: 62% 38% 55% 45% / 45% 60% 40% 55%;
-  animation-delay: -3s;
-}
-.neighborhood-item:nth-child(3n+2)::after {
-  border-radius: 40% 60% 45% 55% / 58% 38% 62% 42%;
-  animation-delay: -8s;
-}
-.neighborhood-item:nth-child(3n+3)::after {
-  border-radius: 55% 45% 35% 65% / 50% 55% 45% 50%;
-  animation-delay: -13s;
-}
-@keyframes neighborhood-blob-drift {
-  0%   { transform: translate(0%, 0%) scale(0.85) rotate(0deg); }
-  22%  { transform: translate(7%, -6%) scale(1) rotate(5deg); }
-  47%  { transform: translate(-5%, 5%) scale(0.92) rotate(-4deg); }
-  68%  { transform: translate(4%, 7%) scale(1.06) rotate(3deg); }
-  100% { transform: translate(0%, 0%) scale(0.85) rotate(0deg); }
 }
 
 .photo-frame {
@@ -508,16 +376,125 @@ body {
   100% { background-position: 30% 35%, 72% 68%, 0 0; }
 }
 
+/* ---------- Leichter weißer Schleier: "Zuhause"- und "Zimmer"-Vorschaubilder ----------
+   Nur für diese beiden Sections: dieselbe dritte Ebene des ::before-Overlays
+   wie oben, aber statt des permanenten schwarzen Abdunklers (rgba(0,0,0,0.25))
+   ein gleichmäßiger, leicht transparenter weißer Schleier (23%) über dem
+   ganzen Bild. Blob-Hover-Effekt (Gold/Cloud-Kreise) bleibt unverändert -
+   nur die feste Grundebene wird getauscht, daher zwei Regeln
+   (Grundzustand + :hover), analog zum Original oben. Die Bildunterschrift
+   liegt nicht mehr auf dem Foto (siehe .tile-caption weiter unten), daher
+   keine Rücksicht mehr auf Textkontrast an dieser Stelle nötig. */
+#section-home-details .photo-frame[data-gallery]::before,
+#section-rooms .photo-frame[data-gallery]::before {
+  background-image:
+    radial-gradient(circle, rgba(var(--gold-rgb), 0), transparent 60%),
+    radial-gradient(circle, rgba(var(--slate-rgb), 0), transparent 55%),
+    linear-gradient(rgba(255,255,255,0.23), rgba(255,255,255,0.23));
+}
+#section-home-details .photo-frame[data-gallery]:hover::before,
+#section-rooms .photo-frame[data-gallery]:hover::before {
+  background-image:
+    radial-gradient(circle, rgba(var(--gold-rgb), var(--blob-opacity-photo-1)), transparent 60%),
+    radial-gradient(circle, rgba(var(--cloud-rgb), var(--blob-opacity-photo-2)), transparent 55%),
+    linear-gradient(rgba(255,255,255,0.23), rgba(255,255,255,0.23));
+}
+
 .photo-frame {
   transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
 }
 .photo-frame[data-gallery]:hover {
   transform: translateY(-2px);
 }
-.photo-frame[data-gallery] .mono-label {
+
+/* ---------- FAQ (Häufige Fragen) ----------
+   Eigene Klassen statt Kombination aus .mono-label + .accordion-panel-content,
+   um Kaskaden-Konflikte zu vermeiden. Farbe der Frage: var(--wine-deep)
+   (#3D0010) - der festgelegte Weinrot-Akzentton dieser Website. */
+.faq-entry {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.faq-entry:first-child {
+  padding-top: 0;
+}
+.faq-entry:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.faq-question {
+  margin: 0 0 8px 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--wine-deep);
+}
+.faq-answer {
+  margin: 0;
+  font-family: 'Avenir Next', 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+/* ---------- Gastgeber-Kacheln ohne Fog-Hintergrund/Abdunkler ----------
+   .photo-grid-plain markiert Grids, deren "Fotos" eigentlich gestaltete
+   Grafiken sind (z.B. die "we love Rosa/Bjørn/Romina"-Karten) statt
+   echter Fotos - diese brauchen weder die cloud-Hintergrundfarbe noch
+   den permanenten 25%-schwarzen Abdunkler. Andere Fotogalerien bleiben
+   unverändert. */
+.photo-grid-plain .photo-frame {
+  background-color: transparent;
+}
+.photo-grid-plain .photo-frame[data-gallery]::before {
+  content: none;
+}
+.photo-grid-plain .photo-frame {
+  aspect-ratio: 1 / 1;
+}
+
+/* ---------- Bildunterschrift unter den Gastgeber-Kacheln ----------
+   Das Label lag zuvor ALS Text-Overlay AUF dem Foto - auf hellen bzw.
+   schwarz-weißen Fotos war das (auch mit Blob-Hintergrund) zu wenig
+   lesbar. Jetzt liegt es als klassische Bildunterschrift UNTER der
+   quadratischen Kachel, auf dem hellen Seitenhintergrund - dafür
+   zwangsläufig in dunkler statt weißer Farbe (siehe .tile-caption),
+   sonst wäre der Text auf hellem Grund unsichtbar. Schriftart/-größe
+   bleiben unverändert (.mono-label), nur Farbe/Position ändern sich.
+   .photo-tile ist der neue Wrapper um Bild + Unterschrift zusammen -
+   er übernimmt jetzt die Flex-Breite im Grid (siehe @media-Regel
+   weiter unten), .photo-frame darin ist reine Bildfläche. */
+.photo-tile {
+  display: flex;
+  flex-direction: column;
+}
+.tile-caption {
+  margin: 12px 0 0 0;
+  text-align: center;
+  color: var(--slate);
+}
+
+/* ---------- Dia-Show in Gastgeber-Kacheln (we love Rosa/Bjørn/Romina) ----------
+   Mehrere <img> liegen übereinander (position:absolute, inset:0), nur das
+   Bild mit .active ist sichtbar. WANN gewechselt wird, steuert JS (siehe
+   startTileSlideshow in gallery.js, gestaffelte Zykluszeiten pro Kachel).
+   CSS ist hier nur fürs WIE zuständig: eine sehr langsame, weiche
+   Opacity-Überblendung statt eines harten Bildwechsels. */
+.tile-slideshow {
   position: relative;
-  z-index: 1;
-  color: white;
+}
+.tile-slideshow-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 3.5s ease-in-out;
+}
+.tile-slideshow-img.active {
+  opacity: 1;
 }
 .photo-grid {
   margin-top: 24px;
@@ -531,7 +508,8 @@ body {
     flex-wrap: wrap;
     justify-content: center;
   }
-  .photo-grid .photo-frame {
+  .photo-grid > .photo-frame,
+  .photo-grid > .photo-tile {
     flex: 0 1 calc((100% - 48px) / 3);
   }
 }
@@ -553,21 +531,6 @@ body {
 }
 .gallery .crossfade-img { transition: opacity 2200ms ease-in-out; }
 .gallery .crossfade-img.active { opacity: 1; }
-
-.feature-list { list-style: none; margin: 56px 0 0 0; padding: 0; }
-.feature-list li {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 0;
-  font-size: 1rem;
-  color: var(--ink);
-  border-bottom: 1px solid var(--line);
-}
-.feature-list .dot {
-  width: 4px; height: 4px; border-radius: 9999px;
-  background: var(--gold); flex-shrink: 0;
-}
 
 .hero {
   position: relative;
@@ -610,6 +573,12 @@ body {
     justify-content: center;
     padding: 0 56px 0 96px;
   }
+}
+.hero_Video_loop {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .ambient-bg {
@@ -708,7 +677,7 @@ body {
   font-weight: 300;
   font-size: 2.75rem;
   line-height: 1.02;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   margin: 0 0 32px 0;
   color: var(--ink);
 }
@@ -717,15 +686,6 @@ body {
 .hero-eyebrow-row {
   margin-bottom: 24px;
 }
-/* Editorial-Styling für ALLE Eyebrows (Hero + jede Section-Eyebrow +
-   Kontakt) - .eyebrow-row ist die gemeinsame Basisklasse überall, die
-   Hero-Variante hat zusätzlich .hero-eyebrow-row nur für den eigenen
-   Abstand (siehe oben), nicht für die Typografie. */
-.eyebrow-row .mono-label {
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 0.4em;
-}
 
 .hero-scroll-hint {
   display: flex;
@@ -733,10 +693,6 @@ body {
   gap: 16px;
   margin-top: 40px;
   color: var(--slate);
-}
-.hero-scroll-hint .mono-label {
-  font-size: 13px;
-  letter-spacing: 0.4em;
 }
 @media (min-width: 900px) {
   .hero-scroll-hint {
@@ -759,7 +715,7 @@ body {
   max-height: 42vh;
   min-height: 220px;
   background-color: var(--cloud);
-  border: 1px solid var(--line);
+  border: none;
   overflow: hidden;
   margin: 96px 24px;
 }
@@ -793,6 +749,24 @@ body {
   font-size: 1.125rem;
   color: #C7C6C1;
 }
+
+.contact-inline-link {
+  font: inherit;
+  color: var(--gold-soft);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.contact-inline-link:hover {
+  opacity: 0.8;
+}
+.contact-inline-link:focus-visible {
+  outline: 2px solid var(--gold-soft);
+  outline-offset: 2px;
+}
+.contact-inline-link:visited {
+  color: var(--gold-soft);
+}
+
 .contact-row {
   display: flex;
   flex-direction: column;
@@ -800,7 +774,7 @@ body {
   gap: 16px;
 }
 @media (min-width: 640px) { .contact-row { flex-direction: row; align-items: center; } }
-.contact-email {
+.contact-email, .contact-phone {
   font-family: var(--font-mono);
   font-size: clamp(0.68rem, 3.6vw, 1rem);
   color: var(--gold-soft);
@@ -810,8 +784,13 @@ body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 }
-.contact-email canvas { display: block; }
+.contact-email canvas, .contact-phone canvas{ display: block; }
 
+.contact-value-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .copy-btn {
   position: relative;
   overflow: hidden;
@@ -864,15 +843,23 @@ body {
 }
 
 .legal-topbar {
-  border-bottom: 1px solid var(--line);
+  position: relative;
   background: var(--paper);
 }
 .legal-topbar-inner {
   max-width: 48rem;
   margin: 0 auto;
   padding: 24px 24px;
+  /* Platz links für das absolut positionierte Logo reservieren (siehe
+     .legal-logo-peek unten) - sonst würde der "Zurück"-Text darunter/
+     dahinter liegen. */
+  padding-left: calc(var(--nav-edge) + 44px + 16px);
+  display: flex;
+  align-items: center;
 }
-@media (min-width: 640px) { .legal-topbar-inner { padding: 24px 40px; } }
+@media (min-width: 640px) {
+  .legal-topbar-inner { padding: 24px 40px; padding-left: calc(var(--nav-edge) + 44px + 16px); }
+}
 .legal-back {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -911,14 +898,13 @@ body {
   width: 4px; height: 4px; border-radius: 9999px;
   background: var(--gold); flex-shrink: 0; margin-top: 10px;
 }
-.email-box {
+.email-box, .phone-box {
   display: inline-block;
   padding: 16px 20px;
-  background: var(--cloud);
-  border: 1px solid var(--line);
+  background: transparent;
   margin-top: 8px;
 }
-.email-box canvas { display: block; }
+.email-box canvas, .phone-box canvas { display: block; }
 
 .site-nav { position: relative; z-index: 500; }
 
@@ -1019,6 +1005,49 @@ body {
   transform: translateY(0);
 }
 
+/* ---------- Logo auf Impressum/Datenschutz ----------
+   Gleiche Kreis-Optik wie .nav-logo-peek (Farbverlauf, Blur, Schatten),
+   UND dieselben top/left-Koordinaten (--nav-track-top, --nav-edge) -
+   damit sitzt es exakt an derselben Stelle wie auf der Startseite.
+   Trotzdem bewusst NICHT "position: fixed" (das würde beim Scrollen
+   oben kleben bleiben), sondern "position: absolute", relativ zu
+   .legal-topbar (dort steht "position: relative" - siehe oben). Da
+   .legal-topbar das erste Element der Seite ist, ist die Ausgangsposition
+   identisch zu .nav-logo-peek; weil es aber absolut statt fix ist,
+   scrollt es normal mit der Seite weg statt oben zu kleben. Zusätzlich
+   klickbar (das Element selbst ist im Template ein <a>, kein <div>),
+   daher hier auch ein Hover-Effekt. */
+.legal-logo-peek {
+  position: absolute;
+  top: var(--nav-track-top, 20px);
+  left: var(--nav-edge);
+  z-index: 500;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(120deg, rgba(var(--wine-rgb), 0.65), rgba(var(--wine-deep-rgb), 0.85));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(var(--paper-rgb), 0.25);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px;
+  text-decoration: none;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1), background 0.25s ease;
+}
+.legal-logo-peek:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(120deg, rgba(var(--wine-rgb), 0.75), rgba(var(--wine-deep-rgb), 0.95));
+}
+.legal-logo-peek img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .nav-dropdown {
   position: fixed;
   min-width: 200px;
@@ -1042,6 +1071,9 @@ body {
 }
 
 .nav-link {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   display: block;
   padding: 14px 24px;
   font-family: var(--font-mono);
@@ -1051,7 +1083,7 @@ body {
   color: var(--slate);
   text-decoration: none;
   border-bottom: 1px solid var(--line);
-  transition: color 0.2s ease;
+  transition: color 0.25s ease;
 }
 .nav-link:last-child { border-bottom: none; }
 
@@ -1060,13 +1092,45 @@ body {
   cursor: default;
 }
 .nav-link.nav-link-disabled:hover { color: var(--line); }
-.nav-link {
-  background: linear-gradient(90deg, rgba(140,31,61,0.08), rgba(140,31,61,0));
-  background-size: 0% 100%;
+
+/* ---------- Dropdown-Hover: derselbe Blob-Effekt wie im Accordion ----------
+   Vorher ein flacher linearer Verlauf (alte Weinrot-Version, dann kurz
+   auf einen einfachen Gold-Verlauf umgestellt). Jetzt dieselbe Technik
+   wie bei .accordion-trigger::before: ein Pseudo-Element mit zwei
+   weichgezeichneten radialen Kreisen, die per @keyframes
+   accordion-blob-drift dauerhaft leicht wandern - im Ruhezustand
+   unsichtbar (Opacity 0), bei :hover auf sichtbare Deckkraft
+   umgeschaltet. Gleiche Variablen wie im Accordion (--gold-rgb,
+   --cloud-rgb, --blob-opacity-accordion-*, --blob-blur-accordion,
+   dieselbe Animation), damit es optisch identisch wirkt.
+   isolation: isolate auf .nav-link + z-index: -1 auf dem Pseudo-Element
+   halten den Blob zuverlässig hinter dem Linktext, ohne dass dafür ein
+   zusätzliches <span> im Template nötig wäre. */
+.nav-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(var(--blob-blur-accordion));
   background-repeat: no-repeat;
-  transition: color 0.25s ease, background-size 0.3s ease;
+  background-size: 200% 200%, 180% 180%;
+  background-image:
+    radial-gradient(circle, rgba(var(--gold-rgb), 0), transparent 55%),
+    radial-gradient(circle, rgba(var(--cloud-rgb), 0), transparent 50%);
+  transition: background-image 0.4s ease;
+  animation: accordion-blob-drift 13s ease-in-out infinite;
 }
-.nav-link:hover { color: var(--gold); background-size: 100% 100%; }
+.nav-link:hover::before {
+  background-image:
+    radial-gradient(circle, rgba(var(--gold-rgb), var(--blob-opacity-accordion-1)), transparent 55%),
+    radial-gradient(circle, rgba(var(--cloud-rgb), var(--blob-opacity-accordion-2)), transparent 50%);
+}
+.nav-link.nav-link-disabled:hover::before { background-image: none; }
+.nav-dropdown .nav-link:nth-child(3n+2)::before { animation-delay: -4s; }
+.nav-dropdown .nav-link:nth-child(3n+3)::before { animation-delay: -9s; }
+
+.nav-link:hover { color: var(--gold); }
 
 .site-footer { padding: 40px 0; background: var(--ink); }
 
@@ -1134,9 +1198,32 @@ body {
   overflow-y: auto;
 }
 .lightbox-info-slide.active { display: flex; }
+
+/* ---------- Schmale Screens: ganze Lightbox scrollen statt Text in
+   der Box ----------
+   Auf breiten Screens funktioniert die feste quadratische Box mit
+   internem Scrollen (overflow-y: auto oben) gut genug. Bei langen
+   Info-Texten auf schmalen Screens reichte das nicht zuverlässig aus -
+   der obere Teil des Texts war nicht erreichbar. Deshalb hier: die Box
+   bekommt ihre natürliche Höhe (kein aspect-ratio/max-height-Deckel
+   mehr), und stattdessen wird die GESAMTE Lightbox-Fläche scrollbar
+   (align-items: flex-start statt center, damit auch der Seitenanfang
+   erreichbar bleibt - center + overflow würde den oberen Teil sonst
+   klassischerweise "verschlucken"). .lightbox-frame verliert dafür
+   ebenfalls seinen max-height-Deckel; Fotos/Videos bleiben trotzdem
+   selbst auf 85vh begrenzt (siehe .lightbox-img/.lightbox-video oben -
+   die haben ihre eigene max-height, unabhängig vom Frame). */
+@media (max-width: 640px) {
+  .lightbox-info-slide {
+    aspect-ratio: auto;
+    height: auto;
+    max-height: 85vh;
+  }
+}
 .lightbox-info-slide-content {
   max-width: 520px;
   color: var(--paper);
+  font-family: var(--font-mono);
   font-size: 16px;
   line-height: 1.8;
   white-space: pre-line;

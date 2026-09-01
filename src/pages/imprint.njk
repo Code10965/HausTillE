@@ -18,33 +18,55 @@ permalink: "{{ pages.imprint[lang] }}"
     </div>
     <h1 class="section-title">{{ t.imprint.title }}</h1>
 
-    <div class="lorem-block">
-      <p class="lorem-p">{{ t.imprint.intro }}</p>
+    <div class="prose-block">
+      <p class="prose-paragraph">{{ t.imprint.intro }}</p>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.imprint.provider_title }}</p>
+      <div class="prose-block">
+        <p class="prose-paragraph">{{ t.imprint.provider_address | safe }}</p>
+      </div>
     </div>
 
     <div class="legal-block">
       <p class="legal-block-title">{{ t.imprint.responsible_title }}</p>
-      <div class="lorem-block">
-        <p class="lorem-p">{{ t.imprint.address | safe }}</p>
+      <div class="prose-block">
+        <p class="prose-paragraph">{{ t.imprint.responsible_address | safe }}</p>
       </div>
     </div>
 
     <div class="legal-block">
       <p class="legal-block-title">{{ t.imprint.contact_title }}</p>
-      <div data-email-contact-theme="light"></div>
+      <div data-email-contact-theme="light" data-copy-label="{{ t.nav.copy_button }}" data-copied-label="{{ t.nav.copied_button }}"></div>
+      <div data-phone-2-contact-theme="light" data-copy-label="{{ t.nav.copy_phone_button }}" data-copied-label="{{ t.nav.copied_button }}"></div>
     </div>
 
     <div class="legal-block">
-      <p class="legal-block-title">{{ t.imprint.liability_title }}</p>
-      <div class="lorem-block">
-        <p class="lorem-p">{{ t.imprint.liability_text }}</p>
+      <p class="legal-block-title">{{ t.imprint.liability_content_title }}</p>
+      <div class="prose-block">
+        <p class="prose-paragraph">{{ t.imprint.liability_content_text }}</p>
+      </div>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.imprint.liability_links_title }}</p>
+      <div class="prose-block">
+        <p class="prose-paragraph">{{ t.imprint.liability_links_text }}</p>
+      </div>
+    </div>
+
+    <div class="legal-block">
+      <p class="legal-block-title">{{ t.imprint.copyright_title }}</p>
+      <div class="prose-block">
+        <p class="prose-paragraph">{{ t.imprint.copyright_text }}</p>
       </div>
     </div>
 
     <div class="legal-block">
       <p class="legal-block-title">{{ t.imprint.dispute_title }}</p>
-      <div class="lorem-block">
-        <p class="lorem-p">{{ t.imprint.dispute_text }}</p>
+      <div class="prose-block">
+        <p class="prose-paragraph">{{ t.imprint.dispute_text }}</p>
       </div>
     </div>
   </div>
