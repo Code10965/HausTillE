@@ -39,6 +39,8 @@ jobs:
 
       - name: Website bauen
         run: npm run build
+        env:
+          ELEVENTY_PATH_PREFIX: /HausTillE/
 
       - name: GitHub Pages konfigurieren
         uses: actions/configure-pages@v5

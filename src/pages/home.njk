@@ -58,14 +58,14 @@ permalink: "{{ pages.home[lang] }}"
     </div>
 {#
     <div class="hero-media crossfade-group" data-interval="7500">
-      <img class="crossfade-img active" src="/assets/media/Hero/Haus_3x4_1.jpg" alt="" />
-      <img class="crossfade-img" src="/assets/media/Hero/Haus_3x4_2.jpg" alt="" />
-      <img class="crossfade-img" src="/assets/media/Hero/Haus_3x4_3.jpg" alt="" />
-      <img class="crossfade-img" src="/assets/media/Hero/Haus_3x4_4.jpg" alt="" />
+      <img class="crossfade-img active" src="{{ '/assets/media/Hero/Haus_3x4_1.jpg' | url }}" alt="" />
+      <img class="crossfade-img" src="{{ '/assets/media/Hero/Haus_3x4_2.jpg' | url }}" alt="" />
+      <img class="crossfade-img" src="{{ '/assets/media/Hero/Haus_3x4_3.jpg' | url }}" alt="" />
+      <img class="crossfade-img" src="{{ '/assets/media/Hero/Haus_3x4_4.jpg' | url }}" alt="" />
     </div> #}
     <div class="hero-media">
-      <video id="hero_Video_loop" class="hero_Video_loop" autoplay muted loop playsinline poster="/assets/media/Hero/Haus_3x4_1.jpg">
-        <source src="/assets/media/Hero/hero_Video_loop.mp4" type="video/mp4">
+      <video id="hero_Video_loop" class="hero_Video_loop" autoplay muted loop playsinline poster="{{ '/assets/media/Hero/Haus_3x4_1.jpg' | url }}">
+        <source src="{{ '/assets/media/Hero/hero_Video_loop.mp4' | url }}" type="video/mp4">
       </video>
     </div>
   </div>
@@ -117,7 +117,7 @@ permalink: "{{ pages.home[lang] }}"
                 {% if entry.images %}
                 <div class="accordion-panel-images">
                   {% for img in entry.images %}
-                  <img class="accordion-panel-image" src="{{ img.src }}" alt="{{ img.alt }}" />
+                  <img class="accordion-panel-image" src="{{ img.src | url }}" alt="{{ img.alt }}" />
                   {% endfor %}
                 </div>
                 {% endif %}
@@ -231,7 +231,7 @@ permalink: "{{ pages.home[lang] }}"
                 {% if entry.images %}
                 <div class="accordion-panel-images">
                   {% for img in entry.images %}
-                  <img class="accordion-panel-image" src="{{ img.src }}" alt="{{ img.alt }}" />
+                  <img class="accordion-panel-image" src="{{ img.src | url }}" alt="{{ img.alt }}" />
                   {% endfor %}
                 </div>
                 {% endif %}

@@ -208,6 +208,38 @@ const media = {
   }
 };
 
+// ---------- Unterordner-fest ----------
+// gallery.js ist eine "rohe" Datei (kein Eleventy-Template) und wird 1:1
+// kopiert - der "url"-Filter aus den .njk-Dateien steht hier nicht zur
+// Verfügung. Stattdessen liest withBase() die globale Variable
+// window.SITE_BASE_URL aus, die layout.njk VOR dieser Datei ins HTML
+// schreibt ("/" lokal, "/HausTillE/" im GitHub-Pages-Unterordner, später
+// wieder "/" auf der eigenen Domain). Alle Pfade im media-Objekt oben
+// werden direkt nach dem Laden EINMAL durchgereicht - danach benutzt der
+// Rest der Datei ganz normal entry.items[...]/entry.src, ohne dass an den
+// späteren Stellen (Kachel-Vorschau, Dia-Show, Lightbox) noch etwas
+// geändert werden muss.
+const SITE_BASE = (typeof window !== "undefined" && window.SITE_BASE_URL
+  ? window.SITE_BASE_URL
+  : "/"
+).replace(/\/$/, ""); // abschließenden Slash entfernen, um Doppel-Slashes zu vermeiden
+
+function withBase(path) {
+  // Nur Pfade mit führendem "/" bekommen das Präfix - externe URLs
+  // (https://...) oder bereits relative Pfade blieben unverändert.
+  if (typeof path !== "string" || !path.startsWith("/")) return path;
+  return SITE_BASE + path;
+}
+
+Object.values(media).forEach((entry) => {
+  if (Array.isArray(entry.items)) {
+    entry.items = entry.items.map(withBase);
+  }
+  if (entry.src) {
+    entry.src = withBase(entry.src);
+  }
+});
+
 // Lightbox-Elemente werden erst beim Start gesetzt (nicht auf Modul-Ebene),
 // damit dieses Modul auch dann sicher geladen werden kann, wenn es die
 // Lightbox auf der jeweiligen Seite gar nicht gibt.

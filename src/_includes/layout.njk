@@ -29,29 +29,32 @@
     <meta name="description" content="{{ meta_description }}" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'self'">
 
-    {# Absolute statt relative Pfade (/assets/... statt favicon/...): die
-       Original-Seiten lagen alle im selben Ordner, jetzt liegt jede Seite
-       eine Ebene tiefer (/de/, /en/, /nl/). Ein relativer Pfad "favicon/..."
-       würde der Browser dann fälschlich als "/de/favicon/..." auflösen.
+    {# ---------- Unterordner-fest ----------
+       Statt fest eingetippter Pfade ("/assets/...") verwenden wir überall
+       den eingebauten Eleventy-"url"-Filter. Der hängt automatisch den
+       aktuellen pathPrefix davor (siehe .eleventy.js) - lokal "/",
+       auf GitHub Pages im Unterordner z.B. "/HausTillE/", später auf der
+       eigenen Domain wieder "/". Am Text hier ändert sich nichts, nur der
+       tatsächlich erzeugte Pfad im fertigen HTML passt sich automatisch an.
 
        Bewusst OHNE Hell/Dunkel-Unterscheidung (kein
        prefers-color-scheme) - ein einziges Icon-Set für alle
        Browser-Modi, passend zu den tatsächlich vorhandenen Dateien im
        favicon-Ordner. #}
-    <link rel="icon" type="image/x-icon" href="/assets/media/favicon/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/media/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/media/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/assets/media/favicon/favicon-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/assets/media/favicon/favicon-512x512.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/media/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="{{ '/assets/media/favicon/favicon.ico' | url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/media/favicon/favicon-16x16.png' | url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/media/favicon/favicon-32x32.png' | url }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ '/assets/media/favicon/favicon-192x192.png' | url }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ '/assets/media/favicon/favicon-512x512.png' | url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/media/favicon/apple-touch-icon.png' | url }}">
     <meta name="theme-color" content="#ffffff">
 
     {# ---------- hreflang: sagt Suchmaschinen "diese Seite gibt es auch
        auf Englisch/Niederländisch, hier ist die jeweilige URL" ----------
-       pages.json (globale Daten, hier als "pages" verfügbar) hält pro
-       page_key die URL je Sprache fest, z.B. pages.imprint.en. Damit
-       müssen wir die Sprach-URLs nicht von Hand tippen und nichts kann
-       auseinanderlaufen. #}
+       site.baseUrl ist die VOLLE Domain (z.B. https://www.haus-till-e.com)
+       aus site.json - das ist unabhängig vom pathPrefix und bleibt hier
+       unverändert, da hreflang/canonical immer eine absolute URL mit
+       Domain brauchen, nicht nur einen Pfad. #}
     {% set page_urls = pages[page_key] %}
     {% for altLang, url in page_urls %}
     <link rel="alternate" hreflang="{{ altLang }}" href="{{ site.baseUrl }}{{ url }}" />
@@ -59,7 +62,7 @@
     <link rel="alternate" hreflang="x-default" href="{{ site.baseUrl }}{{ page_urls.de }}" />
     <link rel="canonical" href="{{ site.baseUrl }}{{ page_urls[lang] }}" />
 
-    <link rel="stylesheet" href="/assets/styles.css" />
+    <link rel="stylesheet" href="{{ '/assets/styles.css' | url }}" />
 
     {# ---------- Strukturierte Daten (Schema.org / JSON-LD) ----------
        Nur auf der Startseite, weil dort die relevanten Inhalte (Haus,
@@ -156,8 +159,19 @@
     </div>
     {% endif %}
 
-    <script type="module" src="/assets/media/js/main.js"></script>
-    <script src="/assets/media/js/heroAmbient.js" defer></script>
-    <script src="/assets/media/js/accordion.js" defer></script>
+    {# ---------- Basis-Pfad für "rohes" JavaScript ----------
+       gallery.js ist KEIN Eleventy-Template, sondern wird 1:1 kopiert
+       (siehe .eleventy.js) - der "url"-Filter kann dort also nicht direkt
+       verwendet werden. Stattdessen schreiben wir den aktuell gültigen
+       pathPrefix einmal als globale Variable ins HTML; gallery.js liest
+       sie aus und hängt sie automatisch vor jeden Bildpfad (siehe
+       Kommentar oben in gallery.js). WICHTIG: Diese Zeile muss VOR dem
+       type="module"-Skript stehen, damit die Variable beim Ausführen von
+       main.js/gallery.js bereits gesetzt ist. #}
+    <script>window.SITE_BASE_URL = "{{ '/' | url }}";</script>
+
+    <script type="module" src="{{ '/assets/media/js/main.js' | url }}"></script>
+    <script src="{{ '/assets/media/js/heroAmbient.js' | url }}" defer></script>
+    <script src="{{ '/assets/media/js/accordion.js' | url }}" defer></script>
   </body>
 </html>
