@@ -45,7 +45,11 @@ test("Logo-Bild lädt auf der deutschen Startseite", async ({ page }) => {
 test("Keine kaputten Bilder auf der Startseite (alle Sprachen)", async ({ page }) => {
   await page.goto("de/");
 
-  const images = await page.locator("img").all();
+  // #lightbox-img ist BEWUSST leer (src=""), solange niemand ein Foto
+  // in der Galerie angeklickt hat - kein kaputtes Bild, sondern ein
+  // Platzhalter. Ohne diesen Ausschluss meldet der Test hier fälschlich
+  // einen Fehler, obwohl die Seite völlig in Ordnung ist.
+  const images = await page.locator("img:not(#lightbox-img)").all();
   for (const img of images) {
     const naturalWidth = await img.evaluate((el) => el.naturalWidth);
     const src = await img.getAttribute("src");

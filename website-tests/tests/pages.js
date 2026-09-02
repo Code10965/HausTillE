@@ -7,7 +7,7 @@
 // aus der BASE_URL. Sobald die eigene Domain (ohne Unterordner) läuft,
 // funktioniert diese Schreibweise weiterhin unverändert.
 const PAGES = [
-  { key: "home", lang: "de", path: "de/", expectedTitleIncludes: "Mosel" },
+  { key: "home", lang: "de", path: "de/", expectedTitleIncludes: "Till E" },
   { key: "home", lang: "en", path: "en/", expectedTitleIncludes: null },
   { key: "home", lang: "nl", path: "nl/", expectedTitleIncludes: null },
   { key: "imprint", lang: "de", path: "de/impressum/", expectedTitleIncludes: null },
