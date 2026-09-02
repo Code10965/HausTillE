@@ -30,7 +30,7 @@
         {% if altLang == lang %}
         <span class="nav-link nav-link-active">{{ t.nav["lang_" + altLang] }}</span>
         {% else %}
-        <a class="nav-link" href="{{ url }}">{{ t.nav["lang_" + altLang] }}</a>
+        <a class="nav-link" href="{{ url | url }}">{{ t.nav["lang_" + altLang] }}</a>
         {% endif %}
       {% endfor %}
     </div>
@@ -81,7 +81,7 @@
     <a class="legal-logo-peek" href="{{ pages.home[lang] }}" aria-label="{{ t.meta.title_home }}">
       <img src="{{ '/assets/media/logo/Logo_Till_E.png' | url }}" alt="{{ t.meta.title_home }}" />
     </a>
-    <a class="legal-back" href="{{ pages.home[lang] }}">
+    <a class="legal-back" href="{{ pages.home[lang] | url }}">
       <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
       {{ t.nav.back_to_home }}
     </a>
