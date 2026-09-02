@@ -5,19 +5,19 @@ permalink: /index.html
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="refresh" content="0; url={{ pages.home.de }}" />
-    <link rel="canonical" href="{{ pages.home.de }}" />
+    <meta http-equiv="refresh" content="0; url={{ pages.home.de | url }}" />
+    <link rel="canonical" href="{{ pages.home.de | url }}" />
     <title>Zuhause. An der Mosel.</title>
-    <script>window.location.replace("{{ pages.home.de }}");</script>
+    <script>window.location.replace("{{ pages.home.de | url }}");</script>
   </head>
   <body>
     {# Fallback für Browser/Bots ohne JS und ohne meta-refresh: eine simple,
        sprachneutrale Auswahl. Kommt praktisch nie zum Einsatz, ist aber
        die korrekte, zugängliche Absicherung. #}
     <p>
-      <a href="{{ pages.home.de }}">Deutsch</a> ·
-      <a href="{{ pages.home.en }}">English</a> ·
-      <a href="{{ pages.home.nl }}">Nederlands</a>
+      <a href="{{ pages.home.de | url }}">Deutsch</a> ·
+      <a href="{{ pages.home.en | url }}">English</a> ·
+      <a href="{{ pages.home.nl | url }}">Nederlands</a>
     </p>
   </body>
 </html>

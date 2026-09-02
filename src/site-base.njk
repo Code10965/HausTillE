@@ -1,0 +1,18 @@
+---
+permalink: "/assets/site-base.js"
+eleventyExcludeFromCollections: true
+---
+// Wird von Eleventy erzeugt, genau wie jede andere Vorlage - der "url"-
+// Filter hängt den aktuellen pathPrefix an (lokal "/", auf GitHub Pages
+// im Unterordner z.B. "/HausTillE/", später auf der eigenen Domain
+// wieder "/"). gallery.js liest diesen Wert aus, um alle Bildpfade
+// unterordner-fest zu machen (siehe Kommentar dort).
+//
+// WICHTIG: Diese Zuweisung steht bewusst in einer EIGENEN, externen
+// .js-Datei statt als <script>...</script> direkt im HTML von
+// layout.njk. Grund: Die Seite setzt einen strengen
+// Content-Security-Policy-Header (default-src 'self', kein 'unsafe-inline').
+// Der blockiert direkt im HTML eingebettete Skripte komplett - eine
+// externe Datei wie diese ist von "default-src 'self'" hingegen erlaubt,
+// weil sie von derselben Domain/demselben Unterordner geladen wird.
+window.SITE_BASE_URL = "{{ '/' | url }}";

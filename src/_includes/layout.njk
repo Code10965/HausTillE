@@ -75,7 +75,13 @@
        valides JSON um (inkl. Anführungszeichen/Sonderzeichen) - so
        muss nichts manuell escaped werden und es kann kein kaputtes
        JSON entstehen, selbst wenn in den Texten Anführungszeichen
-       vorkommen (z.B. „Zeller Schwarze Katz“). #}
+       vorkommen (z.B. „Zeller Schwarze Katz“).
+
+       HINWEIS: application/ld+json-Blöcke sind KEINE ausführbaren
+       Skripte (sie enthalten nur Daten, kein JavaScript) - die
+       Content-Security-Policy blockiert daher nur echte
+       <script>-Skriptblöcke wie den weiter unten entfernten
+       window.SITE_BASE_URL-Block, nicht diese hier. #}
     {% if page_key == "home" %}
     <script type="application/ld+json">
     {
@@ -121,18 +127,23 @@
 
     {{ content | safe }}
 
+    {# ---------- Footer ----------
+       Auch hier: pages.imprint[lang], pages.privacy[lang], pages.home[lang]
+       sind rohe Pfade aus pages.json ("/de/impressum/" usw.) - ohne den
+       "url"-Filter würden sie im GitHub-Pages-Unterordner ins Leere
+       zeigen, genau wie vorher schon bei Favicons/CSS/Skripten. #}
     <footer class="site-footer">
       {% if page_key == "home" %}
       <p class="mono-label footer-label">{{ t.home.footer.line1 }}</p>
       <p class="mono-label footer-label footer-label-spaced">
-        <a href="{{ pages.imprint[lang] }}" class="footer-link">{{ t.imprint.title }}</a>
-        · <a href="{{ pages.privacy[lang] }}" class="footer-link">{{ t.privacy.title | safe }}</a>
+        <a href="{{ pages.imprint[lang] | url }}" class="footer-link">{{ t.imprint.title }}</a>
+        · <a href="{{ pages.privacy[lang] | url }}" class="footer-link">{{ t.privacy.title | safe }}</a>
       </p>
       {% else %}
       <p class="mono-label footer-label">
-        <a href="{{ pages.home[lang] }}" class="footer-link">{{ t.meta.title_home }}</a>
-        · <a href="{{ pages.imprint[lang] }}" class="footer-link">{{ t.imprint.title }}</a>
-        · <a href="{{ pages.privacy[lang] }}" class="footer-link">{{ t.privacy.title | safe }}</a>
+        <a href="{{ pages.home[lang] | url }}" class="footer-link">{{ t.meta.title_home }}</a>
+        · <a href="{{ pages.imprint[lang] | url }}" class="footer-link">{{ t.imprint.title }}</a>
+        · <a href="{{ pages.privacy[lang] | url }}" class="footer-link">{{ t.privacy.title | safe }}</a>
       </p>
       {% endif %}
     </footer>
@@ -160,15 +171,20 @@
     {% endif %}
 
     {# ---------- Basis-Pfad für "rohes" JavaScript ----------
-       gallery.js ist KEIN Eleventy-Template, sondern wird 1:1 kopiert
-       (siehe .eleventy.js) - der "url"-Filter kann dort also nicht direkt
-       verwendet werden. Stattdessen schreiben wir den aktuell gültigen
-       pathPrefix einmal als globale Variable ins HTML; gallery.js liest
-       sie aus und hängt sie automatisch vor jeden Bildpfad (siehe
-       Kommentar oben in gallery.js). WICHTIG: Diese Zeile muss VOR dem
-       type="module"-Skript stehen, damit die Variable beim Ausführen von
-       main.js/gallery.js bereits gesetzt ist. #}
-    <script>window.SITE_BASE_URL = "{{ '/' | url }}";</script>
+       WICHTIG - geändert gegenüber der vorherigen Fassung: Diese Zeile
+       stand früher als <script>window.SITE_BASE_URL = "...";</script>
+       DIREKT hier im HTML. Die Content-Security-Policy oben
+       (default-src 'self', kein 'unsafe-inline') blockiert aber genau
+       solche eingebetteten Skripte - der Browser hat sie zwar im HTML
+       gesehen, aber die Ausführung verweigert. Deshalb liegt der Wert
+       jetzt in einer eigenen, externen Datei (site-base.njk ->
+       /assets/site-base.js), die ganz normal per <script src="...">
+       eingebunden wird - das ist von "default-src 'self'" ausdrücklich
+       erlaubt, weil sie von derselben Domain/demselben Unterordner kommt.
+
+       Muss weiterhin VOR dem type="module"-Skript stehen, damit die
+       Variable beim Ausführen von main.js/gallery.js bereits gesetzt ist. #}
+    <script src="{{ '/assets/site-base.js' | url }}"></script>
 
     <script type="module" src="{{ '/assets/media/js/main.js' | url }}"></script>
     <script src="{{ '/assets/media/js/heroAmbient.js' | url }}" defer></script>
