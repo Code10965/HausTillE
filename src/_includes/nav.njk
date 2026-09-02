@@ -14,7 +14,12 @@
      pages[page_key] liefert z.B. { de: "/de/impressum/", en: "/en/imprint/",
      nl: "/nl/colofon/" } - also die URL DERSELBEN Seite in jeder Sprache,
      nicht einfach die jeweilige Startseite. Die aktuell aktive Sprache wird
-     per CSS-Klasse "nav-link-active" hervorgehoben und nicht verlinkt. #}
+     per CSS-Klasse "nav-link-active" hervorgehoben und nicht verlinkt.
+
+     WICHTIG: "url" ist hier der Nunjucks-Filter-Aufruf, NICHT die
+     Schleifenvariable "url" von "{% for altLang, url in ... %}" - beide
+     heißen zufällig gleich. Das "| url" am Ende der Zeile hängt den
+     pathPrefix an, genau wie überall sonst in diesem Projekt. #}
   <div class="nav-item" id="nav-globe" data-nav-item data-nav-slot="1">
     <button class="nav-ball" id="globe-toggle" aria-label="{{ t.nav.lang_aria }}" aria-expanded="false">
       <span class="nav-ball-visual">
@@ -75,10 +80,13 @@
    aber bewusst NICHT fix positioniert, sondern normaler Teil der
    .legal-topbar-inner - es soll beim Scrollen mit der Leiste wegscrollen,
    nicht oben kleben bleiben. Anders als auf der Startseite ist es hier
-   ein <a>, kein <div>: ein Klick führt zurück zur Startseite. #}
+   ein <a>, kein <div>: ein Klick führt zurück zur Startseite.
+
+   pages.home[lang] wird hier ebenfalls durch den "url"-Filter geschickt -
+   dieselbe Pfad-Falle wie beim Sprachumschalter oben. #}
 <div class="legal-topbar">
   <div class="legal-topbar-inner">
-    <a class="legal-logo-peek" href="{{ pages.home[lang] }}" aria-label="{{ t.meta.title_home }}">
+    <a class="legal-logo-peek" href="{{ pages.home[lang] | url }}" aria-label="{{ t.meta.title_home }}">
       <img src="{{ '/assets/media/logo/Logo_Till_E.png' | url }}" alt="{{ t.meta.title_home }}" />
     </a>
     <a class="legal-back" href="{{ pages.home[lang] | url }}">
