@@ -6,6 +6,14 @@ on:
     - cron: "0 6 * * *"
   workflow_dispatch: # erlaubt zusätzlich manuelles Starten über den "Actions"-Tab
 
+# WICHTIG: Das Test-Setup liegt in einem eigenen Unterordner (website-tests/),
+# getrennt vom eigentlichen Website-Projekt im Repo-Root. Ohne diese Zeile
+# würden npm/playwright im Repo-Root laufen und dort das FALSCHE
+# package.json (das der Website, nicht das der Tests) finden.
+defaults:
+  run:
+    working-directory: website-tests
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -16,7 +24,7 @@ jobs:
       - name: Node.js einrichten
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Abhängigkeiten installieren
         run: npm ci
@@ -36,5 +44,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
-          path: playwright-report/
+          path: website-tests/playwright-report/
           retention-days: 14
