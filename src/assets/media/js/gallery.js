@@ -240,6 +240,19 @@ Object.values(media).forEach((entry) => {
   }
 });
 
+// ---------- Vorschau-Bilder (thumb/) für die automatische Dia-Show ----------
+// Baut aus einem normalen Bild-Pfad (z.B. ".../Bjorn/Bjorn_2.jpg") den
+// Pfad zur kleinen, komprimierten Vorschau-Version im "thumb/"-Unterordner
+// (".../Bjorn/thumb/Bjorn_2.jpg"). Nur für die automatisch laufende
+// Dia-Show DIREKT IN DER KACHEL gedacht (siehe startTileSlideshow) - die
+// Lightbox-Vollansicht nutzt weiterhin unverändert die Original-Pfade aus
+// entry.items, damit man dort die volle Auflösung sieht.
+function toThumbPath(src) {
+  const lastSlash = src.lastIndexOf("/");
+  if (lastSlash === -1) return src;
+  return `${src.slice(0, lastSlash)}/thumb/${src.slice(lastSlash + 1)}`;
+}
+
 // Lightbox-Elemente werden erst beim Start gesetzt (nicht auf Modul-Ebene),
 // damit dieses Modul auch dann sicher geladen werden kann, wenn es die
 // Lightbox auf der jeweiligen Seite gar nicht gibt.
@@ -349,7 +362,7 @@ function renderPhotoGrids() {
           // Bildunterschrift liegt IMMER als echte Unterschrift UNTER der
           // Kachel (heller Seitenhintergrund, Farbe var(--slate) - siehe
           // .tile-caption in styles.css), genau wie bei den Gastgeber-
-          // Kacheln "we love Rosa/Bjørn/Romina" - kein Text-Overlay mehr
+          // Kacheln "we love Rosa/Bjørn/Romina". Kein Text-Overlay mehr
           // auf dem Foto selbst. ".photo-frame" bleibt reine Bildfläche
           // (Foto + Schleier-::before), ".photo-tile" umschließt Bild und
           // Unterschrift zusammen (übernimmt die Flex-Breite im Grid,
@@ -366,7 +379,10 @@ function renderPhotoGrids() {
           // data-full-index merkt sich pro Bild seine Position im
           // KOMPLETTEN items-Array (inkl. übersprungener Textgrafiken) -
           // dadurch weiß der Klick-Handler weiter unten genau, welches
-          // Bild in der Lightbox zuerst gezeigt werden soll.
+          // Bild in der Lightbox zuerst gezeigt werden soll. Das <img>
+          // selbst zeigt dabei bewusst die kleine thumb/-Version (siehe
+          // toThumbPath) - die Lightbox öffnet trotzdem das Originalbild,
+          // weil sie über data-full-index in entry.items nachschlägt.
           if (isPlainGrid && entry.type === "images") {
             const textImageCount = entry.textImages || 0;
             const slideshowItems = textImageCount > 0
@@ -376,7 +392,7 @@ function renderPhotoGrids() {
             const slideshowClass = hasSlideshow ? " tile-slideshow" : "";
             const imgsMarkup = hasSlideshow
               ? slideshowItems
-                  .map((src, i) => `<img class="tile-slideshow-img${i === 0 ? " active" : ""}" src="${src}" data-full-index="${i}" alt="" />`)
+                  .map((src, i) => `<img class="tile-slideshow-img${i === 0 ? " active" : ""}" src="${toThumbPath(src)}" data-full-index="${i}" alt="" loading="lazy" decoding="async" />`)
                   .join("")
               : "";
 

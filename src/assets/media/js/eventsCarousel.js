@@ -86,24 +86,31 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   const setTimer = setIntervalFn || win.setInterval.bind(win);
   const clearTimer = clearIntervalFn || win.clearInterval.bind(win);
 
-  const prefersReducedMotion =
-    "matchMedia" in win && win.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // Bewusst NICHT einmal beim Setup gecacht, sondern bei jeder Prüfung neu
+  // ausgewertet (siehe isEffectivelyPlaying) - Playwrights reducedMotion-
+  // Emulation kann zum sehr frühen Zeitpunkt des Skript-Setups minimal
+  // verzögert greifen; ein gecachter Wert liest dann fälschlich "false"
+  // und die Karussell startet trotz aktivierter Einstellung mit Autoplay.
+  function prefersReducedMotion() {
+    return "matchMedia" in win && win.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
 
   const autoplayMs = parseInt(container.dataset.autoplayMs, 10) || DEFAULT_AUTOPLAY_MS;
   const state = new EventsCarouselState(slides.length, 0);
 
   // "userPlaying": will die Person Autoplay (Play/Pause-Button)?
   // "hovering"/"focused": ist die Maus/Tastatur gerade im Karussell?
-  // Nur wenn BEIDES stimmt (Person will Autoplay UND schaut/klickt
-  // gerade nicht hinein), läuft der Timer wirklich - reines Hovern
-  // pausiert also automatisch mit, ohne den eigentlichen Pause-Knopf
-  // umzuschalten (der behält seinen eigenen Zustand).
-  let userPlaying = !prefersReducedMotion && slides.length > 1;
+  // Nur wenn ALLES stimmt (Person will Autoplay, schaut/klickt gerade
+  // nicht hinein, UND das System verlangt keine reduzierte Bewegung),
+  // läuft der Timer wirklich - reines Hovern pausiert also automatisch
+  // mit, ohne den eigentlichen Pause-Knopf umzuschalten (der behält
+  // seinen eigenen Zustand).
+  let userPlaying = slides.length > 1;
   let hovering = false;
   let timerId = null;
 
   function isEffectivelyPlaying() {
-    return userPlaying && !hovering;
+    return userPlaying && !hovering && !prefersReducedMotion();
   }
 
   function render() {
@@ -177,6 +184,13 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
 
   function setPlaying(playing) {
     userPlaying = playing;
+    if (playing) {
+      // Ein expliziter Play-Befehl überschreibt den aktuellen Hover-
+      // Zustand - sonst würde der Timer nie starten, weil die Maus durch
+      // den Klick auf den Button selbst gerade noch über dem Karussell
+      // steht (mouseenter feuert vor dem eigentlichen click-Event).
+      hovering = false;
+    }
     renderPlayState();
     restartTimer();
   }
