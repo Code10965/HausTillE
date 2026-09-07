@@ -205,8 +205,13 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   });
 
   // Maus ODER Tastaturfokus irgendwo im Karussell pausiert den
-  // automatischen Ablauf - "entspannt" heißt auch: nicht weiterlaufen,
-  // während jemand gerade eine Beschreibung liest.
+  // automatischen Ablauf - AUSSER der Fokus liegt auf dem Play/Pause-
+  // Button selbst. Sonst könnte man den Timer nie per Klick wieder
+  // starten: ein Klick auf den Button gibt ihm zuerst den Fokus
+  // (focusin feuert VOR dem eigentlichen click-Event), was "hovering"
+  // sofort wieder auf true setzen und den gerade erst gestarteten
+  // Timer sofort wieder stoppen würde - der Button würde sich also
+  // selbst dauerhaft in Pause "einfrieren".
   container.addEventListener("mouseenter", () => {
     hovering = true;
     restartTimer();
@@ -215,11 +220,13 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     hovering = false;
     restartTimer();
   });
-  container.addEventListener("focusin", () => {
+  container.addEventListener("focusin", (event) => {
+    if (playPauseBtn && event.target === playPauseBtn) return;
     hovering = true;
     restartTimer();
   });
-  container.addEventListener("focusout", () => {
+  container.addEventListener("focusout", (event) => {
+    if (playPauseBtn && event.target === playPauseBtn) return;
     // Kleiner Timeout wäre "sauberer" bei schnellem Fokuswechsel
     // zwischen zwei Kindern, ist hier aber nicht nötig: focusin auf dem
     // nächsten Kind feuert vor focusout auf dem alten Browser-Verhalten

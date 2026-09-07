@@ -135,7 +135,11 @@ test.describe("mit aktivierter Systemeinstellung 'Bewegung reduzieren'", () => {
   test.use({ reducedMotion: "reduce" });
 
   test("kein automatischer Wechsel, aber die Pfeile funktionieren weiterhin", async ({ page }) => {
-    await gotoEventsWithClock(page);
+    // Kein erneutes gotoEventsWithClock(page) hier - test.beforeEach hat
+    // die Seite bereits geladen, und zwar schon MIT der reducedMotion-
+    // Emulation aus test.use() (die gilt für den ganzen Test, inklusive
+    // beforeEach). Ein zweiter Aufruf würde nur unnötig ein zweites Mal
+    // navigieren und die virtuelle Uhr neu installieren.
     const slides = page.locator("[data-events-slide]");
 
     await page.clock.fastForward(AUTOPLAY_MS * 2);
