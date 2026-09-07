@@ -44,7 +44,7 @@
   --wine-deep: #3D0010;
   --gold: #A6803F;
   --gold-soft: #C9A768;
-  --gold-ink: #1e170b;
+  --gold-ink: #0c0a05;
 
   --ink-rgb: 28, 28, 26;
   --slate-rgb: 92, 93, 88;
@@ -58,7 +58,7 @@
   /* Stark verdunkelte Version von --gold-rgb, nur für den Kontakt-Bildschleier -
   sorgt für einen warmen, dunklen Farbton statt neutralem Schwarz, bleibt
   aber erkennbar mit dem Gold-Akzent der Seite verwandt. */
-  --gold-ink-rgb: 30, 23, 11;
+  --gold-ink-rgb: 12, 10, 5;
 
   --blob-opacity-photo-1: 0.30;
   --blob-opacity-photo-2: 0.40;
@@ -766,7 +766,7 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: rgba(var(--gold-ink-rgb), 0.82);
+  background: rgba(var(--gold-ink-rgb), 0.90);
   pointer-events: none;
 }
 
