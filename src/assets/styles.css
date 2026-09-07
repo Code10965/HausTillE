@@ -44,6 +44,7 @@
   --wine-deep: #3D0010;
   --gold: #A6803F;
   --gold-soft: #C9A768;
+  --gold-ink: #1e170b;
 
   --ink-rgb: 28, 28, 26;
   --slate-rgb: 92, 93, 88;
@@ -54,6 +55,10 @@
   --wine-deep-rgb: 61, 0, 16;
   --gold-rgb: 166, 128, 63;
   --gold-soft-rgb: 201, 167, 104;
+  /* Stark verdunkelte Version von --gold-rgb, nur für den Kontakt-Bildschleier -
+  sorgt für einen warmen, dunklen Farbton statt neutralem Schwarz, bleibt
+  aber erkennbar mit dem Gold-Akzent der Seite verwandt. */
+  --gold-ink-rgb: 30, 23, 11;
 
   --blob-opacity-photo-1: 0.30;
   --blob-opacity-photo-2: 0.40;
@@ -740,7 +745,35 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   transition: opacity 2800ms ease-in-out, transform 9000ms ease-out;
 }
 
-.contact { position: relative; background: var(--ink); color: var(--paper); }
+.contact {
+  position: relative;
+  background-color: var(--ink); /* Fallback, falls das Bild noch lädt oder fehlschlägt */
+  background-image: url('media/Contact/contact-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: var(--paper);
+}
+
+/* ---------- Dunkler Schleier über dem Hintergrundbild ----------
+   Ohne diesen Schleier wäre der helle Text (var(--paper)/var(--gold-soft))
+   je nach Bildmotiv nicht mehr zuverlässig lesbar. Liegt als eigene Ebene
+   ZWISCHEN Hintergrundbild und Inhalt (z-index 0 vs. 1 bei .section-inner
+   weiter unten) - genau wie der Fog-Abdunkler bei den Foto-Kacheln weiter
+   oben in dieser Datei (.photo-frame[data-gallery]::before), nur hier
+   permanent statt nur im Blob-Hover-Zustand. */
+.contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(var(--gold-ink-rgb), 0.82);
+  pointer-events: none;
+}
+
+.contact .section-inner {
+  position: relative;
+  z-index: 1;
+}
 .contact-title { color: var(--paper); }
 .contact-text {
   line-height: 1.7;
