@@ -748,7 +748,7 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
 .contact {
   position: relative;
   background-color: var(--ink); /* Fallback, falls das Bild noch lädt oder fehlschlägt */
-  background-image: url('media/Contact/contact-bg.jpg');
+  background-image: url('media/contact/contact-bg.jpg');
   background-size: cover;
   background-position: center;
   color: var(--paper);
