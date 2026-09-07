@@ -24,11 +24,6 @@ const NAV_SCENES_PATH = path.resolve(__dirname, "../../src/assets/media/js/navSc
 
 let rowTarget, stackTarget, buildRowToStackScenes, buildStackToRowScenes, buildStepDurations, stackExtent;
 
-test.beforeAll(async () => {
-  const mod = await import(pathToFileURL(NAV_SCENES_PATH).href);
-  ({ rowTarget, stackTarget, buildRowToStackScenes, buildStackToRowScenes, buildStepDurations, stackExtent } = mod);
-});
-
 const BALL = 44, ROW_GAP = 12, STACK_GAP = 6, SMALL_SCALE = 0.32;
 const R = (slot) => rowTarget(slot, 20, 20, BALL, ROW_GAP);
 const S = (slot) => stackTarget(slot, 20, 20, BALL, STACK_GAP);
@@ -39,8 +34,20 @@ const SLOT = { M: 0, S: 1, C: 2, E: 3 };
 // Positions-Label -> tatsächliche Position, wie in der Referenztabelle
 // benannt (Reihe: links/2.links/2.rechts/rechts=Rand; Stapel:
 // oben/2.oben/2.unten/unten).
-const ROW_POS = { rand: R(0), zweiRechts: R(1), zweiLinks: R(2), links: R(3) };
-const STACK_POS = { oben: S(0), zweiOben: S(1), zweiUnten: S(2), unten: S(3) };
+// WICHTIG: Diese hängen von rowTarget/stackTarget ab, die erst durch den
+// dynamischen Import unten in beforeAll gesetzt werden. Deshalb werden sie
+// hier nur deklariert und erst INNERHALB von beforeAll tatsächlich
+// berechnet - sonst wären sie beim Laden des Moduls noch undefined
+// (Fehler: "rowTarget is not a function").
+let ROW_POS, STACK_POS;
+
+test.beforeAll(async () => {
+  const mod = await import(pathToFileURL(NAV_SCENES_PATH).href);
+  ({ rowTarget, stackTarget, buildRowToStackScenes, buildStackToRowScenes, buildStepDurations, stackExtent } = mod);
+
+  ROW_POS = { rand: R(0), zweiRechts: R(1), zweiLinks: R(2), links: R(3) };
+  STACK_POS = { oben: S(0), zweiOben: S(1), zweiUnten: S(2), unten: S(3) };
+});
 
 /** Baut aus { E, K, S, M } (Label oder null) ein Szenen-Array (Index=Slot). */
 function rowScene({ E, K, S: Sp, M }) {
@@ -78,75 +85,88 @@ function expectMatches(generated, expected, label) {
 // ============================================================
 // Referenz-Szenen 1-31 aus Scroll_logic_Nav_Kugeln.xlsx
 // ============================================================
+// Diese Funktionen greifen auf ROW_POS/STACK_POS zu, deshalb dürfen sie
+// erst INNERHALB der Tests aufgerufen werden (nach beforeAll), nicht mehr
+// beim Laden des Moduls wie vorher.
 
 // Szenen 1-8: HERO, runter (Reihe -> Stapel, variant "hero")
-const scenes1to8 = [
-  rowScene({ E: "links", K: "zweiLinks", S: "zweiRechts", M: "rand" }),
-  rowScene({ E: "zweiLinks", K: "zweiRechts", M: "rand" }),
-  rowScene({ E: "zweiRechts", M: "rand" }),
-  rowScene({ M: "rand" }),
-  stackScene({ M: "oben" }),
-  stackScene({ E: "zweiOben", M: "oben" }),
-  stackScene({ E: "zweiUnten", K: "zweiOben", M: "oben" }),
-  stackScene({ E: "unten", K: "zweiUnten", S: "zweiOben", M: "oben" }),
-];
+function getScenes1to8() {
+  return [
+    rowScene({ E: "links", K: "zweiLinks", S: "zweiRechts", M: "rand" }),
+    rowScene({ E: "zweiLinks", K: "zweiRechts", M: "rand" }),
+    rowScene({ E: "zweiRechts", M: "rand" }),
+    rowScene({ M: "rand" }),
+    stackScene({ M: "oben" }),
+    stackScene({ E: "zweiOben", M: "oben" }),
+    stackScene({ E: "zweiUnten", K: "zweiOben", M: "oben" }),
+    stackScene({ E: "unten", K: "zweiUnten", S: "zweiOben", M: "oben" }),
+  ];
+}
 
 // Szenen 8-15: FOOTER, runter (Stapel -> Reihe, variant "footer") - Szene 8 = scenes1to8[7]
-const scenes9to15 = [
-  stackScene({ K: "unten", S: "zweiUnten", M: "zweiOben" }),
-  stackScene({ S: "unten", M: "zweiUnten" }),
-  stackScene({ M: "unten" }),
-  rowScene({ M: "rand" }),
-  rowScene({ E: "zweiRechts", M: "rand" }),
-  rowScene({ E: "zweiLinks", K: "zweiRechts", M: "rand" }),
-  rowScene({ E: "links", K: "zweiLinks", S: "zweiRechts", M: "rand" }),
-];
+function getScenes9to15() {
+  return [
+    stackScene({ K: "unten", S: "zweiUnten", M: "zweiOben" }),
+    stackScene({ S: "unten", M: "zweiUnten" }),
+    stackScene({ M: "unten" }),
+    rowScene({ M: "rand" }),
+    rowScene({ E: "zweiRechts", M: "rand" }),
+    rowScene({ E: "zweiLinks", K: "zweiRechts", M: "rand" }),
+    rowScene({ E: "links", K: "zweiLinks", S: "zweiRechts", M: "rand" }),
+  ];
+}
 
 // Szenen 16-23: FOOTER, hoch (Reihe -> Stapel, variant "footer")
-const scenes16to23 = [
-  rowScene({ E: "links", K: "zweiLinks", S: "zweiRechts", M: "rand" }),
-  rowScene({ E: "zweiLinks", K: "zweiRechts", M: "rand" }),
-  rowScene({ E: "zweiRechts", M: "rand" }),
-  rowScene({ M: "rand" }),
-  stackScene({ M: "unten" }),
-  stackScene({ S: "unten", M: "zweiUnten" }),
-  stackScene({ S: "zweiUnten", K: "unten", M: "zweiOben" }),
-  stackScene({ S: "zweiOben", K: "zweiUnten", E: "unten", M: "oben" }),
-];
+function getScenes16to23() {
+  return [
+    rowScene({ E: "links", K: "zweiLinks", S: "zweiRechts", M: "rand" }),
+    rowScene({ E: "zweiLinks", K: "zweiRechts", M: "rand" }),
+    rowScene({ E: "zweiRechts", M: "rand" }),
+    rowScene({ M: "rand" }),
+    stackScene({ M: "unten" }),
+    stackScene({ S: "unten", M: "zweiUnten" }),
+    stackScene({ S: "zweiUnten", K: "unten", M: "zweiOben" }),
+    stackScene({ S: "zweiOben", K: "zweiUnten", E: "unten", M: "oben" }),
+  ];
+}
 
 // Szenen 23-31: HERO, hoch (Stapel -> Reihe, variant "hero") - Szene 23 = scenes16to23[7]
-const scenes25to31 = [
-  stackScene({ K: "zweiOben", E: "zweiUnten", M: "oben" }),
-  stackScene({ E: "zweiOben", M: "oben" }),
-  stackScene({ M: "oben" }),
-  rowScene({ M: "rand" }),
-  rowScene({ E: "zweiRechts", M: "rand" }),
-  rowScene({ E: "zweiLinks", K: "zweiRechts", M: "rand" }),
-  rowScene({ E: "links", K: "zweiLinks", S: "zweiRechts", M: "rand" }),
-];
+function getScenes25to31() {
+  return [
+    stackScene({ K: "zweiOben", E: "zweiUnten", M: "oben" }),
+    stackScene({ E: "zweiOben", M: "oben" }),
+    stackScene({ M: "oben" }),
+    rowScene({ M: "rand" }),
+    rowScene({ E: "zweiRechts", M: "rand" }),
+    rowScene({ E: "zweiLinks", K: "zweiRechts", M: "rand" }),
+    rowScene({ E: "links", K: "zweiLinks", S: "zweiRechts", M: "rand" }),
+  ];
+}
 
 test("HERO -> STAPEL (Szenen 1-8, variant='hero')", async () => {
   const generated = buildRowToStackScenes(4, R, S, SMALL_SCALE, "hero");
   expect(generated).toHaveLength(8);
-  expectMatches(generated, scenes1to8, "Hero->Stapel");
+  expectMatches(generated, getScenes1to8(), "Hero->Stapel");
 });
 
 test("STAPEL -> FOOTER (Szenen 8-15, variant='footer')", async () => {
   const generated = buildStackToRowScenes(4, R, S, SMALL_SCALE, "footer");
   expect(generated).toHaveLength(8);
-  expectMatches(generated, [scenes1to8[7], ...scenes9to15], "Stapel->Footer");
+  const scenes1to8 = getScenes1to8();
+  expectMatches(generated, [scenes1to8[7], ...getScenes9to15()], "Stapel->Footer");
 });
 
 test("FOOTER -> STAPEL (Szenen 16-23, variant='footer')", async () => {
   const generated = buildRowToStackScenes(4, R, S, SMALL_SCALE, "footer");
   expect(generated).toHaveLength(8);
-  expectMatches(generated, scenes16to23, "Footer->Stapel");
+  expectMatches(generated, getScenes16to23(), "Footer->Stapel");
 });
 
 test("STAPEL -> HERO (Szenen 23-31, variant='hero')", async () => {
   const generated = buildStackToRowScenes(4, R, S, SMALL_SCALE, "hero");
   expect(generated).toHaveLength(8);
-  expectMatches(generated, [scenes16to23[7], ...scenes25to31], "Stapel->Hero");
+  const scenes16to23 = getScenes16to23();
+  expectMatches(generated, [scenes16to23[7], ...getScenes25to31()], "Stapel->Hero");
 });
 
 test("der komplette Zyklus schließt sich: Szene 31 entspricht wieder Szene 1", async () => {
