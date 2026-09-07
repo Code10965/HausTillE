@@ -1,0 +1,146 @@
+---
+layout: layout.njk
+page_key: events
+pagination:
+  data: languageList
+  size: 1
+  alias: lang
+permalink: "{{ pages.events[lang] }}"
+---
+{#
+  events.njk: eigenständige Seite für "Veranstaltungen" (analog zu
+  imprint.njk / privacy.njk) - eigene URL pro Sprache über pages.events,
+  eigene Texte über t.events.*, Zurück-Leiste + Logo kommen automatisch
+  aus nav.njk (dort greift der "sonst"-Zweig für jeden page_key ausser
+  "home").
+
+  Struktur:
+  1. Eyebrow "Events rund ums Haus Till E"
+  2. Headline "Veranstaltungen." + kursive Zeile "Klassisch und Innovativ"
+     (nutzt dieselbe .section-title-line2-Klasse wie auf der Startseite -
+     dort ist "kursiv + Weinrot" schon exakt so definiert)
+  3. Karussell mit 3 bis 10 Events (t.events.items) - Aufbau/Verhalten
+     siehe eventsCarousel.js
+
+  Der Hintergrund bekommt denselben "Blob"-Effekt wie im Hero: ein
+  .ambient-bg mit fünf .ambient-layer-*-Kindern. heroAmbient.js sucht
+  automatisch ALLE .ambient-bg-Container auf der Seite ab (nicht nur die
+  der Startseite) - hier ist also nichts weiter nötig, damit sich die
+  Farbflächen auch auf dieser Seite sanft bewegen.
+#}
+{% set t = de %}
+{% if lang == "en" %}{% set t = en %}{% endif %}
+{% if lang == "nl" %}{% set t = nl %}{% endif %}
+
+<section class="reveal-section tone-cloud events-section visible">
+  <div class="ambient-bg" aria-hidden="true">
+    <div class="ambient-layer ambient-layer-1"></div>
+    <div class="ambient-layer ambient-layer-2"></div>
+    <div class="ambient-layer ambient-layer-3"></div>
+    <div class="ambient-layer ambient-layer-4"></div>
+    <div class="ambient-layer ambient-layer-5"></div>
+  </div>
+
+  <div class="section-inner">
+    <div class="eyebrow-row">
+      <span class="mono-label wine-label">{{ t.events.eyebrow }}</span>
+      <span class="eyebrow-line"></span>
+    </div>
+
+    <h1 class="section-title">
+      {{ t.events.title }}<br />
+      <span class="section-title-line2">{{ t.events.subtitle }}</span>
+    </h1>
+
+    {# ---------- Karussell ----------
+       data-events-carousel markiert den Container, den eventsCarousel.js
+       sucht (Muster wie ".ambient-bg"/".crossfade-group": JS sucht selbst
+       nach seinen Elementen, läuft ins Leere, wenn keine da sind).
+
+       data-autoplay-ms erlaubt es, das Tempo direkt im Template zu
+       justieren, ohne die JS-Datei anzufassen - Default (falls das
+       Attribut fehlt) steht in eventsCarousel.js. #}
+    <div
+      class="events-carousel"
+      data-events-carousel
+      data-autoplay-ms="6500"
+      aria-roledescription="carousel"
+      aria-label="{{ t.events.eyebrow }}"
+    >
+      <div class="events-viewport" data-events-viewport>
+        <ul class="events-track" data-events-track>
+          {% for item in t.events.items %}
+          <li
+            class="event-slide"
+            role="group"
+            aria-roledescription="slide"
+            aria-label="{{ item.title }} ({{ loop.index }} {{ t.events.carousel.of }} {{ t.events.items.length }})"
+            {% if not loop.first %}aria-hidden="true"{% endif %}
+            data-events-slide
+          >
+            <article class="event-card">
+              <div class="event-photo">
+                <img
+                  src="{{ item.image.src | url }}"
+                  alt="{{ item.image.alt }}"
+                  loading="lazy"
+                  {% if not loop.first %}decoding="async"{% endif %}
+                />
+              </div>
+              <div class="event-info">
+                <p class="mono-label event-meta">
+                  <span class="event-date">{{ item.date }}</span>
+                  <span class="event-meta-dot" aria-hidden="true">&middot;</span>
+                  <span class="event-time">{{ item.time }}</span>
+                </p>
+                <h2 class="event-title">{{ item.title }}</h2>
+                <p class="event-location">
+                  <svg class="event-location-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 21s-7-6.1-7-11.4A7 7 0 0 1 19 9.6C19 14.9 12 21 12 21Z"></path>
+                    <circle cx="12" cy="9.5" r="2.4"></circle>
+                  </svg>
+                  {{ item.location }}
+                </p>
+                <p class="event-description">{{ item.description }}</p>
+              </div>
+            </article>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="events-controls">
+        <button type="button" class="events-arrow events-prev" data-events-prev aria-label="{{ t.events.carousel.prev_aria }}">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
+        </button>
+
+        <button type="button" class="events-playpause" data-events-playpause data-play-label="{{ t.events.carousel.play_aria }}" aria-pressed="false" aria-label="{{ t.events.carousel.pause_aria }}">
+          <svg class="icon-pause" data-icon-pause viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg>
+          <svg class="icon-play" data-icon-play viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" hidden><polygon points="7 4 20 12 7 20"></polygon></svg>
+        </button>
+
+        <div class="events-dots" data-events-dots role="tablist" aria-label="{{ t.events.carousel.dots_aria }}">
+          {% for item in t.events.items %}
+          <button
+            type="button"
+            class="events-dot{% if loop.first %} is-active{% endif %}"
+            data-events-dot="{{ loop.index0 }}"
+            role="tab"
+            aria-selected="{% if loop.first %}true{% else %}false{% endif %}"
+            aria-label="{{ t.events.carousel.goto_aria }} {{ loop.index }}"
+          ></button>
+          {% endfor %}
+        </div>
+
+        <button type="button" class="events-arrow events-next" data-events-next aria-label="{{ t.events.carousel.next_aria }}">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+        </button>
+      </div>
+
+      {# Für Screenreader: still (visuell versteckt), meldet bei jedem
+         Wechsel "Titel (2 von 5)" - dieselbe .visually-hidden-Klasse wird
+         gleich in styles.css ergänzt. #}
+      <p class="visually-hidden" data-events-live aria-live="polite"></p>
+    </div>
+  </div>
+</section>

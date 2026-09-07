@@ -11,6 +11,7 @@ import { renderPhoneContacts } from "./phoneContact.js";
 import { alignContactBoxWidths } from "./contactUtils.js";
 import { setupGallery } from "./gallery.js";
 import { setupNav } from "./nav.js";
+import { setupEventsCarousel } from "./eventsCarousel.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   setupCrossfadeGroups();
@@ -22,4 +23,5 @@ document.addEventListener("DOMContentLoaded", () => {
   alignContactBoxWidths(".copy-btn");
   setupGallery();
   setupNav();
+  setupEventsCarousel(); // läuft ins Leere auf Seiten ohne [data-events-carousel]
 });

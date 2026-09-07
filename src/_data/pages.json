@@ -13,5 +13,10 @@
     "de": "/de/datenschutz/",
     "en": "/en/privacypolicy/",
     "nl": "/nl/privacybeleid/"
+  },
+  "events": {
+    "de": "/de/veranstaltungen/",
+    "en": "/en/events/",
+    "nl": "/nl/evenementen/"
   }
 }

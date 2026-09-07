@@ -1,42 +1,34 @@
-// ---------- Position aller drei Kugeln + ihrer Panels beim Scrollen ----------
+// ---------- Position aller Kugeln + ihrer Panels beim Scrollen ----------
 //
 // Layout-Prinzip:
-// - Ganz oben (Hero) ODER ganz unten (Kontakt-Sektion), "groß": alle drei
+// - Ganz oben (Hero) ODER ganz unten (Kontakt-Sektion), "groß": alle
 //   Kugeln nebeneinander in einer Reihe, rechtsbündig. Von rechts nach
-//   links: Menü (Slot 0, am Rand) -> Sprache (Slot 1) -> Kontakt (Slot 2).
-// - Dazwischen gescrollt, "klein": senkrecht gestapelt - Menü oben, Sprache
-//   darunter, Kontakt ganz unten.
+//   links: Menü (Slot 0, am Rand) -> Sprache (Slot 1) -> Kontakt (Slot 2)
+//   -> Events (Slot 3) -> ... (höhere Slots weiter außen/links).
+// - Dazwischen gescrollt, "klein": senkrecht gestapelt - Menü oben,
+//   darunter in Slot-Reihenfolge alle weiteren Kugeln.
 //
-// WICHTIG: Die beiden Richtungen sind NICHT spiegelbildlich zueinander,
-// sondern zwei eigenständige, unterschiedlich choreografierte Abläufe
-// (nach zwei getrennten Vorlagen):
+// WICHTIG: die eigentliche Szenen-Choreografie (welche Kugel wann
+// sichtbar wird/verschwindet, wohin sie sich bewegt) steckt komplett in
+// navScenes.js, nicht hier - diese Datei kümmert sich nur noch ums
+// Anwenden (Inline-Styles setzen, Timing, Scroll-Events). Ausführliche
+// Erklärung der vier Choreografie-Varianten (Hero verhält sich anders
+// als Footer!) direkt am Kopf von navScenes.js.
 //
-// REIHE -> STAPEL (rowToStackScenes):
-//   0: alle drei groß in der Reihe.
-//   1: Menü unsichtbar. Sprache UND Kontakt rücken sichtbar nach (Sprache
-//      übernimmt Menüs Randposition, Kontakt übernimmt Spraches alte
-//      Position) - noch alle groß.
-//   2: Sprache zusätzlich unsichtbar. Kontakt rückt weiter vor auf die
-//      Randposition - immer noch groß, jetzt allein sichtbar.
-//   3: Kontakt wandert (allein) zu ihrer EIGENEN Stapel-Position und
-//      schrumpft dabei.
-//   4: Sprache erscheint (schon klein) an ihrer Stapel-Position.
-//   5: Menü erscheint (schon klein) an seiner Stapel-Position - fertig.
-//
-// STAPEL -> REIHE (stackToRowScenes) - andere Reihenfolge:
-//   0: alle drei klein im Stapel.
-//   1: Kontakt (unterste) wird unsichtbar. Menü, Sprache bleiben unverändert.
-//   2: Sprache zusätzlich unsichtbar. Nur noch Menü sichtbar (klein, oben).
-//   3: Menü wächst (allein) zu ihrer EIGENEN Reihen-Position (Rand).
-//   4: Kontakt erscheint groß, aber zunächst auf dem NÄCHSTEN freien Platz
-//      (nicht ihrer finalen Position) direkt neben Menü.
-//   5: Sprache erscheint groß auf demselben Platz - Kontakt rückt dabei
-//      weiter auf ihre finale (äußerste) Position - fertig.
-//
-// Beide laufen komplett über Inline-Styles (nicht CSS-Variablen), weil
-// sonst jeder Scroll-Frame die laufende Animation überschreiben würde. Aus
-// demselben Grund wird auch die Größe (normalerweise per CSS-Klasse groß/
-// klein geschaltet) während der Choreografie explizit pro Szene gesteuert.
+// Beide Richtungen laufen komplett über Inline-Styles (nicht
+// CSS-Variablen), weil sonst jeder Scroll-Frame die laufende Animation
+// überschreiben würde. Aus demselben Grund wird auch die Größe
+// (normalerweise per CSS-Klasse groß/klein geschaltet) während der
+// Choreografie explizit pro Szene gesteuert.
+
+import {
+  rowTarget,
+  stackTarget,
+  buildRowToStackScenes,
+  buildStackToRowScenes,
+  buildStepDurations,
+  stackExtent
+} from "./navScenes.js";
 
 const BALL = 44; // muss zu Breite/Höhe von .nav-ball in styles.css passen
 const ROW_GAP = 12;
@@ -49,15 +41,40 @@ const EDGE_MARGIN = 20;
 const TOP_THRESHOLD = 80;
 const BOTTOM_THRESHOLD = 40;
 const SMALL_SCALE = 0.32; // muss zum scale()-Wert der CSS-Schrumpf-Regel passen
-const DRIFT_MAX = 14; // muss zum größten möglichen driftAmplitude-Wert unten passen (6 + 8)
+const DRIFT_MAX = 14; // muss zum größten möglichen driftAmplitude-Wert in navItems.js passen (6 + 8)
 
-const STEP_DURATIONS = [220, 220, 280, 220, 220]; // Dauer je Übergang zwischen zwei Szenen
 const START_SETTLE = 150; // sanfter (nicht instantaner) Start in Szene 0, fängt
                             // eventuelle Drift-Bewegung sauber ab statt hart
                             // "einzurasten" (das sah wie ein Überschießen aus)
-const OVERLAP = 0.55; // wie stark aufeinanderfolgende Schritte sich zeitlich
-                       // überlappen, für einen fließenderen statt abgehackten
-                       // Eindruck
+// War früher 0.55 (nächste Szene startet schon bei 55% der laufenden
+// Übergangsdauer) - das ließ zwei Positionswechsel überlappen: eine
+// Kugel bekam mitten in ihrer Bewegung (z.B. von rechts nach links) ein
+// neues Ziel und wechselte die Richtung, wodurch ein diagonaler
+// "Sprung" statt eines sauberen, geraden Wegs entstand. Jetzt läuft
+// jede Szene vollständig zu Ende, BEVOR die nächste beginnt.
+const OVERLAP = 1;
+
+// Kleiner zeitlicher Versatz zwischen den Kugeln INNERHALB derselben
+// Szene: statt dass alle vier exakt im selben Frame lossausen und exakt
+// im selben Frame stehenbleiben (wirkte wie ein starrer Marschtakt),
+// startet jede Kugel ein kleines Stück später als die vorherige - wie
+// eine sanfte Welle. Bleibt trotzdem strikt sequenziell: die nächste
+// Szene wartet, bis auch die ZULETZT gestartete (also am stärksten
+// verzögerte) Kugel ihre Bewegung komplett beendet hat - der
+// "Sprung/Verwisch"-Effekt von vorher kann dadurch nicht zurückkommen.
+const STAGGER_MS = 16;
+
+// Zwei Übergangskurven statt einer einzigen für alle Schritte: eine
+// starke Ease-Out-Kurve bremst am ENDE ihrer Dauer bis zum Stillstand ab
+// - bei 7 Schritten hintereinander macht das 7 kleine "Vollbremsungen",
+// die das Auge als einzelne, hölzerne Bewegungen statt einer
+// durchgehenden Bewegung wahrnimmt (unabhängig von der Dauer der
+// einzelnen Schritte). Deshalb: alle ZWISCHENschritte laufen linear
+// (konstante Geschwindigkeit, kein Abbremsen) durch - nur der ALLERLETZTE
+// Schritt der gesamten Kette bekommt noch die sanft ausbremsende Kurve,
+// damit die Kugel am Ende ihrer Reise nicht hart einrastet.
+const EASE_CONTINUOUS = "linear";
+const EASE_SETTLE = "cubic-bezier(0.16,1,0.3,1)";
 
 export function setupScrollTrack(nav, items) {
   let ticking = false;
@@ -65,19 +82,13 @@ export function setupScrollTrack(nav, items) {
   let currentIsLarge = null;
   const timers = [];
 
-  const [menu, globe, contact] = items; // sortiert nach Slot: 0, 1, 2
+  const N = items.length; // Anzahl Kugeln - austauschbar, nicht mehr fest 3
 
   const currentEdge = () =>
     window.innerWidth < MOBILE_BREAKPOINT ? EDGE_MOBILE : EDGE_DESKTOP;
 
-  const rowTarget = (slot, baseTop, edge) => ({
-    top: baseTop,
-    right: edge + slot * (BALL + ROW_GAP)
-  });
-  const stackTarget = (slot, baseTop, smallEdge) => ({
-    top: baseTop + slot * (BALL + STACK_GAP),
-    right: smallEdge
-  });
+  const R = (slot, baseTop, edge) => rowTarget(slot, baseTop, edge, BALL, ROW_GAP);
+  const S = (slot, baseTop, smallEdge) => stackTarget(slot, baseTop, smallEdge, BALL, STACK_GAP);
 
   const positionDropdown = (item, ballTop, ballRight) => {
     const ballCenterY = ballTop + BALL / 2;
@@ -97,48 +108,12 @@ export function setupScrollTrack(nav, items) {
     }
   };
 
-  // ---- Szenen Reihe -> Stapel ----
-  const buildRowToStackScenes = (baseTopRow, baseTopStack, edge, smallEdge) => {
-    const R = (slot) => rowTarget(slot, baseTopRow, edge);
-    const S = (slot) => stackTarget(slot, baseTopStack, smallEdge);
-    return [
-      { menu: { vis: 1, pos: R(0), scale: 1 }, globe: { vis: 1, pos: R(1), scale: 1 }, contact: { vis: 1, pos: R(2), scale: 1 } },
-      { menu: { vis: 0, pos: R(0), scale: 1 }, globe: { vis: 1, pos: R(0), scale: 1 }, contact: { vis: 1, pos: R(1), scale: 1 } },
-      { menu: { vis: 0, pos: R(0), scale: 1 }, globe: { vis: 0, pos: R(0), scale: 1 }, contact: { vis: 1, pos: R(0), scale: 1 } },
-      // Kontakt wandert zunächst nur auf die MITTLERE Stapel-Position (Slot 1),
-      // nicht direkt auf ihre eigene (unterste) - Globe/Menü bleiben unsichtbar.
-      { menu: { vis: 0, pos: R(0), scale: 1 }, globe: { vis: 0, pos: S(1), scale: SMALL_SCALE }, contact: { vis: 1, pos: S(1), scale: SMALL_SCALE } },
-      // Kontakt zieht GLEICHZEITIG weiter auf ihre eigene (unterste) Position,
-      // während Globe genau an der nun frei werdenden mittleren Position erscheint.
-      { menu: { vis: 0, pos: R(0), scale: 1 }, globe: { vis: 1, pos: S(1), scale: SMALL_SCALE }, contact: { vis: 1, pos: S(2), scale: SMALL_SCALE } },
-      { menu: { vis: 1, pos: S(0), scale: SMALL_SCALE }, globe: { vis: 1, pos: S(1), scale: SMALL_SCALE }, contact: { vis: 1, pos: S(2), scale: SMALL_SCALE } }
-    ];
-  };
-
-  // ---- Szenen Stapel -> Reihe (eigenständig, NICHT die Umkehrung oben) ----
-  // Kontakt verschwindet zuerst (unterste im Stapel), Menü bleibt als
-  // einzige übrig und wächst zuerst; Kontakt erscheint danach zunächst auf
-  // dem Zwischenplatz direkt neben Menü, bevor Sprache erscheint und
-  // Kontakt auf ihre finale, äußerste Position weiterschiebt.
-  const buildStackToRowScenes = (baseTopRow, baseTopStack, edge, smallEdge) => {
-    const R = (slot) => rowTarget(slot, baseTopRow, edge);
-    const S = (slot) => stackTarget(slot, baseTopStack, smallEdge);
-    return [
-      { menu: { vis: 1, pos: S(0), scale: SMALL_SCALE }, globe: { vis: 1, pos: S(1), scale: SMALL_SCALE }, contact: { vis: 1, pos: S(2), scale: SMALL_SCALE } },
-      { menu: { vis: 1, pos: S(0), scale: SMALL_SCALE }, globe: { vis: 1, pos: S(1), scale: SMALL_SCALE }, contact: { vis: 0, pos: S(2), scale: SMALL_SCALE } },
-      { menu: { vis: 1, pos: S(0), scale: SMALL_SCALE }, globe: { vis: 0, pos: S(1), scale: SMALL_SCALE }, contact: { vis: 0, pos: S(2), scale: SMALL_SCALE } },
-      { menu: { vis: 1, pos: R(0), scale: 1 }, globe: { vis: 0, pos: S(1), scale: SMALL_SCALE }, contact: { vis: 0, pos: S(2), scale: SMALL_SCALE } },
-      { menu: { vis: 1, pos: R(0), scale: 1 }, globe: { vis: 0, pos: R(1), scale: 1 }, contact: { vis: 1, pos: R(1), scale: 1 } },
-      { menu: { vis: 1, pos: R(0), scale: 1 }, globe: { vis: 1, pos: R(1), scale: 1 }, contact: { vis: 1, pos: R(2), scale: 1 } }
-    ];
-  };
-
-  const applyItemState = (item, state, duration) => {
+  const applyItemState = (item, state, duration, delay = 0, easing = "cubic-bezier(0.16,1,0.3,1)") => {
     item.toggle.style.transition = duration
-      ? `opacity ${duration}ms ease, top ${duration}ms cubic-bezier(0.16,1,0.3,1), right ${duration}ms cubic-bezier(0.16,1,0.3,1)`
+      ? `opacity ${duration}ms ease ${delay}ms, top ${duration}ms ${easing} ${delay}ms, right ${duration}ms ${easing} ${delay}ms`
       : "none";
     item.visual.style.transition = duration
-      ? `transform ${duration}ms cubic-bezier(0.16,1,0.3,1)`
+      ? `transform ${duration}ms ${easing} ${delay}ms`
       : "none";
     void item.toggle.offsetWidth; // Reflow, damit die neue Transition sicher greift
 
@@ -150,10 +125,16 @@ export function setupScrollTrack(nav, items) {
     positionDropdown(item, state.pos.top, state.pos.right);
   };
 
-  const applyScene = (scene, duration) => {
-    applyItemState(menu, scene.menu, duration);
-    applyItemState(globe, scene.globe, duration);
-    applyItemState(contact, scene.contact, duration);
+  // scene ist jetzt ein Array (Index = Slot), statt der früheren festen
+  // { menu, globe, contact }-Objektform - dadurch beliebig viele Kugeln.
+  // `staggered`: bei true bekommt jede Kugel (nach ihrem Index in
+  // `items`, also aufsteigend nach Slot) einen um STAGGER_MS längeren
+  // Delay als die vorherige - die kleine "Welle" statt Gleichschritt.
+  // `easing`: siehe EASE_CONTINUOUS/EASE_SETTLE unten - entscheidet, ob
+  // dieser Schritt sanft ausbremst (letzter Schritt der Kette) oder
+  // linear durchläuft (alle Zwischenschritte, kein Zwischenstopp).
+  const applyScene = (scene, duration, staggered = false, easing = EASE_SETTLE) => {
+    items.forEach((item, i) => applyItemState(item, scene[i], duration, staggered ? i * STAGGER_MS : 0, easing));
   };
 
   const releaseOverrides = () => {
@@ -168,27 +149,48 @@ export function setupScrollTrack(nav, items) {
 
   const after = (ms, fn) => timers.push(setTimeout(fn, ms));
 
-  const playSequence = (toLarge, baseTopRow, baseTopStack, edge, smallEdge) => {
+  // Am HERO-Ende (obere Seitenhälfte) und am FOOTER-Ende (untere Hälfte)
+  // läuft die Reihe<->Stapel-Choreografie unterschiedlich ab (siehe
+  // ausführliche Erklärung in navScenes.js) - `fraction` (0 = ganz oben,
+  // 1 = ganz unten) entscheidet, welche der beiden Varianten gerade
+  // gilt. Wird im Moment der Auslösung ermittelt, nicht erst am Ende der
+  // Animation, damit z.B. beim Herausscrollen aus dem Hero (fraction
+  // noch klein) sicher die Hero-Variante läuft.
+  const playSequence = (toLarge, baseTopRow, baseTopStack, edge, smallEdge, fraction) => {
     timers.forEach(clearTimeout);
     timers.length = 0;
     isTransitioning = true;
 
+    const variant = fraction < 0.5 ? "hero" : "footer";
+    const rFn = (slot) => R(slot, baseTopRow, edge);
+    const sFn = (slot) => S(slot, baseTopStack, smallEdge);
     const scenes = toLarge
-      ? buildStackToRowScenes(baseTopRow, baseTopStack, edge, smallEdge)
-      : buildRowToStackScenes(baseTopRow, baseTopStack, edge, smallEdge);
+      ? buildStackToRowScenes(N, rFn, sFn, SMALL_SCALE, variant)
+      : buildRowToStackScenes(N, rFn, sFn, SMALL_SCALE, variant);
+    const stepDurations = buildStepDurations(N);
 
     // Sanft (nicht instantan) in Szene 0 "einschwingen" - fängt eventuelle
     // Restbewegung (Drift) der letzten kontinuierlichen Position ab, statt
     // hart einzurasten (das sah wie ein Überschießen über das Ziel aus).
-    applyScene(scenes[0], START_SETTLE);
+    // Kein Stagger hier - das Einschwingen betrifft alle Kugeln an ihrer
+    // aktuellen (ggf. leicht drivenden) Position gleichermaßen.
+    applyScene(scenes[0], START_SETTLE, false);
+
+    // Effektive Dauer eines Schritts = Basisdauer + Versatz der zuletzt
+    // (am stärksten verzögert) startenden Kugel - erst wenn DIE fertig
+    // ist, darf die nächste Szene beginnen (siehe STAGGER_MS oben).
+    const staggerSpan = (N - 1) * STAGGER_MS;
 
     let startAt = START_SETTLE;
     let finishAt = startAt;
     for (let i = 1; i < scenes.length; i++) {
-      const dur = STEP_DURATIONS[i - 1];
-      after(startAt, () => applyScene(scenes[i], dur));
-      finishAt = startAt + dur;
-      startAt += dur * OVERLAP;
+      const dur = stepDurations[i - 1];
+      const stepTime = dur + staggerSpan;
+      const isLastStep = i === scenes.length - 1;
+      const easing = isLastStep ? EASE_SETTLE : EASE_CONTINUOUS;
+      after(startAt, () => applyScene(scenes[i], dur, true, easing));
+      finishAt = startAt + stepTime;
+      startAt += stepTime * OVERLAP;
     }
 
     after(finishAt + 40, () => {
@@ -201,16 +203,16 @@ export function setupScrollTrack(nav, items) {
     const trackTopMin = 20;
     // Reihe und Stapel brauchen UNTERSCHIEDLICH viel Platz nach unten: die
     // Reihe nur die Höhe einer einzelnen Kugel, der Stapel die Höhe aller
-    // drei übereinander. Würde man für beide denselben Basiswert verwenden,
-    // reicht der Stapel bei gleicher Basis immer ~100px weiter nach unten
-    // als die Reihe (genau der Bug aus den Screenshots). Deshalb zwei
-    // getrennte Obergrenzen: rowMax ist großzügiger (fast bis zum Rand),
-    // stackMax ist so viel kleiner, dass der Stapel an SEINER Obergrenze
-    // exakt genauso tief reicht wie die Reihe an IHRER (siehe Rechnung
-    // unten) - plus Puffer für die maximale Drift-Auslenkung.
-    const stackExtent = 2 * (BALL + STACK_GAP) + BALL; // Gesamthöhe des Stapels
+    // N Kugeln übereinander. Würde man für beide denselben Basiswert
+    // verwenden, reicht der Stapel bei gleicher Basis immer weiter nach
+    // unten als die Reihe (genau der Bug aus den früheren Screenshots).
+    // Deshalb zwei getrennte Obergrenzen: rowMax ist großzügiger (fast
+    // bis zum Rand), stackMax ist so viel kleiner, dass der Stapel an
+    // SEINER Obergrenze exakt genauso tief reicht wie die Reihe an IHRER -
+    // plus Puffer für die maximale Drift-Auslenkung.
+    const extent = stackExtent(N, BALL, STACK_GAP); // Gesamthöhe des Stapels
     const rowMax = window.innerHeight - BALL - EDGE_MARGIN;
-    const stackMax = rowMax - (stackExtent - BALL) - DRIFT_MAX;
+    const stackMax = rowMax - (extent - BALL) - DRIFT_MAX;
 
     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
     const fraction = scrollable > 0 ? window.scrollY / scrollable : 0;
@@ -235,8 +237,8 @@ export function setupScrollTrack(nav, items) {
       currentIsLarge = isLarge;
       items.forEach((item) => {
         const pos = isLarge
-          ? rowTarget(item.slot, baseTopRow, edge)
-          : stackTarget(item.slot, baseTopStack, smallEdge);
+          ? R(item.slot, baseTopRow, edge)
+          : S(item.slot, baseTopStack, smallEdge);
         item.toggle.style.top = `${pos.top}px`;
         item.toggle.style.right = `${pos.right}px`;
         positionDropdown(item, pos.top, pos.right);
@@ -246,7 +248,7 @@ export function setupScrollTrack(nav, items) {
 
     if (isLarge !== currentIsLarge) {
       currentIsLarge = isLarge;
-      playSequence(isLarge, baseTopRow, baseTopStack, edge, smallEdge);
+      playSequence(isLarge, baseTopRow, baseTopStack, edge, smallEdge, fraction);
       return;
     }
 

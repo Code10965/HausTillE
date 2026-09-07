@@ -20,6 +20,14 @@
 {% set meta_title = t.meta["title_" + page_key] %}
 {% set meta_description = t.meta["description_" + page_key] %}
 
+{# ---------- page_urls: zentral hier oben definiert ----------
+   Wird sowohl für die Open-Graph-Tags (og:url) als auch weiter unten für
+   hreflang/canonical gebraucht. Steht bewusst hier bei den anderen
+   {% set %}-Variablen (t, meta_title, meta_description) statt erst
+   später im Dokument - so bleiben alle zentralen Werte an einer Stelle
+   und der komplette Open-Graph-Block kann zusammenhängend stehen. #}
+{% set page_urls = pages[page_key] %}
+
 <!doctype html>
 <html lang="{{ lang }}">
   <head>
@@ -27,6 +35,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ meta_title }}</title>
     <meta name="description" content="{{ meta_description }}" />
+
+    {# ---------- Open Graph / Twitter Card ----------
+       Bestimmt Bild + Text, den Messenger (WhatsApp, iMessage, Slack ...)
+       beim Teilen eines Links anzeigen. og:image MUSS eine absolute URL
+       mit Domain sein - deshalb hier site.baseUrl direkt (wie bei
+       hreflang/JSON-LD), NICHT der "| url"-Filter: der ist nur für den
+       lokalen/GitHub-Pages-Unterordner-Testfall gedacht, og:image soll
+       aber immer auf die echte, finale Domain zeigen.
+       t.meta.og_image kommt aus der jeweiligen Sprachdatei (de.json/
+       en.json/nl.json) - so kann jede Sprache ihr eigenes Vorschaubild
+       haben, genau wie bei title_home & Co. #}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ meta_title }}" />
+    <meta property="og:description" content="{{ meta_description }}" />
+    <meta property="og:image" content="{{ site.baseUrl }}{{ t.meta.og_image }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="{{ site.baseUrl }}{{ page_urls[lang] }}" />
+    <meta property="og:locale" content="{{ lang }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'self'">
 
     {# ---------- Unterordner-fest ----------
@@ -55,7 +84,6 @@
        aus site.json - das ist unabhängig vom pathPrefix und bleibt hier
        unverändert, da hreflang/canonical immer eine absolute URL mit
        Domain brauchen, nicht nur einen Pfad. #}
-    {% set page_urls = pages[page_key] %}
     {% for altLang, url in page_urls %}
     <link rel="alternate" hreflang="{{ altLang }}" href="{{ site.baseUrl }}{{ url }}" />
     {% endfor %}

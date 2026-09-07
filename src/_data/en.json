@@ -1,11 +1,14 @@
 {
   "meta": {
+    "og_image": "/assets/media/og/og-preview-en.jpg",
     "title_home": "Haus Till E",
     "description_home": "Your home on the Moselle. A first-class bed-and-breakfast hotel",
     "title_imprint": "Imprint — Haus Till E",
     "description_imprint": "Imprint pursuant to § 5 TMG.",
     "title_privacy": "Privacy Policy — Haus Till E",
-    "description_privacy": "Privacy policy in accordance with Art. 13 GDPR."
+    "description_privacy": "Privacy policy in accordance with Art. 13 GDPR.",
+    "title_events": "Events – Haus Till E",
+    "description_events": "Classic and innovative events at Haus Till E on the Moselle: wine tastings, festivals and more."
   },
   "nav": {
     "menu_aria": "Open menu",
@@ -34,7 +37,6 @@
       "sub": "In this listed Art Deco house full of history, five individual double rooms await you, each brimming with charm and character. Start the day with a delicious breakfast in our cosy breakfast room — before losing track of time in our wildly romantic garden.",
       "scroll_hint": "Scroll to read"
     },
-
     "home_details": {
       "eyebrow": "01 — Your home on the Moselle",
       "title_line1": "A home.",
@@ -62,19 +64,48 @@
         "Info": ""
       },
       "accordion": [
-        { "title": "Directions", "content": "Haus Till E is within walking distance of the Moselle, right in the heart of Zell's old town, at Schloßstraße 10. Coming from Bullay, you drive through the Zell-Merl district into Zell's old town. Other routes lead via the Zeller Berg and Grenderich (L199), through the Altlay valley (L194), or from Kappel via the B421. By train, you can reach us via the Bullay eco-station — from there, a bus takes you about 3 km to the Lindenplatz stop, just a short walk from Haus Till E. The nearest airport is Frankfurt-Hahn (approx. 20 km). Whether from the train station or the airport: just let us know — we're happy to pick you up by car! (for a small contribution towards costs)" },
-        { "title": "Address", "content": "Haus Till E is located at Schloßstraße 10, 56856 Zell (Mosel) — right at the foot of the steep vineyard „Zeller Schwarze Katz“, just a few minutes' walk from the Moselle promenade and the old town." },
-        { "title": "Parking", "content": "Numerous free parking spaces are available along the Moselle riverside. You can park directly on Schloßstraße with a parking ticket — for loading and unloading your luggage, the free 30-minute ticket is usually enough." },
-        { "title": "Pets", "content": "We both love dogs dearly — but over the years we've had some experiences that led us to rethink. For this reason, bringing dogs to Haus Till E is currently not possible. Thank you for your understanding." },
-        { "title": "Limitations", "content": "Haus Till E is a listed building from the 1920s with no lift — the rooms are only accessible via the stairs. <br><br>Smoking is not permitted inside the house, including on the balconies; however, you are welcome to smoke in our garden at any time." },
-        { "title": "Bicycles", "content": "You can safely park and charge your regular or electric bicycles in our outbuilding. <br><br>If you'd prefer to rent locally: our guests are especially happy with the bike rental services from Wanderland (Balduinstraße 95) and Moselglück (Balduinstraße 43) — both offer well-maintained bikes right in Zell." },
-        { "title": "Air conditioning", "content": "There is no classic air conditioning in our historic house. On particularly warm days, we're happy to bring a modern, bladeless tower fan (8 speed settings) to your room on request — just let us know." },
-        { "title": "Lactose, gluten, etc.", "content": "We may not always have every product for every intolerance in stock as standard. It's best to let us know your needs already at the time of booking — we're happy to accommodate you." },
-        { "title": "Family and children", "content": "Haus Till E is regularly booked by entire families or groups of friends — we've had the pleasure of witnessing many a milestone birthday and hosting three or four generations at once throughout the house. It brings us great joy to provide the setting for unforgettable shared moments." },
-        { "title": "Arrival and departure times", "content": "Since we run the hotel with a small team, check-in is available between 4:00 PM and 6:00 PM. If your room happens to be ready earlier, we’ll be sure to let you know right away. We wish we could just wave a magic wand – until that works out, we simply work quickly and carefully so your room is ready by 4:00 PM. <br><br>We would ask you to check out by 11.00 am." }
+        {
+          "title": "Directions",
+          "content": "Haus Till E is within walking distance of the Moselle, right in the heart of Zell's old town, at Schloßstraße 10. Coming from Bullay, you drive through the Zell-Merl district into Zell's old town. Other routes lead via the Zeller Berg and Grenderich (L199), through the Altlay valley (L194), or from Kappel via the B421. By train, you can reach us via the Bullay eco-station — from there, a bus takes you about 3 km to the Lindenplatz stop, just a short walk from Haus Till E. The nearest airport is Frankfurt-Hahn (approx. 20 km). Whether from the train station or the airport: just let us know — we're happy to pick you up by car! (for a small contribution towards costs)"
+        },
+        {
+          "title": "Address",
+          "content": "Haus Till E is located at Schloßstraße 10, 56856 Zell (Mosel) — right at the foot of the steep vineyard „Zeller Schwarze Katz“, just a few minutes' walk from the Moselle promenade and the old town."
+        },
+        {
+          "title": "Parking",
+          "content": "Numerous free parking spaces are available along the Moselle riverside. You can park directly on Schloßstraße with a parking ticket — for loading and unloading your luggage, the free 30-minute ticket is usually enough."
+        },
+        {
+          "title": "Pets",
+          "content": "We both love dogs dearly — but over the years we've had some experiences that led us to rethink. For this reason, bringing dogs to Haus Till E is currently not possible. Thank you for your understanding."
+        },
+        {
+          "title": "Limitations",
+          "content": "Haus Till E is a listed building from the 1920s with no lift — the rooms are only accessible via the stairs. <br><br>Smoking is not permitted inside the house, including on the balconies; however, you are welcome to smoke in our garden at any time."
+        },
+        {
+          "title": "Bicycles",
+          "content": "You can safely park and charge your regular or electric bicycles in our outbuilding. <br><br>If you'd prefer to rent locally: our guests are especially happy with the bike rental services from Wanderland (Balduinstraße 95) and Moselglück (Balduinstraße 43) — both offer well-maintained bikes right in Zell."
+        },
+        {
+          "title": "Air conditioning",
+          "content": "There is no classic air conditioning in our historic house. On particularly warm days, we're happy to bring a modern, bladeless tower fan (8 speed settings) to your room on request — just let us know."
+        },
+        {
+          "title": "Lactose, gluten, etc.",
+          "content": "We may not always have every product for every intolerance in stock as standard. It's best to let us know your needs already at the time of booking — we're happy to accommodate you."
+        },
+        {
+          "title": "Family and children",
+          "content": "Haus Till E is regularly booked by entire families or groups of friends — we've had the pleasure of witnessing many a milestone birthday and hosting three or four generations at once throughout the house. It brings us great joy to provide the setting for unforgettable shared moments."
+        },
+        {
+          "title": "Arrival and departure times",
+          "content": "Since we run the hotel with a small team, check-in is available between 4:00 PM and 6:00 PM. If your room happens to be ready earlier, we’ll be sure to let you know right away. We wish we could just wave a magic wand – until that works out, we simply work quickly and carefully so your room is ready by 4:00 PM. <br><br>We would ask you to check out by 11.00 am."
+        }
       ]
     },
-
     "rooms": {
       "eyebrow": "02 — Choose from five rooms",
       "title_line1": "Individual rooms.",
@@ -114,7 +145,6 @@
         }
       }
     },
-
     "hosts": {
       "eyebrow": "03 — Your hosts look forward to welcoming you",
       "title_line1": "Here for you.",
@@ -144,11 +174,10 @@
         }
       }
     },
-
     "area": {
       "eyebrow": "04 — Zell and surroundings",
       "title_line1": "One place.",
-      "title_line2": "Countless possibilities",
+      "title_line2": "Countless possibilities.",
       "text": [
         "At Haus Till E, everything revolves around what people quietly long for: peace to arrive, time to do nothing — and, if you like, a little activity in between. From our favourite viewpoint bench (our personal 'Moselle cinema'), just a 10-minute walk from Haus Till E, you can watch life unfold on the Moselle and simply let time pass by.",
         "If you prefer to be active, you'll find hiking trails right on the doorstep of Haus Till E, such as the Liebesschlucht (Lovers' Gorge, 11.1 km) or the Marienburg circular trail (15.2 km), relaxed cycling tours along the Moselle, or more sporty stretches up into the steep vineyards of the 'Zeller Schwarze Katz'. And as a reward, more than 20 passionate winegrowers and restaurants for every taste await you in Zell (Mosel) — from Greek to Asian, from ice cream sundaes to chocolate.",
@@ -226,11 +255,9 @@
         ]
       }
     },
-
     "footer": {
       "line1": "© 2026 Haus Till E"
     },
-
     "contact": {
       "eyebrow": "05 — get in touch directly",
       "title": "So, feeling tempted?",
@@ -284,6 +311,77 @@
       "Objection to processing (Art. 21 GDPR)",
       "Data portability (Art. 20 GDPR)",
       "Lodging a complaint with a data protection supervisory authority, e.g. the authority responsible for your place of residence"
+    ]
+  },
+  "events": {
+    "eyebrow": "Events at Haus Till E",
+    "title": "Events.",
+    "subtitle": "From Classic to Innovative.",
+    "carousel": {
+      "prev_aria": "Previous event",
+      "next_aria": "Next event",
+      "pause_aria": "Pause carousel",
+      "play_aria": "Resume carousel",
+      "dots_aria": "Choose an event",
+      "goto_aria": "Go to event",
+      "of": "of"
+    },
+    "items": [
+      {
+        "title": "Wine Tasting in the Courtyard",
+        "date": "December 14, 2026",
+        "time": "6:00 PM",
+        "location": "Courtyard, Haus Till E",
+        "description": "Five Moselle wines, introduced by the winemaker himself - relaxed, personal, with a view of the vineyards.",
+        "image": {
+          "src": "/assets/media/events/weinprobe.jpg",
+          "alt": "Wine glasses at a tasting in the courtyard"
+        }
+      },
+      {
+        "title": "Winegrowers' Festival in Zell",
+        "date": "June 20, 2026",
+        "time": "3:00 PM",
+        "location": "Market Square, Zell (Moselle)",
+        "description": "Music, stalls and young wine straight from the barrel - the traditional festival of the winegrowing community on the riverbank.",
+        "image": {
+          "src": "/assets/media/events/winzerfest.jpg",
+          "alt": "Winegrowers' festival with stalls on the Moselle riverbank"
+        }
+      },
+      {
+        "title": "Advent Market at the House",
+        "date": "December 6, 2026",
+        "time": "2:00 – 7:00 PM",
+        "location": "Schloßstraße 10, Zell (Moselle)",
+        "description": "Mulled wine, handicrafts and candlelight - a small, fine market right on the doorstep.",
+        "image": {
+          "src": "/assets/media/events/adventsmarkt.jpg",
+          "alt": "Advent market with lights"
+        }
+      },
+      {
+        "title": "Cooking Class: Moselle Cuisine Reimagined",
+        "date": "May 9, 2026",
+        "time": "5:30 PM",
+        "location": "Kitchen, Haus Till E",
+        "description": "Regional ingredients, modern techniques - an evening between tradition and new beginnings, cooking together.",
+        "image": {
+          "src": "/assets/media/events/kochkurs.jpg",
+          "alt": "Cooking class in the kitchen"
+        }
+      },
+      {
+        "title": "Concert by the River",
+        "date": "August 2, 2026",
+        "time": "8:00 PM",
+        "location": "Moselle Promenade, Zell (Moselle)",
+        "description": "Acoustic sounds at sunset - music that flows just as calmly as the Moselle itself.",
+        "image": {
+          "src": "/assets/media/events/konzert.jpg",
+          "alt": "Concert at sunset on the Moselle"
+        }
+      }
     ]
   }
 }

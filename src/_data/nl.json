@@ -1,11 +1,14 @@
 {
   "meta": {
+    "og_image": "/assets/media/og/og-preview-nl.jpg",
     "title_home": "Haus Till E",
     "description_home": "Jouw thuis aan de Moezel. Een hotel-garni van de bovenste plank",
     "title_imprint": "Colofon — Haus Till E",
     "description_imprint": "Colofon conform § 5 TMG.",
     "title_privacy": "Privacyverklaring — Haus Till E",
-    "description_privacy": "Privacyverklaring conform art. 13 AVG."
+    "description_privacy": "Privacyverklaring conform art. 13 AVG.",
+    "title_events": "Evenementen – Haus Till E",
+    "description_events": "Klassieke en innovatieve evenementen rond Haus Till E aan de Moezel: wijnproeverijen, feesten en meer."
   },
   "nav": {
     "menu_aria": "Menu openen",
@@ -34,7 +37,6 @@
       "sub": "In het monumentale art-decohuis met een eigen geschiedenis wachten vijf individuele tweepersoonskamers vol charme en karakter op je. Begin de dag met een heerlijk ontbijt in onze gezellige ontbijtruimte — voordat je in de wildromantische tuin de tijd vergeet.",
       "scroll_hint": "Scroll om te lezen"
     },
-
     "home_details": {
       "eyebrow": "01 — Jouw thuis aan de Moezel",
       "title_line1": "Een thuis.",
@@ -62,19 +64,48 @@
         "Info": ""
       },
       "accordion": [
-        { "title": "Route", "content": "Haus Till E ligt op loopafstand van de Moezel, midden in de oude binnenstad van Zell, aan de Schloßstraße 10. Vanuit Bullay rijd je door de wijk Zell-Merl naar de oude binnenstad van Zell. Andere routes lopen via de Zeller Berg en Grenderich (L199), door het Altlayer Bachtal (L194), of vanuit Kappel via de B421. Met de trein bereik je ons via het milieuvriendelijke station Bullay — vandaar brengt de bus je in ongeveer 3 km naar halte Lindenplatz, een korte wandeling van Haus Till E vandaan. De dichtstbijzijnde luchthaven is Frankfurt-Hahn (ca. 20 km). Of je nu vanaf het station of de luchthaven komt: laat het ons gewoon weten — we halen je graag op met de auto! (tegen een kleine onkostenvergoeding)" },
-        { "title": "Adres", "content": "Haus Till E bevindt zich aan de Schloßstraße 10, 56856 Zell (Mosel) — direct aan de voet van de steile wijngaard „Zeller Schwarze Katz“, op enkele minuten lopen van de Moezelpromenade en de oude binnenstad." },
-        { "title": "Parkeren", "content": "Aan de Moezeloever zijn volop gratis parkeerplaatsen beschikbaar. Direct aan de Schloßstraße kun je met een parkeerkaart parkeren — voor het in- en uitladen van je bagage is meestal het gratis 30-minutenkaartje al voldoende." },
-        { "title": "Huisdieren", "content": "Wij houden allebei enorm van honden — maar in de loop der jaren hebben we een aantal ervaringen opgedaan die ons hebben doen heroverwegen. Daarom is het meebrengen van honden naar Haus Till E momenteel helaas niet mogelijk. Bedankt voor je begrip." },
-        { "title": "Beperkingen", "content": "Haus Till E is een monumentaal gebouw uit de jaren 1920 zonder lift — de kamers zijn uitsluitend via de trap bereikbaar. <br><br>In het huis, inclusief de balkons, is roken niet toegestaan; in onze tuin mag je echter altijd en graag roken." },
-        { "title": "Fietsen", "content": "Je gewone of elektrische fietsen kun je veilig stallen en opladen in ons bijgebouw. <br><br>Wie liever ter plaatse huurt: onze gasten zijn bijzonder tevreden over de fietsverhuur van Wanderland (Balduinstraße 95) en Moselglück (Balduinstraße 43) — beide bieden goed onderhouden fietsen direct in Zell." },
-        { "title": "Airconditioning", "content": "Een klassieke airconditioning is er niet in ons historische huis. Op bijzonder warme dagen brengen we op verzoek graag een moderne, rotorloze torenventilator (8 snelheidsstanden) naar je kamer — laat het ons gewoon even weten." },
-        { "title": "Lactose, gluten, enz.", "content": "Wij hebben niet altijd standaard alle producten voor elke intolerantie op voorraad. Laat ons je wensen het beste al bij de boeking weten — we stemmen graag en met plezier op je af." },
-        { "title": "Familie en kinderen", "content": "Haus Till E wordt regelmatig geboekt door hele families of vriendengroepen — we hebben al menige ronde verjaardag mogen meemaken en drie of vier generaties tegelijk in het hele huis mogen ontvangen. Het geeft ons veel plezier om het decor te bieden voor onvergetelijke gezamenlijke momenten." },
-        { "title": "Aankomst- en vertrektijden", "content": "Aangezien we het hotel met een klein team runnen, is check-in mogelijk tussen 16:00 en 18:00 uur. Mocht jullie kamer eerder klaar zijn, dan laten we het jullie meteen weten. We wensten dat we konden toveren – zolang dat nog niet lukt, werken we gewoon snel en zorgvuldig, zodat de kamer om 16:00 uur klaarstaat voor jullie check-in.​​​​​​​​​​​​​​​​ <br><br>Wij verzoeken u om uiterlijk om 11.00 uur uit te checken." }
+        {
+          "title": "Route",
+          "content": "Haus Till E ligt op loopafstand van de Moezel, midden in de oude binnenstad van Zell, aan de Schloßstraße 10. Vanuit Bullay rijd je door de wijk Zell-Merl naar de oude binnenstad van Zell. Andere routes lopen via de Zeller Berg en Grenderich (L199), door het Altlayer Bachtal (L194), of vanuit Kappel via de B421. Met de trein bereik je ons via het milieuvriendelijke station Bullay — vandaar brengt de bus je in ongeveer 3 km naar halte Lindenplatz, een korte wandeling van Haus Till E vandaan. De dichtstbijzijnde luchthaven is Frankfurt-Hahn (ca. 20 km). Of je nu vanaf het station of de luchthaven komt: laat het ons gewoon weten — we halen je graag op met de auto! (tegen een kleine onkostenvergoeding)"
+        },
+        {
+          "title": "Adres",
+          "content": "Haus Till E bevindt zich aan de Schloßstraße 10, 56856 Zell (Mosel) — direct aan de voet van de steile wijngaard „Zeller Schwarze Katz“, op enkele minuten lopen van de Moezelpromenade en de oude binnenstad."
+        },
+        {
+          "title": "Parkeren",
+          "content": "Aan de Moezeloever zijn volop gratis parkeerplaatsen beschikbaar. Direct aan de Schloßstraße kun je met een parkeerkaart parkeren — voor het in- en uitladen van je bagage is meestal het gratis 30-minutenkaartje al voldoende."
+        },
+        {
+          "title": "Huisdieren",
+          "content": "Wij houden allebei enorm van honden — maar in de loop der jaren hebben we een aantal ervaringen opgedaan die ons hebben doen heroverwegen. Daarom is het meebrengen van honden naar Haus Till E momenteel helaas niet mogelijk. Bedankt voor je begrip."
+        },
+        {
+          "title": "Beperkingen",
+          "content": "Haus Till E is een monumentaal gebouw uit de jaren 1920 zonder lift — de kamers zijn uitsluitend via de trap bereikbaar. <br><br>In het huis, inclusief de balkons, is roken niet toegestaan; in onze tuin mag je echter altijd en graag roken."
+        },
+        {
+          "title": "Fietsen",
+          "content": "Je gewone of elektrische fietsen kun je veilig stallen en opladen in ons bijgebouw. <br><br>Wie liever ter plaatse huurt: onze gasten zijn bijzonder tevreden over de fietsverhuur van Wanderland (Balduinstraße 95) en Moselglück (Balduinstraße 43) — beide bieden goed onderhouden fietsen direct in Zell."
+        },
+        {
+          "title": "Airconditioning",
+          "content": "Een klassieke airconditioning is er niet in ons historische huis. Op bijzonder warme dagen brengen we op verzoek graag een moderne, rotorloze torenventilator (8 snelheidsstanden) naar je kamer — laat het ons gewoon even weten."
+        },
+        {
+          "title": "Lactose, gluten, enz.",
+          "content": "Wij hebben niet altijd standaard alle producten voor elke intolerantie op voorraad. Laat ons je wensen het beste al bij de boeking weten — we stemmen graag en met plezier op je af."
+        },
+        {
+          "title": "Familie en kinderen",
+          "content": "Haus Till E wordt regelmatig geboekt door hele families of vriendengroepen — we hebben al menige ronde verjaardag mogen meemaken en drie of vier generaties tegelijk in het hele huis mogen ontvangen. Het geeft ons veel plezier om het decor te bieden voor onvergetelijke gezamenlijke momenten."
+        },
+        {
+          "title": "Aankomst- en vertrektijden",
+          "content": "Aangezien we het hotel met een klein team runnen, is check-in mogelijk tussen 16:00 en 18:00 uur. Mocht jullie kamer eerder klaar zijn, dan laten we het jullie meteen weten. We wensten dat we konden toveren – zolang dat nog niet lukt, werken we gewoon snel en zorgvuldig, zodat de kamer om 16:00 uur klaarstaat voor jullie check-in.​​​​​​​​​​​​​​​​ <br><br>Wij verzoeken u om uiterlijk om 11.00 uur uit te checken."
+        }
       ]
     },
-
     "rooms": {
       "eyebrow": "02 — Kies uit vijf kamers",
       "title_line1": "Individuele kamers.",
@@ -114,7 +145,6 @@
         }
       }
     },
-
     "hosts": {
       "eyebrow": "03 — Je gastheren verheugen zich op je komst",
       "title_line1": "Er voor je.",
@@ -144,11 +174,10 @@
         }
       }
     },
-
     "area": {
       "eyebrow": "04 — Zell en omgeving",
       "title_line1": "Eén plek.",
-      "title_line2": "Talloze mogelijkheden",
+      "title_line2": "Talloze mogelijkheden.",
       "text": [
         "Bij Haus Till E draait alles om waar je in stilte naar verlangt: rust om aan te komen, tijd om niets te doen — en op verzoek ook een beetje beweging tussendoor. Vanaf onze favoriete uitzichtbank (onze persoonlijke 'Moezelbioscoop'), op slechts 10 minuten lopen van Haus Till E, kijk je naar het leven op de Moezel en laat je de tijd gewoon voorbijgaan.",
         "Wie liever actief is, vindt direct voor de deur van Haus Till E wandelpaden zoals de Liebesschlucht (11,1 km) of het Marienburg-rondwandelpad (15,2 km), ontspannen fietstochten langs de Moezel of sportievere etappes de steile wijngaarden van de 'Zeller Schwarze Katz' in. En als beloning wachten in Zell (Mosel) meer dan 20 gepassioneerde wijnbouwers en restaurants voor elke smaak op je — van Grieks tot Aziatisch, van ijscoupe tot chocolade.",
@@ -226,11 +255,9 @@
         ]
       }
     },
-
     "footer": {
       "line1": "© 2026 Haus Till E"
     },
-
     "contact": {
       "eyebrow": "05 — direct contact met ons",
       "title": "Zin gekregen?",
@@ -284,6 +311,77 @@
       "Bezwaar tegen de verwerking (art. 21 AVG)",
       "Overdraagbaarheid van gegevens (art. 20 AVG)",
       "Het indienen van een klacht bij een toezichthoudende autoriteit voor gegevensbescherming, bijv. de autoriteit die verantwoordelijk is voor uw woonplaats"
+    ]
+  },
+  "events": {
+    "eyebrow": "Evenementen rond Haus Till E",
+    "title": "Evenementen.",
+    "subtitle": "Van Klassiek tot Innovatief.",
+    "carousel": {
+      "prev_aria": "Vorig evenement",
+      "next_aria": "Volgend evenement",
+      "pause_aria": "Carrousel pauzeren",
+      "play_aria": "Carrousel hervatten",
+      "dots_aria": "Evenement kiezen",
+      "goto_aria": "Ga naar evenement",
+      "of": "van"
+    },
+    "items": [
+      {
+        "title": "Wijnproeverij in de binnenplaats",
+        "date": "14 december 2026",
+        "time": "18:00 uur",
+        "location": "Binnenplaats, Haus Till E",
+        "description": "Vijf wijnen van de Moezel, toegelicht door de wijnmaker zelf - ontspannen, persoonlijk en met uitzicht op de wijngaarden.",
+        "image": {
+          "src": "/assets/media/events/weinprobe.jpg",
+          "alt": "Wijnglazen bij een proeverij in de binnenplaats"
+        }
+      },
+      {
+        "title": "Wijnfeest in Zell",
+        "date": "20 juni 2026",
+        "time": "15:00 uur",
+        "location": "Marktplein, Zell (Moezel)",
+        "description": "Muziek, kraampjes en jonge wijn rechtstreeks van het vat - het traditionele feest van de wijnbouwgemeenschap aan de Moezeloever.",
+        "image": {
+          "src": "/assets/media/events/winzerfest.jpg",
+          "alt": "Wijnfeest met kraampjes aan de Moezeloever"
+        }
+      },
+      {
+        "title": "Adventsmarkt bij het huis",
+        "date": "6 december 2026",
+        "time": "14:00 – 19:00 uur",
+        "location": "Schloßstraße 10, Zell (Moezel)",
+        "description": "Glühwein, ambachten en kaarslicht - een kleine, fijne markt vlak voor de deur.",
+        "image": {
+          "src": "/assets/media/events/adventsmarkt.jpg",
+          "alt": "Adventsmarkt met lichtjes"
+        }
+      },
+      {
+        "title": "Kookworkshop: Moezelkeuken opnieuw bedacht",
+        "date": "9 mei 2026",
+        "time": "17:30 uur",
+        "location": "Keuken, Haus Till E",
+        "description": "Regionale ingrediënten, moderne technieken - een avond tussen traditie en vernieuwing, samen aan het fornuis.",
+        "image": {
+          "src": "/assets/media/events/kochkurs.jpg",
+          "alt": "Kookworkshop in de keuken"
+        }
+      },
+      {
+        "title": "Concert aan de rivier",
+        "date": "2 augustus 2026",
+        "time": "20:00 uur",
+        "location": "Moezelpromenade, Zell (Moezel)",
+        "description": "Akoestische klanken bij zonsondergang - muziek die net zo rustig stroomt als de Moezel zelf.",
+        "image": {
+          "src": "/assets/media/events/konzert.jpg",
+          "alt": "Concert bij zonsondergang aan de Moezel"
+        }
+      }
     ]
   }
 }

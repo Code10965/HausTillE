@@ -16,6 +16,7 @@
 
 import { buildItem } from "./navItems.js";
 import { setupOpenClose } from "./navToggle.js";
+
 import { setupScrollTrack } from "./navScrollTrack.js";
 
 export function setupNav() {
@@ -27,8 +28,12 @@ export function setupNav() {
   const items = Array.from(itemEls)
     .map((wrapper) => buildItem(wrapper))
     .filter(Boolean)
-    .sort((a, b) => a.slot - b.slot); // [Menü(0), Sprache(1), Kontakt(2)]
-  if (items.length !== 3) return;
+    .sort((a, b) => a.slot - b.slot); // nach Slot sortiert: 0, 1, 2, 3, ...
+  // War früher "items.length !== 3" (genau Menü/Sprache/Kontakt) - die
+  // Choreografie in navScrollTrack.js/navScenes.js funktioniert inzwischen
+  // für jede Anzahl Kugeln, daher reicht "mindestens eine" als Schutz vor
+  // kaputtem/unvollständigem Markup.
+  if (items.length === 0) return;
 
   setupOpenClose(nav, items);
   setupScrollTrack(nav, items);
