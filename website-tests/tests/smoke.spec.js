@@ -51,9 +51,25 @@ test("Keine kaputten Bilder auf der Startseite (alle Sprachen)", async ({ page }
   // einen Fehler, obwohl die Seite völlig in Ordnung ist.
   const images = await page.locator("img:not(#lightbox-img)").all();
   for (const img of images) {
-    const naturalWidth = await img.evaluate((el) => el.naturalWidth);
+    // Manche Bilder (z.B. die Gastgeber-Dia-Show mit loading="lazy") lädt
+    // der Browser erst, sobald sie in den sichtbaren Bereich kommen - direkt
+    // nach page.goto() ohne Scrollen ist das für weiter unten liegende
+    // Bilder schlicht noch nicht passiert. scrollIntoViewIfNeeded() bildet
+    // nach, was ein echter Besuchender tut (zur Stelle scrollen), und löst
+    // dadurch zuverlässig das Nachladen aus, BEVOR wir naturalWidth prüfen.
+    await img.scrollIntoViewIfNeeded();
+
+    // expect.poll statt einer einzelnen sofortigen Prüfung: gibt dem Bild
+    // nach dem Scrollen noch einen kurzen Moment Zeit, tatsächlich zu laden
+    // (Netzwerk-Latenz), statt sofort im allerersten Frame nach dem Scrollen
+    // zu urteilen.
     const src = await img.getAttribute("src");
-    expect(naturalWidth, `Bild konnte nicht geladen werden: ${src}`).toBeGreaterThan(0);
+    await expect
+      .poll(() => img.evaluate((el) => el.naturalWidth), {
+        message: `Bild konnte nicht geladen werden: ${src}`,
+        timeout: 5000,
+      })
+      .toBeGreaterThan(0);
   }
 });
 
