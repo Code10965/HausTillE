@@ -87,10 +87,8 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   const clearTimer = clearIntervalFn || win.clearInterval.bind(win);
 
   // Bewusst NICHT einmal beim Setup gecacht, sondern bei jeder Prüfung neu
-  // ausgewertet (siehe isEffectivelyPlaying) - Playwrights reducedMotion-
-  // Emulation kann zum sehr frühen Zeitpunkt des Skript-Setups minimal
-  // verzögert greifen; ein gecachter Wert liest dann fälschlich "false"
-  // und die Karussell startet trotz aktivierter Einstellung mit Autoplay.
+  // ausgewertet (siehe isEffectivelyPlaying) - reagiert damit korrekt,
+  // falls sich die Systemeinstellung während der laufenden Sitzung ändert.
   function prefersReducedMotion() {
     return "matchMedia" in win && win.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }

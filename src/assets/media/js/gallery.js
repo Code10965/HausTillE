@@ -444,7 +444,7 @@ function renderPhotoGrids() {
           // Textgrafik steht jetzt am ENDE von items (siehe media-Objekt
           // oben) - items[0] ist dadurch immer schon ein echtes Foto,
           // kein Offset mehr nötig wie zuvor.
-          frame.style.backgroundImage = `url('${entry.items[0]}')`;
+          frame.style.backgroundImage = `url('${toThumbPath(entry.items[0])}')`;
         }
       }
       let info = infoOverrides[name] || entry.info || "";

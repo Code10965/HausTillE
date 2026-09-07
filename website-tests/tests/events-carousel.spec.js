@@ -132,14 +132,37 @@ test("Hover pausiert den Ablauf, ohne den Pause-Button umzuschalten", async ({ p
 });
 
 test.describe("mit aktivierter Systemeinstellung 'Bewegung reduzieren'", () => {
-  test.use({ reducedMotion: "reduce" });
-
   test("kein automatischer Wechsel, aber die Pfeile funktionieren weiterhin", async ({ page }) => {
-    // Kein erneutes gotoEventsWithClock(page) hier - test.beforeEach hat
-    // die Seite bereits geladen, und zwar schon MIT der reducedMotion-
-    // Emulation aus test.use() (die gilt für den ganzen Test, inklusive
-    // beforeEach). Ein zweiter Aufruf würde nur unnötig ein zweites Mal
-    // navigieren und die virtuelle Uhr neu installieren.
+    // Statt Playwrights context-weiter reducedMotion-Emulation (die sich
+    // als timing-abhängig erwiesen hat - siehe die frühere, flackernde
+    // Version dieses Tests) patchen wir window.matchMedia DIREKT in der
+    // echten Seite. addInitScript() garantiert, dass dieser Code vor JEDEM
+    // Skript der Seite läuft, bei jeder Navigation ab jetzt - kein
+    // Emulations-Timing-Risiko mehr, aber weiterhin dieselbe echte Seite
+    // mit demselben echten eventsCarousel.js wie im echten Betrieb.
+    await page.addInitScript(() => {
+      const originalMatchMedia = window.matchMedia.bind(window);
+      window.matchMedia = (query) => {
+        if (query === "(prefers-reduced-motion: reduce)") {
+          return {
+            matches: true,
+            media: query,
+            addListener() {},
+            removeListener() {},
+            addEventListener() {},
+            removeEventListener() {},
+            dispatchEvent() { return true; },
+          };
+        }
+        return originalMatchMedia(query);
+      };
+    });
+
+    // Erneut navigieren: die Navigation aus dem äußeren beforeEach lief VOR
+    // diesem addInitScript und zählt daher nicht (der Patch war zu dem
+    // Zeitpunkt noch nicht registriert). Diesmal ist er von Anfang an aktiv.
+    await gotoEventsWithClock(page);
+
     const slides = page.locator("[data-events-slide]");
 
     await page.clock.fastForward(AUTOPLAY_MS * 2);
