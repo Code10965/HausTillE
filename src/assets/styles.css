@@ -1405,7 +1405,7 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 28px;
-  align-items: stretch;
+  align-items: start;
 }
 @media (min-width: 760px) {
   .event-card {
@@ -1416,9 +1416,19 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
 
 .event-photo {
   position: relative;
-  aspect-ratio: 4 / 3;
+  width: 100%;
+  max-width: 420px;      /* verhindert bildschirmfüllende Höhe auf schmalen Screens */
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;   /* quadratisch statt 4:3 */
   overflow: hidden;
   background-color: var(--cloud);
+}
+@media (min-width: 760px) {
+  .event-photo {
+    width: 420px;
+    max-width: 420px;
+    margin: 0;
+  }
 }
 .event-photo img {
   display: block;
@@ -1443,6 +1453,22 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   flex-direction: column;
   justify-content: center;
   gap: 14px;
+}
+@media (min-width: 760px) {
+  .event-info {
+    /* Höhe an das quadratische Foto (420px) gekoppelt, damit beide
+       Spalten immer exakt gleich hoch sind - unabhängig davon, wie
+       lang die Beschreibung eines einzelnen Events ist. */
+    max-height: 420px;
+    /* Breite ebenfalls an das Foto (420px) gekoppelt - und zwar hier
+       am gesamten Info-Block, nicht nur an .event-description weiter
+       unten. So bleiben Titel, Meta-Zeile, Ort UND Beschreibung
+       gemeinsam bündig zur Fotobreite, auch wenn die rechte Grid-Spalte
+       (.event-card: 1.15fr 1fr) auf sehr breiten Screens theoretisch
+       breiter werden könnte als 420px. */
+    max-width: 420px;
+    justify-content: flex-start;
+  }
 }
 .event-meta {
   display: flex;
@@ -1484,6 +1510,44 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   color: var(--slate);
   font-size: 16px;
   line-height: 1.7;
+}
+@media (min-width: 760px) {
+  .event-description {
+    /* Nimmt nur den Platz ein, der nach Titel/Ort/Link innerhalb der
+       420px übrig bleibt - "min-height: 0" ist bei Flex-Kindern mit
+       overflow nötig, sonst ignoriert der Browser die Begrenzung und
+       lässt den Text trotzdem auf natürliche Höhe wachsen. Die
+       Breitenbegrenzung (max-width: 420px) sitzt jetzt am Elternelement
+       .event-info (siehe oben) und wird hier nicht mehr separat
+       gesetzt - so gilt sie einheitlich für den ganzen Info-Block. */
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding-right: 8px;
+    mask-image: linear-gradient(to bottom, black calc(100% - 32px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 32px), transparent 100%);
+  }
+}
+.event-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--wine-deep);
+  text-decoration: none;
+  transition: gap 0.25s ease, opacity 0.15s ease;
+}
+.event-link:hover {
+  gap: 9px;
+  opacity: 0.85;
+}
+.event-link:focus-visible {
+  outline: 2px solid var(--gold-soft);
+  outline-offset: 3px;
 }
 
 /* ---------- Steuerung: Pfeile, Play/Pause, Punkte ----------

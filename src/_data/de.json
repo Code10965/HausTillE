@@ -326,62 +326,133 @@
       "play_aria": "Karussell fortsetzen",
       "dots_aria": "Event auswählen",
       "goto_aria": "Zu Event",
+      "more_info": "Mehr erfahren",
       "of": "von"
     },
     "items": [
       {
-        "title": "Weinprobe im Innenhof",
-        "date": "14. Dezember 2026",
-        "time": "18:00 Uhr",
-        "location": "Innenhof, Haus Till E",
-        "description": "Fünf Weine der Mosel, erklärt vom Winzer selbst - entspannt, persönlich und mit Blick auf die Weinberge.",
+        "title": "Federweißer-Fest",
+        "date": "8.–11. Okt 2026",
+        "time": "ganztägig (siehe Link)",
+        "location": "Zeller Marktplatz",
+        "description": "Der Zeller Marktplatz verwandelt sich beim Federweißerfest wieder in vier Tage voller Genuss, Musik und Gemeinschaft – mit Federweißem, gutem Essen, tollem Programm für Groß und Klein und jeder Menge guter Stimmung freut sich Zell auf euch! Und Haus Till E sorgt u.a. für die Verpflegung.",
         "image": {
-          "src": "/assets/media/events/weinprobe.jpg",
-          "alt": "Weingläser bei einer Weinprobe im Innenhof"
+          "src": "/assets/media/events/federweisser-fest.jpg",
+          "alt": "Federweißer-Fest auf dem Zeller Marktplatz"
+        },
+        "link": "https://mosl-wein.de/products/federweisserfest-2026-x-08-10-11-10-2026"
+      },
+      {
+        "title": "Zeller Stadt- & Gässchen-Flohmarkt",
+        "date": "17.–18. Okt 2026",
+        "time": "ganztägig (siehe Link)",
+        "location": "über die ganze Stadt verteilt / Garten Haus Till E",
+        "description": "Am 17. und 18. Oktober lädt der Herbstzauber in Zell mit Kaimt und Merl zum großen Stöbern ein – ob Stadt- und Gässchenflohmarkt, Kinderflohmarkt, verkaufsoffener Sonntag oder kulinarische Herbstleckereien, hier findet garantiert jeder sein kleines Schnäppchen und genießt gemütliche Herbsttage in Zell! Und natürlich gibt's auch im Garten vom Haus Till E viel zu Stöbern - wir machen mit unseren Freunden mit!",
+        "image": {
+          "src": "/assets/media/events/herbstzauber-floehmarkt.jpg",
+          "alt": "Herbstzauber Flohmarkt in Zell"
+        },
+        "link": "https://www.zellerland.de/event/herbstzauber-mit-stadt-und-gaesschenflohmarkt-in-zell"
+      },
+      {
+        "title": "Dekadenzia 2026 – Mottoparty",
+        "date": "21. Nov 2026",
+        "time": "19:00 Uhr",
+        "location": "Zeller Schlosskeller",
+        "description": "Die wilden 20er Jahre sind zurück - für eine Nacht - im Zeller Schlosskeller mit Liveband, Burlesque Show, Tanzkurs, Spielhölle und Cocktails. Und wir beide schmeißen uns auch in Schale - und werden eine Nacht Teil des wundervollen Bar-Teams.",
+        "image": {
+          "src": "/assets/media/events/dekadenzia-mottoparty.jpg",
+          "alt": "Dekadenzia Mottoparty im Zeller Schlosskeller"
+        },
+        "link": "https://eventfrog.de/de/p/partys/mottoparty/dekadenzia-2026-7423319046110610491.html"
+      },
+      {
+        "title": "Zauber im Advent 2026",
+        "date": "20. Nov – 20. Dez 2026",
+        "time": "ganztägig (siehe Flyer)",
+        "location": "Lichter-Garten Haus Till E",
+        "description": "Beim Adventszauber im Haus Till E erwarten euch gemütliches Beisammensein im festlich geschmückten Garten, Essen und Trinken mit heißem Glühwein, Konzerte und Mitmachkonzerte für Groß und Klein sowie ein Geschenkeschrank voller Ideen zum Verschenken. Wir freuen uns auf euch!",
+        "image": {
+          "src": "/assets/media/events/zauber-im-advent.jpg",
+          "alt": "Zauber im Advent im Lichter-Garten"
         }
       },
       {
-        "title": "Winzerfest in Zell",
-        "date": "20. Juni 2026",
-        "time": "15:00 Uhr",
-        "location": "Marktplatz, Zell (Mosel)",
-        "description": "Musik, Stände und junger Wein direkt vom Fass - das traditionelle Fest der Winzergemeinde am Moselufer.",
+        "title": "Konzert beim Zauber am 2. Advent",
+        "date": "5. Dez 2026",
+        "time": "19:00 Uhr",
+        "location": "Lichter-Garten Haus Till E",
+        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
         "image": {
-          "src": "/assets/media/events/winzerfest.jpg",
-          "alt": "Winzerfest mit Ständen am Moselufer"
+          "src": "/assets/media/events/konzert-advent.jpg",
+          "alt": "Konzert im Lichter-Garten"
         }
       },
       {
-        "title": "Adventsmarkt am Haus",
-        "date": "6. Dezember 2026",
-        "time": "14:00 – 19:00 Uhr",
-        "location": "Schloßstraße 10, Zell (Mosel)",
-        "description": "Glühwein, Handwerk und Kerzenschein - ein kleiner, feiner Markt direkt vor der Tür.",
+        "title": "Konzert beim Zauber am 3. Advent",
+        "date": "12. Dez 2026",
+        "time": "19:00 Uhr",
+        "location": "Lichter-Garten Haus Till E",
+        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
         "image": {
-          "src": "/assets/media/events/adventsmarkt.jpg",
-          "alt": "Adventsmarkt mit Lichtern"
+          "src": "/assets/media/events/konzert-advent.jpg",
+          "alt": "Konzert im Lichter-Garten"
         }
       },
       {
-        "title": "Kochkurs: Moselküche neu gedacht",
-        "date": "9. Mai 2026",
+        "title": "Konzert beim Zauber am 4. Advent",
+        "date": "19. Dez 2026",
+        "time": "19:00 Uhr",
+        "location": "Lichter-Garten Haus Till E",
+        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
+        "image": {
+          "src": "/assets/media/events/konzert-advent.jpg",
+          "alt": "Konzert im Lichter-Garten"
+        }
+      },
+      {
+        "title": "Märchenumzug der Stadt Zell",
+        "date": "28. Nov 2026",
         "time": "17:30 Uhr",
-        "location": "Küche, Haus Till E",
-        "description": "Regionale Zutaten, moderne Techniken - ein Abend zwischen Tradition und Aufbruch, gemeinsam am Herd.",
+        "location": "über die ganze Stadt verteilt / Garten Haus Till E",
+        "description": "Zum 1. Advent verwandelt sich Zell in ein stimmungsvolles Märchenland: Der Gewerbeverein Zell lädt zum großen Märchenumzug durch die weihnachtlich geschmückte Altstadt ein. Ab 17:30 Uhr ziehen bekannte Märchenfiguren wie Frau Holle, der Nussknacker und Schneewittchen durch die Straßen und verzaubern Groß und Klein. Bereits ab 13:00 Uhr könnt ihr beim Adventsmarkt rund um den Marktplatz und im Rathaus stöbern – mit einem schönen Angebot an weihnachtlicher Dekoration, Kunsthandwerk und handgefertigten Geschenken. Ein zauberhafter Start in die Adventszeit für die ganze Familie!",
         "image": {
-          "src": "/assets/media/events/kochkurs.jpg",
-          "alt": "Kochkurs in der Küche"
+          "src": "/assets/media/events/maerchenumzug.jpg",
+          "alt": "Märchenumzug durch die Zeller Altstadt"
+        },
+        "link": "https://www.zellerland.de/event/maerchenumzug-durch-die-zeller-altstadt"
+      },
+      {
+        "title": "Konzert beim Zauber am 2. Advent",
+        "date": "5. Dez 2025",
+        "time": "19:00 Uhr",
+        "location": "Lichter-Garten Haus Till E",
+        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
+        "image": {
+          "src": "/assets/media/events/konzert-advent.jpg",
+          "alt": "Konzert im Lichter-Garten"
         }
       },
       {
-        "title": "Konzert am Fluss",
-        "date": "2. August 2026",
-        "time": "20:00 Uhr",
-        "location": "Moselpromenade, Zell (Mosel)",
-        "description": "Akustische Klänge bei Sonnenuntergang - Musik, die genauso ruhig fließt wie die Mosel selbst.",
+        "title": "Konzert beim Zauber am 3. Advent",
+        "date": "12. Dez 2025",
+        "time": "19:00 Uhr",
+        "location": "Lichter-Garten Haus Till E",
+        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
         "image": {
-          "src": "/assets/media/events/konzert.jpg",
-          "alt": "Konzert bei Sonnenuntergang an der Mosel"
+          "src": "/assets/media/events/konzert-advent.jpg",
+          "alt": "Konzert im Lichter-Garten"
+        }
+      },
+      {
+        "title": "Konzert beim Zauber am 4. Advent",
+        "date": "19. Dez 2025",
+        "time": "19:00 Uhr",
+        "location": "Lichter-Garten Haus Till E",
+        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
+        "image": {
+          "src": "/assets/media/events/konzert-advent.jpg",
+          "alt": "Konzert im Lichter-Garten"
         }
       }
     ]
