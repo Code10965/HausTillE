@@ -33,7 +33,7 @@ jobs:
       - name: Per SFTP zu Manitu hochladen
         uses: wangyucode/sftp-upload-action@v2.0.4
         with:
-          server: ${{ secrets.MANITU_FTP_HOST }}
+          host: ${{ secrets.MANITU_FTP_HOST }}
           username: ${{ secrets.MANITU_FTP_USERNAME }}
           password: ${{ secrets.MANITU_FTP_PASSWORD }}
           port: 23
