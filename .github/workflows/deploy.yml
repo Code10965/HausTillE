@@ -36,8 +36,8 @@ jobs:
           server: ${{ secrets.MANITU_FTP_HOST }}
           username: ${{ secrets.MANITU_FTP_USERNAME }}
           password: ${{ secrets.MANITU_FTP_PASSWORD }}
-          protocol: sftp
-          port: 23
+          protocol: ftps
+          port: 21
           local-dir: "./_site/"
           server-dir: "/web/haus-till-e.com/"
           log-level: verbose
