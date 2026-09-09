@@ -1350,6 +1350,12 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
    für ".events-section" - der Rest der Website (die die normale
    .section-inner-Regel weiter oben nutzt) bleibt unverändert. */
 .events-section .section-inner {
+  /* Kein max-width-Override mehr nötig: .section-inner liegt jetzt
+     innerhalb von .events-main, das selbst schon nur 2/3 der Seite
+     einnimmt (siehe .events-page-row weiter unten) - die sonst
+     geteilte 48rem-Regel würde hier unnötig einschränken, deshalb
+     bleibt max-width hier bewusst ungesetzt (nutzt die volle Breite
+     von .events-main). */
   padding-top: 48px;
   padding-bottom: 96px;
 }
@@ -1370,9 +1376,71 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   .events-section .section-title { font-size: 2.75rem; }
 }
 
+/* ---------- Zweispaltiges Layout: Zukunft (2/3) + Erinnerungen (1/3) ----------
+   NEU: .events-page-row liegt direkt auf Sektionsebene (als Kind von
+   <section>), NICHT mehr innerhalb von .section-inner - genau wie
+   .hero-grid bei der Hero-Sektion. Dadurch kann .past-events (die
+   rechte, dunkle Spalte) randlos bis zum echten Browserrand reichen,
+   statt vor dem Rand des zentrierten/padded Seiteninhalts aufzuhören.
+   .events-main (2/3, mit dem gewohnten .section-inner darin) bleibt
+   dagegen schön eingerückt.
+
+   Auf schmalen Screens stapelt sich das Layout automatisch
+   (Erinnerungen unter dem Zukunfts-Karussell) - erst ab 900px stehen
+   beide Spalten nebeneinander.
+
+   WICHTIG: Das interne Foto/Text-Layout der Event-Karte (.event-card)
+   reagiert NICHT auf die Gesamt-Bildschirmbreite (wie früher via
+   @media (min-width: 760px)), sondern per Container Query auf die
+   TATSÄCHLICHE Breite von .events-future selbst (siehe "container-type"
+   unten). Grund: seit es nur noch 2/3 der Seite bekommt statt der vollen
+   Breite, konnte die Bildschirmbreite "760px+" erreicht sein, während
+   die Spalte selbst noch viel schmaler war - das quetschte das feste
+   420px-Foto plus Text in zu wenig Platz und ließ Inhalte am
+   Karussell-Rand abgeschnitten verschwinden. Mit einer Container Query
+   kann das nicht mehr passieren, egal wie die Spalte gerade eingeteilt
+   ist. */
+.events-page-row {
+  display: flex;
+  flex-direction: column;
+  /* Bewusst KEIN align-items: flex-start hier (das war mal ein Bug!):
+     Im gestapelten Zustand (< 900px, flex-direction: column) steuert
+     align-items die BREITE der beiden Spalten. "flex-start" bedeutet
+     "nur so breit wie der Inhalt selbst verlangt" statt "volle Breite
+     ausfüllen". Der Standardwert "stretch" (einfach die Zeile
+     weglassen) füllt die volle Breite zuverlässig. */
+}
+@media (min-width: 900px) {
+  .events-page-row {
+    flex-direction: row;
+    align-items: stretch;
+  }
+  .events-main {
+    flex: 2 1 0;
+    min-width: 0;
+  }
+  .past-events {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+.events-empty {
+  color: var(--slate);
+  font-size: 15px;
+  line-height: 1.7;
+  padding: 24px 0;
+}
+
 .events-carousel {
   position: relative;
   margin-top: 32px;
+  /* Grundlage für die Container Query bei .event-card/.event-photo/
+     .event-info/.event-description weiter unten - reagiert auf die
+     TATSÄCHLICHE Breite dieses Elements, nicht auf die gesamte
+     Bildschirmbreite (siehe ausführliche Erklärung bei .events-page-row
+     weiter oben). */
+  container-type: inline-size;
 }
 
 .events-viewport {
@@ -1407,7 +1475,10 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   gap: 28px;
   align-items: start;
 }
-@media (min-width: 760px) {
+/* @container statt @media: reagiert auf die Breite von .events-carousel
+   selbst (siehe container-type dort), nicht auf die Bildschirmbreite -
+   das ist der eigentliche Bugfix (siehe Erklärung bei .events-page-row). */
+@container (min-width: 640px) {
   .event-card {
     grid-template-columns: 1.15fr 1fr;
     gap: 40px;
@@ -1423,7 +1494,7 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   overflow: hidden;
   background-color: var(--cloud);
 }
-@media (min-width: 760px) {
+@container (min-width: 640px) {
   .event-photo {
     width: 420px;
     max-width: 420px;
@@ -1454,7 +1525,7 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   justify-content: center;
   gap: 14px;
 }
-@media (min-width: 760px) {
+@container (min-width: 640px) {
   .event-info {
     /* Höhe an das quadratische Foto (420px) gekoppelt, damit beide
        Spalten immer exakt gleich hoch sind - unabhängig davon, wie
@@ -1511,7 +1582,7 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   font-size: 16px;
   line-height: 1.7;
 }
-@media (min-width: 760px) {
+@container (min-width: 640px) {
   .event-description {
     /* Nimmt nur den Platz ein, der nach Titel/Ort/Link innerhalb der
        420px übrig bleibt - "min-height: 0" ist bei Flex-Kindern mit
@@ -1646,4 +1717,373 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
 .events-dot:focus-visible {
   outline: 2px solid var(--gold-soft);
   outline-offset: 3px;
+}
+
+/* =========================================================================
+   Events-Seite: vertikales "Erinnerungen"-Karussell (vergangene Events)
+   =========================================================================
+   Anders als das horizontale Zukunfts-Karussell KEIN seitliches Gleiten,
+   sondern ein Flip-Effekt, der an einen Tischkalender zum Umblättern
+   erinnert: alle Karten liegen absolut übereinander in .past-viewport
+   (mit CSS-perspective für die 3D-Kippung), nur die Karte mit
+   .is-current liegt flach und sichtbar oben. Karten VOR der aktuellen
+   (.is-before, schon "umgeblättert") sind nach oben weggekippt, Karten
+   NACH der aktuellen (.is-after, "noch nicht dran") liegen nach unten
+   weggekippt dahinter. Der Wechsel zwischen den drei Zuständen ist eine
+   reine CSS-Transition auf transform/opacity (siehe .past-slide) -
+   createPastCarouselController() in eventsCarousel.js vergibt bei jedem
+   Blättern nur die passenden Klassen neu. */
+
+.past-events {
+  position: relative;
+  background-color: var(--ink); /* Fallback, falls das Bild noch lädt oder fehlschlägt */
+  background-image: url('media/contact/contact-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  color: var(--paper);
+  /* Auf schmalen Screens (< 900px, .events-page-row gestapelt statt
+     Reihe) bekommt dieses Element keine Höhe mehr vom Stretch-
+     Verhalten der Reihe geliehen (siehe .events-page-row weiter oben) -
+     ohne eigene Mindesthöhe würde der Hintergrund dort nur so hoch wie
+     sein eigener Inhalt sein. 420px passt zur Fotohöhe des
+     Zukunfts-Karussells und sorgt für ein ähnlich großzügiges Panel. */
+  min-height: 420px;
+  /* Bewusst KEIN eigener Innenabstand mehr hier (siehe .past-events-inner
+     weiter unten) - der Hintergrund soll randlos bis an alle vier Kanten
+     dieser Spalte reichen, statt als "Kasten mit Rand" darin zu
+     schweben. Ab 900px (Reihen-Layout) kommt die Höhe automatisch vom
+     Stretch-Verhalten von .events-page-row und entspricht dadurch der
+     Höhe von .events-main links daneben - randlos bis zum echten
+     Browserrand, genau wie .hero-media bei der Hero-Sektion. */
+}
+/* Derselbe dunkle Schleier wie bei .contact (siehe dort weiter oben in
+   dieser Datei) - ohne ihn wäre der helle Text je nach Bildmotiv nicht
+   zuverlässig lesbar. Liegt als eigene Ebene ZWISCHEN Hintergrundbild
+   und Inhalt (z-index 0 vs. 1), damit Eyebrow und Karussell darüber
+   liegen. */
+.past-events::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: rgba(var(--gold-ink-rgb), 0.88);
+  pointer-events: none;
+}
+/* Der eigentliche Innenabstand sitzt hier, auf einer eigenen Ebene
+   ÜBER dem Hintergrund + Schleier (z-index: 1) - so bleibt der dunkle
+   Hintergrund selbst randlos, während Eyebrow-Text und Karte trotzdem
+   nicht direkt an der Kante kleben. height: 100% sorgt dafür, dass
+   dieser Wrapper die volle (gestreckte) Höhe von .past-events ausfüllt,
+   damit sich Eyebrow und Karussell wie zuvor sauber darin verteilen. */
+.past-events-inner {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* padding-top UND padding-bottom an .events-section .section-inner
+     angeglichen (48px/96px, ab 640px 64px/120px) - nicht nur oben
+     (für die Überschrift), sondern jetzt auch unten. Grund: beide
+     Spalten haben durch das Stretch-Verhalten von .events-page-row
+     dieselbe Gesamthöhe, aber nur wenn auch der untere "Reserve"-
+     Abstand gleich groß ist, landet der letzte sichtbare Inhalt (hier:
+     der Hinweistext unter der Telefonnummer, links: die Pfeile des
+     Zukunfts-Karussells) exakt auf derselben Höhe. Vorher war der
+     untere Abstand hier pauschal 40px - deutlich weniger als die
+     96-120px links - wodurch der Hinweistext tiefer saß als die Pfeile. */
+  padding: 48px 32px 96px;
+}
+@media (min-width: 640px) {
+  .past-events-inner {
+    padding-top: 64px;
+    padding-bottom: 120px;
+  }
+}
+.past-eyebrow-row {
+  margin-bottom: 24px;
+}
+
+/* ---------- Überschrift im rechten Drittel ----------
+   Gleiches Muster wie die Haupt-Headline links (.section-title +
+   .section-title-line2: Zeile 1 normal, Zeile 2 kursiv) - hier bewusst
+   halb so groß (Faktor 0.5 auf beide Font-Size-Stufen) und in hellen
+   Farbtönen, die auf dem dunklen Steinhintergrund lesbar bleiben
+   (var(--paper) statt var(--ink), var(--gold-soft) statt var(--wine) -
+   Weinrot selbst hätte auf dem dunklen Foto zu wenig Kontrast). */
+.past-heading {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-size: 1.25rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  margin: 0 0 32px 0;
+}
+@media (min-width: 640px) {
+  .past-heading { font-size: 1.875rem; }
+}
+.past-heading-line2 {
+  font-style: italic;
+  color: var(--gold-soft);
+}
+
+.past-carousel {
+  position: relative;
+  /* Wächst innerhalb von .past-events-inner (Flex-Spalte), um genau
+     den Platz einzunehmen, der nach Eyebrow + Überschrift oben und dem
+     WhatsApp-Block unten übrig bleibt - dadurch landet der WhatsApp-
+     Block automatisch unten bündig mit den Pfeilen des linken
+     Karussells, egal wie hoch die linke Spalte durch unterschiedlich
+     lange Beschreibungstexte gerade ausfällt. Kein fester Pixelwert
+     nötig, der sonst bei jedem Event wieder anders daneben läge. */
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Karte + Pfeil-Spalte nebeneinander ----------
+   Statt die Pfeile UNTER die Karte zu setzen, liegt die schmale
+   Steuerungs-Spalte (.past-controls) jetzt RECHTS daneben - passend zur
+   Blätterrichtung der Karten selbst (hoch = neuere Erinnerung, runter =
+   ältere, siehe eventsCarousel.js). */
+.past-body {
+  display: flex;
+  align-items: stretch;
+  gap: 14px;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.past-viewport {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  perspective: 1400px;
+}
+
+.past-track {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.past-slide {
+  position: absolute;
+  inset: 0;
+  transform-origin: top center;
+  backface-visibility: hidden;
+  transition: transform 650ms cubic-bezier(0.16,1,0.3,1), opacity 450ms ease;
+  will-change: transform, opacity;
+  /* ---------- Standardzustand VOR der JS-Initialisierung ----------
+     Ohne diese Regel wären alle Karten direkt nach dem Laden der Seite
+     (bevor createPastCarouselController() die Klassen is-current/
+     is-before/is-after vergibt) gleichzeitig voll sichtbar und
+     ungestapelt übereinander - genau das "unförmige" Bild aus dem
+     Bug-Report. Per Default ist daher nur die ERSTE Karte im DOM
+     sichtbar (siehe :first-child-Regel direkt darunter), alle anderen
+     unsichtbar und weggekippt - exakt der Zustand, den render() beim
+     allerersten Aufruf ohnehin herstellen würde. Die .is-*-Klassen
+     stehen bewusst WEITER UNTEN in dieser Datei: bei gleicher
+     CSS-Spezifität (Klasse + Klasse bzw. Klasse + Pseudoklasse)
+     entscheidet die Reihenfolge im Stylesheet, und die per JS
+     vergebenen Klassen sollen diesen Fallback immer überschreiben
+     können, sobald das Karussell läuft. */
+  opacity: 0;
+  transform: rotateX(-100deg);
+  z-index: 1;
+  pointer-events: none;
+}
+.past-slide:first-child {
+  opacity: 1;
+  transform: rotateX(0deg);
+  z-index: 3;
+  pointer-events: auto;
+}
+.past-slide.is-current {
+  transform: rotateX(0deg);
+  opacity: 1;
+  z-index: 3;
+  pointer-events: auto;
+}
+.past-slide.is-before {
+  /* Schon "umgeblättert" - nach oben/hinten weggekippt. */
+  transform: rotateX(100deg);
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.past-slide.is-after {
+  /* Liegt noch "vor" der aktuellen Karte im Stapel - nach unten/hinten
+     weggekippt, damit beim Weiterblättern dieselbe Bewegung in die
+     andere Richtung entsteht. */
+  transform: rotateX(-100deg);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.past-card {
+  position: relative;
+  box-sizing: border-box;
+  height: 100%;
+  padding: 32px 28px 28px;
+  background: var(--paper);
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Nicht mehr die ganze Karte scrollen (das hätte Titel/Ort mit
+     weggeschoben) - stattdessen bleiben Jahr/Titel/Ort fest stehen und
+     nur .past-card-description scrollt bei Bedarf für sich, mit
+     weichem Verblassen am unteren Rand (siehe dort). */
+  overflow: hidden;
+}
+
+/* Kompaktes Jahres-Label statt des vollen Datums - passend zur
+   bewussten Reduktion auf Titel/Ort/Beschreibung, aber als kleiner
+   zeitlicher Anker ("wann war das noch mal?") trotzdem hilfreich. */
+.past-card-year {
+  margin: 0;
+  color: var(--slate);
+}
+.past-card-title {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-size: 1.4rem;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0;
+}
+.past-card-location {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: var(--slate);
+  font-size: 13px;
+}
+.past-card-location-icon {
+  flex-shrink: 0;
+  color: var(--wine-deep);
+}
+.past-card-description {
+  margin: 0;
+  color: var(--slate);
+  font-size: 15px;
+  line-height: 1.7;
+  /* Nimmt den restlichen Platz in der Karte ein und scrollt bei
+     Bedarf für sich - mit demselben weichen Verblassen am unteren
+     Rand wie .event-description beim Zukunfts-Karussell, statt den
+     Text hart abzuschneiden. */
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 8px;
+  mask-image: linear-gradient(to bottom, black calc(100% - 32px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 32px), transparent 100%);
+}
+
+.past-controls {
+  /* Vertikale Spalte statt horizontaler Reihe unter der Karte - "hoch"
+     und "runter" liegen jetzt genau übereinander, in derselben Richtung,
+     in die auch die Karten selbst wegkippen (siehe .past-slide oben). */
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0;
+}
+.past-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid rgba(var(--paper-rgb), 0.25);
+  background: linear-gradient(120deg, rgba(var(--wine-rgb), 0.65), rgba(var(--wine-deep-rgb), 0.85));
+  color: var(--paper);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, opacity 0.25s ease;
+}
+.past-arrow:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(120deg, rgba(var(--wine-rgb), 0.8), rgba(var(--wine-deep-rgb), 1));
+}
+.past-arrow:focus-visible {
+  outline: 2px solid var(--gold-soft);
+  outline-offset: 3px;
+}
+.past-arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+  transform: none;
+}
+
+.past-counter {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  color: rgba(var(--paper-rgb), 0.7);
+  white-space: nowrap;
+}
+
+.past-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  text-align: center;
+  color: #C7C6C1;
+}
+
+/* ---------- Zuverlässiges Ein-/Ausblenden für Karussell-Leerzustände ----------
+   Wird von toggleEmptyState() in eventsCarousel.js per classList.toggle()
+   gesetzt/entfernt. Bewusst mit !important: Elemente wie .past-controls
+   haben eine eigene "display"-Regel - ohne !important würde diese das
+   native hidden-Attribut in der CSS-Kaskade grundsätzlich überschreiben
+   (Autoren-Regeln schlagen die [hidden]-Browserregel immer, unabhängig
+   von der Spezifität), wodurch Elemente trotz "hidden" sichtbar
+   blieben. .is-hidden mit !important kann das nicht passieren. */
+.is-hidden {
+  display: none !important;
+}
+
+/* ---------- WhatsApp-Hinweis unter dem Erinnerungen-Karussell ----------
+   Nutzt dasselbe Farbschema wie die Kontakt-Sektion auf der Startseite
+   (helle Schrift auf dunklem Steinhintergrund) - die Telefonnummer
+   selbst wird nicht hier gestylt, sondern kommt fertig aus
+   .contact-phone/.contact-value-box/.copy-btn (siehe weiter oben in
+   dieser Datei), da events.njk denselben data-phone-contact-theme-
+   Platzhalter wie die Kontakt-Sektion nutzt und renderPhoneContacts()
+   (läuft bereits global über main.js) das Canvas-Bild + den
+   Kopieren-Button automatisch einsetzt. */
+.past-whatsapp {
+  margin-top: 40px;
+}
+.past-whatsapp-text {
+  margin: 0 0 24px 0;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #C7C6C1;
+}
+.past-whatsapp-hint {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: #7A7A76;
+  margin: 16px 0 0 0;
 }

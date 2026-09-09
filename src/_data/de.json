@@ -327,12 +327,26 @@
       "dots_aria": "Event auswählen",
       "goto_aria": "Zu Event",
       "more_info": "Mehr erfahren",
-      "of": "von"
+      "of": "von",
+      "empty": "Aktuell sind keine neuen Termine geplant. Schaut gerne bald wieder vorbei!"
+    },
+    "past": {
+      "eyebrow": "Vergangene Veranstaltungen",
+      "heading_line1": "Erinnerungen.",
+      "heading_line2": "Unvergessliche Momente.",
+      "prev_aria": "Neuere Erinnerung",
+      "next_aria": "Ältere Erinnerung",
+      "of": "von",
+      "empty": "Noch keine vergangenen Events.",
+      "whatsapp_text": "Ihr möchtet unsere Events nicht mehr verpassen? Dann schreibt uns eine WhatsApp-Nachricht mit \"bitte informiere uns über zukünftige Veranstaltungen\" und wir schicken Euch ab sofort unsere Veranstaltungstipps direkt per WhatsApp.",
+      "whatsapp_hint": "Die Telefonnummer ist als Bild hinterlegt, damit Spam-Bots sie nicht auslesen können — am einfachsten über den Button kopieren."
     },
     "items": [
       {
         "title": "Federweißer-Fest",
         "date": "8.–11. Okt 2026",
+        "date_iso": "2026-10-08",
+        "date_end_iso": "2026-10-11",
         "time": "ganztägig (siehe Link)",
         "location": "Zeller Marktplatz",
         "description": "Der Zeller Marktplatz verwandelt sich beim Federweißerfest wieder in vier Tage voller Genuss, Musik und Gemeinschaft – mit Federweißem, gutem Essen, tollem Programm für Groß und Klein und jeder Menge guter Stimmung freut sich Zell auf euch! Und Haus Till E sorgt u.a. für die Verpflegung.",
@@ -345,6 +359,8 @@
       {
         "title": "Zeller Stadt- & Gässchen-Flohmarkt",
         "date": "17.–18. Okt 2026",
+        "date_iso": "2026-10-17",
+        "date_end_iso": "2026-10-18",
         "time": "ganztägig (siehe Link)",
         "location": "über die ganze Stadt verteilt / Garten Haus Till E",
         "description": "Am 17. und 18. Oktober lädt der Herbstzauber in Zell mit Kaimt und Merl zum großen Stöbern ein – ob Stadt- und Gässchenflohmarkt, Kinderflohmarkt, verkaufsoffener Sonntag oder kulinarische Herbstleckereien, hier findet garantiert jeder sein kleines Schnäppchen und genießt gemütliche Herbsttage in Zell! Und natürlich gibt's auch im Garten vom Haus Till E viel zu Stöbern - wir machen mit unseren Freunden mit!",
@@ -357,6 +373,7 @@
       {
         "title": "Dekadenzia 2026 – Mottoparty",
         "date": "21. Nov 2026",
+        "date_iso": "2026-11-21",
         "time": "19:00 Uhr",
         "location": "Zeller Schlosskeller",
         "description": "Die wilden 20er Jahre sind zurück - für eine Nacht - im Zeller Schlosskeller mit Liveband, Burlesque Show, Tanzkurs, Spielhölle und Cocktails. Und wir beide schmeißen uns auch in Schale - und werden eine Nacht Teil des wundervollen Bar-Teams.",
@@ -369,6 +386,8 @@
       {
         "title": "Zauber im Advent 2026",
         "date": "20. Nov – 20. Dez 2026",
+        "date_iso": "2026-11-20",
+        "date_end_iso": "2026-12-20",
         "time": "ganztägig (siehe Flyer)",
         "location": "Lichter-Garten Haus Till E",
         "description": "Beim Adventszauber im Haus Till E erwarten euch gemütliches Beisammensein im festlich geschmückten Garten, Essen und Trinken mit heißem Glühwein, Konzerte und Mitmachkonzerte für Groß und Klein sowie ein Geschenkeschrank voller Ideen zum Verschenken. Wir freuen uns auf euch!",
@@ -380,6 +399,7 @@
       {
         "title": "Konzert beim Zauber am 2. Advent",
         "date": "5. Dez 2026",
+        "date_iso": "2026-12-05",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
         "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
@@ -391,6 +411,7 @@
       {
         "title": "Konzert beim Zauber am 3. Advent",
         "date": "12. Dez 2026",
+        "date_iso": "2026-12-12",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
         "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
@@ -402,6 +423,7 @@
       {
         "title": "Konzert beim Zauber am 4. Advent",
         "date": "19. Dez 2026",
+        "date_iso": "2026-12-19",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
         "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
@@ -413,6 +435,7 @@
       {
         "title": "Märchenumzug der Stadt Zell",
         "date": "28. Nov 2026",
+        "date_iso": "2026-11-28",
         "time": "17:30 Uhr",
         "location": "über die ganze Stadt verteilt / Garten Haus Till E",
         "description": "Zum 1. Advent verwandelt sich Zell in ein stimmungsvolles Märchenland: Der Gewerbeverein Zell lädt zum großen Märchenumzug durch die weihnachtlich geschmückte Altstadt ein. Ab 17:30 Uhr ziehen bekannte Märchenfiguren wie Frau Holle, der Nussknacker und Schneewittchen durch die Straßen und verzaubern Groß und Klein. Bereits ab 13:00 Uhr könnt ihr beim Adventsmarkt rund um den Marktplatz und im Rathaus stöbern – mit einem schönen Angebot an weihnachtlicher Dekoration, Kunsthandwerk und handgefertigten Geschenken. Ein zauberhafter Start in die Adventszeit für die ganze Familie!",
@@ -425,6 +448,7 @@
       {
         "title": "Konzert beim Zauber am 2. Advent",
         "date": "5. Dez 2025",
+        "date_iso": "2025-12-05",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
         "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
@@ -436,6 +460,7 @@
       {
         "title": "Konzert beim Zauber am 3. Advent",
         "date": "12. Dez 2025",
+        "date_iso": "2025-12-12",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
         "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
@@ -447,6 +472,7 @@
       {
         "title": "Konzert beim Zauber am 4. Advent",
         "date": "19. Dez 2025",
+        "date_iso": "2025-12-19",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
         "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",

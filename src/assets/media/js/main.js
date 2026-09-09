@@ -1,8 +1,7 @@
-// ---------- Einstiegspunkt ----------
-// Bindet die einzelnen, fachlich getrennten Module ein und startet sie.
 // Jedes Modul prüft selbst, ob seine Elemente auf der aktuellen Seite
 // überhaupt existieren - daher kann diese Datei unverändert auf allen
-// drei Seiten (Startseite, Impressum, Datenschutz) eingebunden werden.
+// Seiten (Startseite, Impressum, Datenschutz, Events, ...) eingebunden
+// werden.
 import { setupCrossfadeGroups } from "./crossfade.js";
 import { setupScrollReveal } from "./scrollReveal.js";
 import { setupHeroReveal } from "./heroReveal.js";
@@ -11,7 +10,7 @@ import { renderPhoneContacts } from "./phoneContact.js";
 import { alignContactBoxWidths } from "./contactUtils.js";
 import { setupGallery } from "./gallery.js";
 import { setupNav } from "./nav.js";
-import { setupEventsCarousel } from "./eventsCarousel.js";
+import { setupAllEventCarousels } from "./eventsCarousel.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   setupCrossfadeGroups();
@@ -19,9 +18,19 @@ document.addEventListener("DOMContentLoaded", () => {
   setupHeroReveal();
   renderEmailContacts();
   renderPhoneContacts();
-  alignContactBoxWidths(); 
+  alignContactBoxWidths();
   alignContactBoxWidths(".copy-btn");
   setupGallery();
   setupNav();
-  setupEventsCarousel(); // läuft ins Leere auf Seiten ohne [data-events-carousel]
+  // WICHTIG: setupAllEventCarousels() statt einzeln setupEventsCarousel() -
+  // erst diese Funktion teilt die Events per partitionEventsByDate() nach
+  // "heute" in Zukunft/Vergangenheit auf, BEVOR beide Karussells (das
+  // horizontale links und das vertikale "Erinnerungen"-Karussell rechts)
+  // initialisiert werden. Ruft man stattdessen weiterhin nur
+  // setupEventsCarousel() auf, bleiben im linken Karussell auch
+  // vergangene Events sichtbar, und die Punkte-Navigation darunter
+  // bleibt leer (siehe eventsCarousel.js für Details).
+  // Läuft auf Seiten ohne [data-events-carousel]/[data-past-carousel]
+  // einfach ins Leere.
+  setupAllEventCarousels();
 });

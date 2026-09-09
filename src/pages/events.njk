@@ -15,18 +15,42 @@ permalink: "{{ pages.events[lang] }}"
   "home").
 
   Struktur:
-  1. Eyebrow "Events rund ums Haus Till E"
-  2. Headline "Veranstaltungen." + kursive Zeile "Klassisch und Innovativ"
-     (nutzt dieselbe .section-title-line2-Klasse wie auf der Startseite -
-     dort ist "kursiv + Weinrot" schon exakt so definiert)
-  3. Karussell mit 3 bis 10 Events (t.events.items) - Aufbau/Verhalten
-     siehe eventsCarousel.js
+  1. .events-page-row - NEUE, unbeschränkte Reihe auf Sektionsebene
+     (analog zu .hero-grid in der Hero-Sektion): zwei echte Spalten,
+     nicht länger beide innerhalb des padded/zentrierten .section-inner.
+       a) .events-main (2/3): behält das gewohnte .section-inner mit
+          Eyebrow "Events rund ums Haus Till E", Headline
+          "Veranstaltungen." + kursive Zeile, und darunter das
+          horizontale Zukunfts-Karussell - zeigt ALLE zukünftigen
+          Events inkl. heute
+       b) .past-events (1/3): das vertikale "Flip-Kalender"-Karussell
+          ("Erinnerungen. Unvergessliche Momente.") - zeigt alle
+          vergangenen Events, neuestes zuerst, nur mit Titel/Ort/
+          Beschreibung auf der Karte, darunter ein WhatsApp-Hinweis mit
+          Telefonnummer. Liegt jetzt AUSSERHALB von .section-inner,
+          direkt als zweite Spalte von .events-page-row - genau wie
+          .hero-media bei der Hero-Sektion reicht der dunkle
+          Hintergrund dadurch randlos bis zum echten Browserrand, nicht
+          nur bis zum Rand des zentrierten Seiteninhalts (siehe
+          styles.css).
+
+  WICHTIG zur Datumsaufteilung: Eleventy baut diese Seite nur bei jedem
+  Deploy neu - "heute" würde also einfrieren, wenn wir die Aufteilung
+  zukünftig/vergangen hier im Template vornehmen würden. Deshalb werden
+  BEIDE Karussells zunächst mit ALLEN Events aus t.events.items befüllt
+  (jede Folie trägt data-date-start/data-date-end als ISO-Datum), und
+  erst eventsCarousel.js entscheidet beim Laden der Seite im Browser -
+  anhand des tatsächlichen "heute" - welche Folie in welchem Karussell
+  bleibt und welche entfernt wird (siehe partitionEventsByDate() dort).
+  So bleibt die Aufteilung auch Monate nach dem letzten Deploy korrekt.
 
   Der Hintergrund bekommt denselben "Blob"-Effekt wie im Hero: ein
   .ambient-bg mit fünf .ambient-layer-*-Kindern. heroAmbient.js sucht
   automatisch ALLE .ambient-bg-Container auf der Seite ab (nicht nur die
   der Startseite) - hier ist also nichts weiter nötig, damit sich die
-  Farbflächen auch auf dieser Seite sanft bewegen.
+  Farbflächen auch auf dieser Seite sanft bewegen. Die Blobs liegen
+  ohnehin ganz hinten (z-index: -1) und werden im rechten Drittel vom
+  eigenen dunklen Hintergrund von .past-events überdeckt.
 #}
 {% set t = de %}
 {% if lang == "en" %}{% set t = en %}{% endif %}
@@ -41,115 +65,252 @@ permalink: "{{ pages.events[lang] }}"
     <div class="ambient-layer ambient-layer-5"></div>
   </div>
 
-  <div class="section-inner">
-    <div class="eyebrow-row">
-      <span class="mono-label wine-label">{{ t.events.eyebrow }}</span>
-      <span class="eyebrow-line"></span>
-    </div>
+  <div class="events-page-row">
 
-    <h1 class="section-title">
-      {{ t.events.title }}<br />
-      <span class="section-title-line2">{{ t.events.subtitle }}</span>
-    </h1>
-
-    {# ---------- Karussell ----------
-       data-events-carousel markiert den Container, den eventsCarousel.js
-       sucht (Muster wie ".ambient-bg"/".crossfade-group": JS sucht selbst
-       nach seinen Elementen, läuft ins Leere, wenn keine da sind).
-
-       data-autoplay-ms erlaubt es, das Tempo direkt im Template zu
-       justieren, ohne die JS-Datei anzufassen - Default (falls das
-       Attribut fehlt) steht in eventsCarousel.js. #}
-    <div
-      class="events-carousel"
-      data-events-carousel
-      data-autoplay-ms="6500"
-      aria-roledescription="carousel"
-      aria-label="{{ t.events.eyebrow }}"
-    >
-      <div class="events-viewport" data-events-viewport>
-        <ul class="events-track" data-events-track>
-          {% for item in t.events.items %}
-          <li
-            class="event-slide"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="{{ item.title }} ({{ loop.index }} {{ t.events.carousel.of }} {{ t.events.items.length }})"
-            {% if not loop.first %}aria-hidden="true"{% endif %}
-            data-events-slide
-          >
-            <article class="event-card">
-              <div class="event-photo">
-                <img
-                  src="{{ item.image.src | url }}"
-                  alt="{{ item.image.alt }}"
-                  loading="lazy"
-                  {% if not loop.first %}decoding="async"{% endif %}
-                />
-              </div>
-              <div class="event-info">
-                <p class="mono-label event-meta">
-                  <span class="event-date">{{ item.date }}</span>
-                  <span class="event-meta-dot" aria-hidden="true">&middot;</span>
-                  <span class="event-time">{{ item.time }}</span>
-                </p>
-                <h2 class="event-title">{{ item.title }}</h2>
-                <p class="event-location">
-                  <svg class="event-location-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M12 21s-7-6.1-7-11.4A7 7 0 0 1 19 9.6C19 14.9 12 21 12 21Z"></path>
-                    <circle cx="12" cy="9.5" r="2.4"></circle>
-                  </svg>
-                  {{ item.location }}
-                </p>
-                <p class="event-description">{{ item.description }}</p>
-                {% if item.link %}
-                <a class="event-link" href="{{ item.link }}" target="_blank" rel="noopener">
-                  {{ t.events.carousel.more_info }}
-                  <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <line x1="7" y1="17" x2="17" y2="7"></line>
-                    <polyline points="7 7 17 7 17 17"></polyline>
-                  </svg>
-                </a>
-                {% endif %}
-              </div>
-            </article>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-
-      <div class="events-controls">
-        <button type="button" class="events-arrow events-prev" data-events-prev aria-label="{{ t.events.carousel.prev_aria }}">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
-        </button>
-
-        <button type="button" class="events-playpause" data-events-playpause data-play-label="{{ t.events.carousel.play_aria }}" aria-pressed="false" aria-label="{{ t.events.carousel.pause_aria }}">
-          <svg class="icon-pause" data-icon-pause viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg>
-          <svg class="icon-play" data-icon-play viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" hidden><polygon points="7 4 20 12 7 20"></polygon></svg>
-        </button>
-
-        <div class="events-dots" data-events-dots role="tablist" aria-label="{{ t.events.carousel.dots_aria }}">
-          {% for item in t.events.items %}
-          <button
-            type="button"
-            class="events-dot{% if loop.first %} is-active{% endif %}"
-            data-events-dot="{{ loop.index0 }}"
-            role="tab"
-            aria-selected="{% if loop.first %}true{% else %}false{% endif %}"
-            aria-label="{{ t.events.carousel.goto_aria }} {{ loop.index }}"
-          ></button>
-          {% endfor %}
+    {# ========== SPALTE 1 (2/3): EYEBROW, TITEL, ZUKÜNFTIGE EVENTS ==========
+       Der gewohnte .section-inner (mit der zentrierten/padded Breite)
+       lebt jetzt HIER drin statt auf Sektionsebene - dadurch bleibt der
+       Text schön eingerückt, während die rechte Spalte gleich daneben
+       ungehindert bis zum Browserrand reichen kann. #}
+    <div class="events-main">
+      <div class="section-inner">
+        <div class="eyebrow-row">
+          <span class="mono-label wine-label">{{ t.events.eyebrow }}</span>
+          <span class="eyebrow-line"></span>
         </div>
 
-        <button type="button" class="events-arrow events-next" data-events-next aria-label="{{ t.events.carousel.next_aria }}">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
-        </button>
-      </div>
+        <h1 class="section-title">
+          {{ t.events.title }}<br />
+          <span class="section-title-line2">{{ t.events.subtitle }}</span>
+        </h1>
 
-      {# Für Screenreader: still (visuell versteckt), meldet bei jedem
-         Wechsel "Titel (2 von 5)" - dieselbe .visually-hidden-Klasse wird
-         gleich in styles.css ergänzt. #}
-      <p class="visually-hidden" data-events-live aria-live="polite"></p>
+        {# ---------- Horizontales Zukunfts-Karussell ----------
+           Unverändert - einzige Ergänzung: data-events-scope="future"
+           (damit eventsCarousel.js dieses Karussell von "future"
+           unterscheiden kann) sowie data-date-start/data-date-end und
+           data-goto-aria/data-of-label (werden von der JS-Logik zum
+           Aufteilen und zum Nachbauen der Punkte-Navigation gebraucht -
+           siehe eventsCarousel.js). Die Punkte selbst werden nicht mehr
+           hier im Template vorgerendert, sondern von buildDots() in JS
+           erzeugt, weil erst zur Laufzeit feststeht, wie viele
+           zukünftige Events tatsächlich übrig bleiben. data-title trägt
+           den reinen Titel ohne die "(X von Y)"-Klammer, damit JS das
+           aria-label nach dem Aufteilen sauber mit der korrekten
+           (kleineren) Gesamtzahl neu zusammensetzen kann. #}
+        <div
+          class="events-carousel events-future"
+          data-events-carousel
+          data-events-scope="future"
+          data-autoplay-ms="6500"
+          data-goto-aria="{{ t.events.carousel.goto_aria }}"
+          data-of-label="{{ t.events.carousel.of }}"
+          aria-roledescription="carousel"
+          aria-label="{{ t.events.eyebrow }}"
+        >
+          <div class="events-viewport" data-events-viewport>
+            <ul class="events-track" data-events-track>
+              {% for item in t.events.items %}
+              <li
+                class="event-slide"
+                role="group"
+                aria-roledescription="slide"
+                aria-label="{{ item.title }} ({{ loop.index }} {{ t.events.carousel.of }} {{ t.events.items.length }})"
+                aria-hidden="true"
+                data-events-slide
+                data-title="{{ item.title }}"
+                data-date-start="{{ item.date_iso }}"
+                data-date-end="{{ item.date_end_iso | default(item.date_iso) }}"
+              >
+                <article class="event-card">
+                  <div class="event-photo">
+                    <img
+                      src="{{ item.image.src | url }}"
+                      alt="{{ item.image.alt }}"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="event-info">
+                    <p class="mono-label event-meta">
+                      <span class="event-date">{{ item.date }}</span>
+                      <span class="event-meta-dot" aria-hidden="true">&middot;</span>
+                      <span class="event-time">{{ item.time }}</span>
+                    </p>
+                    <h2 class="event-title">{{ item.title }}</h2>
+                    <p class="event-location">
+                      <svg class="event-location-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 21s-7-6.1-7-11.4A7 7 0 0 1 19 9.6C19 14.9 12 21 12 21Z"></path>
+                        <circle cx="12" cy="9.5" r="2.4"></circle>
+                      </svg>
+                      {{ item.location }}
+                    </p>
+                    <p class="event-description">{{ item.description }}</p>
+                    {% if item.link %}
+                    <a class="event-link" href="{{ item.link }}" target="_blank" rel="noopener">
+                      {{ t.events.carousel.more_info }}
+                      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                      </svg>
+                    </a>
+                    {% endif %}
+                  </div>
+                </article>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          {# Wird per JS eingeblendet, falls einmal ALLE Events in der
+             Vergangenheit liegen sollten (dann bleibt hier nichts
+             übrig) - siehe toggleEmptyState() in eventsCarousel.js. #}
+          <p class="events-empty is-hidden" data-events-empty>{{ t.events.carousel.empty }}</p>
+
+          <div class="events-controls" data-events-controls>
+            <button type="button" class="events-arrow events-prev" data-events-prev aria-label="{{ t.events.carousel.prev_aria }}">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
+            </button>
+
+            <button type="button" class="events-playpause" data-events-playpause data-play-label="{{ t.events.carousel.play_aria }}" aria-pressed="false" aria-label="{{ t.events.carousel.pause_aria }}">
+              <svg class="icon-pause" data-icon-pause viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg>
+              <svg class="icon-play" data-icon-play viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" hidden><polygon points="7 4 20 12 7 20"></polygon></svg>
+            </button>
+
+            {# Bleibt leer - buildDots() in eventsCarousel.js füllt
+               diesen Container erst, nachdem feststeht, wie viele
+               zukünftige Folien nach der Datumsaufteilung übrig
+               bleiben. #}
+            <div class="events-dots" data-events-dots role="tablist" aria-label="{{ t.events.carousel.dots_aria }}"></div>
+
+            <button type="button" class="events-arrow events-next" data-events-next aria-label="{{ t.events.carousel.next_aria }}">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+            </button>
+          </div>
+
+          {# Für Screenreader: still (visuell versteckt), meldet bei
+             jedem Wechsel "Titel" - dieselbe .visually-hidden-Klasse
+             wie überall sonst auf der Seite. #}
+          <p class="visually-hidden" data-events-live aria-live="polite"></p>
+        </div>
+      </div>
     </div>
+
+    {# ========== SPALTE 2 (1/3): VERGANGENE EVENTS ("Erinnerungen. Unvergessliche Momente.") ==========
+       Vertikales Karussell im Stil eines Tischkalenders zum
+       Umblättern: jede Karte liegt übereinandergestapelt, die aktuelle
+       Karte ist flach sichtbar, die anderen sind nach hinten
+       weggekippt (siehe .past-slide in styles.css). Zeigt bewusst NUR
+       Titel, Ort und Beschreibung - keine Fotos, kein volles Datum
+       (nur die Jahreszahl), kein Link, wie gewünscht.
+
+       Liegt jetzt als direktes Geschwisterelement von .events-main auf
+       Ebene von .events-page-row - NICHT mehr innerhalb eines
+       zentrierten/padded Containers. Der dunkle Hintergrund (Bild +
+       Schleier, wie bei der Kontakt-Sektion) reicht dadurch randlos
+       bis zum echten Browserrand, genau wie .hero-media es bei der
+       Hero-Sektion tut. #}
+    <div class="past-events">
+      {# ---------- Innerer Wrapper für den Innenabstand ----------
+         Der Innenabstand liegt hier, nicht direkt auf .past-events -
+         so kann der dunkle Hintergrund selbst randlos bis an alle vier
+         Kanten reichen, statt als "Kasten mit Rand" darin zu
+         schweben. #}
+      <div class="past-events-inner">
+        <div class="eyebrow-row past-eyebrow-row">
+          <span class="mono-label light-gold-label">{{ t.events.past.eyebrow }}</span>
+          <span class="eyebrow-line light-line"></span>
+        </div>
+
+        {# ---------- Überschrift auf derselben Höhe wie links ----------
+           Gleiches Muster wie die Haupt-Headline links (Zeile 1 normal,
+           Zeile 2 kursiv) - hier halb so groß und in hellen Farbtönen
+           für den dunklen Hintergrund (var(--paper)/var(--gold-soft)
+           statt var(--ink)/var(--wine), die auf Stein kaum lesbar
+           wären). #}
+        <h2 class="past-heading">
+          {{ t.events.past.heading_line1 }}<br />
+          <span class="past-heading-line2">{{ t.events.past.heading_line2 }}</span>
+        </h2>
+
+        <div
+          class="past-carousel"
+          data-past-carousel
+          data-of-label="{{ t.events.past.of }}"
+          aria-roledescription="carousel"
+          aria-label="{{ t.events.past.eyebrow }}"
+        >
+          {# ---------- Karte + Pfeil-Spalte nebeneinander ----------
+             .past-body ordnet Kalenderkarte (links, nimmt den
+             Großteil der Breite ein) und die Steuerung (rechts,
+             schmale Spalte) per Flexbox nebeneinander an - siehe
+             styles.css. Die Pfeile zeigen bewusst hoch/runter, weil
+             sie dieselbe Richtung abbilden, in die die Karten kippen
+             (nach oben = neuere Erinnerung, nach unten = ältere). #}
+          <div class="past-body">
+            <div class="past-viewport" data-past-viewport>
+              <ul class="past-track" data-past-track>
+                {% for item in t.events.items %}
+                <li
+                  class="past-slide"
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label="{{ item.title }}"
+                  aria-hidden="true"
+                  data-past-slide
+                  data-date-start="{{ item.date_iso }}"
+                  data-date-end="{{ item.date_end_iso | default(item.date_iso) }}"
+                >
+                  <article class="past-card">
+                    <p class="mono-label past-card-year">{{ (item.date_iso | default("")).slice(0, 4) }}</p>
+                    <h3 class="past-card-title">{{ item.title }}</h3>
+                    <p class="past-card-location">
+                      <svg class="past-card-location-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 21s-7-6.1-7-11.4A7 7 0 0 1 19 9.6C19 14.9 12 21 12 21Z"></path>
+                        <circle cx="12" cy="9.5" r="2.4"></circle>
+                      </svg>
+                      {{ item.location }}
+                    </p>
+                    <p class="past-card-description">{{ item.description }}</p>
+                  </article>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div class="past-controls" data-past-controls>
+              <button type="button" class="past-arrow past-prev" data-past-prev aria-label="{{ t.events.past.prev_aria }}">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+              </button>
+              <span class="past-counter" data-past-counter aria-hidden="true"></span>
+              <button type="button" class="past-arrow past-next" data-past-next aria-label="{{ t.events.past.next_aria }}">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+            </div>
+          </div>
+
+          {# Wird eingeblendet, falls (noch) kein einziges Event in der
+             Vergangenheit liegt. #}
+          <p class="events-empty past-empty is-hidden" data-past-empty>{{ t.events.past.empty }}</p>
+
+          <p class="visually-hidden" data-past-live aria-live="polite"></p>
+        </div>
+
+        {# ---------- WhatsApp-Hinweis unter dem Karussell ----------
+           Nutzt exakt dieselbe Technik wie die Kontakt-Sektion auf der
+           Startseite: ein leerer Platzhalter mit data-phone-contact-theme,
+           den renderPhoneContacts() (siehe phoneContact.js, läuft
+           bereits global über main.js auf jeder Seite) automatisch mit
+           Canvas-Bild + Kopieren-Button befüllt - keine weitere
+           JS-Änderung nötig. Bewusst die MOBILE Nummer
+           (data-phone-contact-theme, nicht data-phone-2-contact-theme),
+           da nur diese WhatsApp-fähig ist. #}
+        <div class="past-whatsapp">
+          <p class="past-whatsapp-text">{{ t.events.past.whatsapp_text }}</p>
+          <div data-phone-contact-theme="dark" data-copy-label="{{ t.nav.copy_phone_button }}" data-copied-label="{{ t.nav.copied_button }}"></div>
+          <p class="past-whatsapp-hint">{{ t.events.past.whatsapp_hint }}</p>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
