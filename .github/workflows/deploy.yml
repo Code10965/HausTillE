@@ -1,4 +1,4 @@
-name: Deploy Eleventy site to GitHub Pages
+name: Deploy Eleventy site to Manitu
 
 # Läuft bei jedem Push auf main automatisch, außerdem manuell startbar
 # über den "Run workflow"-Button im Actions-Tab (workflow_dispatch).
@@ -7,22 +7,8 @@ on:
     branches: ["main"]
   workflow_dispatch:
 
-# Diese drei Rechte braucht der Workflow: das Repo lesen, auf Pages
-# schreiben, sich per OIDC-Token gegenüber Pages authentifizieren.
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# Verhindert, dass zwei Deploys gleichzeitig laufen (z.B. bei zwei
-# schnell aufeinanderfolgenden Pushes) - der zweite wartet, statt den
-# ersten mitten im Deploy zu unterbrechen.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Repository auschecken
@@ -39,24 +25,17 @@ jobs:
 
       - name: Website bauen
         run: npm run build
-        env:
-          ELEVENTY_PATH_PREFIX: /HausTillE/
+        # Kein ELEVENTY_PATH_PREFIX mehr nötig: die Seite liegt jetzt im
+        # Root der eigenen Domain, nicht mehr in einem GitHub-Pages-
+        # Unterordner. eleventy.config.js fällt dann automatisch auf "/"
+        # zurück (siehe pathPrefix: process.env.ELEVENTY_PATH_PREFIX || "/").
 
-      - name: GitHub Pages konfigurieren
-        uses: actions/configure-pages@v5
-
-      - name: Build-Ergebnis (_site) als Pages-Artefakt hochladen
-        uses: actions/upload-pages-artifact@v4
+      - name: Per SFTP zu Manitu hochladen
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
-          path: ./_site
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Auf GitHub Pages veröffentlichen
-        id: deployment
-        uses: actions/deploy-pages@v4
+          server: ${{ secrets.MANITU_FTP_HOST }}
+          username: ${{ secrets.MANITU_FTP_USERNAME }}
+          password: ${{ secrets.MANITU_FTP_PASSWORD }}
+          port: 22
+          local_path: "./_site/*"
+          remote_path: "/web/haus-till-e.com/"
