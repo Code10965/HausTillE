@@ -1,7 +1,7 @@
 // ---------- phoneContact.js ----------
 import { renderContacts } from "./contactUtils.js";
 
-const CONTACT_PHONE = ["+49 176 ", "62536160"].join("1"); // 
+const CONTACT_PHONE = ["+49 176 ", "2536160"].join("6"); // 
 const CONTACT_2_PHONE = ["+49 6542 ", "227"].join("5"); // 
 
 export function renderPhoneContacts() {
