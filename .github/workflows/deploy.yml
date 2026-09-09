@@ -31,11 +31,13 @@ jobs:
         # zurück (siehe pathPrefix: process.env.ELEVENTY_PATH_PREFIX || "/").
 
       - name: Per SFTP zu Manitu hochladen
-        uses: wangyucode/sftp-upload-action@v2.0.4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.MANITU_FTP_HOST }}
+          server: ${{ secrets.MANITU_FTP_HOST }}
           username: ${{ secrets.MANITU_FTP_USERNAME }}
           password: ${{ secrets.MANITU_FTP_PASSWORD }}
+          protocol: sftp
           port: 23
-          localDir: "_site"
-          remoteDir: "/web/haus-till-e.com/"
+          local-dir: "./_site/"
+          server-dir: "/web/haus-till-e.com/"
+          log-level: verbose
