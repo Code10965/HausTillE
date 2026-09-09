@@ -33,7 +33,7 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Haus Till E aan de Moezelbocht in Zell",
+      "eyebrow": "Haus Till<span class=\"eyebrow-tight-e\"> E</span> aan de Moezelbocht in Zell",
       "title_line1": "Aankomen.",
       "title_line2": "Thuis zijn.",
       "sub": "In het monumentale art-decohuis met een eigen geschiedenis wachten vijf individuele tweepersoonskamers vol charme en karakter op je. Begin de dag met een heerlijk ontbijt in onze gezellige ontbijtruimte — voordat je in de wildromantische tuin de tijd vergeet.",
@@ -68,6 +68,7 @@
       "accordion": [
         { "title": "Route", "content": "Hoe kom ik bij Haus Till E?<br><br>Haus Till E ligt op loopafstand van de Moezel, midden in de oude binnenstad van Zell, aan de Schloßstraße 10. Vanuit Bullay rijd je door de wijk Zell-Merl naar de oude binnenstad van Zell. Andere routes lopen via de Zeller Berg en Grenderich (L199), door het Altlayer Bachtal (L194), of vanuit Kappel via de B421. Met de trein bereik je ons via het milieuvriendelijke station Bullay — vandaar brengt de bus je in ongeveer 3 km naar halte Lindenplatz, een korte wandeling van Haus Till E vandaan. De dichtstbijzijnde luchthaven is Frankfurt-Hahn (ca. 20 km). Of je nu vanaf het station of de luchthaven komt: laat het ons gewoon weten — we halen je graag op met de auto! (tegen een kleine onkostenvergoeding)" },
         { "title": "Adres", "content": "Waar precies ligt Haus Till E?<br><br>Haus Till E bevindt zich aan de Schloßstraße 10, 56856 Zell (Mosel) — direct aan de voet van de steile wijngaard „Zeller Schwarze Katz“, op enkele minuten lopen van de Moezelpromenade en de oude binnenstad." },
+        { "title": "Prijzen", "content": "Wat kost een overnachting in een tweepersoonskamer?<br><br>€110–140 per nacht (afhankelijk van de dag van de week en beschikbaarheid)<br><br>Is het ontbijt bij de prijs inbegrepen?<br><br>Ja, het ontbijt is inbegrepen in de overnachtingsprijs voor de tweepersoonskamer (€110–140)."},
         { "title": "Parkeren", "content": "Zijn er gratis parkeerplaatsen in de buurt?<br><br>Aan de Moezeloever zijn volop gratis parkeerplaatsen beschikbaar. Direct aan de Schloßstraße kun je met een parkeerkaart parkeren — voor het in- en uitladen van je bagage is meestal het gratis 30-minutenkaartje al voldoende." },
         { "title": "Huisdieren", "content": "Zijn honden toegestaan bij Haus Till E?<br><br>Wij houden allebei enorm van honden — maar in de loop der jaren hebben we een aantal ervaringen opgedaan die ons hebben doen heroverwegen. Daarom is het meebrengen van honden naar Haus Till E momenteel helaas niet mogelijk. Bedankt voor je begrip." },
         { "title": "Beperkingen", "content": "Is er een lift?<br><br>Haus Till E is een monumentaal gebouw uit de jaren 1920 zonder lift — de kamers zijn uitsluitend via de trap bereikbaar.<br><br>Mag er binnen gerookt worden?<br><br>In het huis, inclusief de balkons, is roken niet toegestaan; in onze tuin mag je echter altijd en graag roken." },
@@ -286,7 +287,7 @@
     ]
   },
   "events": {
-    "eyebrow": "Evenementen rond Haus Till E",
+    "eyebrow": "Evenementen rond Haus Till<span class=\"eyebrow-tight-e\"> E</span>",
     "title": "Evenementen.",
     "subtitle": "Van Klassiek tot Innovatief.",
     "carousel": {

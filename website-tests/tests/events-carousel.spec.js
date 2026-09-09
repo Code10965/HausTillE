@@ -173,6 +173,174 @@ test.describe("mit aktivierter Systemeinstellung 'Bewegung reduzieren'", () => {
   });
 });
 
+test.describe("Datumsgrenze: 'heute' zählt noch als zukünftig, der Folgetag nicht mehr", () => {
+  test("ein Event wandert am Tag nach seinem Enddatum vom Zukunfts- ins Vergangenheits-Karussell", async ({ page }) => {
+    // Das nächste bevorstehende Event ganz normal (mit echtem heutigen
+    // Datum) ermitteln und sein relevantes Enddatum auslesen - dieselbe
+    // Regel wie slideEndDate() in eventsCarousel.js: data-date-end, sonst
+    // data-date-start. Dadurch ist der Test unabhängig von den konkreten
+    // Testdaten und funktioniert auch bei mehrtägigen Events korrekt.
+    const nextEventSlide = page.locator("[data-events-slide]").first();
+    const nextEventStart = await nextEventSlide.getAttribute("data-date-start");
+    const nextEventEnd = await nextEventSlide.evaluate(
+      (el) => el.dataset.dateEnd || el.dataset.dateStart
+    );
+    expect(
+      nextEventEnd,
+      "Kein bevorstehendes Event gefunden, anhand dessen die Datumsgrenze getestet werden könnte"
+    ).toBeTruthy();
+ 
+    // Virtuelle Uhr GENAU auf Mitternacht des Endtages stellen und neu
+    // laden, damit partitionEventsByDate() mit dem neuen "heute" erneut
+    // läuft (siehe setupAllEventCarousels() in eventsCarousel.js).
+    await page.clock.setSystemTime(new Date(`${nextEventEnd}T00:00:00`));
+    await page.reload();
+    await expect(page.locator("[data-events-slide]").first()).toBeVisible();
+ 
+    // Am Endtag selbst MUSS das Event noch im Zukunfts-Karussell stehen -
+    // partitionEventsByDate() entfernt dort nur Folien mit end < today,
+    // "heute" (end === today) bleibt also zukünftig.
+    await expect(
+      page.locator(`[data-events-slide][data-date-start="${nextEventStart}"]`)
+    ).toHaveCount(1);
+ 
+    // Einen Tag weiterspulen: Das Enddatum liegt jetzt "gestern".
+    const dayAfter = new Date(`${nextEventEnd}T00:00:00`);
+    dayAfter.setDate(dayAfter.getDate() + 1);
+    await page.clock.setSystemTime(dayAfter);
+    await page.reload();
+ 
+    // Ab dem Folgetag darf es NICHT mehr im Zukunfts-Karussell stehen
+    // (partitionEventsByDate() entfernt es dort per slide.remove()) ...
+    await expect(
+      page.locator(`[data-events-slide][data-date-start="${nextEventStart}"]`)
+    ).toHaveCount(0);
+ 
+    // ... sondern muss stattdessen im Vergangenheits-Karussell auftauchen.
+    await expect(
+      page.locator(`[data-past-slide][data-date-start="${nextEventStart}"]`)
+    ).toHaveCount(1);
+  });
+});
+ 
+ 
+test.describe("Vergangenheits-Karussell ('Schöne Erinnerungen')", () => {
+  test("zeigt beim Start nur die neueste Erinnerung, restliche sind versteckt", async ({ page }) => {
+    const slides = page.locator("[data-past-slide]");
+    const count = await slides.count();
+    test.skip(count === 0, "Keine vergangenen Events in den aktuellen Testdaten vorhanden");
+ 
+    await expect(slides.nth(0)).toHaveAttribute("aria-hidden", "false");
+    for (let i = 1; i < count; i++) {
+      await expect(slides.nth(i)).toHaveAttribute("aria-hidden", "true");
+    }
+  });
+ 
+  test("Klick auf 'weiter' zeigt die nächstältere Erinnerung und aktualisiert den Zähler", async ({ page }) => {
+    const slides = page.locator("[data-past-slide]");
+    const count = await slides.count();
+    test.skip(count < 2, "Zu wenige vergangene Events zum Navigieren");
+ 
+    // Format laut render() in eventsCarousel.js: z.B. "1/5" (kein
+    // Leerzeichen, kein "von"-Wort - bewusst kompakt für die schmale
+    // Steuerungsspalte).
+    await expect(page.locator("[data-past-counter]")).toHaveText("1/" + count);
+ 
+    await page.locator("[data-past-next]").click();
+ 
+    await expect(slides.nth(0)).toHaveAttribute("aria-hidden", "true");
+    await expect(slides.nth(1)).toHaveAttribute("aria-hidden", "false");
+    await expect(page.locator("[data-past-counter]")).toHaveText("2/" + count);
+  });
+ 
+  test("Pfeil 'zurück' ist bei der neuesten Erinnerung deaktiviert (kein Endlos-Wechsel)", async ({ page }) => {
+    const count = await page.locator("[data-past-slide]").count();
+    test.skip(count === 0, "Keine vergangenen Events vorhanden");
+ 
+    // Anders als beim Zukunfts-Karussell: laut Code-Kommentar in
+    // createPastCarouselController() gibt es HIER keine Endlos-Schleife -
+    // am jeweiligen Ende deaktiviert sich der Pfeil, statt umzuspringen.
+    await expect(page.locator("[data-past-prev]")).toBeDisabled();
+  });
+ 
+  test("Pfeil 'weiter' ist bei der ältesten Erinnerung deaktiviert", async ({ page }) => {
+    const count = await page.locator("[data-past-slide]").count();
+    test.skip(count < 2, "Zu wenige vergangene Events zum Durchklicken");
+ 
+    const nextBtn = page.locator("[data-past-next]");
+    for (let i = 0; i < count - 1; i++) {
+      await nextBtn.click();
+    }
+    await expect(nextBtn).toBeDisabled();
+    await expect(page.locator("[data-past-prev]")).toBeEnabled();
+  });
+ 
+  test("Pfeiltasten hoch/runter navigieren, wenn der Fokus im Karussell liegt", async ({ page }) => {
+    const slides = page.locator("[data-past-slide]");
+    const count = await slides.count();
+    test.skip(count < 2, "Zu wenige vergangene Events zum Navigieren");
+ 
+    await page.locator("[data-past-next]").focus();
+    await page.keyboard.press("ArrowDown");
+    await expect(slides.nth(1)).toHaveAttribute("aria-hidden", "false");
+ 
+    await page.keyboard.press("ArrowUp");
+    await expect(slides.nth(0)).toHaveAttribute("aria-hidden", "false");
+  });
+ 
+  test("Leer-Zustand erscheint, wenn keine vergangenen Events existieren", async ({ page }) => {
+    const count = await page.locator("[data-past-slide]").count();
+    // Greift nur, wenn die aktuellen Testdaten (noch) keine vergangenen
+    // Events enthalten - siehe Hinweis am Dateiende für den Fall, dass
+    // ihr das gezielt erzwingen wollt.
+    test.skip(count > 0, "Es gibt aktuell vergangene Events - Leer-Zustand kann so nicht ausgelöst werden");
+ 
+    await expect(page.locator("[data-past-empty]")).toBeVisible();
+  });
+ 
+  test("WhatsApp-Kontakt-Widget rendert das Telefonnummer-Canvas", async ({ page }) => {
+    // Struktur laut contact-utils.js (renderContacts()): das Wrapper-Div
+    // bekommt die Klassen "contact-phone contact-value-box", DARIN liegt
+    // ein <canvas class="phone-canvas">. Das aria-label sitzt direkt auf
+    // dem <canvas>, nicht auf dem Wrapper-Div.
+    const widget = page.locator("[data-phone-contact-theme='dark']");
+    await expect(widget).toBeVisible();
+ 
+    const canvas = widget.locator("canvas.phone-canvas");
+    await expect(canvas).toHaveAttribute(
+      "aria-label",
+      "Telefonnummer als Bild, gegen automatisiertes Auslesen geschützt"
+    );
+ 
+    // drawCanvases() setzt canvas.width erst NACH dem Zeichnen (basierend
+    // auf der gemessenen Textbreite) - width > 0 heißt also: es wurde
+    // wirklich etwas gezeichnet, nicht nur ein leeres <canvas> eingefügt.
+    const canvasWidth = await canvas.evaluate((el) => el.width);
+    expect(canvasWidth, "Canvas wurde nicht mit Inhalt gezeichnet").toBeGreaterThan(0);
+ 
+    // Kopieren-Button ist vorhanden und zeigt anfangs sein normales
+    // Label (noch nicht "Kopiert ✓").
+    const copyBtn = widget.locator(".copy-btn");
+    await expect(copyBtn).toBeVisible();
+    await expect(copyBtn).not.toHaveText(/Kopiert/);
+  });
+});
+ 
+// Hinweis zum Leer-Zustand-Test oben: Falls eure Testdaten immer sowohl
+// zukünftige als auch vergangene Events enthalten, greift dieser Test nie
+// wirklich (er wird via test.skip übersprungen). Um ihn zuverlässig
+// auszulösen, bräuchtet ihr eine Möglichkeit, die Events-Daten für einen
+// einzelnen Testlauf zu mocken (z.B. über page.route() auf die JSON-Quelle
+// der Events, falls es eine gibt, oder eine dedizierte Test-Fixture-Seite).
+//
+// Zur Telefonnummer in phoneContact.js: die vorherige Vermutung, dass
+// ["+49 176 ", "2536160"].join("6") ein Fehler sei, war FALSCH - das
+// Ergebnis ist "+49 176 62536160", eine gültige deutsche Mobilnummer.
+// Der Trick fügt bewusst die fehlende erste Ziffer als Trennzeichen von
+// join() ein, damit die vollständige Nummer nirgends als zusammen-
+// hängender String im Quellcode steht (Schutz vor simplen Scrapern).
+// Kein Handlungsbedarf hier.
+
 test("mehrsprachig: Events-Seite ist auch auf Englisch und Niederländisch erreichbar", async ({ page }) => {
   await page.goto("en/events/");
   await expect(page.locator("[data-events-slide]").first()).toBeVisible();

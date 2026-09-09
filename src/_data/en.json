@@ -33,7 +33,7 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Haus Till E on the Moselle bend in Zell",
+      "eyebrow": "Haus Till<span class=\"eyebrow-tight-e\"> E</span> on the Moselle bend in Zell",
       "title_line1": "Arrive.",
       "title_line2": "Feel at home.",
       "sub": "In this listed Art Deco house full of history, five individual double rooms await you, each brimming with charm and character. Start the day with a delicious breakfast in our cosy breakfast room — before losing track of time in our wildly romantic garden.",
@@ -68,6 +68,7 @@
       "accordion": [
         { "title": "Directions", "content": "How do I get to Haus Till E?<br><br>Haus Till E is within walking distance of the Moselle, right in the heart of Zell's old town, at Schloßstraße 10. Coming from Bullay, you drive through the Zell-Merl district into Zell's old town. Other routes lead via the Zeller Berg and Grenderich (L199), through the Altlay valley (L194), or from Kappel via the B421. By train, you can reach us via the Bullay eco-station — from there, a bus takes you about 3 km to the Lindenplatz stop, just a short walk from Haus Till E. The nearest airport is Frankfurt-Hahn (approx. 20 km). Whether from the train station or the airport: just let us know — we're happy to pick you up by car! (for a small contribution towards costs)" },
         { "title": "Address", "content": "Where exactly is Haus Till E located?<br><br>Haus Till E is located at Schloßstraße 10, 56856 Zell (Mosel) — right at the foot of the steep vineyard „Zeller Schwarze Katz“, just a few minutes' walk from the Moselle promenade and the old town." },
+        { "title": "Prices", "content": "How much does a night in a double room cost?<br><br>€110–140 per night (depending on weekday and availability)<br><br>Is breakfast included in the price?<br><br>Yes, breakfast is included in the price for the double room (€110–140)."},
         { "title": "Parking", "content": "Is there free parking nearby?<br><br>Numerous free parking spaces are available along the Moselle riverside. You can park directly on Schloßstraße with a parking ticket — for loading and unloading your luggage, the free 30-minute ticket is usually enough." },
         { "title": "Pets", "content": "Are dogs allowed at Haus Till E?<br><br>We both love dogs dearly — but over the years we've had some experiences that led us to rethink. For this reason, bringing dogs to Haus Till E is currently not possible. Thank you for your understanding." },
         { "title": "Limitations", "content": "Is there a lift?<br><br>Haus Till E is a listed building from the 1920s with no lift — the rooms are only accessible via the stairs.<br><br>Is smoking allowed inside?<br><br>Smoking is not permitted inside the house, including on the balconies; however, you are welcome to smoke in our garden at any time." },
@@ -286,7 +287,7 @@
     ]
   },
   "events": {
-    "eyebrow": "Events at Haus Till E",
+    "eyebrow": "Events at Haus Till<span class=\"eyebrow-tight-e\"> E</span>",
     "title": "Events.",
     "subtitle": "From Classic to Innovative.",
     "carousel": {

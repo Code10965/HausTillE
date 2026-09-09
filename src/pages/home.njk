@@ -39,7 +39,7 @@ permalink: "{{ pages.home[lang] }}"
 
     <div class="hero-text" id="hero-content">
       <div class="eyebrow-row hero-eyebrow-row">
-        <span class="mono-label wine-label">{{ t.home.hero.eyebrow }}</span>
+        <span class="mono-label wine-label">{{ t.home.hero.eyebrow | safe }}</span>
         <span class="eyebrow-line"></span>
       </div>
 
@@ -296,7 +296,7 @@ permalink: "{{ pages.home[lang] }}"
 <section id="section-contact" class="contact">
   <div class="section-inner">
     <div class="eyebrow-row">
-      <span class="mono-label light-gold-label">{{ t.home.contact.eyebrow }}</span>
+      <span class="mono-label light-gold-label">{{ t.home.contact.eyebrow | safe }}</span>
       <span class="eyebrow-line light-line"></span>
     </div>
     <h2 class="section-title contact-title">{{ t.home.contact.title }}</h2>

@@ -112,6 +112,16 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
 .eyebrow-row { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
 .eyebrow-line { width: 40px; height: 1px; background: var(--line); }
 .eyebrow-line.light-line { background: rgba(var(--paper-rgb), 0.25); }
+/* ---------- "Till E": Namensbestandteil optisch enger ans "Till" ----------
+   .mono-label hat ein großzügiges letter-spacing (0.32em), gedacht für
+   die ganze Eyebrow-Zeile. Bei "E" als eigenständigem Ein-Buchstaben-Wort
+   wirkt der Zwischenraum dadurch unproportional breit (Spacing nach dem
+   letzten Buchstaben von "Till" PLUS Spacing nach dem Leerzeichen).
+   margin-left zieht nur diesen einen Zwischenraum enger zusammen, ohne
+   das letter-spacing der übrigen Zeile anzutasten. */
+.eyebrow-tight-e {
+  margin-left: -0.2em;
+}
 
 .section-title {
   font-weight: 300;

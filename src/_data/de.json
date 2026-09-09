@@ -33,7 +33,7 @@
   },
   "home": {
     "hero": {
-      "eyebrow": "Haus Till E an der Moselschleife in Zell",
+      "eyebrow": "Haus Till<span class=\"eyebrow-tight-e\"> E</span> an der Moselschleife in Zell",
       "title_line1": "Ankommen.",
       "title_line2": "Zuhause sein.",
       "sub": "Im denkmalgeschützten Art-Deco-Haus mit eigener Geschichte erwarten Euch fünf individuelle Doppelzimmer voller Charme und Charakter. Startet den Tag mit einem leckeren Frühstück in unserem gemütlichen Frühstücksraum – bevor Ihr im wildromantischen Garten die Zeit vergesst.",
@@ -68,6 +68,7 @@
       "accordion": [
         { "title": "Anfahrt", "content": "Wie erreiche ich Haus Till E?<br><br>Das Haus Till E liegt fußläufig an der Mosel, mitten in der Zeller Altstadt, in der Schloßstraße 10. Von Bullay kommend fahrt Ihr durch den Stadtteil Zell-Merl in die Zeller Altstadt. Weitere Anfahrtsmöglichkeiten führen über den Zeller Berg und Grenderich (L199), durch das Altlayer Bachtal (L194) oder von Kappel kommend über die B421. Mit dem Zug erreicht Ihr uns über den Umweltbahnhof Bullay – von dort bringt Euch der Bus in rund 3 km bis zur Haltestelle Lindenplatz, nur einen kurzen Fußweg von Haus Till E entfernt. Der nächstgelegene Flughafen ist Frankfurt-Hahn (ca. 20 km). Egal ob vom Bahnhof oder Flughafen: Sagt uns einfach Bescheid – wir holen Euch gerne mit dem Auto ab! (gegen einen kleinen Unkostenbeitrag)" },
         { "title": "Adresse", "content": "Wo genau liegt Haus Till E?<br><br>Das Haus Till E befindet sich in der Schloßstraße 10, 56856 Zell (Mosel) – direkt am Fuße der Steillage „Zeller Schwarze Katz“, nur wenige Gehminuten von Moselpromenade und Altstadt entfernt." },
+        { "title": "Preise", "content": "Was kostet eine Übernachtung im Doppelzimmer?<br><br> 110–140 € pro Nacht (je nach Wochentag und Verfügbarkeit)<br><br>Ist das Frühstück im Preis inbegriffen?<br><br>Ja, das Frühstück ist im Übernachtungspreis für das Doppelzimmer (110–140 €) bereits enthalten."},
         { "title": "Parken", "content": "Gibt es kostenfreie Parkplätze in der Nähe?<br><br>Am Moselufer stehen Euch zahlreiche kostenfreie Parkplätze zur Verfügung. Direkt in der Schloßstraße könnt Ihr mit Parkschein parken – zum Ein- und Ausladen Eures Gepäcks reicht meist schon das kostenlose 30-Minuten-Ticket." },
         { "title": "Haustiere", "content": "Sind Hunde in Haus Till E erlaubt?<br><br>Wir beide lieben Hunde von Herzen – über die Jahre haben wir jedoch einige Erfahrungen gemacht, die uns zum Umdenken bewogen haben. Deshalb ist das Mitbringen von Hunden in Haus Till E derzeit leider nicht möglich. Wir danken für Euer Verständnis." },
         { "title": "Einschränkungen", "content": "Gibt es einen Aufzug?<br><br>Das Haus Till E ist ein denkmalgeschütztes Gebäude aus den 1920er-Jahren ohne Aufzug – die Zimmer sind ausschließlich über die Treppe erreichbar.<br><br>Darf man im Haus rauchen?<br><br>Im Haus, einschließlich der Balkone, ist das Rauchen nicht gestattet; in unserem Garten dürft Ihr dafür gerne und jederzeit rauchen." },
@@ -286,7 +287,7 @@
     ]
   },
   "events": {
-    "eyebrow": "Events rund ums Haus Till E",
+    "eyebrow": "Events rund ums Haus Till<span class=\"eyebrow-tight-e\"> E</span>",
     "title": "Veranstaltungen.",
     "subtitle": "Von Klassisch bis Innovativ.",
     "carousel": {
