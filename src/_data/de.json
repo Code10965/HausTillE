@@ -66,46 +66,16 @@
         "Info": ""
       },
       "accordion": [
-        {
-          "title": "Anfahrt",
-          "content": "Das Haus Till E liegt fußläufig an der Mosel, mitten in der Zeller Altstadt, in der Schloßstraße 10. Von Bullay kommend fahrt Ihr durch den Stadtteil Zell-Merl in die Zeller Altstadt. Weitere Anfahrtsmöglichkeiten führen über den Zeller Berg und Grenderich (L199), durch das Altlayer Bachtal (L194) oder von Kappel kommend über die B421. Mit dem Zug erreicht Ihr uns über den Umweltbahnhof Bullay – von dort bringt Euch der Bus in rund 3 km bis zur Haltestelle Lindenplatz, nur einen kurzen Fußweg von Haus Till E entfernt. Der nächstgelegene Flughafen ist Frankfurt-Hahn (ca. 20 km). Egal ob vom Bahnhof oder Flughafen: Sagt uns einfach Bescheid – wir holen Euch gerne mit dem Auto ab! (gegen einen kleinen Unkostenbeitrag)"
-        },
-        {
-          "title": "Adresse",
-          "content": "Das Haus Till E befindet sich in der Schloßstraße 10, 56856 Zell (Mosel) – direkt am Fuße der Steillage „Zeller Schwarze Katz“, nur wenige Gehminuten von Moselpromenade und Altstadt entfernt."
-        },
-        {
-          "title": "Parken",
-          "content": "Am Moselufer stehen Euch zahlreiche kostenfreie Parkplätze zur Verfügung. Direkt in der Schloßstraße könnt Ihr mit Parkschein parken – zum Ein- und Ausladen Eures Gepäcks reicht meist schon das kostenlose 30-Minuten-Ticket."
-        },
-        {
-          "title": "Haustiere",
-          "content": "Wir beide lieben Hunde von Herzen – über die Jahre haben wir jedoch einige Erfahrungen gemacht, die uns zum Umdenken bewogen haben. Deshalb ist das Mitbringen von Hunden in Haus Till E derzeit leider nicht möglich. Wir danken für Euer Verständnis."
-        },
-        {
-          "title": "Einschränkungen",
-          "content": "Das Haus Till E ist ein denkmalgeschütztes Gebäude aus den 1920er-Jahren ohne Aufzug – die Zimmer sind ausschließlich über die Treppe erreichbar. <br><br>Im Haus, einschließlich der Balkone, ist das Rauchen nicht gestattet; in unserem Garten dürft Ihr dafür gerne und jederzeit rauchen."
-        },
-        {
-          "title": "Fahrräder",
-          "content": "Eure Bio- oder Elektro-Fahrräder könnt Ihr sicher in unserem Nebengebäude parken und laden. <br><br>Wer lieber vor Ort ausleiht: Unsere Gäste sind besonders zufrieden mit dem Radverleih von Wanderland (Balduinstraße 95) und Moselglück (Balduinstraße 43) – beide bieten gut geprüfte Räder direkt in Zell."
-        },
-        {
-          "title": "Klimatisierung",
-          "content": "Eine klassische Klimaanlage gibt es in unserem historischen Haus nicht. An besonders warmen Tagen bringen wir Euch auf Wunsch gerne einen modernen, rotorlosen Turmventilator (8 Geschwindigkeitsstufen) aufs Zimmer – sagt uns einfach kurz Bescheid."
-        },
-        {
-          "title": "Laktose, Gluten, etc.",
-          "content": "Wir haben ggf. nicht immer alle Produkte für jede Unverträglichkeit standardmäßig vorrätig. Teilt uns Eure Bedürfnisse am besten schon bei der Buchung mit – wir stellen uns gerne und mit Freude auf Euch ein."
-        },
-        {
-          "title": "Familie und Kinder",
-          "content": "Das Haus Till E wird immer wieder von ganzen Familien oder Freundeskreisen gebucht – wir durften schon so manchen runden Geburtstag miterleben und drei oder vier Generationen gleichzeitig im ganzen Haus beherbergen. Es macht uns große Freude, den Rahmen für unvergessliche, gemeinsame Momente zu schaffen."
-        },
-        {
-          "title": "An- und Abreisezeiten",
-          "content": "Da wir das Hotel mit einem kleinen Team betreiben, ist der Check-in zwischen 16:00 und 18:00 Uhr möglich. Ist euer Zimmer schon früher bereit, hört ihr selbstverständlich sofort von uns. Wir wünschten, wir könnten zaubern – solange das noch nicht klappt, arbeiten wir eben schnell und sorgfältig, damit die Zimmer bis 16:00 Uhr bereit für euren Check-in sind. <br><br>Wir bitten Euch, bis 11 Uhr auszuchecken."
-        }
+        { "title": "Anfahrt", "content": "Wie erreiche ich Haus Till E?<br><br>Das Haus Till E liegt fußläufig an der Mosel, mitten in der Zeller Altstadt, in der Schloßstraße 10. Von Bullay kommend fahrt Ihr durch den Stadtteil Zell-Merl in die Zeller Altstadt. Weitere Anfahrtsmöglichkeiten führen über den Zeller Berg und Grenderich (L199), durch das Altlayer Bachtal (L194) oder von Kappel kommend über die B421. Mit dem Zug erreicht Ihr uns über den Umweltbahnhof Bullay – von dort bringt Euch der Bus in rund 3 km bis zur Haltestelle Lindenplatz, nur einen kurzen Fußweg von Haus Till E entfernt. Der nächstgelegene Flughafen ist Frankfurt-Hahn (ca. 20 km). Egal ob vom Bahnhof oder Flughafen: Sagt uns einfach Bescheid – wir holen Euch gerne mit dem Auto ab! (gegen einen kleinen Unkostenbeitrag)" },
+        { "title": "Adresse", "content": "Wo genau liegt Haus Till E?<br><br>Das Haus Till E befindet sich in der Schloßstraße 10, 56856 Zell (Mosel) – direkt am Fuße der Steillage „Zeller Schwarze Katz“, nur wenige Gehminuten von Moselpromenade und Altstadt entfernt." },
+        { "title": "Parken", "content": "Gibt es kostenfreie Parkplätze in der Nähe?<br><br>Am Moselufer stehen Euch zahlreiche kostenfreie Parkplätze zur Verfügung. Direkt in der Schloßstraße könnt Ihr mit Parkschein parken – zum Ein- und Ausladen Eures Gepäcks reicht meist schon das kostenlose 30-Minuten-Ticket." },
+        { "title": "Haustiere", "content": "Sind Hunde in Haus Till E erlaubt?<br><br>Wir beide lieben Hunde von Herzen – über die Jahre haben wir jedoch einige Erfahrungen gemacht, die uns zum Umdenken bewogen haben. Deshalb ist das Mitbringen von Hunden in Haus Till E derzeit leider nicht möglich. Wir danken für Euer Verständnis." },
+        { "title": "Einschränkungen", "content": "Gibt es einen Aufzug?<br><br>Das Haus Till E ist ein denkmalgeschütztes Gebäude aus den 1920er-Jahren ohne Aufzug – die Zimmer sind ausschließlich über die Treppe erreichbar.<br><br>Darf man im Haus rauchen?<br><br>Im Haus, einschließlich der Balkone, ist das Rauchen nicht gestattet; in unserem Garten dürft Ihr dafür gerne und jederzeit rauchen." },
+        { "title": "Fahrräder", "content": "Kann ich mein Fahrrad sicher unterstellen und laden?<br><br>Eure Bio- oder Elektro-Fahrräder könnt Ihr sicher in unserem Nebengebäude parken und laden.<br><br>Kann ich vor Ort ein Fahrrad ausleihen?<br><br>Unsere Gäste sind besonders zufrieden mit dem Radverleih von Wanderland (Balduinstraße 95) und Moselglück (Balduinstraße 43) – beide bieten gut geprüfte Räder direkt in Zell." },
+        { "title": "Klimatisierung", "content": "Gibt es eine Klimaanlage in den Zimmern?<br><br>Eine klassische Klimaanlage gibt es in unserem historischen Haus nicht. An besonders warmen Tagen bringen wir Euch auf Wunsch gerne einen modernen, rotorlosen Turmventilator (8 Geschwindigkeitsstufen) aufs Zimmer – sagt uns einfach kurz Bescheid." },
+        { "title": "Laktose, Gluten, etc.", "content": "Können Unverträglichkeiten wie Laktose oder Gluten beim Frühstück berücksichtigt werden?<br><br>Wir haben ggf. nicht immer alle Produkte für jede Unverträglichkeit standardmäßig vorrätig. Teilt uns Eure Bedürfnisse am besten schon bei der Buchung mit – wir stellen uns gerne und mit Freude auf Euch ein." },
+        { "title": "Familie und Kinder", "content": "Ist Haus Till E für Familien mit Kindern geeignet?<br><br>Das Haus Till E wird immer wieder von ganzen Familien oder Freundeskreisen gebucht – wir durften schon so manchen runden Geburtstag miterleben und drei oder vier Generationen gleichzeitig im ganzen Haus beherbergen. Es macht uns große Freude, den Rahmen für unvergessliche, gemeinsame Momente zu schaffen." },
+        { "title": "An- und Abreisezeiten", "content": "Wann ist Check-in und Check-out möglich?<br><br>Da wir das Hotel mit einem kleinen Team betreiben, ist der Check-in zwischen 16:00 und 18:00 Uhr möglich. Ist euer Zimmer schon früher bereit, hört ihr selbstverständlich sofort von uns. Wir wünschten, wir könnten zaubern – solange das noch nicht klappt, arbeiten wir eben schnell und sorgfältig, damit die Zimmer bis 16:00 Uhr bereit für euren Check-in sind.<br><br>Wir bitten Euch, bis 11 Uhr auszuchecken." }
       ]
     },
     "rooms": {

@@ -66,46 +66,16 @@
         "Info": ""
       },
       "accordion": [
-        {
-          "title": "Directions",
-          "content": "Haus Till E is within walking distance of the Moselle, right in the heart of Zell's old town, at Schloßstraße 10. Coming from Bullay, you drive through the Zell-Merl district into Zell's old town. Other routes lead via the Zeller Berg and Grenderich (L199), through the Altlay valley (L194), or from Kappel via the B421. By train, you can reach us via the Bullay eco-station — from there, a bus takes you about 3 km to the Lindenplatz stop, just a short walk from Haus Till E. The nearest airport is Frankfurt-Hahn (approx. 20 km). Whether from the train station or the airport: just let us know — we're happy to pick you up by car! (for a small contribution towards costs)"
-        },
-        {
-          "title": "Address",
-          "content": "Haus Till E is located at Schloßstraße 10, 56856 Zell (Mosel) — right at the foot of the steep vineyard „Zeller Schwarze Katz“, just a few minutes' walk from the Moselle promenade and the old town."
-        },
-        {
-          "title": "Parking",
-          "content": "Numerous free parking spaces are available along the Moselle riverside. You can park directly on Schloßstraße with a parking ticket — for loading and unloading your luggage, the free 30-minute ticket is usually enough."
-        },
-        {
-          "title": "Pets",
-          "content": "We both love dogs dearly — but over the years we've had some experiences that led us to rethink. For this reason, bringing dogs to Haus Till E is currently not possible. Thank you for your understanding."
-        },
-        {
-          "title": "Limitations",
-          "content": "Haus Till E is a listed building from the 1920s with no lift — the rooms are only accessible via the stairs. <br><br>Smoking is not permitted inside the house, including on the balconies; however, you are welcome to smoke in our garden at any time."
-        },
-        {
-          "title": "Bicycles",
-          "content": "You can safely park and charge your regular or electric bicycles in our outbuilding. <br><br>If you'd prefer to rent locally: our guests are especially happy with the bike rental services from Wanderland (Balduinstraße 95) and Moselglück (Balduinstraße 43) — both offer well-maintained bikes right in Zell."
-        },
-        {
-          "title": "Air conditioning",
-          "content": "There is no classic air conditioning in our historic house. On particularly warm days, we're happy to bring a modern, bladeless tower fan (8 speed settings) to your room on request — just let us know."
-        },
-        {
-          "title": "Lactose, gluten, etc.",
-          "content": "We may not always have every product for every intolerance in stock as standard. It's best to let us know your needs already at the time of booking — we're happy to accommodate you."
-        },
-        {
-          "title": "Family and children",
-          "content": "Haus Till E is regularly booked by entire families or groups of friends — we've had the pleasure of witnessing many a milestone birthday and hosting three or four generations at once throughout the house. It brings us great joy to provide the setting for unforgettable shared moments."
-        },
-        {
-          "title": "Arrival and departure times",
-          "content": "Since we run the hotel with a small team, check-in is available between 4:00 PM and 6:00 PM. If your room happens to be ready earlier, we’ll be sure to let you know right away. We wish we could just wave a magic wand – until that works out, we simply work quickly and carefully so your room is ready by 4:00 PM. <br><br>We would ask you to check out by 11.00 am."
-        }
+        { "title": "Directions", "content": "How do I get to Haus Till E?<br><br>Haus Till E is within walking distance of the Moselle, right in the heart of Zell's old town, at Schloßstraße 10. Coming from Bullay, you drive through the Zell-Merl district into Zell's old town. Other routes lead via the Zeller Berg and Grenderich (L199), through the Altlay valley (L194), or from Kappel via the B421. By train, you can reach us via the Bullay eco-station — from there, a bus takes you about 3 km to the Lindenplatz stop, just a short walk from Haus Till E. The nearest airport is Frankfurt-Hahn (approx. 20 km). Whether from the train station or the airport: just let us know — we're happy to pick you up by car! (for a small contribution towards costs)" },
+        { "title": "Address", "content": "Where exactly is Haus Till E located?<br><br>Haus Till E is located at Schloßstraße 10, 56856 Zell (Mosel) — right at the foot of the steep vineyard „Zeller Schwarze Katz“, just a few minutes' walk from the Moselle promenade and the old town." },
+        { "title": "Parking", "content": "Is there free parking nearby?<br><br>Numerous free parking spaces are available along the Moselle riverside. You can park directly on Schloßstraße with a parking ticket — for loading and unloading your luggage, the free 30-minute ticket is usually enough." },
+        { "title": "Pets", "content": "Are dogs allowed at Haus Till E?<br><br>We both love dogs dearly — but over the years we've had some experiences that led us to rethink. For this reason, bringing dogs to Haus Till E is currently not possible. Thank you for your understanding." },
+        { "title": "Limitations", "content": "Is there a lift?<br><br>Haus Till E is a listed building from the 1920s with no lift — the rooms are only accessible via the stairs.<br><br>Is smoking allowed inside?<br><br>Smoking is not permitted inside the house, including on the balconies; however, you are welcome to smoke in our garden at any time." },
+        { "title": "Bicycles", "content": "Can I safely store and charge my bike?<br><br>You can safely park and charge your regular or electric bicycles in our outbuilding.<br><br>Can I rent a bike locally?<br><br>Our guests are especially happy with the bike rental services from Wanderland (Balduinstraße 95) and Moselglück (Balduinstraße 43) — both offer well-maintained bikes right in Zell." },
+        { "title": "Air conditioning", "content": "Is there air conditioning in the rooms?<br><br>There is no classic air conditioning in our historic house. On particularly warm days, we're happy to bring a modern, bladeless tower fan (8 speed settings) to your room on request — just let us know." },
+        { "title": "Lactose, gluten, etc.", "content": "Can food intolerances like lactose or gluten be accommodated at breakfast?<br><br>We may not always have every product for every intolerance in stock as standard. It's best to let us know your needs already at the time of booking — we're happy to accommodate you." },
+        { "title": "Family and children", "content": "Is Haus Till E suitable for families with children?<br><br>Haus Till E is regularly booked by entire families or groups of friends — we've had the pleasure of witnessing many a milestone birthday and hosting three or four generations at once throughout the house. It brings us great joy to provide the setting for unforgettable shared moments." },
+        { "title": "Arrival and departure times", "content": "When is check-in and check-out?<br><br>Since we run the hotel with a small team, check-in is available between 4:00 PM and 6:00 PM. If your room happens to be ready earlier, we'll be sure to let you know right away. We wish we could just wave a magic wand – until that works out, we simply work quickly and carefully so your room is ready by 4:00 PM.<br><br>We would ask you to check out by 11.00 am." }
       ]
     },
     "rooms": {
