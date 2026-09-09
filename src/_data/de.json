@@ -338,7 +338,7 @@
       "next_aria": "Ältere Erinnerung",
       "of": "von",
       "empty": "Noch keine vergangenen Events.",
-      "whatsapp_text": "Ihr möchtet unsere Events nicht mehr verpassen? Dann schreibt uns eine WhatsApp-Nachricht mit \"bitte informiere uns über zukünftige Veranstaltungen\" und wir schicken Euch ab sofort unsere Veranstaltungstipps direkt per WhatsApp.",
+      "whatsapp_text": "Schreibt uns per WhatsApp (\"bitte Infos über Veranstaltungen\") und erhaltet künftig alle Veranstaltungstipps direkt per WhatsApp!",
       "whatsapp_hint": "Die Telefonnummer ist als Bild hinterlegt, damit Spam-Bots sie nicht auslesen können — am einfachsten über den Button kopieren."
     },
     "items": [
@@ -392,43 +392,43 @@
         "location": "Lichter-Garten Haus Till E",
         "description": "Beim Adventszauber im Haus Till E erwarten euch gemütliches Beisammensein im festlich geschmückten Garten, Essen und Trinken mit heißem Glühwein, Konzerte und Mitmachkonzerte für Groß und Klein sowie ein Geschenkeschrank voller Ideen zum Verschenken. Wir freuen uns auf euch!",
         "image": {
-          "src": "/assets/media/events/zauber-im-advent.jpg",
+          "src": "/assets/media/events/adventsmarkt.jpg",
           "alt": "Zauber im Advent im Lichter-Garten"
         }
       },
       {
-        "title": "Konzert beim Zauber am 2. Advent",
+        "title": "Konzert beim Adventszauber am 2. Advent",
         "date": "5. Dez 2026",
         "date_iso": "2026-12-05",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
         "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
         "image": {
-          "src": "/assets/media/events/konzert-advent.jpg",
+          "src": "/assets/media/events/konzert-advent-2.jpg",
           "alt": "Konzert im Lichter-Garten"
         }
       },
       {
-        "title": "Konzert beim Zauber am 3. Advent",
+        "title": "Konzert beim Adventszauber am 3. Advent",
         "date": "12. Dez 2026",
         "date_iso": "2026-12-12",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
         "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
         "image": {
-          "src": "/assets/media/events/konzert-advent.jpg",
+          "src": "/assets/media/events/konzert-advent-3.jpg",
           "alt": "Konzert im Lichter-Garten"
         }
       },
       {
-        "title": "Konzert beim Zauber am 4. Advent",
+        "title": "Konzert beim Adventszauber am 4. Advent",
         "date": "19. Dez 2026",
         "date_iso": "2026-12-19",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
         "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
         "image": {
-          "src": "/assets/media/events/konzert-advent.jpg",
+          "src": "/assets/media/events/konzert-advent-4.jpg",
           "alt": "Konzert im Lichter-Garten"
         }
       },
@@ -446,39 +446,51 @@
         "link": "https://www.zellerland.de/event/maerchenumzug-durch-die-zeller-altstadt"
       },
       {
-        "title": "Konzert beim Zauber am 2. Advent",
-        "date": "5. Dez 2025",
-        "date_iso": "2025-12-05",
+        "title": "Musik-Kantine Mai",
+        "date": "31.May 2026",
+        "date_iso": "2026-05-31",
         "time": "19:00 Uhr",
-        "location": "Lichter-Garten Haus Till E",
-        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
+        "location": "Garten Haus Till E",
+        "description": "Freut euch auf ein besonderes Konzerthighlight: Joe's Truck Stop bringt mit einer mitreißenden Mischung aus Bluegrass, Honky Tonk und Western Swing echte Americana-Stimmung auf die Bühne. Joe erzählt in seinen Songs Geschichten vom Leben auf der Straße, von Liebe und Herzschmerz – begleitet von Banjo, Fiddle und jeder Menge Spielfreude. Ein Konzertabend, der garantiert für gute Laune und Fernweh-Feeling sorgt!",
         "image": {
-          "src": "/assets/media/events/konzert-advent.jpg",
-          "alt": "Konzert im Lichter-Garten"
+          "src": "/assets/media/events/music_canteen_joe.jpg",
+          "alt": "Garten-Konzert Haus Till E"
         }
       },
       {
-        "title": "Konzert beim Zauber am 3. Advent",
-        "date": "12. Dez 2025",
-        "date_iso": "2025-12-12",
+        "title": "Musik-Kantine Juni",
+        "date": "06. Juni 2026",
+        "date_iso": "2026-06-06",
         "time": "19:00 Uhr",
-        "location": "Lichter-Garten Haus Till E",
-        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
+        "location": "Garten Haus Till E",
+        "description": "Sean K. Preston, international touring Künstler aus Baltimore, bringt raubeinigen Honkytonk, dreckigen Blues und herzzerreißende Country-Balladen auf die Bühne. Mit rauer, gefühlvoller Stimme erzählt er Geschichten von Liebe, Verlust und Fernweh – ein Konzertabend voller Energie und echter Americana-Seele!",
         "image": {
-          "src": "/assets/media/events/konzert-advent.jpg",
-          "alt": "Konzert im Lichter-Garten"
+          "src": "/assets/media/events/music_canteen_sean.jpg",
+          "alt": "Garten-Konzert Haus Till E"
         }
       },
       {
-        "title": "Konzert beim Zauber am 4. Advent",
-        "date": "19. Dez 2025",
-        "date_iso": "2025-12-19",
+        "title": "Summer in the City",
+        "date": "02. Juli 2026",
+        "date_iso": "2026-07-02",
         "time": "19:00 Uhr",
-        "location": "Lichter-Garten Haus Till E",
-        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
+        "location": "Garten Haus Till E",
+        "description": "River Soul Connection sorgt mit ihrem mitreißenden Sound aus klassischem Rock & Pop garantiert für gute Stimmung! Die Coverband präsentiert bekannte Hits, die von Herzen gespielt werden und Groß und Klein zum Mitsingen und Tanzen einladen. Ein Konzertabend voller guter Laune und bekannter Melodien – hier ist für jeden Musikgeschmack etwas dabei! Natürlich bei uns - im Haus Till E!",
         "image": {
-          "src": "/assets/media/events/konzert-advent.jpg",
-          "alt": "Konzert im Lichter-Garten"
+          "src": "/assets/media/events/summer_in_the_city.jpg",
+          "alt": "Garten-Konzert Haus Till E"
+        }
+      },
+      {
+        "title": "Musik-Kantine August",
+        "date": "23. August 2026",
+        "date_iso": "2026-08-23",
+        "time": "11:30 Uhr",
+        "location": "Garten Haus Till E",
+        "description": "Es wird laut, es wird toll, es wird big! Zum Frühschoppen bei Haus Till E begrüßen wir Magic Rhythm, die Bigband der Musikschule Bad Nauheim, mit ihrem mitreißenden Programm aus Swing, Latin und Funk. So viele Musiker auf einmal hatten wir auf unserer kleinen Gartenbühne noch nie – ein echtes Bigband-Erlebnis mit vollem Sound, das ihr euch bei einem gemütlichen Frühschoppen nicht entgehen lassen solltet!",
+        "image": {
+          "src": "/assets/media/events/music_canteen_big_band.jpg",
+          "alt": "Garten-Konzert Haus Till E"
         }
       }
     ]

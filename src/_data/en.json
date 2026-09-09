@@ -327,62 +327,170 @@
       "dots_aria": "Choose an event",
       "goto_aria": "Go to event",
       "more_info": "Learn more",
-      "of": "of"
+      "of": "of",
+      "empty": "No new dates are currently planned. Check back again soon!"
+    },
+    "past": {
+      "eyebrow": "Past Events",
+      "heading_line1": "Memories.",
+      "heading_line2": "Unforgettable Moments.",
+      "prev_aria": "More recent memory",
+      "next_aria": "Older memory",
+      "of": "of",
+      "empty": "No past events yet.",
+      "whatsapp_text": "Message us on WhatsApp (\"please send me event updates\") and we'll send you all our future event tips straight to WhatsApp!",
+      "whatsapp_hint": "The phone number is stored as an image so spam bots can't read it — the easiest way is to copy it using the button."
     },
     "items": [
       {
-        "title": "Wine Tasting in the Courtyard",
-        "date": "December 14, 2026",
-        "time": "6:00 PM",
-        "location": "Courtyard, Haus Till E",
-        "description": "Five Moselle wines, introduced by the winemaker himself - relaxed, personal, with a view of the vineyards.",
+        "title": "Federweißer Festival",
+        "date": "Oct 8–11, 2026",
+        "date_iso": "2026-10-08",
+        "date_end_iso": "2026-10-11",
+        "time": "All day (see link)",
+        "location": "Zeller Marktplatz",
+        "description": "The Zeller Marktplatz once again transforms into four days of indulgence, music and togetherness at the Federweißer Festival – with young wine (Federweißer), great food, a lively programme for all ages and plenty of good spirits, Zell can't wait to welcome you! And Haus Till E helps look after the catering, among other things.",
         "image": {
-          "src": "/assets/media/events/weinprobe.jpg",
-          "alt": "Wine glasses at a tasting in the courtyard"
-        }
+          "src": "/assets/media/events/federweisser-fest.jpg",
+          "alt": "Federweißer Festival on the Zeller Marktplatz"
+        },
+        "link": "https://mosl-wein.de/products/federweisserfest-2026-x-08-10-11-10-2026"
       },
       {
-        "title": "Winegrowers' Festival in Zell",
-        "date": "June 20, 2026",
-        "time": "3:00 PM",
-        "location": "Market Square, Zell (Moselle)",
-        "description": "Music, stalls and young wine straight from the barrel - the traditional festival of the winegrowing community on the riverbank.",
+        "title": "Zell Town & Backstreets Flea Market",
+        "date": "Oct 17–18, 2026",
+        "date_iso": "2026-10-17",
+        "date_end_iso": "2026-10-18",
+        "time": "All day (see link)",
+        "location": "Throughout the town / Garden of Haus Till E",
+        "description": "On October 17 and 18, the Herbstzauber (autumn magic) in Zell, Kaimt and Merl invites you to browse to your heart's content – whether it's the town and backstreets flea market, a children's flea market, a Sunday shopping opening, or delicious autumn treats, everyone is bound to find a little bargain and enjoy cosy autumn days in Zell! And of course there's plenty to browse in the garden of Haus Till E too – we're joining in together with our friends!",
         "image": {
-          "src": "/assets/media/events/winzerfest.jpg",
-          "alt": "Winegrowers' festival with stalls on the Moselle riverbank"
-        }
+          "src": "/assets/media/events/herbstzauber-floehmarkt.jpg",
+          "alt": "Herbstzauber flea market in Zell"
+        },
+        "link": "https://www.zellerland.de/event/herbstzauber-mit-stadt-und-gaesschenflohmarkt-in-zell"
       },
       {
-        "title": "Advent Market at the House",
-        "date": "December 6, 2026",
-        "time": "2:00 – 7:00 PM",
-        "location": "Schloßstraße 10, Zell (Moselle)",
-        "description": "Mulled wine, handicrafts and candlelight - a small, fine market right on the doorstep.",
+        "title": "Dekadenzia 2026 – Themed Party",
+        "date": "Nov 21, 2026",
+        "date_iso": "2026-11-21",
+        "time": "7:00 PM",
+        "location": "Zeller Schlosskeller",
+        "description": "The Roaring Twenties are back – for one night only – at the Zeller Schlosskeller, with a live band, burlesque show, dance lesson, casino games and cocktails. And the two of us will be dressing up too, joining the wonderful bar team for the night.",
+        "image": {
+          "src": "/assets/media/events/dekadenzia-mottoparty.jpg",
+          "alt": "Dekadenzia themed party at the Zeller Schlosskeller"
+        },
+        "link": "https://eventfrog.de/de/p/partys/mottoparty/dekadenzia-2026-7423319046110610491.html"
+      },
+      {
+        "title": "Magic of Advent 2026",
+        "date": "Nov 20 – Dec 20, 2026",
+        "date_iso": "2026-11-20",
+        "date_end_iso": "2026-12-20",
+        "time": "All day (see flyer)",
+        "location": "Garden of Lights, Haus Till E",
+        "description": "At the Advent Magic at Haus Till E, cosy get-togethers await you in our festively decorated garden, food and drink with hot mulled wine, concerts and sing-along concerts for all ages, plus a gift cabinet full of ideas for presents. We look forward to seeing you!",
         "image": {
           "src": "/assets/media/events/adventsmarkt.jpg",
-          "alt": "Advent market with lights"
+          "alt": "Magic of Advent in the Garden of Lights"
         }
       },
       {
-        "title": "Cooking Class: Moselle Cuisine Reimagined",
-        "date": "May 9, 2026",
+        "title": "Concert at the Advent Magic (2nd Saturday of Advent)",
+        "date": "Dec 5, 2026",
+        "date_iso": "2026-12-05",
+        "time": "7:00 PM",
+        "location": "Garden of Lights, Haus Till E",
+        "description": "A musical highlight of the Advent Magic at Haus Till E: in our beautifully decorated garden, a concert awaits that conjures up true feel-good vibes – with warm tunes to sing along to, dream to and enjoy. Plus hot mulled wine and delicious treats to round off the evening in style. A concert experience for all ages that truly rings in the festive season!",
+        "image": {
+          "src": "/assets/media/events/konzert-advent-2.jpg",
+          "alt": "Concert in the Garden of Lights"
+        }
+      },
+      {
+        "title": "Concert at the Advent Magic (3rd Saturday of Advent)",
+        "date": "Dec 12, 2026",
+        "date_iso": "2026-12-12",
+        "time": "7:00 PM",
+        "location": "Garden of Lights, Haus Till E",
+        "description": "A musical highlight of the Advent Magic at Haus Till E: in our beautifully decorated garden, a concert awaits that conjures up true feel-good vibes – with warm tunes to sing along to, dream to and enjoy. Plus hot mulled wine and delicious treats to round off the evening in style. A concert experience for all ages that truly rings in the festive season!",
+        "image": {
+          "src": "/assets/media/events/konzert-advent-3.jpg",
+          "alt": "Concert in the Garden of Lights"
+        }
+      },
+      {
+        "title": "Concert at the Advent Magic (4th Saturday of Advent)",
+        "date": "Dec 19, 2026",
+        "date_iso": "2026-12-19",
+        "time": "7:00 PM",
+        "location": "Garden of Lights, Haus Till E",
+        "description": "A musical highlight of the Advent Magic at Haus Till E: in our beautifully decorated garden, a concert awaits that conjures up true feel-good vibes – with warm tunes to sing along to, dream to and enjoy. Plus hot mulled wine and delicious treats to round off the evening in style. A concert experience for all ages that truly rings in the festive season!",
+        "image": {
+          "src": "/assets/media/events/konzert-advent-4.jpg",
+          "alt": "Concert in the Garden of Lights"
+        }
+      },
+      {
+        "title": "Fairy Tale Parade of the Town of Zell",
+        "date": "Nov 28, 2026",
+        "date_iso": "2026-11-28",
         "time": "5:30 PM",
-        "location": "Kitchen, Haus Till E",
-        "description": "Regional ingredients, modern techniques - an evening between tradition and new beginnings, cooking together.",
+        "location": "Throughout the town / Garden of Haus Till E",
+        "description": "On the first Sunday of Advent, Zell transforms into an enchanting fairy-tale land: the Zell business association invites you to the grand fairy-tale parade through the festively decorated old town. From 5:30 PM, well-known fairy-tale characters such as Mother Holle, the Nutcracker and Snow White stroll through the streets, enchanting young and old alike. From 1:00 PM, you can already browse the Advent market around the market square and inside the town hall – with a lovely selection of Christmas decorations, handicrafts and handmade gifts. A magical start to the festive season for the whole family!",
         "image": {
-          "src": "/assets/media/events/kochkurs.jpg",
-          "alt": "Cooking class in the kitchen"
+          "src": "/assets/media/events/maerchenumzug.jpg",
+          "alt": "Fairy tale parade through Zell's old town"
+        },
+        "link": "https://www.zellerland.de/event/maerchenumzug-durch-die-zeller-altstadt"
+      },
+      {
+        "title": "Music Canteen – May",
+        "date": "May 31, 2026",
+        "date_iso": "2026-05-31",
+        "time": "7:00 PM",
+        "location": "Garden, Haus Till E",
+        "description": "Look forward to a special concert highlight: Joe's Truck Stop brings true Americana spirit to the stage with a rousing mix of bluegrass, honky tonk and western swing. In his songs, Joe tells stories of life on the road, of love and heartbreak – accompanied by banjo, fiddle and plenty of playful energy. A concert evening guaranteed to put you in a good mood and stir up some wanderlust!",
+        "image": {
+          "src": "/assets/media/events/music_canteen_joe.jpg",
+          "alt": "Garden concert at Haus Till E"
         }
       },
       {
-        "title": "Concert by the River",
-        "date": "August 2, 2026",
-        "time": "8:00 PM",
-        "location": "Moselle Promenade, Zell (Moselle)",
-        "description": "Acoustic sounds at sunset - music that flows just as calmly as the Moselle itself.",
+        "title": "Music Canteen – June",
+        "date": "Jun 6, 2026",
+        "date_iso": "2026-06-06",
+        "time": "7:00 PM",
+        "location": "Garden, Haus Till E",
+        "description": "Sean K. Preston, an internationally touring artist from Baltimore, brings raw honky tonk, gritty blues and heart-wrenching country ballads to the stage. With a rough, soulful voice, he tells stories of love, loss and longing – a concert evening full of energy and true Americana soul!",
         "image": {
-          "src": "/assets/media/events/konzert.jpg",
-          "alt": "Concert at sunset on the Moselle"
+          "src": "/assets/media/events/music_canteen_sean.jpg",
+          "alt": "Garden concert at Haus Till E"
+        }
+      },
+      {
+        "title": "Summer in the City",
+        "date": "Jul 2, 2026",
+        "date_iso": "2026-07-02",
+        "time": "7:00 PM",
+        "location": "Garden, Haus Till E",
+        "description": "River Soul Connection guarantees a great atmosphere with their rousing sound of classic rock & pop! The cover band performs well-known hits played straight from the heart, inviting young and old to sing along and dance. A concert evening full of good vibes and familiar melodies – there's something here for every musical taste! Of course, right here at Haus Till E!",
+        "image": {
+          "src": "/assets/media/events/summer_in_the_city.jpg",
+          "alt": "Garden concert at Haus Till E"
+        }
+      },
+      {
+        "title": "Music Canteen – August",
+        "date": "Aug 23, 2026",
+        "date_iso": "2026-08-23",
+        "time": "11:30 AM",
+        "location": "Garden, Haus Till E",
+        "description": "It's going to be loud, it's going to be great, it's going to be big! For our Frühschoppen (late-morning get-together) at Haus Till E, we welcome Magic Rhythm, the big band of the Bad Nauheim music school, with their rousing programme of swing, Latin and funk. We've never had so many musicians on our little garden stage at once – a true big-band experience with full sound that you shouldn't miss during a relaxed late-morning gathering!",
+        "image": {
+          "src": "/assets/media/events/music_canteen_big_band.jpg",
+          "alt": "Garden concert at Haus Till E"
         }
       }
     ]

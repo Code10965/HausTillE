@@ -24,25 +24,34 @@ permalink: "{{ pages.events[lang] }}"
           horizontale Zukunfts-Karussell - zeigt ALLE zukünftigen
           Events inkl. heute
        b) .past-events (1/3): das vertikale "Flip-Kalender"-Karussell
-          ("Erinnerungen. Unvergessliche Momente.") - zeigt alle
-          vergangenen Events, neuestes zuerst, nur mit Titel/Ort/
-          Beschreibung auf der Karte, darunter ein WhatsApp-Hinweis mit
-          Telefonnummer. Liegt jetzt AUSSERHALB von .section-inner,
-          direkt als zweite Spalte von .events-page-row - genau wie
-          .hero-media bei der Hero-Sektion reicht der dunkle
-          Hintergrund dadurch randlos bis zum echten Browserrand, nicht
-          nur bis zum Rand des zentrierten Seiteninhalts (siehe
-          styles.css).
+          ("Schöne Erinnerungen") - zeigt alle vergangenen Events,
+          neuestes zuerst, nur mit Titel/Ort/Beschreibung auf der
+          Karte. Liegt jetzt AUSSERHALB von .section-inner, direkt als
+          zweite Spalte von .events-page-row - genau wie .hero-media
+          bei der Hero-Sektion reicht der dunkle Hintergrund dadurch
+          randlos bis zum echten Browserrand, nicht nur bis zum Rand
+          des zentrierten Seiteninhalts (siehe styles.css).
 
-  WICHTIG zur Datumsaufteilung: Eleventy baut diese Seite nur bei jedem
-  Deploy neu - "heute" würde also einfrieren, wenn wir die Aufteilung
-  zukünftig/vergangen hier im Template vornehmen würden. Deshalb werden
-  BEIDE Karussells zunächst mit ALLEN Events aus t.events.items befüllt
-  (jede Folie trägt data-date-start/data-date-end als ISO-Datum), und
-  erst eventsCarousel.js entscheidet beim Laden der Seite im Browser -
-  anhand des tatsächlichen "heute" - welche Folie in welchem Karussell
-  bleibt und welche entfernt wird (siehe partitionEventsByDate() dort).
-  So bleibt die Aufteilung auch Monate nach dem letzten Deploy korrekt.
+  WICHTIG zur Sortierung UND Datumsaufteilung: Die eigentliche
+  Sortierung (chronologisch nach Startdatum) passiert NICHT mehr hier im
+  Template, sondern schon vorher beim Bauen der Seite, in
+  src/_data/sortedEvents.js - "sortedEvents[lang]" ist also bereits die
+  fertig sortierte Liste (statt der unsortierten t.events.items). Das
+  spart jedem Website-Besucher das erneute Sortieren im Browser.
+
+  Die Aufteilung in "zukünftig" und "vergangen" DARF dagegen nicht beim
+  Bauen passieren: Eleventy baut diese Seite nur bei jedem Deploy neu -
+  "heute" würde also einfrieren, wenn wir zukünftig/vergangen hier im
+  Template entscheiden würden. Deshalb werden BEIDE Karussells zunächst
+  mit ALLEN (schon sortierten) Events befüllt (jede Folie trägt
+  data-date-start/data-date-end als ISO-Datum), und erst
+  eventsCarousel.js entscheidet beim Laden der Seite im Browser - anhand
+  des tatsächlichen "heute" - welche Folie in welchem Karussell bleibt
+  (siehe partitionEventsByDate() dort). Weil die Reihenfolge dank
+  sortedEvents[lang] schon stimmt, muss dort nur noch gefiltert werden -
+  kein erneutes Sortieren nötig. So bleibt die Aufteilung auch Monate
+  nach dem letzten Deploy korrekt, ohne dass der Browser die teure
+  Sortierarbeit wiederholen muss.
 
   Der Hintergrund bekommt denselben "Blob"-Effekt wie im Hero: ein
   .ambient-bg mit fünf .ambient-layer-*-Kindern. heroAmbient.js sucht
@@ -109,12 +118,12 @@ permalink: "{{ pages.events[lang] }}"
         >
           <div class="events-viewport" data-events-viewport>
             <ul class="events-track" data-events-track>
-              {% for item in t.events.items %}
+              {% for item in sortedEvents[lang] %}
               <li
                 class="event-slide"
                 role="group"
                 aria-roledescription="slide"
-                aria-label="{{ item.title }} ({{ loop.index }} {{ t.events.carousel.of }} {{ t.events.items.length }})"
+                aria-label="{{ item.title }} ({{ loop.index }} {{ t.events.carousel.of }} {{ sortedEvents[lang].length }})"
                 aria-hidden="true"
                 data-events-slide
                 data-title="{{ item.title }}"
@@ -195,13 +204,13 @@ permalink: "{{ pages.events[lang] }}"
       </div>
     </div>
 
-    {# ========== SPALTE 2 (1/3): VERGANGENE EVENTS ("Erinnerungen. Unvergessliche Momente.") ==========
+    {# ========== SPALTE 2 (1/3): VERGANGENE EVENTS ("Schöne Erinnerungen") ==========
        Vertikales Karussell im Stil eines Tischkalenders zum
        Umblättern: jede Karte liegt übereinandergestapelt, die aktuelle
        Karte ist flach sichtbar, die anderen sind nach hinten
        weggekippt (siehe .past-slide in styles.css). Zeigt bewusst NUR
-       Titel, Ort und Beschreibung - keine Fotos, kein volles Datum
-       (nur die Jahreszahl), kein Link, wie gewünscht.
+       Titel, Ort und Beschreibung - keine Fotos, kein Datum, kein
+       Link, wie gewünscht.
 
        Liegt jetzt als direktes Geschwisterelement von .events-main auf
        Ebene von .events-page-row - NICHT mehr innerhalb eines
@@ -249,7 +258,7 @@ permalink: "{{ pages.events[lang] }}"
           <div class="past-body">
             <div class="past-viewport" data-past-viewport>
               <ul class="past-track" data-past-track>
-                {% for item in t.events.items %}
+                {% for item in sortedEvents[lang] %}
                 <li
                   class="past-slide"
                   role="group"
@@ -270,7 +279,14 @@ permalink: "{{ pages.events[lang] }}"
                       </svg>
                       {{ item.location }}
                     </p>
-                    <p class="past-card-description">{{ item.description }}</p>
+                    <p class="past-card-description">
+                      <img
+                        class="past-card-photo"
+                        src="{{ item.image.src | url }}"
+                        alt="{{ item.image.alt }}"
+                        loading="lazy"
+                      />{{ item.description }}
+                    </p>
                   </article>
                 </li>
                 {% endfor %}

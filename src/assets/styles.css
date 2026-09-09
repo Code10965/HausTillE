@@ -1991,6 +1991,22 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   mask-image: linear-gradient(to bottom, black calc(100% - 32px), transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black calc(100% - 32px), transparent 100%);
 }
+/* Kleines quadratisches Foto, das per Textumfluss (float) direkt im
+   Beschreibungstext sitzt - liegt bewusst im selben <p> wie der Text
+   (siehe events.njk), damit der Fließtext ganz klassisch per CSS
+   automatisch drumherum läuft, ohne eigenes Grid/Flex-Layout zu
+   brauchen. Nimmt die Hälfte der Breite des Beschreibungsfelds ein;
+   object-fit: cover + aspect-ratio sorgen dafür, dass jedes Foto -
+   unabhängig vom Seitenverhältnis der Originaldatei - automatisch
+   quadratisch zugeschnitten wird (dieselbe Technik wie bei
+   .event-photo im Zukunfts-Karussell). */
+.past-card-photo {
+  float: left;
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin: 2px 14px 8px 0;
+}
 
 .past-controls {
   /* Vertikale Spalte statt horizontaler Reihe unter der Karte - "hoch"

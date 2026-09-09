@@ -352,6 +352,22 @@ function toggleEmptyState(container, isEmpty) {
  * horizontalen Karussell, alles vor heute wandert (neuestes zuerst)
  * ins vertikale "Erinnerungen"-Karussell.
  *
+ * WICHTIG: Hier wird NICHT mehr sortiert. Die Folien kommen bereits in
+ * der richtigen chronologischen Reihenfolge (aufsteigend nach
+ * Startdatum) aus dem Template, weil events.njk über "sortedEvents[lang]"
+ * statt der unsortierten Event-Liste loopt - sortiert wird einmalig
+ * beim Bauen der Seite in src/_data/sortedEvents.js (dort auch die
+ * ausführliche Begründung zum gewählten Sortieralgorithmus). Hier im
+ * Browser bleibt für jedes Karussell nur noch ein einziger linearer
+ * Durchlauf übrig:
+ *   - Zukunfts-Karussell: O(n) Filtern (entfernt vergangene Folien),
+ *     die verbleibende Reihenfolge ist automatisch schon aufsteigend
+ *     richtig (nächstliegendes Event zuerst).
+ *   - Erinnerungen-Karussell: O(n) Filtern (entfernt zukünftige Folien)
+ *     plus O(n) Umkehren der Reihenfolge, weil "neuestes zuerst"
+ *     gewünscht ist, die Grundsortierung aber aufsteigend ist - kein
+ *     erneutes Sortieren nötig, ein einfaches .reverse() reicht.
+ *
  * Muss VOR createCarouselController()/createPastCarouselController()
  * aufgerufen werden, weil beide Funktionen die zu diesem Zeitpunkt noch
  * im DOM vorhandenen Folien zählen und darauf ihre Zustandsverwaltung
@@ -362,6 +378,10 @@ export function partitionEventsByDate(root = document, today = localISODate()) {
     const track = container.querySelector("[data-events-track]");
     if (!track) return;
 
+    // O(n): vergangene Folien entfernen. Die verbleibende Reihenfolge
+    // im DOM ist bereits aufsteigend chronologisch richtig (kommt so
+    // sortiert aus sortedEvents[lang] im Template) - hier ist also
+    // nichts weiter umzusortieren.
     Array.prototype.slice.call(track.querySelectorAll("[data-events-slide]")).forEach((slide) => {
       const end = slideEndDate(slide);
       if (end && end < today) slide.remove();
@@ -372,12 +392,12 @@ export function partitionEventsByDate(root = document, today = localISODate()) {
     remaining.forEach((slide, i) => {
       slide.setAttribute("aria-hidden", i === 0 ? "false" : "true");
       // Der aria-label-Text kommt ursprünglich statisch aus dem Template
-      // und zählt dort immer "von 11" (der Gesamtzahl ALLER Events,
-      // unabhängig vom Datum) - nach dem Entfernen der vergangenen
-      // Folien wäre das falsch (z.B. "1 von 11" statt korrekt "1 von 8").
-      // data-title enthält den reinen Titel ohne die Zähl-Klammer, damit
-      // hier sauber neu zusammengesetzt werden kann, statt den
-      // bestehenden aria-label-String zu zerlegen.
+      // und zählt dort immer die Gesamtzahl ALLER Events, unabhängig
+      // vom Datum - nach dem Entfernen der vergangenen Folien wäre das
+      // falsch (z.B. "1 von 12" statt korrekt "1 von 8"). data-title
+      // enthält den reinen Titel ohne die Zähl-Klammer, damit hier
+      // sauber neu zusammengesetzt werden kann, statt den bestehenden
+      // aria-label-String zu zerlegen.
       const title = slide.dataset.title;
       if (title) {
         slide.setAttribute("aria-label", `${title} (${i + 1} ${ofLabel} ${remaining.length})`.trim());
@@ -391,18 +411,19 @@ export function partitionEventsByDate(root = document, today = localISODate()) {
     const track = container.querySelector("[data-past-track]");
     if (!track) return;
 
+    // O(n): zukünftige Folien entfernen.
     Array.prototype.slice.call(track.querySelectorAll("[data-past-slide]")).forEach((slide) => {
       const end = slideEndDate(slide);
       if (!end || end >= today) slide.remove();
     });
 
-    // Neueste Erinnerung zuerst - fühlt sich beim Umblättern an, als
-    // würde man sich Schritt für Schritt weiter in die Vergangenheit
-    // zurückblättern, statt bei der ältesten zu beginnen.
-    const remaining = Array.prototype.slice.call(track.querySelectorAll("[data-past-slide]"));
-    remaining
-      .sort((a, b) => slideEndDate(b).localeCompare(slideEndDate(a)))
-      .forEach((slide) => track.appendChild(slide));
+    // O(n): nur noch umkehren statt neu sortieren - die Grund-
+    // reihenfolge ist aufsteigend (ältestes zuletzt), fürs Erinnerungen-
+    // Karussell soll aber das neueste zuerst erscheinen. Ein simples
+    // .reverse() reicht dafür, ein erneutes .sort() (O(n log n)) wäre
+    // hier unnötige, teurere Arbeit.
+    const remaining = Array.prototype.slice.call(track.querySelectorAll("[data-past-slide]")).reverse();
+    remaining.forEach((slide) => track.appendChild(slide));
 
     toggleEmptyState(container, remaining.length === 0);
   });
