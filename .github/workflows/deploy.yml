@@ -31,13 +31,20 @@ jobs:
         # zurück (siehe pathPrefix: process.env.ELEVENTY_PATH_PREFIX || "/").
 
       - name: Per SFTP zu Manitu hochladen
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: wangyucode/sftp-upload-action@v2.0.4
+        # Zurück von FTPS (SamKirkland/FTP-Deploy-Action) zu reinem SFTP:
+        # FTPS hat beim Ersetzen bestehender Dateien (nicht bei neuen
+        # Uploads) wiederholt einen "Timeout when trying to open data
+        # connection" produziert - vermutlich ein Passive-Mode/Firewall-
+        # Problem bei Manitu, das speziell bei Replace-Vorgängen auftritt.
+        # SFTP tunnelt alle Übertragungen durch die eine bereits
+        # bestehende SSH-Verbindung, ganz ohne zusätzliche Datenkanäle -
+        # dieselbe Methode, mit der der allererste komplette Deploy
+        # (253 Dateien) bereits fehlerfrei durchlief.
         with:
-          server: ${{ secrets.MANITU_FTP_HOST }}
+          host: ${{ secrets.MANITU_FTP_HOST }}
           username: ${{ secrets.MANITU_FTP_USERNAME }}
           password: ${{ secrets.MANITU_FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          local-dir: "./_site/"
-          server-dir: "/web/haus-till-e.com/"
-          log-level: verbose
+          port: 23
+          localDir: "_site"
+          remoteDir: "/web/haus-till-e.com/"
