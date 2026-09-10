@@ -314,7 +314,7 @@
     },
     "items": [
       {
-        "title": "Federweisser Festival",
+        "title": "Federweisser Festival - hosted by MOS:L WEIN:EVENTS",
         "date": "Oct 8–11, 2026",
         "date_iso": "2026-10-08",
         "date_end_iso": "2026-10-11",
@@ -361,7 +361,7 @@
         "date_end_iso": "2026-12-20",
         "time": "all day (see flyer)",
         "location": "Lights Garden at Haus Till E",
-        "description": "At the Advent Magic in Haus Till E you can look forward to cozy togetherness in the festively decorated garden, food and drink with hot mulled wine, concerts and sing-along concerts for young and old, plus a gift cabinet full of ideas for what to give. We look forward to seeing you!",
+        "description": "At the Advent Magic in Haus Till E you can look forward to cozy togetherness in the festively decorated garden, food and drink with hot mulled wine, and concerts for young and old, plus a gift cabinet full of ideas for what to give. We look forward to seeing you!",
         "image": {
           "src": "/assets/media/events/adventsmarkt.jpg",
           "alt": "Advent Magic in the Lights Garden"

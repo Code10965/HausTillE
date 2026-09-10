@@ -314,7 +314,7 @@
     },
     "items": [
       {
-        "title": "Federweißer-Fest",
+        "title": "Federweißer-Fest - hosted by MOS:L WEIN:EVENTS",
         "date": "8.–11. Okt 2026",
         "date_iso": "2026-10-08",
         "date_end_iso": "2026-10-11",
@@ -361,7 +361,7 @@
         "date_end_iso": "2026-12-20",
         "time": "ganztägig (siehe Flyer)",
         "location": "Lichter-Garten Haus Till E",
-        "description": "Beim Adventszauber im Haus Till E erwarten euch gemütliches Beisammensein im festlich geschmückten Garten, Essen und Trinken mit heißem Glühwein, Konzerte und Mitmachkonzerte für Groß und Klein sowie ein Geschenkeschrank voller Ideen zum Verschenken. Wir freuen uns auf euch!",
+        "description": "Beim Adventszauber im Haus Till E erwarten euch gemütliches Beisammensein im festlich geschmückten Garten, Essen und Trinken mit heißem Glühwein, und Konzerte für Groß und Klein sowie ein Geschenkeschrank voller Ideen zum Verschenken. Wir freuen uns auf euch!",
         "image": {
           "src": "/assets/media/events/adventsmarkt.jpg",
           "alt": "Zauber im Advent im Lichter-Garten"

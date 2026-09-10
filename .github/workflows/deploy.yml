@@ -30,21 +30,28 @@ jobs:
         # Unterordner. eleventy.config.js fällt dann automatisch auf "/"
         # zurück (siehe pathPrefix: process.env.ELEVENTY_PATH_PREFIX || "/").
 
-      - name: Per SFTP zu Manitu hochladen
-        uses: wangyucode/sftp-upload-action@v2.0.4
-        # Zurück von FTPS (SamKirkland/FTP-Deploy-Action) zu reinem SFTP:
-        # FTPS hat beim Ersetzen bestehender Dateien (nicht bei neuen
-        # Uploads) wiederholt einen "Timeout when trying to open data
-        # connection" produziert - vermutlich ein Passive-Mode/Firewall-
-        # Problem bei Manitu, das speziell bei Replace-Vorgängen auftritt.
-        # SFTP tunnelt alle Übertragungen durch die eine bereits
-        # bestehende SSH-Verbindung, ganz ohne zusätzliche Datenkanäle -
-        # dieselbe Methode, mit der der allererste komplette Deploy
-        # (253 Dateien) bereits fehlerfrei durchlief.
-        with:
-          host: ${{ secrets.MANITU_FTP_HOST }}
-          username: ${{ secrets.MANITU_FTP_USERNAME }}
-          password: ${{ secrets.MANITU_FTP_PASSWORD }}
-          port: 23
-          localDir: "_site"
-          remoteDir: "/web/haus-till-e.com/"
+      - name: lftp installieren
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Per SFTP (lftp) zu Manitu hochladen
+        # Dritter Anlauf für den Deploy-Mechanismus: FTPS (SamKirkland)
+        # produzierte wiederholt Timeouts beim Ersetzen bestehender
+        # Dateien, die reine SFTP-Action (wangyucode) blieb zweimal
+        # ohne jede Fehlermeldung einfach hängen (unbegrenzt lange, kein
+        # Fortschritt). lftp ist ein sehr ausgereiftes, seit Jahrzehnten
+        # für genau solche automatisierten Uploads genutztes Tool -
+        # spricht ebenfalls reines SFTP (kein Shell-Zugriff auf dem
+        # Server nötig), aber mit expliziten Timeout-/Retry-
+        # Einstellungen, die ein stilles Hängenbleiben verhindern.
+        # "mirror --only-newer" lädt zudem nur tatsächlich geänderte
+        # Dateien hoch statt jedes Mal alle 254.
+        run: |
+          lftp -u "${{ secrets.MANITU_FTP_USERNAME }},${{ secrets.MANITU_FTP_PASSWORD }}" -p 23 sftp://${{ secrets.MANITU_FTP_HOST }} <<'ENDSCRIPT'
+          set sftp:auto-confirm yes
+          set net:timeout 20
+          set net:max-retries 3
+          set net:reconnect-interval-base 5
+          set mirror:parallel-transfer-count 3
+          mirror --reverse --verbose --only-newer _site /web/haus-till-e.com/
+          bye
+          ENDSCRIPT
