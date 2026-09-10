@@ -6,13 +6,12 @@ const { defineConfig, devices } = require("@playwright/test");
  * lokal ("http://localhost:8080" beim `eleventy --serve`) UND gegen die
  * echte Live-Seite laufen lassen kannst, ohne Code zu ändern.
  *
- * Aktuell zeigt die URL auf die GitHub-Pages-Projekt-Site (mit dem
- * Unterordner "/HausTillE/"). Sobald www.haus-till-e.com als eigene
- * Domain verknüpft ist, hier auf "https://www.haus-till-e.com" umstellen
- * (dann OHNE "/HausTillE/" am Ende) - oder einfach das BASE_URL-Secret
- * in GitHub Actions ändern, dann muss diese Datei gar nicht angefasst werden.
+ * Fallback zeigt jetzt auf die echte, eigene Domain (ohne Unterordner-
+ * Präfix, da die Seite seit der Manitu-Umstellung im Root liegt). Ein
+ * eventuell gesetztes BASE_URL-Secret in GitHub Actions hat weiterhin
+ * Vorrang vor diesem Fallback.
  */
-const BASE_URL = process.env.BASE_URL || "https://code10965.github.io/HausTillE/";
+const BASE_URL = process.env.BASE_URL || "https://www.haus-till-e.com";
 
 module.exports = defineConfig({
   testDir: "./tests",
