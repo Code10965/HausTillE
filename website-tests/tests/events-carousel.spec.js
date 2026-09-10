@@ -107,19 +107,26 @@ test("Pause-Button stoppt den automatischen Ablauf, erneutes Klicken setzt ihn f
   await page.clock.fastForward(AUTOPLAY_MS * 2);
   await expect(slides.nth(0)).toHaveAttribute("aria-hidden", "false"); // trotz Zeitablauf keine Bewegung
 
-  await playPause.click(); // fortsetzen
-  await expect(playPause).toHaveAttribute("aria-pressed", "false");
-
-  // Maus weg vom Karussell bewegen: Playwright lässt den Mauszeiger nach
-  // click() genau auf dem Button stehen. Der Button liegt INNERHALB des
-  // Karussell-Containers, dessen mouseenter-Handler (siehe
-  // eventsCarousel.js) "hovering = true" setzt - das ist beim ersten
-  // Klick (pausieren) bereits passiert und bleibt ohne diesen Schritt
-  // bestehen, weil kein erneutes mouseenter feuert (die Maus verlässt
-  // den Container zwischen den beiden Klicks ja nie). isEffectivelyPlaying()
-  // prüft "userPlaying && !hovering" - ohne diesen Schritt bliebe der
-  // Timer trotz "fortsetzen" dauerhaft gestoppt.
+  // Maus ZUERST eindeutig wegbewegen, BEVOR der Button ein zweites Mal
+  // aktiviert wird - und ihn danach per Tastatur (Leertaste) statt per
+  // erneutem Klick auslösen. Grund: Playwright dispatcht bei click()
+  // nur dann ein neues mousemove/mouseenter, wenn sich die Zielposition
+  // tatsächlich ändert. Zwei Klicks auf exakt denselben Button-Mittelpunkt
+  // hintereinander lösen beim zweiten Mal daher KEIN neues mouseenter
+  // aus - und in Chromium (Desktop) hat sich gezeigt, dass auch das
+  // anschließende Wegbewegen der Maus nicht zuverlässig ein mouseleave
+  // nachliefert, wodurch "hovering" in eventsCarousel.js fälschlich auf
+  // true hängen bleibt und der Timer trotz "fortsetzen" gestoppt bleibt.
+  // Indem wir die Maus VOR dem zweiten Toggle wegbewegen (dort löst ein
+  // echtes mouseleave zuverlässig aus, weil sich die Position wirklich
+  // ändert) und den bereits fokussierten Button anschließend per
+  // Tastatur aktivieren, entsteht das Problem gar nicht erst - es gibt
+  // keinen "Klick an identischer Position" mehr. WebKit/Mobile Safari
+  // war von der ursprünglichen Variante nicht betroffen, daher schlug
+  // der Test bisher nur in Desktop Chrome fehl.
   await page.mouse.move(0, 0);
+  await playPause.press(" "); // Leertaste aktiviert einen fokussierten <button> wie ein Klick
+  await expect(playPause).toHaveAttribute("aria-pressed", "false");
 
   await page.clock.fastForward(AUTOPLAY_MS);
   await expect(slides.nth(1)).toHaveAttribute("aria-hidden", "false");
