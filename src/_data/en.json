@@ -74,8 +74,8 @@
         { "title": "Limitations", "content": "Is there a lift?<br><br>Haus Till E is a listed building from the 1920s with no lift — the rooms are only accessible via the stairs.<br><br>Is smoking allowed inside?<br><br>Smoking is not permitted inside the house, including on the balconies; however, you are welcome to smoke in our garden at any time." },
         { "title": "Bicycles", "content": "Can I safely store and charge my bike?<br><br>You can safely park and charge your regular or electric bicycles in our outbuilding.<br><br>Can I rent a bike locally?<br><br>Our guests are especially happy with the bike rental services from Wanderland (Balduinstraße 95) and Moselglück (Balduinstraße 43) — both offer well-maintained bikes right in Zell." },
         { "title": "Air conditioning", "content": "Is there air conditioning in the rooms?<br><br>There is no classic air conditioning in our historic house. On particularly warm days, we're happy to bring a modern, bladeless tower fan (8 speed settings) to your room on request — just let us know." },
-        { "title": "Lactose, gluten, etc.", "content": "Can food intolerances like lactose or gluten be accommodated at breakfast?<br><br>We may not always have every product for every intolerance in stock as standard. It's best to let us know your needs already at the time of booking — we're happy to accommodate you." },
-        { "title": "Family and children", "content": "Is Haus Till E suitable for families with children?<br><br>Haus Till E is regularly booked by entire families or groups of friends — we've had the pleasure of witnessing many a milestone birthday and hosting three or four generations at once throughout the house. It brings us great joy to provide the setting for unforgettable shared moments.<br><br>How many rooms are there in total?<br><br>We have five lovingly furnished rooms: two with a balcony (Room 1 & 2), a studio without a balcony (Room 3), a room with a view of the castle and the Moselle (Room 4), and a cozy room with charming sloped ceilings (Room 5).<br><br>How many people can stay overnight in total?<br><br>We have five double rooms, so up to ten people can stay with us at the same time." },
+        { "title": "Lactose, gluten, etc.", "content": "Can food intolerances like lactose or gluten be accommodated at breakfast?<br><br>We may not always have every product for every intolerance in stock as standard. It's best to let us know your needs already at the time of booking — we're happy to accommodate you.<br><br>How many rooms are there in total?<br><br>We have five lovingly furnished rooms: two with a balcony (Room 1 & 2), a studio without a balcony (Room 3), a room with a view of the castle and the Moselle (Room 4), and a cozy room with charming sloped ceilings (Room 5).<br><br>How many people can stay overnight in total?<br><br>We have five double rooms, so up to ten people can stay with us at the same time." },
+        { "title": "Family and children", "content": "Is Haus Till E suitable for families with children?<br><br>Haus Till E is regularly booked by entire families or groups of friends — we've had the pleasure of witnessing many a milestone birthday and hosting three or four generations at once throughout the house. It brings us great joy to provide the setting for unforgettable shared moments." },
         { "title": "Arrival and departure times", "content": "When is check-in and check-out?<br><br>Since we run the hotel with a small team, check-in is available between 4:00 PM and 6:00 PM. If your room happens to be ready earlier, we'll be sure to let you know right away. We wish we could just wave a magic wand – until that works out, we simply work quickly and carefully so your room is ready by 4:00 PM.<br><br>We would ask you to check out by 11.00 am." }
       ]
     },
@@ -314,93 +314,93 @@
     },
     "items": [
       {
-        "title": "Federweißer Festival",
+        "title": "Federweisser Festival",
         "date": "Oct 8–11, 2026",
         "date_iso": "2026-10-08",
         "date_end_iso": "2026-10-11",
-        "time": "All day (see link)",
-        "location": "Zeller Marktplatz",
-        "description": "The Zeller Marktplatz once again transforms into four days of indulgence, music and togetherness at the Federweißer Festival – with young wine (Federweißer), great food, a lively programme for all ages and plenty of good spirits, Zell can't wait to welcome you! And Haus Till E helps look after the catering, among other things.",
+        "time": "all day (see link)",
+        "location": "Zell Marketplace",
+        "description": "The Zell marketplace turns into four days full of indulgence, music and togetherness at the Federweisser Festival – with Federweisser, great food, a wonderful program for young and old, and plenty of good cheer, Zell looks forward to welcoming you! Haus Till E will also be providing catering, among other things.",
         "image": {
           "src": "/assets/media/events/federweisser-fest.jpg",
-          "alt": "Federweißer Festival on the Zeller Marktplatz"
+          "alt": "Federweisser Festival at Zell Marketplace"
         },
         "link": "https://mosl-wein.de/products/federweisserfest-2026-x-08-10-11-10-2026"
       },
       {
-        "title": "Zell Town & Backstreets Flea Market",
+        "title": "Zell Town & Alley Flea Market",
         "date": "Oct 17–18, 2026",
         "date_iso": "2026-10-17",
         "date_end_iso": "2026-10-18",
-        "time": "All day (see link)",
-        "location": "Throughout the town / Garden of Haus Till E",
-        "description": "On October 17 and 18, the Herbstzauber (autumn magic) in Zell, Kaimt and Merl invites you to browse to your heart's content – whether it's the town and backstreets flea market, a children's flea market, a Sunday shopping opening, or delicious autumn treats, everyone is bound to find a little bargain and enjoy cosy autumn days in Zell! And of course there's plenty to browse in the garden of Haus Till E too – we're joining in together with our friends!",
+        "time": "all day (see link)",
+        "location": "across the whole town / Garden at Haus Till E",
+        "description": "On October 17 and 18, the Autumn Magic in Zell invites you to browse and discover – whether it's the town and alley flea market, a children's flea market, a special shopping Sunday, or delicious autumn treats, everyone is sure to find their own little bargain and enjoy cozy autumn days in Zell! And of course there's plenty to browse in the garden at Haus Till E too – we're joining in with our friends!",
         "image": {
           "src": "/assets/media/events/herbstzauber-floehmarkt.jpg",
-          "alt": "Herbstzauber flea market in Zell"
+          "alt": "Autumn Magic Flea Market in Zell"
         },
         "link": "https://www.zellerland.de/event/herbstzauber-mit-stadt-und-gaesschenflohmarkt-in-zell"
       },
       {
-        "title": "Dekadenzia 2026 – Themed Party",
+        "title": "Dekadenzia 2026 – Theme Party",
         "date": "Nov 21, 2026",
         "date_iso": "2026-11-21",
         "time": "7:00 PM",
-        "location": "Zeller Schlosskeller",
-        "description": "The Roaring Twenties are back – for one night only – at the Zeller Schlosskeller, with a live band, burlesque show, dance lesson, casino games and cocktails. And the two of us will be dressing up too, joining the wonderful bar team for the night.",
+        "location": "Zell Castle Cellar",
+        "description": "The Roaring Twenties are back – for one night – at the Zell Castle Cellar with a live band, burlesque show, dance lesson, gambling den and cocktails. And the two of us are dressing up too – becoming part of the wonderful bar team for the night.",
         "image": {
           "src": "/assets/media/events/dekadenzia-mottoparty.jpg",
-          "alt": "Dekadenzia themed party at the Zeller Schlosskeller"
+          "alt": "Dekadenzia Theme Party at the Zell Castle Cellar"
         },
         "link": "https://eventfrog.de/de/p/partys/mottoparty/dekadenzia-2026-7423319046110610491.html"
       },
       {
-        "title": "Magic of Advent 2026",
+        "title": "Advent Magic 2026",
         "date": "Nov 20 – Dec 20, 2026",
         "date_iso": "2026-11-20",
         "date_end_iso": "2026-12-20",
-        "time": "All day (see flyer)",
-        "location": "Garden of Lights, Haus Till E",
-        "description": "At the Advent Magic at Haus Till E, cosy get-togethers await you in our festively decorated garden, food and drink with hot mulled wine, concerts and sing-along concerts for all ages, plus a gift cabinet full of ideas for presents. We look forward to seeing you!",
+        "time": "all day (see flyer)",
+        "location": "Lights Garden at Haus Till E",
+        "description": "At the Advent Magic in Haus Till E you can look forward to cozy togetherness in the festively decorated garden, food and drink with hot mulled wine, concerts and sing-along concerts for young and old, plus a gift cabinet full of ideas for what to give. We look forward to seeing you!",
         "image": {
           "src": "/assets/media/events/adventsmarkt.jpg",
-          "alt": "Magic of Advent in the Garden of Lights"
+          "alt": "Advent Magic in the Lights Garden"
         }
       },
       {
-        "title": "Concert at the Advent Magic (2nd Saturday of Advent)",
+        "title": "Concert at Advent Magic – 2nd Sunday of Advent",
         "date": "Dec 5, 2026",
         "date_iso": "2026-12-05",
         "time": "7:00 PM",
-        "location": "Garden of Lights, Haus Till E",
-        "description": "A musical highlight of the Advent Magic at Haus Till E: in our beautifully decorated garden, a concert awaits that conjures up true feel-good vibes – with warm tunes to sing along to, dream to and enjoy. Plus hot mulled wine and delicious treats to round off the evening in style. A concert experience for all ages that truly rings in the festive season!",
+        "location": "Lights Garden at Haus Till E",
+        "description": "Rock vibes guaranteed: Friday's Five bring their infectious rock covers to the stage in a brand-new lineup! Their sound is honest, powerful, good old-fashioned rock — played with real passion. Yet despite all that rock power, they create a cozy, living-room atmosphere that gets everyone singing along and having a great time!",
         "image": {
           "src": "/assets/media/events/konzert-advent-2.jpg",
-          "alt": "Concert in the Garden of Lights"
+          "alt": "Concert in the Lights Garden"
         }
       },
       {
-        "title": "Concert at the Advent Magic (3rd Saturday of Advent)",
+        "title": "Concert at Advent Magic – 3rd Sunday of Advent",
         "date": "Dec 12, 2026",
         "date_iso": "2026-12-12",
         "time": "7:00 PM",
-        "location": "Garden of Lights, Haus Till E",
-        "description": "A musical highlight of the Advent Magic at Haus Till E: in our beautifully decorated garden, a concert awaits that conjures up true feel-good vibes – with warm tunes to sing along to, dream to and enjoy. Plus hot mulled wine and delicious treats to round off the evening in style. A concert experience for all ages that truly rings in the festive season!",
+        "location": "Lights Garden at Haus Till E",
+        "description": "For several years now, Tobi Goldschmidt has been captivating audiences as a solo artist — and he's sure to do the same here! In his performances, original songs meet well-known hits, all reimagined in his own unmistakable style. An evening of music full of personal sound and familiar melodies given a fresh new twist!",
         "image": {
           "src": "/assets/media/events/konzert-advent-3.jpg",
-          "alt": "Concert in the Garden of Lights"
+          "alt": "Concert in the Lights Garden"
         }
       },
       {
-        "title": "Concert at the Advent Magic (4th Saturday of Advent)",
+        "title": "Concert at Advent Magic – 4th Sunday of Advent",
         "date": "Dec 19, 2026",
         "date_iso": "2026-12-19",
         "time": "7:00 PM",
-        "location": "Garden of Lights, Haus Till E",
-        "description": "A musical highlight of the Advent Magic at Haus Till E: in our beautifully decorated garden, a concert awaits that conjures up true feel-good vibes – with warm tunes to sing along to, dream to and enjoy. Plus hot mulled wine and delicious treats to round off the evening in style. A concert experience for all ages that truly rings in the festive season!",
+        "location": "Lights Garden at Haus Till E",
+        "description": "Get ready for a musical evening with Elias Beuren! The guitarist from the Moselle region enchants with handmade, acoustic cover music, creating a relaxed and cozy atmosphere perfect for listening and unwinding. Having grown up along the Moselle, he's become a familiar face at concerts and events in Zell — an evening of music with genuine local charm and heart!",
         "image": {
           "src": "/assets/media/events/konzert-advent-4.jpg",
-          "alt": "Concert in the Garden of Lights"
+          "alt": "Concert in the Lights Garden"
         }
       },
       {
@@ -408,33 +408,33 @@
         "date": "Nov 28, 2026",
         "date_iso": "2026-11-28",
         "time": "5:30 PM",
-        "location": "Throughout the town / Garden of Haus Till E",
-        "description": "On the first Sunday of Advent, Zell transforms into an enchanting fairy-tale land: the Zell business association invites you to the grand fairy-tale parade through the festively decorated old town. From 5:30 PM, well-known fairy-tale characters such as Mother Holle, the Nutcracker and Snow White stroll through the streets, enchanting young and old alike. From 1:00 PM, you can already browse the Advent market around the market square and inside the town hall – with a lovely selection of Christmas decorations, handicrafts and handmade gifts. A magical start to the festive season for the whole family!",
+        "location": "across the whole town / Garden at Haus Till E",
+        "description": "For the first Sunday of Advent, Zell transforms into an enchanting fairy-tale town: the Zell Business Association invites you to the grand fairy-tale parade through the festively decorated old town. Starting at 5:30 pm, well-known fairy-tale characters such as Mother Hulda, the Nutcracker and Snow White parade through the streets, delighting young and old alike. Starting at 1:00 pm, you can already browse the Advent market around the marketplace and in the town hall – featuring a lovely selection of festive decorations, handicrafts and handmade gifts. A magical start to the Advent season for the whole family!",
         "image": {
           "src": "/assets/media/events/maerchenumzug.jpg",
-          "alt": "Fairy tale parade through Zell's old town"
+          "alt": "Fairy Tale Parade through Zell's Old Town"
         },
         "link": "https://www.zellerland.de/event/maerchenumzug-durch-die-zeller-altstadt"
       },
       {
-        "title": "Music Canteen – May",
+        "title": "Music Canteen May",
         "date": "May 31, 2026",
         "date_iso": "2026-05-31",
         "time": "7:00 PM",
-        "location": "Garden, Haus Till E",
-        "description": "Look forward to a special concert highlight: Joe's Truck Stop brings true Americana spirit to the stage with a rousing mix of bluegrass, honky tonk and western swing. In his songs, Joe tells stories of life on the road, of love and heartbreak – accompanied by banjo, fiddle and plenty of playful energy. A concert evening guaranteed to put you in a good mood and stir up some wanderlust!",
+        "location": "Garden at Haus Till E",
+        "description": "Look forward to a special concert highlight: Joe's Truck Stop brings genuine Americana vibes to the stage with an infectious mix of bluegrass, honky tonk and western swing. Joe's songs tell stories of life on the road, of love and heartbreak – backed by banjo, fiddle and plenty of joy for playing. A concert evening guaranteed to deliver good spirits and wanderlust feelings!",
         "image": {
           "src": "/assets/media/events/music_canteen_joe.jpg",
           "alt": "Garden concert at Haus Till E"
         }
       },
       {
-        "title": "Music Canteen – June",
+        "title": "Music Canteen June",
         "date": "Jun 6, 2026",
         "date_iso": "2026-06-06",
         "time": "7:00 PM",
-        "location": "Garden, Haus Till E",
-        "description": "Sean K. Preston, an internationally touring artist from Baltimore, brings raw honky tonk, gritty blues and heart-wrenching country ballads to the stage. With a rough, soulful voice, he tells stories of love, loss and longing – a concert evening full of energy and true Americana soul!",
+        "location": "Garden at Haus Till E",
+        "description": "Sean K. Preston, an internationally touring artist from Baltimore, brings gritty honky-tonk, dirty blues and heart-wrenching country ballads to the stage. With a raw, soulful voice, he tells stories of love, loss and wanderlust – a concert evening full of energy and true Americana soul!",
         "image": {
           "src": "/assets/media/events/music_canteen_sean.jpg",
           "alt": "Garden concert at Haus Till E"
@@ -445,22 +445,34 @@
         "date": "Jul 2, 2026",
         "date_iso": "2026-07-02",
         "time": "7:00 PM",
-        "location": "Garden, Haus Till E",
-        "description": "River Soul Connection guarantees a great atmosphere with their rousing sound of classic rock & pop! The cover band performs well-known hits played straight from the heart, inviting young and old to sing along and dance. A concert evening full of good vibes and familiar melodies – there's something here for every musical taste! Of course, right here at Haus Till E!",
+        "location": "Garden at Haus Till E",
+        "description": "River Soul Connection guarantees a great atmosphere with their infectious classic rock & pop sound! The cover band performs well-known hits, played straight from the heart, inviting young and old to sing along and dance. A concert evening full of good vibes and familiar melodies – there's something here for every musical taste! Of course, right here at Haus Till E!",
         "image": {
           "src": "/assets/media/events/summer_in_the_city.jpg",
           "alt": "Garden concert at Haus Till E"
         }
       },
       {
-        "title": "Music Canteen – August",
+        "title": "Music Canteen August",
         "date": "Aug 23, 2026",
         "date_iso": "2026-08-23",
         "time": "11:30 AM",
-        "location": "Garden, Haus Till E",
-        "description": "It's going to be loud, it's going to be great, it's going to be big! For our Frühschoppen (late-morning get-together) at Haus Till E, we welcome Magic Rhythm, the big band of the Bad Nauheim music school, with their rousing programme of swing, Latin and funk. We've never had so many musicians on our little garden stage at once – a true big-band experience with full sound that you shouldn't miss during a relaxed late-morning gathering!",
+        "location": "Garden at Haus Till E",
+        "description": "It's going to be loud, it's going to be great, it's going to be big! For our morning concert at Haus Till E, we welcome Magic Rhythm, the big band of the Bad Nauheim Music School, with their infectious program of swing, latin and funk. We've never had so many musicians on our little garden stage before – a true big-band experience with full sound that you won't want to miss at this cozy morning gathering!",
         "image": {
           "src": "/assets/media/events/music_canteen_big_band.jpg",
+          "alt": "Garden concert at Haus Till E"
+        }
+      },
+      {
+        "title": "Music Canteen November",
+        "date": "Nov 15, 2026",
+        "date_iso": "2026-11-15",
+        "time": "11:30 AM",
+        "location": "Garden at Haus Till E",
+        "description": "The Turkey Buzzards bring genuine Americana feeling to the stage! The duo, made up of Dylan Nicholson and Eric Patterson, tell stories full of simple beauty in their songs – sometimes shaped by the sticky humidity of the Carolinas, sometimes by the dusty, dry cellars of the American West. Gritty vocals meet thoughtful harmonies, creating an honest, captivating atmosphere that takes the audience on a musical journey. The duo has already shared the stage with greats like Robert Earl Keen, Dawes and White Buffalo – a true concert experience full of authenticity and stories to dive into!",
+        "image": {
+          "src": "/assets/media/events/music_canteen_nov.jpg",
           "alt": "Garden concert at Haus Till E"
         }
       }

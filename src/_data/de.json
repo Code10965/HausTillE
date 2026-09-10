@@ -373,7 +373,7 @@
         "date_iso": "2026-12-05",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
-        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
+        "description": "Rockige Stimmung garantiert: Die Friday's Five bringen in neuer Besetzung ihre mitreißenden Rock-Coversongs auf die Bühne! Ihr Sound klingt nach handgemachtem, gutem Rock – ehrlich, druckvoll und mit jeder Menge Spielfreude. Dabei sorgen sie trotz voller Rock-Power für eine ganz besondere Wohnzimmer-Atmosphäre, die Lust auf Mitsingen und gute Laune macht!",
         "image": {
           "src": "/assets/media/events/konzert-advent-2.jpg",
           "alt": "Konzert im Lichter-Garten"
@@ -385,7 +385,7 @@
         "date_iso": "2026-12-12",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
-        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
+        "description": "Seit einigen Jahren begeistert Tobi Goldschmidt als Solokünstler sein Publikum – und das garantiert auch bei uns! In seinen Auftritten treffen eigene Songs auf bekannte Titel, die er ganz neu interpretiert und mit seinem unverwechselbaren Stil versieht. Ein Konzertabend voller persönlicher Klänge und vertrauter Melodien in neuem Gewand!",
         "image": {
           "src": "/assets/media/events/konzert-advent-3.jpg",
           "alt": "Konzert im Lichter-Garten"
@@ -397,7 +397,7 @@
         "date_iso": "2026-12-19",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
-        "description": "Musikalischer Höhepunkt beim Adventszauber im Haus Till E: Im stimmungsvoll geschmückten Garten erwartet euch ein Konzert, das echte Wohlfühlstimmung zaubert – mit warmen Klängen zum Mitsingen, Träumen und Genießen. Dazu gibt's heißen Glühwein und leckere Köstlichkeiten, die den Abend gemütlich abrunden. Ein Konzerterlebnis für Groß und Klein, das die Vorweihnachtszeit so richtig einläutet!",
+        "description": "Freut euch auf einen musikalischen Abend mit Elias Beuren! Der Gitarrist aus der Moselregion verzaubert mit handgemachter, akustischer Cover-Musik und sorgt für eine entspannte, gemütliche Atmosphäre zum Zuhören und Genießen. Aufgewachsen an der Mosel, ist er längst ein vertrautes Gesicht bei Konzerten und Events in Zell – ein Konzertabend mit echtem Lokalkolorit und viel Herz!",
         "image": {
           "src": "/assets/media/events/konzert-advent-4.jpg",
           "alt": "Konzert im Lichter-Garten"
@@ -418,7 +418,7 @@
       },
       {
         "title": "Musik-Kantine Mai",
-        "date": "31.May 2026",
+        "date": "31.Mai 2026",
         "date_iso": "2026-05-31",
         "time": "19:00 Uhr",
         "location": "Garten Haus Till E",
@@ -454,13 +454,25 @@
       },
       {
         "title": "Musik-Kantine August",
-        "date": "23. August 2026",
+        "date": "23. Aug 2026",
         "date_iso": "2026-08-23",
         "time": "11:30 Uhr",
         "location": "Garten Haus Till E",
         "description": "Es wird laut, es wird toll, es wird big! Zum Frühschoppen bei Haus Till E begrüßen wir Magic Rhythm, die Bigband der Musikschule Bad Nauheim, mit ihrem mitreißenden Programm aus Swing, Latin und Funk. So viele Musiker auf einmal hatten wir auf unserer kleinen Gartenbühne noch nie – ein echtes Bigband-Erlebnis mit vollem Sound, das ihr euch bei einem gemütlichen Frühschoppen nicht entgehen lassen solltet!",
         "image": {
           "src": "/assets/media/events/music_canteen_big_band.jpg",
+          "alt": "Garten-Konzert Haus Till E"
+        }
+      },
+      {
+        "title": "Musik-Kantine November",
+        "date": "15. Nov 2026",
+        "date_iso": "2026-11-15",
+        "time": "11:30 Uhr",
+        "location": "Garten Haus Till E",
+        "description": "The Turkey Buzzards bringen echtes Americana-Feeling auf die Bühne! Das Duo aus Dylan Nicholson und Eric Patterson erzählt in ihren Songs Geschichten voller einfacher Schönheit – mal geprägt von der schwülen Hitze der Carolinas, mal von den staubig-trockenen Kellern des amerikanischen Westens. Rauer Gesang trifft auf durchdachte Harmonien und schafft eine ehrliche, mitreißende Atmosphäre, die ihr Publikum auf eine musikalische Reise mitnimmt. Die beiden standen bereits gemeinsam mit Größen wie Robert Earl Keen, Dawes und White Buffalo auf der Bühne – ein echtes Konzerterlebnis voller Authentizität und Geschichten zum Eintauchen!",
+        "image": {
+          "src": "/assets/media/events/music_canteen_nov.jpg",
           "alt": "Garten-Konzert Haus Till E"
         }
       }

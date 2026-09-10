@@ -314,30 +314,30 @@
     },
     "items": [
       {
-        "title": "Federweißer-feest",
+        "title": "Federweisser Festival",
         "date": "8–11 okt 2026",
         "date_iso": "2026-10-08",
         "date_end_iso": "2026-10-11",
-        "time": "Hele dag (zie link)",
-        "location": "Zeller Marktplatz",
-        "description": "Het marktplein van Zell verandert tijdens het Federweißerfest weer vier dagen lang in een en al genot, muziek en gezelligheid – met Federweißer (jonge wijn), heerlijk eten, een leuk programma voor jong en oud en volop goede sfeer verheugt Zell zich op jullie komst! En Haus Till E zorgt onder andere voor de catering.",
+        "time": "hele dag (zie link)",
+        "location": "Marktplein Zell",
+        "description": "Het Zeller marktplein verandert tijdens het Federweisserfeest weer in vier dagen vol genot, muziek en gezelligheid – met Federweisser, lekker eten, een leuk programma voor groot en klein en heel veel goede stemming verheugt Zell zich op jullie komst! Haus Till E zorgt onder andere voor de catering.",
         "image": {
           "src": "/assets/media/events/federweisser-fest.jpg",
-          "alt": "Federweißer-feest op het marktplein van Zell"
+          "alt": "Federweisser Festival op het Zeller marktplein"
         },
         "link": "https://mosl-wein.de/products/federweisserfest-2026-x-08-10-11-10-2026"
       },
       {
-        "title": "Vlooienmarkt in Zell (stad & steegjes)",
+        "title": "Zeller Stads- en Steegjesrommelmarkt",
         "date": "17–18 okt 2026",
         "date_iso": "2026-10-17",
         "date_end_iso": "2026-10-18",
-        "time": "Hele dag (zie link)",
-        "location": "Verspreid over de hele stad / Tuin van Haus Till E",
-        "description": "Op 17 en 18 oktober nodigt de Herbstzauber (herfstmagie) in Zell, samen met Kaimt en Merl, uit tot heerlijk struinen – of het nu de stads- en steegjesvlooienmarkt is, een kinderrommelmarkt, koopzondag of culinaire herfstlekkernijen, hier vindt iedereen gegarandeerd een leuk koopje en geniet je van gezellige herfstdagen in Zell! En natuurlijk is er ook in de tuin van Haus Till E van alles te ontdekken - wij doen mee samen met onze vrienden!",
+        "time": "hele dag (zie link)",
+        "location": "verspreid over de hele stad / Tuin Haus Till E",
+        "description": "Op 17 en 18 oktober nodigt de Herfstbetovering in Zell je uit om lekker te struinen – of het nu gaat om de stads- en steegjesrommelmarkt, een kinderrommelmarkt, een koopzondag of heerlijke herfstlekkernijen, iedereen vindt hier gegarandeerd zijn eigen kleine koopje en geniet van gezellige herfstdagen in Zell! En natuurlijk valt er ook in de tuin van Haus Till E van alles te ontdekken – wij doen mee met onze vrienden!",
         "image": {
           "src": "/assets/media/events/herbstzauber-floehmarkt.jpg",
-          "alt": "Herbstzauber vlooienmarkt in Zell"
+          "alt": "Herfstbetovering rommelmarkt in Zell"
         },
         "link": "https://www.zellerland.de/event/herbstzauber-mit-stadt-und-gaesschenflohmarkt-in-zell"
       },
@@ -346,61 +346,61 @@
         "date": "21 nov 2026",
         "date_iso": "2026-11-21",
         "time": "19:00 uur",
-        "location": "Zeller Schlosskeller",
-        "description": "De roaring twenties zijn terug - voor één nacht - in de Zeller Schlosskeller met liveband, burlesqueshow, dansles, speelhal en cocktails. En ook wij steken ons in het gala - en maken voor één nacht deel uit van het geweldige barteam.",
+        "location": "Zeller Kasteelkelder",
+        "description": "De bruisende jaren twintig zijn terug – voor één nacht – in de Zeller Kasteelkelder met liveband, burlesqueshow, dansles, speelhol en cocktails. En wij tweeën gooien ons ook in het pak – en worden voor één nacht onderdeel van het geweldige barteam.",
         "image": {
           "src": "/assets/media/events/dekadenzia-mottoparty.jpg",
-          "alt": "Dekadenzia themafeest in de Zeller Schlosskeller"
+          "alt": "Dekadenzia Themafeest in de Zeller Kasteelkelder"
         },
         "link": "https://eventfrog.de/de/p/partys/mottoparty/dekadenzia-2026-7423319046110610491.html"
       },
       {
-        "title": "Adventsmagie 2026",
+        "title": "Adventsbetovering 2026",
         "date": "20 nov – 20 dec 2026",
         "date_iso": "2026-11-20",
         "date_end_iso": "2026-12-20",
-        "time": "Hele dag (zie flyer)",
-        "location": "Lichtertuin, Haus Till E",
-        "description": "Tijdens de Adventsmagie bij Haus Till E wacht een gezellig samenzijn in de feestelijk versierde tuin, eten en drinken met warme glühwein, concerten en meezingconcerten voor jong en oud, en een cadeaukast vol ideeën om cadeau te doen. We verheugen ons op jullie komst!",
+        "time": "hele dag (zie flyer)",
+        "location": "Lichtjestuin Haus Till E",
+        "description": "Bij de Adventsbetovering in Haus Till E kun je uitkijken naar gezellig samenzijn in de feestelijk versierde tuin, eten en drinken met warme glühwein, concerten en meezingconcerten voor groot en klein, en een cadeaukast vol ideeën om cadeau te doen. We verheugen ons op jullie komst!",
         "image": {
           "src": "/assets/media/events/adventsmarkt.jpg",
-          "alt": "Adventsmagie in de Lichtertuin"
+          "alt": "Adventsbetovering in de Lichtjestuin"
         }
       },
       {
-        "title": "Concert tijdens de Adventsmagie (2e Advent)",
+        "title": "Concert bij de Adventsbetovering – 2e adventszondag",
         "date": "5 dec 2026",
         "date_iso": "2026-12-05",
         "time": "19:00 uur",
-        "location": "Lichtertuin, Haus Till E",
-        "description": "Een muzikaal hoogtepunt van de Adventsmagie bij Haus Till E: in de sfeervol versierde tuin wacht een concert dat pure gezelligheid tovert – met warme klanken om mee te zingen, weg te dromen en van te genieten. Daarbij is er warme glühwein en heerlijke lekkernijen die de avond gezellig afronden. Een concertervaring voor jong en oud die de decembermaand echt inluidt!",
+        "location": "Lichtjestuin Haus Till E",
+        "description": "Rockstemming gegarandeerd: Friday's Five brengen in een nieuwe bezetting hun meeslepende rockcovers op het podium! Hun sound klinkt naar eerlijke, stevige rock met heel veel speelplezier. Ondanks alle rockpower zorgen ze voor een gezellige huiskamersfeer, die uitnodigt tot meezingen en goede zin!",
         "image": {
           "src": "/assets/media/events/konzert-advent-2.jpg",
-          "alt": "Concert in de Lichtertuin"
+          "alt": "Concert in de Lichtjestuin"
         }
       },
       {
-        "title": "Concert tijdens de Adventsmagie (3e Advent)",
+        "title": "Concert bij de Adventsbetovering – 3e adventszondag",
         "date": "12 dec 2026",
         "date_iso": "2026-12-12",
         "time": "19:00 uur",
-        "location": "Lichtertuin, Haus Till E",
-        "description": "Een muzikaal hoogtepunt van de Adventsmagie bij Haus Till E: in de sfeervol versierde tuin wacht een concert dat pure gezelligheid tovert – met warme klanken om mee te zingen, weg te dromen en van te genieten. Daarbij is er warme glühwein en heerlijke lekkernijen die de avond gezellig afronden. Een concertervaring voor jong en oud die de decembermaand echt inluidt!",
+        "location": "Lichtjestuin Haus Till E",
+        "description": "Al enkele jaren weet Tobi Goldschmidt als soloartiest zijn publiek te betoveren – en dat garanderen we ook bij ons! In zijn optredens komen eigen songs samen met bekende nummers, die hij op zijn heel eigen manier opnieuw interpreteert. Een concertavond vol persoonlijke klanken en vertrouwde melodieën in een nieuw jasje!",
         "image": {
           "src": "/assets/media/events/konzert-advent-3.jpg",
-          "alt": "Concert in de Lichtertuin"
+          "alt": "Concert in de Lichtjestuin"
         }
       },
       {
-        "title": "Concert tijdens de Adventsmagie (4e Advent)",
+        "title": "Concert bij de Adventsbetovering – 4e adventszondag",
         "date": "19 dec 2026",
         "date_iso": "2026-12-19",
         "time": "19:00 uur",
-        "location": "Lichtertuin, Haus Till E",
-        "description": "Een muzikaal hoogtepunt van de Adventsmagie bij Haus Till E: in de sfeervol versierde tuin wacht een concert dat pure gezelligheid tovert – met warme klanken om mee te zingen, weg te dromen en van te genieten. Daarbij is er warme glühwein en heerlijke lekkernijen die de avond gezellig afronden. Een concertervaring voor jong en oud die de decembermaand echt inluidt!",
+        "location": "Lichtjestuin Haus Till E",
+        "description": "Verheug je op een muzikale avond met Elias Beuren! De gitarist uit de Moezelregio betovert met handgemaakte, akoestische covermuziek en zorgt voor een ontspannen, gezellige sfeer om van te genieten. Opgegroeid aan de Moezel, is hij inmiddels een vertrouwd gezicht bij concerten en evenementen in Zell – een concertavond met echte lokale sfeer en veel hart!",
         "image": {
           "src": "/assets/media/events/konzert-advent-4.jpg",
-          "alt": "Concert in de Lichtertuin"
+          "alt": "Concert in de Lichtjestuin"
         }
       },
       {
@@ -408,8 +408,8 @@
         "date": "28 nov 2026",
         "date_iso": "2026-11-28",
         "time": "17:30 uur",
-        "location": "Verspreid over de hele stad / Tuin van Haus Till E",
-        "description": "Met de eerste zondag van Advent verandert Zell in een sfeervol sprookjesland: de ondernemersvereniging van Zell nodigt uit voor de grote sprookjesoptocht door de kerstig versierde oude binnenstad. Vanaf 17:30 uur trekken bekende sprookjesfiguren zoals Vrouw Holle, de Notenkraker en Sneeuwwitje door de straten en betoveren jong en oud. Al vanaf 13:00 uur kun je struinen over de adventsmarkt rond het marktplein en in het stadhuis – met een mooi aanbod aan kerstdecoratie, kunstnijverheid en handgemaakte cadeaus. Een magische start van de adventstijd voor het hele gezin!",
+        "location": "verspreid over de hele stad / Tuin Haus Till E",
+        "description": "Op de eerste adventszondag verandert Zell in een betoverend sprookjesstadje: de Zeller ondernemersvereniging nodigt uit voor de grote sprookjesoptocht door de feestelijk versierde oude binnenstad. Vanaf 17:30 uur trekken bekende sprookjesfiguren zoals Vrouw Holle, de Notenkraker en Sneeuwwitje door de straten en betoveren groot en klein. Al vanaf 13:00 uur kun je struinen over de adventsmarkt rond het marktplein en in het stadhuis – met een mooi aanbod aan feestelijke decoraties, kunstnijverheid en handgemaakte cadeaus. Een betoverende start van de adventstijd voor het hele gezin!",
         "image": {
           "src": "/assets/media/events/maerchenumzug.jpg",
           "alt": "Sprookjesoptocht door de oude binnenstad van Zell"
@@ -417,24 +417,24 @@
         "link": "https://www.zellerland.de/event/maerchenumzug-durch-die-zeller-altstadt"
       },
       {
-        "title": "Muziekkantine Mei",
+        "title": "Muziekkantine mei",
         "date": "31 mei 2026",
         "date_iso": "2026-05-31",
         "time": "19:00 uur",
-        "location": "Tuin, Haus Till E",
-        "description": "Verheug je op een bijzonder concerthoogtepunt: Joe's Truck Stop brengt met een meeslepende mix van bluegrass, honky tonk en western swing echte Americana-sfeer op het podium. In zijn nummers vertelt Joe verhalen over het leven onderweg, over liefde en liefdesverdriet – begeleid door banjo, viool en veel speelplezier. Een concertavond die gegarandeerd zorgt voor goede stemming en reiskriebels!",
+        "location": "Tuin Haus Till E",
+        "description": "Verheug je op een bijzonder concerthoogtepunt: Joe's Truck Stop brengt met een meeslepende mix van bluegrass, honky tonk en western swing echte Americana-sfeer op het podium. Joe vertelt in zijn songs verhalen over het leven onderweg, over liefde en liefdesverdriet – begeleid door banjo, fiddle en heel veel speelplezier. Een concertavond die gegarandeerd zorgt voor goede stemming en reiskoorts!",
         "image": {
           "src": "/assets/media/events/music_canteen_joe.jpg",
           "alt": "Tuinconcert bij Haus Till E"
         }
       },
       {
-        "title": "Muziekkantine Juni",
+        "title": "Muziekkantine juni",
         "date": "6 juni 2026",
         "date_iso": "2026-06-06",
         "time": "19:00 uur",
-        "location": "Tuin, Haus Till E",
-        "description": "Sean K. Preston, internationaal touring artiest uit Baltimore, brengt rauwe honky tonk, ruige blues en hartverscheurende countryballades op het podium. Met een rauwe, gevoelvolle stem vertelt hij verhalen over liefde, verlies en heimwee – een concertavond vol energie en echte Americana-ziel!",
+        "location": "Tuin Haus Till E",
+        "description": "Sean K. Preston, een internationaal touring artiest uit Baltimore, brengt ruige honky-tonk, vuige blues en hartverscheurende countryballads op het podium. Met zijn rauwe, gevoelvolle stem vertelt hij verhalen over liefde, verlies en reiskoorts – een concertavond vol energie en echte Americana-ziel!",
         "image": {
           "src": "/assets/media/events/music_canteen_sean.jpg",
           "alt": "Tuinconcert bij Haus Till E"
@@ -445,22 +445,34 @@
         "date": "2 juli 2026",
         "date_iso": "2026-07-02",
         "time": "19:00 uur",
-        "location": "Tuin, Haus Till E",
-        "description": "River Soul Connection zorgt met hun meeslepende sound van klassieke rock & pop gegarandeerd voor een goede sfeer! De coverband speelt bekende hits recht uit het hart, die jong en oud uitnodigen om mee te zingen en te dansen. Een concertavond vol goede stemming en bekende melodieën – hier is voor elke muzieksmaak wat wils! Natuurlijk bij ons - in Haus Till E!",
+        "location": "Tuin Haus Till E",
+        "description": "River Soul Connection zorgt met hun meeslepende sound vol klassieke rock & pop gegarandeerd voor een goede sfeer! De coverband speelt bekende hits, recht uit het hart gespeeld, en nodigt groot en klein uit om mee te zingen en te dansen. Een concertavond vol goede stemming en bekende melodieën – hier is voor elke muzieksmaak iets te vinden! Natuurlijk bij ons – in Haus Till E!",
         "image": {
           "src": "/assets/media/events/summer_in_the_city.jpg",
           "alt": "Tuinconcert bij Haus Till E"
         }
       },
       {
-        "title": "Muziekkantine Augustus",
-        "date": "23 augustus 2026",
+        "title": "Muziekkantine augustus",
+        "date": "23 aug 2026",
         "date_iso": "2026-08-23",
         "time": "11:30 uur",
-        "location": "Tuin, Haus Till E",
-        "description": "Het wordt luid, het wordt geweldig, het wordt big! Voor onze Frühschoppen (gezellige ochtendbijeenkomst) bij Haus Till E verwelkomen we Magic Rhythm, de bigband van de muziekschool Bad Nauheim, met hun meeslepende programma van swing, latin en funk. Zoveel muzikanten tegelijk hadden we nog nooit op ons kleine tuinpodium – een echte bigband-ervaring met volle sound die je tijdens een gezellige ochtendborrel niet mag missen!",
+        "location": "Tuin Haus Till E",
+        "description": "Het wordt luid, het wordt geweldig, het wordt groots! Voor onze ochtendborrel bij Haus Till E verwelkomen we Magic Rhythm, de bigband van de Muziekschool Bad Nauheim, met hun meeslepende programma vol swing, latin en funk. Nooit eerder hadden we zoveel muzikanten tegelijk op ons kleine tuinpodium – een echte bigband-ervaring met volle sound die je bij deze gezellige ochtendborrel niet mag missen!",
         "image": {
           "src": "/assets/media/events/music_canteen_big_band.jpg",
+          "alt": "Tuinconcert bij Haus Till E"
+        }
+      },
+      {
+        "title": "Muziekkantine november",
+        "date": "15 nov 2026",
+        "date_iso": "2026-11-15",
+        "time": "11:30 uur",
+        "location": "Tuin Haus Till E",
+        "description": "The Turkey Buzzards brengen echt Americana-gevoel op het podium! Het duo, bestaande uit Dylan Nicholson en Eric Patterson, vertelt in hun songs verhalen vol eenvoudige schoonheid – soms geïnspireerd door de plakkerige vochtigheid van de Carolina's, soms door de stoffig-droge kelders van het Amerikaanse Westen. Rauwe zang ontmoet doordachte harmonieën en zorgt voor een eerlijke, meeslepende sfeer die het publiek meeneemt op een muzikale reis. Het duo stond al samen met grootheden als Robert Earl Keen, Dawes en White Buffalo op het podium – een echte concertervaring vol authenticiteit en verhalen om in onder te duiken!",
+        "image": {
+          "src": "/assets/media/events/music_canteen_nov.jpg",
           "alt": "Tuinconcert bij Haus Till E"
         }
       }
