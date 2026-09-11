@@ -2184,90 +2184,24 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
 }
 
 /* =========================================================================
-   Events-Seite: "Erinnerungen"-Karussell auf Mobile (unter 900px)
+   Events-Seite: "Erinnerungen" - Umschaltung Desktop-Flip vs. Mobile-Klon
    =========================================================================
-   Unter 900px stehen die Spalten gestapelt (siehe .events-page-row),
-   die rechte Spalte bekommt dadurch keine Höhe mehr vom Stretch-
-   Verhalten der linken Spalte geliehen. Statt des Desktop-Flip-Effekts
-   (der bei absolut positionierten Karten keine natürliche Höhe an sein
-   Elternelement weitergibt) wird hier auf eine FESTE Höhe UND ein
-   horizontales Gleit-Layout umgestellt - wie beim Zukunfts-Karussell,
-   inklusive echtem Fingerwischen (siehe createPastCarouselController()
-   in eventsCarousel.js, das dafür die CSS-Variable --past-index auf
-   .past-track setzt). Der Beschreibungstext bleibt dabei bewusst NICHT
-   komplett sichtbar, sondern zeigt gut die Hälfte eines durchschnittlich
-   langen Texts an und lässt den Rest wie gehabt intern scrollen (die
-   Maske/das overflow-y von .past-card-description bleiben unverändert
-   aktiv) - so gibt nicht länger die längste Beschreibung aller Events
-   die Höhe für alle anderen (kürzeren) Karten vor. */
+   Ab 900px: der Flip-Kalender-Effekt (.past-flip-desktop, siehe die
+   .past-* Regeln weiter oben in dieser Datei - unverändert).
+   Unter 900px: stattdessen der mobile Klon des Zukunfts-Karussells
+   (.past-mobile-carousel, siehe events.njk) - nutzt exakt dieselben
+   .events-*-Klassen wie das echte Zukunfts-Karussell und braucht
+   dadurch KEINE eigenen CSS-Regeln mehr (Fotogröße, Kartenbreite,
+   Pfeile, Punkte - alles bereits vorhanden und bewährt). */
+.past-mobile-carousel {
+  display: none;
+}
 @media (max-width: 899px) {
-  .past-events {
-    min-height: 0;
+  .past-flip-desktop {
+    display: none;
   }
-
-  .past-viewport {
-    height: 480px;
-    overflow: hidden;
-    perspective: none;
-    /* Gleiche Breite wie das Foto im Zukunfts-Karussell (siehe
-       .event-photo: width/max-width 420px) - dadurch wirken beide
-       Karussells auf Mobile optisch gleich breit/konsistent, statt
-       dass die Erinnerungen-Karte über die volle Bildschirmbreite
-       geht. */
-    max-width: 420px;
-    margin: 0 auto;
-  }
-
-  .past-track {
-    position: relative;
-    display: flex;
-    height: 100%;
-    width: 100%;
-    /* --past-index wird von createPastCarouselController() in
-       eventsCarousel.js bei jedem render() aktuell gehalten - auf dem
-       Desktop (Flip-Modus, siehe oben) bleibt diese Variable einfach
-       ungenutzt, da diese Regel nur unter 900px gilt. */
-    transform: translateX(calc(var(--past-index, 0) * -100%));
-    transition: transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
-    touch-action: pan-y;
-  }
-
-  .past-slide {
-    /* Überschreibt die Flip-spezifischen Regeln (position: absolute,
-       rotateX-Transforms, opacity 0 für Nachbarkarten) - auf Mobile
-       liegen alle Karten normal nebeneinander in der Flex-Reihe, das
-       Verschieben übernimmt allein .past-track per translateX. */
-    position: relative;
-    inset: auto;
-    flex: 0 0 100%;
-    width: 100%;
-    height: 100%;
-    transform: none;
-    opacity: 1;
-    pointer-events: auto;
-    transition: none;
-  }
-
-  .past-card {
-    height: 100%;
-  }
-
-  /* ---------- Steuerung unter statt neben der Karte ----------
-     Wie beim Zukunfts-Karussell (.events-controls): Pfeile links/rechts,
-     Zähler in der Mitte, alles UNTER der Karte statt seitlich daneben -
-     auf Mobile ist dafür schlicht nicht genug Breite neben einer
-     420px-breiten Karte übrig. */
-  .past-body {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 20px;
-  }
-
-  .past-controls {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    padding: 0;
+  .past-mobile-carousel {
+    display: block;
+    margin-top: 32px;
   }
 }
