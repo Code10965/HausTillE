@@ -47,6 +47,14 @@ jobs:
         # "--only-newer" vergleicht mirror stattdessen nach Dateigröße,
         # was unabhängig von Uhrzeiten zuverlässig echte inhaltliche
         # Änderungen erkennt.
+        #
+        # NACHTRAG: Reichte allein nicht aus - eine Änderung mit klar
+        # unterschiedlicher Dateigröße (66851 -> 67067 Bytes) wurde
+        # trotzdem übersprungen. lftps Standardvergleich zieht offenbar
+        # weiterhin (auch) Zeitstempel heran, nicht nur die Größe.
+        # "--ignore-time" zwingt mirror, Zeitstempel beim Vergleich
+        # komplett zu ignorieren und sich rein auf die Dateigröße zu
+        # verlassen - das ist der eigentlich zuverlässige Weg.
         run: |
           lftp -u "${{ secrets.MANITU_FTP_USERNAME }},${{ secrets.MANITU_FTP_PASSWORD }}" -p 23 sftp://${{ secrets.MANITU_FTP_HOST }} <<'ENDSCRIPT'
           set sftp:auto-confirm yes
@@ -54,6 +62,6 @@ jobs:
           set net:max-retries 3
           set net:reconnect-interval-base 5
           set mirror:parallel-transfer-count 3
-          mirror --reverse --verbose _site /web/haus-till-e.com/
+          mirror --reverse --verbose --ignore-time _site /web/haus-till-e.com/
           bye
           ENDSCRIPT
