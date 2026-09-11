@@ -34,14 +34,6 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: lftp-Skript schreiben
-        # Statt der Befehle direkt per Heredoc an "lftp" zu übergeben,
-        # jetzt eine echte Skriptdatei - das verhindert, dass lftps
-        # Ausgabe durch Puffer-/Terminal-Eigenheiten der Heredoc-
-        # Kombination im GitHub-Actions-Log verschluckt wird (genau das
-        # ist zuletzt passiert: der Upload-Schritt lief nur wenige
-        # Sekunden, ohne jede sichtbare Transfer-Meldung im Log - dabei
-        # ist unklar geblieben, ob lftp wirklich nichts übertragen hat,
-        # oder ob nur die Log-Ausgabe verloren ging).
         run: |
           cat > /tmp/deploy.lftp << 'LFTPSCRIPT'
           set sftp:auto-confirm yes
@@ -52,9 +44,24 @@ jobs:
           set xfer:log yes
           set xfer:log-file /tmp/lftp-transfer.log
           open -u "${{ secrets.MANITU_FTP_USERNAME }},${{ secrets.MANITU_FTP_PASSWORD }}" -p 23 sftp://${{ secrets.MANITU_FTP_HOST }}
-          mirror --reverse --verbose --ignore-time _site /web/haus-till-e.com/
+          lcd _site
+          cd /web/haus-till-e.com/
+          mirror --reverse --verbose --ignore-time
           bye
           LFTPSCRIPT
+        # WICHTIG - Ursache des "_site"-Verschachtelungs-Bugs: Wenn
+        # mirror sowohl Quell- als auch Zielpfad als Argumente bekommt
+        # ("mirror _site /web/haus-till-e.com/"), hat lftp bei einem
+        # Teil-Update (nur eine geänderte Datei von 254) den lokalen
+        # Ordnernamen "_site" fälschlich als NEUEN Unterordner im Ziel
+        # angelegt (Ergebnis: /web/haus-till-e.com/_site/de/... statt
+        # /web/haus-till-e.com/de/...) - die eigentliche Zieldatei blieb
+        # dadurch unverändert. Der eindeutigste, unmissverständlichste
+        # lftp-Modus ist stattdessen: mit "lcd"/"cd" explizit in beide
+        # Verzeichnisse wechseln und "mirror" komplett OHNE Pfad-
+        # Argumente aufrufen - dann spiegelt es "aktueller lokaler
+        # Ordner" -> "aktueller Remote-Ordner", ohne Verschachtelungs-
+        # Mehrdeutigkeit.
 
       - name: Per SFTP (lftp) zu Manitu hochladen
         run: |
