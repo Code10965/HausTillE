@@ -46,7 +46,7 @@
       "text": [
         "Es war einmal ein Schlossbesitzer, der hatte drei Töchter – und jeder vererbte er einen Teil des Zeller Schlosses, das im 16. Jahrhundert erbaut wurde: der einen den Seitenflügel, der anderen das Haupthaus, und für die Dritte ließ er ein neues Gebäude errichten, das sich in Stil und Anmutung harmonisch in das Schlossensemble einfügen sollte.",
         "Was wie ein Märchen klingt, ist eine wahre Geschichte aus den 1920er-Jahren in Zell. So entstand das Anwesen, das heute als Haus Till E bekannt und geschätzt ist. Unser denkmalgeschütztes Gebäude stammt aus der Zeit des Art Deco und wurde im typischen Stil dieser Epoche liebevoll restauriert. Fenster, Türen, Holzböden und Treppenhaus sind original erhalten und verleihen ihm sein einmaliges Flair.",
-        "Vor dem Haus erwartet Euch ein wildromantischer, idyllischer Garten. Bei einer Flasche Wein könnt Ihr hier eure Seele baumeln lassen und die Zeit vergessen, bevor Ihr zurück in die Geschichte des Gemäuers eintaucht."
+        "Vor dem Haus erwartet Euch ein wildromantischer, idyllischer Garten. Bei einer Flasche Wein könnt Ihr hier Eure Seele baumeln lassen und die Zeit vergessen, bevor Ihr zurück in die Geschichte des Gemäuers eintaucht."
       ],
       "photo_labels": {
         "Haus": "Haus",
@@ -76,7 +76,7 @@
         { "title": "Klimatisierung", "content": "Gibt es eine Klimaanlage in den Zimmern?<br><br>Eine klassische Klimaanlage gibt es in unserem historischen Haus nicht. An besonders warmen Tagen bringen wir Euch auf Wunsch gerne einen modernen, rotorlosen Turmventilator (8 Geschwindigkeitsstufen) aufs Zimmer – sagt uns einfach kurz Bescheid." },
         { "title": "Laktose, Gluten, etc.", "content": "Können Unverträglichkeiten wie Laktose oder Gluten beim Frühstück berücksichtigt werden?<br><br>Wir haben ggf. nicht immer alle Produkte für jede Unverträglichkeit standardmäßig vorrätig. Teilt uns Eure Bedürfnisse am besten schon bei der Buchung mit – wir stellen uns gerne und mit Freude auf Euch ein." },
         { "title": "Familie und Kinder", "content": "Ist Haus Till E für Familien mit Kindern geeignet?<br><br>Das Haus Till E wird immer wieder von ganzen Familien oder Freundeskreisen gebucht – wir durften schon so manchen runden Geburtstag miterleben und drei oder vier Generationen gleichzeitig im ganzen Haus beherbergen. Es macht uns große Freude, den Rahmen für unvergessliche, gemeinsame Momente zu schaffen.<br><br>Wie viele Zimmer gibt es insgesamt?<br><br>Wir haben fünf liebevoll eingerichtete Zimmer: zwei mit Balkon (Zimmer 1 & 2), ein Studio ohne Balkon (Zimmer 3), ein Zimmer mit Ausblick auf Schloss und Mosel (Zimmer 4) sowie ein gemütliches Zimmer mit Dachschrägen (Zimmer 5).<br><br>Wie viele Personen können insgesamt übernachten?<br><br>Wir haben fünf Doppelzimmer, sodass insgesamt bis zu zehn Personen gleichzeitig bei uns übernachten können." },
-        { "title": "An- und Abreisezeiten", "content": "Wann ist Check-in und Check-out möglich?<br><br>Da wir das Hotel mit einem kleinen Team betreiben, ist der Check-in zwischen 16:00 und 18:00 Uhr möglich. Ist euer Zimmer schon früher bereit, hört ihr selbstverständlich sofort von uns. Wir wünschten, wir könnten zaubern – solange das noch nicht klappt, arbeiten wir eben schnell und sorgfältig, damit die Zimmer bis 16:00 Uhr bereit für euren Check-in sind.<br><br>Wir bitten Euch, bis 11 Uhr auszuchecken." }
+        { "title": "An- und Abreisezeiten", "content": "Wann ist Check-in und Check-out möglich?<br><br>Da wir das Hotel mit einem kleinen Team betreiben, ist der Check-in zwischen 16:00 und 18:00 Uhr möglich. Ist Euer Zimmer schon früher bereit, hört ihr selbstverständlich sofort von uns. Wir wünschten, wir könnten zaubern – solange das noch nicht klappt, arbeiten wir eben schnell und sorgfältig, damit die Zimmer bis 16:00 Uhr bereit für Euren Check-in sind.<br><br>Wir bitten Euch, bis 11 Uhr auszuchecken." }
       ]
     },
     "rooms": {
@@ -320,7 +320,7 @@
         "date_end_iso": "2026-10-11",
         "time": "ganztägig (siehe Link)",
         "location": "Zeller Marktplatz",
-        "description": "Der Zeller Marktplatz verwandelt sich beim Federweißerfest wieder in vier Tage voller Genuss, Musik und Gemeinschaft – mit Federweißem, gutem Essen, tollem Programm für Groß und Klein und jeder Menge guter Stimmung freut sich Zell auf euch! Für Euer leibliches Wohl sorgt u.a. Haus Till E.",
+        "description": "Der Zeller Marktplatz verwandelt sich beim Federweißerfest wieder in vier Tage voller Genuss, Musik und Gemeinschaft – mit Federweißem, gutem Essen, tollem Programm für Groß und Klein und jeder Menge guter Stimmung freut sich Zell auf Euch! Für Euer leibliches Wohl sorgt u.a. Haus Till E.",
         "image": {
           "src": "/assets/media/events/federweisser-fest.jpg",
           "alt": "Federweißer-Fest auf dem Zeller Marktplatz"
@@ -361,7 +361,7 @@
         "date_end_iso": "2026-12-20",
         "time": "ganztägig (siehe Flyer)",
         "location": "Lichter-Garten Haus Till E",
-        "description": "Beim Adventszauber im Haus Till E erwarten euch gemütliches Beisammensein im festlich geschmückten Garten, Essen und Trinken mit heißem Glühwein, und Konzerte für Groß und Klein sowie ein Geschenkeschrank voller Ideen zum Verschenken. Wir freuen uns auf euch!",
+        "description": "Beim Adventszauber im Haus Till E erwarten Euch gemütliches Beisammensein im festlich geschmückten Garten, Essen und Trinken mit heißem Glühwein, und Konzerte für Groß und Klein sowie ein Geschenkeschrank voller Ideen zum Verschenken. Wir freuen uns auf Euch!",
         "image": {
           "src": "/assets/media/events/adventsmarkt.jpg",
           "alt": "Zauber im Advent im Lichter-Garten"
@@ -397,7 +397,7 @@
         "date_iso": "2026-12-19",
         "time": "19:00 Uhr",
         "location": "Lichter-Garten Haus Till E",
-        "description": "Freut euch auf einen musikalischen Abend mit Elias Beuren! Der Gitarrist aus der Moselregion verzaubert mit handgemachter, akustischer Cover-Musik und sorgt für eine entspannte, gemütliche Atmosphäre zum Zuhören und Genießen. Aufgewachsen an der Mosel, ist er längst ein vertrautes Gesicht bei Konzerten und Events in Zell – ein Konzertabend mit echtem Lokalkolorit und viel Herz!",
+        "description": "Freut Euch auf einen musikalischen Abend mit Elias Beuren! Der Gitarrist aus der Moselregion verzaubert mit handgemachter, akustischer Cover-Musik und sorgt für eine entspannte, gemütliche Atmosphäre zum Zuhören und Genießen. Aufgewachsen an der Mosel, ist er längst ein vertrautes Gesicht bei Konzerten und Events in Zell – ein Konzertabend mit echtem Lokalkolorit und viel Herz!",
         "image": {
           "src": "/assets/media/events/konzert-advent-4.jpg",
           "alt": "Konzert im Lichter-Garten"
@@ -409,7 +409,7 @@
         "date_iso": "2026-11-28",
         "time": "17:30 Uhr",
         "location": "über die ganze Stadt verteilt / Garten Haus Till E",
-        "description": "Zum 1. Advent verwandelt sich Zell in ein stimmungsvolles Märchenland: Der Gewerbeverein Zell lädt zum großen Märchenumzug durch die weihnachtlich geschmückte Altstadt ein. Ab 17:30 Uhr ziehen bekannte Märchenfiguren wie Frau Holle, der Nussknacker und Schneewittchen durch die Straßen und verzaubern Groß und Klein. Bereits ab 13:00 Uhr könnt ihr beim Adventsmarkt rund um den Marktplatz und im Rathaus stöbern – mit einem schönen Angebot an weihnachtlicher Dekoration, Kunsthandwerk und handgefertigten Geschenken. Ein zauberhafter Start in die Adventszeit für die ganze Familie!",
+        "description": "Zum 1. Advent verwandelt sich Zell in ein stimmungsvolles Märchenland: Der Gewerbeverein Zell lädt zum großen Märchenumzug durch die weihnachtlich geschmückte Altstadt ein. Ab 17:30 Uhr ziehen bekannte Märchenfiguren wie Frau Holle, der Nussknacker und Schneewittchen durch die Straßen und verzaubern Groß und Klein. Bereits ab 13:00 Uhr könnt Ihr beim Adventsmarkt rund um den Marktplatz und im Rathaus stöbern – mit einem schönen Angebot an weihnachtlicher Dekoration, Kunsthandwerk und handgefertigten Geschenken. Ein zauberhafter Start in die Adventszeit für die ganze Familie!",
         "image": {
           "src": "/assets/media/events/maerchenumzug.jpg",
           "alt": "Märchenumzug durch die Zeller Altstadt"
@@ -422,7 +422,7 @@
         "date_iso": "2026-05-31",
         "time": "19:00 Uhr",
         "location": "Garten Haus Till E",
-        "description": "Freut euch auf ein besonderes Konzerthighlight: Joe's Truck Stop bringt mit einer mitreißenden Mischung aus Bluegrass, Honky Tonk und Western Swing echte Americana-Stimmung auf die Bühne. Joe erzählt in seinen Songs Geschichten vom Leben auf der Straße, von Liebe und Herzschmerz – begleitet von Banjo, Fiddle und jeder Menge Spielfreude. Ein Konzertabend, der garantiert für gute Laune und Fernweh-Feeling sorgt!",
+        "description": "Freut Euch auf ein Konzerthighlight: Joe's Truck Stop bringt mit einer mitreißenden Mischung aus Bluegrass, Honky Tonk und Western Swing echte Americana-Stimmung auf die Bühne. Joe erzählt in seinen Songs Geschichten vom Leben auf der Straße, von Liebe und Herzschmerz – begleitet von Banjo, Fiddle und jeder Menge Spielfreude. Ein Konzertabend, der garantiert für gute Laune und Fernweh-Feeling sorgt!",
         "image": {
           "src": "/assets/media/events/music_canteen_joe.jpg",
           "alt": "Garten-Konzert Haus Till E"
@@ -458,7 +458,7 @@
         "date_iso": "2026-08-23",
         "time": "11:30 Uhr",
         "location": "Garten Haus Till E",
-        "description": "Es wird laut, es wird toll, es wird big! Zum Frühschoppen bei Haus Till E begrüßen wir Magic Rhythm, die Bigband der Musikschule Bad Nauheim, mit ihrem mitreißenden Programm aus Swing, Latin und Funk. So viele Musiker auf einmal hatten wir auf unserer kleinen Gartenbühne noch nie – ein echtes Bigband-Erlebnis mit vollem Sound, das ihr euch bei einem gemütlichen Frühschoppen nicht entgehen lassen solltet!",
+        "description": "Es wird laut, es wird toll, es wird big! Zum Frühschoppen bei Haus Till E begrüßen wir Magic Rhythm, die Bigband der Musikschule Bad Nauheim, mit ihrem mitreißenden Programm aus Swing, Latin und Funk. So viele Musiker auf einmal hatten wir auf unserer kleinen Gartenbühne noch nie – ein echtes Bigband-Erlebnis mit vollem Sound, das Ihr Euch bei einem gemütlichen Frühschoppen nicht entgehen lassen solltet!",
         "image": {
           "src": "/assets/media/events/music_canteen_big_band.jpg",
           "alt": "Garten-Konzert Haus Till E"
