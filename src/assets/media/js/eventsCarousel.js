@@ -7,30 +7,25 @@
 //      getestet.
 //   2. createCarouselController   - verbindet EventsCarouselState mit
 //      dem tatsächlichen HTML (Pfeile, Punkte, Pause-Button,
-//      Autoplay-Timer, Touch-Swipe über attachSwipeGesture() aus
-//      swipeGesture.js) genau wie die anderen setup*()-Funktionen in
+//      Autoplay-Timer) genau wie die anderen setup*()-Funktionen in
 //      diesem Projekt (siehe nav.js, gallery.js): sucht sich seine
 //      Elemente selbst, läuft ins Leere, wenn keine da sind.
-//   3. partitionEventsByDate       - entscheidet beim Laden der Seite
-//      im Browser (nicht beim Bauen der Seite!), welche Events
+//   3. partitionEventsByDate       - NEU: entscheidet beim Laden der
+//      Seite im Browser (nicht beim Bauen der Seite!), welche Events
 //      "Zukunft" (inkl. heute) und welche "Vergangenheit" sind, und
 //      entfernt die jeweils falsche Hälfte aus jedem Karussell.
-//   4. createPastCarouselController - das vertikale
-//      "Erinnerungen"-Karussell (Flip-Kalender-Optik) für vergangene
-//      Events - anders als Teil 2 OHNE Endlos-Schleife (ein endlicher
-//      Stapel Erinnerungen, kein Kreis) und ohne Autoplay, ebenfalls
-//      mit Touch-Swipe (vertikal statt horizontal).
-//
-// Die eigentliche Touch-Wisch-Erkennung selbst (attachSwipeGesture)
-// lebt bewusst NICHT hier, sondern in einer eigenen, von Events
-// unabhängigen Datei: siehe swipeGesture.js. Grund: sie kennt weder
-// EventsCarouselState noch data-events-*-Attribute und ist damit ein
-// allgemeines Werkzeug, keine Event-spezifische Logik (siehe
-// ausführliche Begründung im Kommentar dort) - so ließe sie sich z.B.
-// auch für die Lightbox in gallery.js wiederverwenden, ohne dass diese
-// eventsCarousel.js importieren müsste.
-
-import { attachSwipeGesture } from "./swipeGesture.js";
+//   4. createPastCarouselController - NEU: das "Erinnerungen"-Karussell
+//      für vergangene Events. Auf Desktop (ab 900px) ein vertikales
+//      Flip-Kalender-Karussell (siehe CSS: .past-slide mit
+//      is-before/is-current/is-after). Auf Mobile (unter 900px)
+//      dagegen ein horizontales Gleit-Karussell wie beim Zukunfts-
+//      Karussell, zusätzlich mit echtem Fingerwischen bedienbar (siehe
+//      Pointer-Event-Handler weiter unten in dieser Funktion) - welche
+//      Darstellung tatsächlich greift, entscheidet ausschließlich das
+//      CSS (@media (max-width: 899px) in styles.css), dieser
+//      JavaScript-Code ist für beide Varianten identisch. Anders als
+//      das Zukunfts-Karussell OHNE Endlos-Schleife (ein endlicher
+//      Stapel Erinnerungen, kein Kreis) und ohne Autoplay.
 
 /**
  * Reine Index-Verwaltung für ein Karussell mit `count` Folien (die
@@ -114,12 +109,11 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   const state = new EventsCarouselState(slides.length, 0);
 
   // "userPlaying": will die Person Autoplay (Play/Pause-Button)?
-  // "hovering"/"focused": ist die Maus/Tastatur/der Finger gerade im
-  // Karussell? Nur wenn BEIDES stimmt (Person will Autoplay UND
-  // schaut/klickt/wischt gerade nicht hinein), läuft der Timer
-  // wirklich - reines Hovern (oder jetzt: Wischen) pausiert also
-  // automatisch mit, ohne den eigentlichen Pause-Knopf umzuschalten
-  // (der behält seinen eigenen Zustand).
+  // "hovering"/"focused": ist die Maus/Tastatur gerade im Karussell?
+  // Nur wenn BEIDES stimmt (Person will Autoplay UND schaut/klickt
+  // gerade nicht hinein), läuft der Timer wirklich - reines Hovern
+  // pausiert also automatisch mit, ohne den eigentlichen Pause-Knopf
+  // umzuschalten (der behält seinen eigenen Zustand).
   let userPlaying = !prefersReducedMotion && slides.length > 1;
   let hovering = false;
   let timerId = null;
@@ -212,8 +206,8 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   if (playPauseBtn) playPauseBtn.addEventListener("click", togglePlaying);
   dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
 
-  // Pfeiltasten navigieren, sobald der Fokus irgendwo im Karussell liegt
-  // (auf einem der Buttons oder Punkte) - Leertaste auf dem
+  // Pfeiltasten navigieren, sobald der Fokus irgendwo im Karussell
+  // liegt (auf einem der Buttons oder Punkte) - Leertaste auf dem
   // Play/Pause-Button schaltet zusätzlich um (Standardverhalten von
   // <button> macht das ohnehin, hier nur zur Robustheit explizit).
   container.addEventListener("keydown", (event) => {
@@ -248,28 +242,6 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     // in modernen Browsern zuverlässig genug für diesen Anwendungsfall.
     hovering = false;
     restartTimer();
-  });
-
-  // ---------- Touch-Swipe (horizontal) ----------
-  // Zusätzlich zu den Pfeil-Buttons per Finger-Wisch bedienbar (Logik
-  // in swipeGesture.js). Wischen fühlt sich für die Person wie Hovern
-  // an: während des Ziehens pausiert der Autoplay-Timer genau wie bei
-  // der Maus (siehe hovering weiter oben), und läuft danach ganz normal
-  // weiter. Wisch nach LINKS = nächstes Event (wie ein Klick auf den
-  // rechten Pfeil), Wisch nach RECHTS = vorheriges Event.
-  const viewport = container.querySelector("[data-events-viewport]");
-  attachSwipeGesture(viewport || track, {
-    axis: "horizontal",
-    onDragStart: () => {
-      hovering = true;
-      restartTimer();
-    },
-    onDragEnd: () => {
-      hovering = false;
-      restartTimer();
-    },
-    onNext: next,
-    onPrev: prev,
   });
 
   render();
@@ -364,8 +336,8 @@ function buildDots(container, count) {
  * dieselben zwei data-Attribut-Paare verwenden (nur mit "events-" bzw.
  * "past-" Präfix).
  *
- * Nutzt bewusst eine eigene .is-hidden { display: none !important; }
- * -Klasse (siehe styles.css) statt des nativen hidden-Attributs:
+ * Nutzt bewusst eine eigene .is-hidden-Klasse (siehe styles.css,
+ * "display: none !important") statt des nativen hidden-Attributs:
  * Elemente, die zusätzlich eine eigene "display"-CSS-Regel bekommen
  * (wie .past-controls mit "display: flex"), würden das hidden-Attribut
  * sonst stillschweigend überschreiben - Autoren-Stylesheets gewinnen in
@@ -466,27 +438,44 @@ export function partitionEventsByDate(root = document, today = localISODate()) {
 }
 
 // =========================================================================
-// Vertikales "Erinnerungen"-Karussell (Flip-Kalender-Optik)
+// "Erinnerungen"-Karussell (vergangene Events)
 // =========================================================================
 
 const DEFAULT_PAST_OF_LABEL = "von";
+// Ab wie viel Pixeln horizontaler Fingerbewegung ein Wisch als
+// "gemeint" zählt, statt als zufälliges Zittern/Antippen gewertet zu
+// werden - dieselbe Größenordnung, wie sie auch bei anderen
+// Wisch-Interaktionen üblich ist (nicht zu empfindlich, aber auch
+// nicht zu träge).
+const SWIPE_THRESHOLD_PX = 40;
 
 /**
- * Verbindet ein einzelnes [data-past-carousel] mit seinem HTML. Anders
- * als das horizontale Zukunfts-Karussell:
+ * Verbindet ein einzelnes [data-past-carousel] mit seinem HTML.
+ *
+ * Zwei optische Darstellungen, beide von DEMSELBEN JavaScript-Zustand
+ * gesteuert - welche tatsächlich sichtbar ist, entscheidet ausschließlich
+ * das CSS (styles.css):
+ *   - Ab 900px (Desktop): vertikaler Flip-Kalender-Effekt. Alle Karten
+ *     liegen absolut übereinandergestapelt, nur .is-current liegt
+ *     flach/sichtbar oben - die Klassen is-before/is-current/is-after
+ *     erzeugen den Umblätter-Eindruck rein über CSS-Transitions auf
+ *     transform/opacity (siehe render() unten).
+ *   - Unter 900px (Mobile): horizontales Gleiten wie beim
+ *     Zukunfts-Karussell. Hierfür setzt render() zusätzlich die
+ *     CSS-Variable "--past-index" auf dem Track-Element - im mobilen
+ *     Media-Query verschiebt genau diese Variable den ganzen Track per
+ *     translateX() (siehe styles.css). Auf Desktop bleibt die Variable
+ *     schlicht ungenutzt.
+ *
+ * Anders als das horizontale Zukunfts-Karussell:
  *   - KEINE Endlos-Schleife: Erinnerungen sind ein endlicher, geordneter
  *     Stapel - am Anfang/Ende angekommen, deaktiviert sich der jeweilige
  *     Pfeil, statt am anderen Ende weiterzuspringen.
  *   - KEIN Autoplay: Erinnerungen sollen bewusst durchgeblättert werden.
- *   - Der Wechsel ist ein Flip statt eines seitlichen Gleitens: alle
- *     Karten liegen übereinandergestapelt in .past-viewport (mit
- *     CSS-perspective), nur .is-current liegt flach/sichtbar oben. Die
- *     CSS-Klassen is-before/is-current/is-after (siehe styles.css)
- *     erzeugen allein durch eine CSS-Transition auf transform/opacity
- *     den Umblätter-Eindruck - hier im JS wird nur die Klasse pro
- *     Render-Durchlauf neu vergeben.
- *   - Zusätzlich zu den Pfeilen per vertikalem Finger-Wisch bedienbar
- *     (Logik in swipeGesture.js).
+ *   - Zusätzlich zu Pfeilen/Tastatur per echtem Fingerwischen bedienbar
+ *     (Pointer-Events, siehe weiter unten) - wichtig vor allem für die
+ *     mobile horizontale Darstellung, funktioniert aber (harmlos) auch
+ *     im Desktop-Flip-Modus per Maus-Ziehen.
  */
 export function createPastCarouselController(container) {
   const track = container.querySelector("[data-past-track]");
@@ -508,6 +497,11 @@ export function createPastCarouselController(container) {
       slide.classList.toggle("is-after", i > index);
       slide.setAttribute("aria-hidden", i === index ? "false" : "true");
     });
+
+    // Für die mobile horizontale Darstellung (siehe @media in
+    // styles.css) - auf Desktop schlicht ungenutzt, da dort keine
+    // CSS-Regel diese Variable liest.
+    track.style.setProperty("--past-index", String(index));
 
     if (prevBtn) prevBtn.disabled = index === 0;
     if (nextBtn) nextBtn.disabled = index === slides.length - 1;
@@ -548,7 +542,10 @@ export function createPastCarouselController(container) {
 
   // Pfeiltasten hoch/runter navigieren, sobald der Fokus im Karussell
   // liegt - Pendant zu Pfeiltasten links/rechts beim horizontalen
-  // Karussell, nur eben für die vertikale Blätterrichtung.
+  // Zukunfts-Karussell, nur eben für die vertikale Blätterrichtung
+  // (die auf Mobile zwar horizontal aussieht, aber weiterhin dieselbe
+  // Tastatursteuerung nutzt - Pfeil hoch/runter bleibt konsistent mit
+  // der "Erinnerungen"-Metapher, unabhängig von der Bildschirmgröße).
   container.addEventListener("keydown", (event) => {
     if (event.key === "ArrowUp") {
       event.preventDefault();
@@ -559,24 +556,54 @@ export function createPastCarouselController(container) {
     }
   });
 
-  // ---------- Touch-Swipe (vertikal) ----------
-  // Zusätzlich zu den Pfeil-Buttons per Finger-Wisch bedienbar (Logik
-  // in swipeGesture.js). Wisch-Richtung folgt der üblichen
-  // Mobil-Konvention (wie bei Stories/Reels): Finger nach OBEN ziehen =
-  // weiter/next (eine Erinnerung weiter zurück), Finger nach UNTEN
-  // ziehen = zurück/prev (eine Erinnerung näher an heute) - unabhängig
-  // davon, dass die Pfeil-Buttons selbst nach der Kipprichtung der
-  // Karten benannt sind (siehe Kommentar bei prev()/next() oben).
-  // ignoreSelector sorgt dafür, dass ein Wisch, der im scrollbaren
-  // Beschreibungstext beginnt (.past-card-description, siehe
-  // styles.css), dort ganz normal scrollt, statt versehentlich die
-  // Karte umzublättern.
-  const pastViewport = container.querySelector("[data-past-viewport]");
-  attachSwipeGesture(pastViewport || track, {
-    axis: "vertical",
-    ignoreSelector: ".past-card-description",
-    onNext: next,
-    onPrev: prev,
+  // ---------- Echtes Fingerwischen (Pointer-Events) ----------
+  // Pointer-Events decken Maus UND Touch einheitlich mit derselben API
+  // ab. Ein Schwellenwert für die HORIZONTALE Bewegung verhindert, dass
+  // normales vertikales Scrollen innerhalb der Kartenbeschreibung
+  // (.past-card-description hat ihr eigenes overflow-y: auto)
+  // versehentlich als Wisch-Navigation missverstanden wird - erst wenn
+  // die horizontale Bewegung klar überwiegt, zählt der Ausschlag
+  // überhaupt als Wisch-Kandidat. Wird an .past-track gebunden (nicht
+  // an den ganzen Container), damit Pfeile/Zähler außerhalb davon
+  // unberührt bleiben.
+  let pointerId = null;
+  let startX = 0;
+  let startY = 0;
+  let isSwiping = false;
+
+  track.addEventListener("pointerdown", (event) => {
+    pointerId = event.pointerId;
+    startX = event.clientX;
+    startY = event.clientY;
+    isSwiping = false;
+  });
+
+  track.addEventListener("pointermove", (event) => {
+    if (event.pointerId !== pointerId) return;
+    const deltaX = event.clientX - startX;
+    const deltaY = event.clientY - startY;
+    if (!isSwiping && Math.abs(deltaX) > 10 && Math.abs(deltaX) > Math.abs(deltaY)) {
+      isSwiping = true;
+    }
+  });
+
+  track.addEventListener("pointerup", (event) => {
+    if (event.pointerId !== pointerId) return;
+    if (isSwiping) {
+      const deltaX = event.clientX - startX;
+      if (deltaX <= -SWIPE_THRESHOLD_PX) {
+        next();
+      } else if (deltaX >= SWIPE_THRESHOLD_PX) {
+        prev();
+      }
+    }
+    pointerId = null;
+    isSwiping = false;
+  });
+
+  track.addEventListener("pointercancel", () => {
+    pointerId = null;
+    isSwiping = false;
   });
 
   render();
@@ -594,7 +621,7 @@ export function createPastCarouselController(container) {
   };
 }
 
-// ---------- Einstiegspunkt: vertikales Erinnerungen-Karussell ----------
+// ---------- Einstiegspunkt: Erinnerungen-Karussell ----------
 export function setupPastEventsCarousel(root = document) {
   const containers = Array.prototype.slice.call(root.querySelectorAll("[data-past-carousel]"));
   return containers

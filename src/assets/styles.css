@@ -2173,52 +2173,53 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   color: #7A7A76;
   margin: 16px 0 0 0;
 }
-
-/* ---------- Mobile: Erinnerungen-Karussell zeigt vollen Text ----------
-   Unter 900px stehen die Spalten gestapelt (siehe .events-page-row),
-   die rechte Spalte bekommt dadurch keine Höhe mehr vom Stretch-
-   Verhalten der linken Spalte geliehen - übrig blieb nur die feste
-   min-height:420px von .past-events. Da .past-slide absolut
-   positioniert ist (für den Flip-Effekt), trägt sie nichts zur
-   natürlichen Höhe ihres Elternelements bei - der Beschreibungstext
-   wurde dadurch hart abgeschnitten, das interne Scrollen griff nicht
-   zuverlässig. Lösung: Auf Mobile bekommt NUR die aktuell sichtbare
-   Karte (.is-current, sowie die Startkarte vor der JS-Initialisierung)
-   normalen Dokumentenfluss statt absoluter Positionierung - ihr echter
-   Inhalt bestimmt dadurch die Höhe des kompletten Blocks, der Text
-   muss nicht mehr intern scrollen. Der Flip-Effekt selbst bleibt
-   optisch unangetastet, weil die aktuelle Karte ohnehin transform:
-   rotateX(0deg) (identity) hat - nur die weggekippten Nachbarkarten
-   (.is-before/.is-after) bleiben absolut positioniert, damit sie
-   keinen zusätzlichen Platz beanspruchen. */
 @media (max-width: 899px) {
   .past-events {
     min-height: 0;
   }
 
   .past-viewport {
+    height: 480px;
+    overflow: hidden;
+    /* Horizontales Gleiten statt Flip-Kipp-Effekt, wie beim
+       Zukunfts-Karussell (.events-viewport/.events-track) - auf
+       schmalen Screens ist "seitlich wischen" die vertrautere
+       Bediengeste als das Umblättern eines Kalenders. perspective wird
+       hier nicht mehr gebraucht (kein 3D-Kippen mehr nötig). */
     perspective: none;
   }
 
   .past-track {
-    height: auto;
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    /* --past-index wird von createPastCarouselController() in
+       eventsCarousel.js bei jedem render() aktuell gehalten (siehe
+       dort) - auf dem Desktop (Flip-Modus) bleibt diese Variable
+       einfach ungenutzt, da diese Regel nur unter 900px gilt. */
+    transform: translateX(calc(var(--past-index, 0) * -100%));
+    transition: transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
+    touch-action: pan-y;
   }
 
-  .past-slide:first-child,
-  .past-slide.is-current {
+  .past-slide {
+    /* Überschreibt die Flip-spezifischen Regeln (position: absolute,
+       rotateX-Transforms, opacity 0 für Nachbarkarten) - auf Mobile
+       liegen alle Karten normal nebeneinander in der Flex-Reihe, das
+       Verschieben übernimmt allein .past-track per translateX. */
     position: relative;
     inset: auto;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+    transition: none;
   }
 
   .past-card {
-    height: auto;
-    overflow: visible;
-  }
-
-  .past-card-description {
-    overflow-y: visible;
-    max-height: none;
-    mask-image: none;
-    -webkit-mask-image: none;
+    height: 100%;
   }
 }
