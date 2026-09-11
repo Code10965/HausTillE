@@ -33,35 +33,32 @@ jobs:
       - name: lftp installieren
         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      - name: Per SFTP (lftp) zu Manitu hochladen
-        # WICHTIG: KEIN "--only-newer" mehr! Das verglich Dateien anhand
-        # ihres Änderungsdatums (mtime) - bei jedem CI-Lauf wird das
-        # Repository frisch ausgecheckt, alle lokalen Dateien bekommen
-        # dadurch zwar ein neues Datum, aber falls die Uhr des
-        # GitHub-Runners und die des Manitu-Servers nicht exakt synchron
-        # laufen (auch nur Sekundenbruchteile Unterschied reichen),
-        # kann lftp fälschlich entscheiden, eine inhaltlich geänderte
-        # Datei sei "nicht neuer" und den Upload überspringen - genau
-        # das ist uns bei einer reinen Text-/JSON-Änderung passiert
-        # (Build lokal korrekt, Server blieb auf altem Stand). Ohne
-        # "--only-newer" vergleicht mirror stattdessen nach Dateigröße,
-        # was unabhängig von Uhrzeiten zuverlässig echte inhaltliche
-        # Änderungen erkennt.
-        #
-        # NACHTRAG: Reichte allein nicht aus - eine Änderung mit klar
-        # unterschiedlicher Dateigröße (66851 -> 67067 Bytes) wurde
-        # trotzdem übersprungen. lftps Standardvergleich zieht offenbar
-        # weiterhin (auch) Zeitstempel heran, nicht nur die Größe.
-        # "--ignore-time" zwingt mirror, Zeitstempel beim Vergleich
-        # komplett zu ignorieren und sich rein auf die Dateigröße zu
-        # verlassen - das ist der eigentlich zuverlässige Weg.
+      - name: lftp-Skript schreiben
+        # Statt der Befehle direkt per Heredoc an "lftp" zu übergeben,
+        # jetzt eine echte Skriptdatei - das verhindert, dass lftps
+        # Ausgabe durch Puffer-/Terminal-Eigenheiten der Heredoc-
+        # Kombination im GitHub-Actions-Log verschluckt wird (genau das
+        # ist zuletzt passiert: der Upload-Schritt lief nur wenige
+        # Sekunden, ohne jede sichtbare Transfer-Meldung im Log - dabei
+        # ist unklar geblieben, ob lftp wirklich nichts übertragen hat,
+        # oder ob nur die Log-Ausgabe verloren ging).
         run: |
-          lftp -u "${{ secrets.MANITU_FTP_USERNAME }},${{ secrets.MANITU_FTP_PASSWORD }}" -p 23 sftp://${{ secrets.MANITU_FTP_HOST }} <<'ENDSCRIPT'
+          cat > /tmp/deploy.lftp << 'LFTPSCRIPT'
           set sftp:auto-confirm yes
           set net:timeout 20
           set net:max-retries 3
           set net:reconnect-interval-base 5
           set mirror:parallel-transfer-count 3
+          set xfer:log yes
+          set xfer:log-file /tmp/lftp-transfer.log
+          open -u "${{ secrets.MANITU_FTP_USERNAME }},${{ secrets.MANITU_FTP_PASSWORD }}" -p 23 sftp://${{ secrets.MANITU_FTP_HOST }}
           mirror --reverse --verbose --ignore-time _site /web/haus-till-e.com/
           bye
-          ENDSCRIPT
+          LFTPSCRIPT
+
+      - name: Per SFTP (lftp) zu Manitu hochladen
+        run: |
+          lftp -f /tmp/deploy.lftp
+          echo "--- lftp beendet mit Exit-Code $? ---"
+          echo "--- Transfer-Log (falls vorhanden) ---"
+          cat /tmp/lftp-transfer.log 2>/dev/null || echo "(keine Transfer-Log-Datei gefunden)"
