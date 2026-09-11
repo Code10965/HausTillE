@@ -1642,13 +1642,22 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   justify-content: center;
   gap: 20px;
   margin-top: 28px;
-  flex-wrap: wrap;
+  /* Geändert von "wrap" zu "nowrap": bei vielen Events soll die
+     Punkte-Navigation lieber selbst horizontal scrollen (siehe
+     .events-dots weiter unten), statt die ganze Steuerzeile in eine
+     zweite Zeile umbrechen zu lassen - dadurch bleiben Pfeile und
+     Play/Pause-Button immer auf derselben Höhe, egal wie viele Punkte
+     gerade dazwischen passen müssten. */
+  flex-wrap: nowrap;
 }
 
 .events-arrow {
   width: 44px;
   height: 44px;
   border-radius: 50%;
+  /* Ohne dies dürfte sich dieser runde Button als Flex-Kind unter
+     seine feste Größe zusammenquetschen, sobald .events-dots (siehe
+     unten) viel Platz beansprucht - flex-shrink: 0 hält ihn auf 44px. */
   flex-shrink: 0;
   border: 1px solid rgba(var(--paper-rgb), 0.25);
   background: linear-gradient(120deg, rgba(var(--wine-rgb), 0.65), rgba(var(--wine-deep-rgb), 0.85));
@@ -1678,6 +1687,9 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   width: 36px;
   height: 36px;
   border-radius: 50%;
+  /* Gleicher Grund wie bei .events-arrow oben - Play/Pause-Button soll
+     seine feste Größe von 36px behalten, unabhängig davon, wie viel
+     Platz .events-dots gerade für sich beansprucht. */
   flex-shrink: 0;
   background: transparent;
   border: 1px solid var(--line);
@@ -1702,10 +1714,52 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   color: var(--paper);
 }
 
+/* ---------- Punkte-Navigation: horizontal scrollbar statt Zeilenumbruch ----------
+   Bei vielen Events (z.B. 10+) wurde die Punkte-Reihe irgendwann breiter
+   als der verbleibende Platz zwischen den Pfeilen - flex-wrap: wrap auf
+   .events-controls ließ die ganze Steuerzeile dann in eine zweite Zeile
+   umbrechen. Jetzt bleibt die Steuerzeile immer einzeilig (siehe
+   flex-wrap: nowrap oben): .events-dots nimmt nur den Platz ein, der
+   zwischen Play/Pause-Button und rechtem Pfeil übrig bleibt (flex: 1 1
+   auto + min-width: 0 - Flex-Kinder haben sonst standardmäßig
+   min-width: auto, also "niemals schmaler als der eigene Inhalt", was
+   hier genau das Umbruch-Problem verursacht hat), und scrollt bei
+   Bedarf selbst horizontal (overflow-x: auto). Die mask-image blendet
+   die Punkte an den Rändern weich aus, wenn mehr da sind als sichtbar
+   Platz haben - dieselbe Technik wie bei .event-description/
+   .past-card-description, nur horizontal statt vertikal, damit optisch
+   klar wird, dass noch mehr Punkte folgen. */
 .events-dots {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox: native Scrollleiste ausblenden */
+  -ms-overflow-style: none;
+  /* Sanftes Einrasten auf dem nächsten Punkt beim Wischen/Scrollen,
+     statt frei durchzurutschen - fühlt sich bei so kleinen Elementen
+     aufgeräumter an. */
+  scroll-snap-type: x proximity;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 12px,
+    black calc(100% - 12px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 12px,
+    black calc(100% - 12px),
+    transparent 100%
+  );
+}
+.events-dots::-webkit-scrollbar {
+  display: none; /* Chrome/Safari: native Scrollleiste ausblenden */
 }
 .events-dot {
   width: 8px;
@@ -1715,6 +1769,12 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   border-radius: 50%;
   background: var(--line);
   cursor: pointer;
+  /* Punkte selbst sollen nie schrumpfen, nur die ganze Reihe scrollt -
+     ohne dies würden sich einzelne Punkte bei vielen Events optisch
+     verzerren/zusammenquetschen statt außerhalb des sichtbaren
+     Bereichs zu landen. */
+  flex-shrink: 0;
+  scroll-snap-align: center;
   transition: background 0.3s ease, transform 0.3s ease;
 }
 .events-dot:hover {

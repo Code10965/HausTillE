@@ -7,17 +7,30 @@
 //      getestet.
 //   2. createCarouselController   - verbindet EventsCarouselState mit
 //      dem tatsächlichen HTML (Pfeile, Punkte, Pause-Button,
-//      Autoplay-Timer) genau wie die anderen setup*()-Funktionen in
+//      Autoplay-Timer, Touch-Swipe über attachSwipeGesture() aus
+//      swipeGesture.js) genau wie die anderen setup*()-Funktionen in
 //      diesem Projekt (siehe nav.js, gallery.js): sucht sich seine
 //      Elemente selbst, läuft ins Leere, wenn keine da sind.
-//   3. partitionEventsByDate       - NEU: entscheidet beim Laden der
-//      Seite im Browser (nicht beim Bauen der Seite!), welche Events
+//   3. partitionEventsByDate       - entscheidet beim Laden der Seite
+//      im Browser (nicht beim Bauen der Seite!), welche Events
 //      "Zukunft" (inkl. heute) und welche "Vergangenheit" sind, und
 //      entfernt die jeweils falsche Hälfte aus jedem Karussell.
-//   4. createPastCarouselController - NEU: das vertikale
+//   4. createPastCarouselController - das vertikale
 //      "Erinnerungen"-Karussell (Flip-Kalender-Optik) für vergangene
 //      Events - anders als Teil 2 OHNE Endlos-Schleife (ein endlicher
-//      Stapel Erinnerungen, kein Kreis) und ohne Autoplay.
+//      Stapel Erinnerungen, kein Kreis) und ohne Autoplay, ebenfalls
+//      mit Touch-Swipe (vertikal statt horizontal).
+//
+// Die eigentliche Touch-Wisch-Erkennung selbst (attachSwipeGesture)
+// lebt bewusst NICHT hier, sondern in einer eigenen, von Events
+// unabhängigen Datei: siehe swipeGesture.js. Grund: sie kennt weder
+// EventsCarouselState noch data-events-*-Attribute und ist damit ein
+// allgemeines Werkzeug, keine Event-spezifische Logik (siehe
+// ausführliche Begründung im Kommentar dort) - so ließe sie sich z.B.
+// auch für die Lightbox in gallery.js wiederverwenden, ohne dass diese
+// eventsCarousel.js importieren müsste.
+
+import { attachSwipeGesture } from "./swipeGesture.js";
 
 /**
  * Reine Index-Verwaltung für ein Karussell mit `count` Folien (die
@@ -101,11 +114,12 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   const state = new EventsCarouselState(slides.length, 0);
 
   // "userPlaying": will die Person Autoplay (Play/Pause-Button)?
-  // "hovering"/"focused": ist die Maus/Tastatur gerade im Karussell?
-  // Nur wenn BEIDES stimmt (Person will Autoplay UND schaut/klickt
-  // gerade nicht hinein), läuft der Timer wirklich - reines Hovern
-  // pausiert also automatisch mit, ohne den eigentlichen Pause-Knopf
-  // umzuschalten (der behält seinen eigenen Zustand).
+  // "hovering"/"focused": ist die Maus/Tastatur/der Finger gerade im
+  // Karussell? Nur wenn BEIDES stimmt (Person will Autoplay UND
+  // schaut/klickt/wischt gerade nicht hinein), läuft der Timer
+  // wirklich - reines Hovern (oder jetzt: Wischen) pausiert also
+  // automatisch mit, ohne den eigentlichen Pause-Knopf umzuschalten
+  // (der behält seinen eigenen Zustand).
   let userPlaying = !prefersReducedMotion && slides.length > 1;
   let hovering = false;
   let timerId = null;
@@ -236,6 +250,28 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     restartTimer();
   });
 
+  // ---------- Touch-Swipe (horizontal) ----------
+  // Zusätzlich zu den Pfeil-Buttons per Finger-Wisch bedienbar (Logik
+  // in swipeGesture.js). Wischen fühlt sich für die Person wie Hovern
+  // an: während des Ziehens pausiert der Autoplay-Timer genau wie bei
+  // der Maus (siehe hovering weiter oben), und läuft danach ganz normal
+  // weiter. Wisch nach LINKS = nächstes Event (wie ein Klick auf den
+  // rechten Pfeil), Wisch nach RECHTS = vorheriges Event.
+  const viewport = container.querySelector("[data-events-viewport]");
+  attachSwipeGesture(viewport || track, {
+    axis: "horizontal",
+    onDragStart: () => {
+      hovering = true;
+      restartTimer();
+    },
+    onDragEnd: () => {
+      hovering = false;
+      restartTimer();
+    },
+    onNext: next,
+    onPrev: prev,
+  });
+
   render();
   renderPlayState();
   startTimer();
@@ -328,8 +364,8 @@ function buildDots(container, count) {
  * dieselben zwei data-Attribut-Paare verwenden (nur mit "events-" bzw.
  * "past-" Präfix).
  *
- * Nutzt bewusst eine eigene .is-hidden-Klasse (siehe styles.css,
- * "display: none !important") statt des nativen hidden-Attributs:
+ * Nutzt bewusst eine eigene .is-hidden { display: none !important; }
+ * -Klasse (siehe styles.css) statt des nativen hidden-Attributs:
  * Elemente, die zusätzlich eine eigene "display"-CSS-Regel bekommen
  * (wie .past-controls mit "display: flex"), würden das hidden-Attribut
  * sonst stillschweigend überschreiben - Autoren-Stylesheets gewinnen in
@@ -449,6 +485,8 @@ const DEFAULT_PAST_OF_LABEL = "von";
  *     erzeugen allein durch eine CSS-Transition auf transform/opacity
  *     den Umblätter-Eindruck - hier im JS wird nur die Klasse pro
  *     Render-Durchlauf neu vergeben.
+ *   - Zusätzlich zu den Pfeilen per vertikalem Finger-Wisch bedienbar
+ *     (Logik in swipeGesture.js).
  */
 export function createPastCarouselController(container) {
   const track = container.querySelector("[data-past-track]");
@@ -519,6 +557,26 @@ export function createPastCarouselController(container) {
       event.preventDefault();
       next();
     }
+  });
+
+  // ---------- Touch-Swipe (vertikal) ----------
+  // Zusätzlich zu den Pfeil-Buttons per Finger-Wisch bedienbar (Logik
+  // in swipeGesture.js). Wisch-Richtung folgt der üblichen
+  // Mobil-Konvention (wie bei Stories/Reels): Finger nach OBEN ziehen =
+  // weiter/next (eine Erinnerung weiter zurück), Finger nach UNTEN
+  // ziehen = zurück/prev (eine Erinnerung näher an heute) - unabhängig
+  // davon, dass die Pfeil-Buttons selbst nach der Kipprichtung der
+  // Karten benannt sind (siehe Kommentar bei prev()/next() oben).
+  // ignoreSelector sorgt dafür, dass ein Wisch, der im scrollbaren
+  // Beschreibungstext beginnt (.past-card-description, siehe
+  // styles.css), dort ganz normal scrollt, statt versehentlich die
+  // Karte umzublättern.
+  const pastViewport = container.querySelector("[data-past-viewport]");
+  attachSwipeGesture(pastViewport || track, {
+    axis: "vertical",
+    ignoreSelector: ".past-card-description",
+    onNext: next,
+    onPrev: prev,
   });
 
   render();
