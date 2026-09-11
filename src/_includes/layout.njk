@@ -1,327 +1,221 @@
----
-layout: layout.njk
-page_key: events
-pagination:
-  data: languageList
-  size: 1
-  alias: lang
-permalink: "{{ pages.events[lang] }}"
----
 {#
-  events.njk: eigenständige Seite für "Veranstaltungen" (analog zu
-  imprint.njk / privacy.njk) - eigene URL pro Sprache über pages.events,
-  eigene Texte über t.events.*, Zurück-Leiste + Logo kommen automatisch
-  aus nav.njk (dort greift der "sonst"-Zweig für jeden page_key ausser
-  "home").
-
-  Struktur:
-  1. .events-page-row - unbeschränkte Reihe auf Sektionsebene: zwei
-     echte Spalten.
-       a) .events-main (2/3): Eyebrow, Headline, horizontales
-          Zukunfts-Karussell - zeigt ALLE zukünftigen Events inkl. heute
-       b) .past-events (1/3): "Erinnerungen" für vergangene Events.
-          ZWEI Darstellungen, per CSS ein-/ausgeblendet:
-            - .past-flip-desktop: ab 900px, vertikaler Flip-Kalender-
-              Effekt (unverändert wie bisher)
-            - .past-mobile-carousel: unter 900px, ein STRUKTURELLER
-              KLON des Zukunfts-Karussells (identische CSS-Klassen wie
-              .events-main, identischer JS-Regler
-              createCarouselController) - dadurch exakt dasselbe
-              Verhalten (inkl. Fingerwischen, Pfeile, Punkte) wie beim
-              Zukunfts-Karussell, nur mit Jahr statt Datum/Uhrzeit und
-              ohne Location/Link. Vermeidet die Layout-Bugs, die beim
-              Versuch entstanden, den Flip-Effekt selbst mobil-tauglich
-              zu machen (Karten außerhalb des Bildschirms, falsch
-              ausgerichtete Pfeil-Icons, abgeschnittene Fotos).
-
-  WICHTIG zur Sortierung UND Datumsaufteilung: Die eigentliche
-  Sortierung (chronologisch nach Startdatum) passiert NICHT mehr hier im
-  Template, sondern schon vorher beim Bauen der Seite, in
-  src/_data/sortedEvents.js. Die Aufteilung in "zukünftig" und
-  "vergangen" DARF dagegen nicht beim Bauen passieren (siehe
-  eventsCarousel.js/partitionEventsByDate()) - deshalb bekommen ALLE
-  DREI Karussells (Zukunft, Erinnerungen-Desktop, Erinnerungen-Mobile)
-  hier zunächst dieselben, ungefilterten sortedEvents[lang], und erst
-  eventsCarousel.js entscheidet beim Laden der Seite im Browser, welche
-  Folie in welchem Karussell bleibt.
-
-  Der Hintergrund bekommt denselben "Blob"-Effekt wie im Hero. #}
+  layout.njk ist die EINZIGE Datei, die das komplette <html>-Gerüst enthält.
+  Jede Seite (de/index.njk, en/imprint.njk, ...) liefert per Front Matter
+  nur noch "lang" und "page_key" - der Rest (Kopf, Navigation, Footer,
+  hreflang) kommt von hier. Genau das ist der Kern der Aufgabe: eine
+  Änderung hier wirkt sich automatisch auf ALLE Sprachversionen aus.
+#}
+{# ---------- Sprach-Umschaltvariable ----------
+   Die drei Übersetzungsdateien (de.json, en.json, nl.json) werden von
+   Eleventy automatisch als globale Daten geladen - sie heißen im Template
+   einfach "de", "en" und "nl". Damit Kopf/Navigation/Footer (die für ALLE
+   Sprachen gelten) nicht dreimal geschrieben werden müssen, zeigen wir mit
+   der Variable "t" ("translations") einfach auf die passende Datei. #}
 {% set t = de %}
 {% if lang == "en" %}{% set t = en %}{% endif %}
 {% if lang == "nl" %}{% set t = nl %}{% endif %}
 
-<section class="reveal-section tone-cloud events-section visible">
-  <div class="ambient-bg" aria-hidden="true">
-    <div class="ambient-layer ambient-layer-1"></div>
-    <div class="ambient-layer ambient-layer-2"></div>
-    <div class="ambient-layer ambient-layer-3"></div>
-    <div class="ambient-layer ambient-layer-4"></div>
-    <div class="ambient-layer ambient-layer-5"></div>
-  </div>
+{# Meta-Titel/-Beschreibung sind pro Seite unterschiedlich (Start/Impressum/
+   Datenschutz) - deshalb hier über page_key ausgewählt. #}
+{% set meta_title = t.meta["title_" + page_key] %}
+{% set meta_description = t.meta["description_" + page_key] %}
 
-  <div class="events-page-row">
+{# ---------- page_urls: zentral hier oben definiert ----------
+   Wird sowohl für die Open-Graph-Tags (og:url) als auch weiter unten für
+   hreflang/canonical gebraucht. Steht bewusst hier bei den anderen
+   {% set %}-Variablen (t, meta_title, meta_description) statt erst
+   später im Dokument - so bleiben alle zentralen Werte an einer Stelle
+   und der komplette Open-Graph-Block kann zusammenhängend stehen. #}
+{% set page_urls = pages[page_key] %}
 
-    {# ========== SPALTE 1 (2/3): EYEBROW, TITEL, ZUKÜNFTIGE EVENTS ========== #}
-    <div class="events-main">
-      <div class="section-inner">
-        <div class="eyebrow-row">
-          <span class="mono-label wine-label">{{ t.events.eyebrow | safe }}</span>
-          <span class="eyebrow-line"></span>
-        </div>
+<!doctype html>
+<html lang="{{ lang }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ meta_title }}</title>
+    <meta name="description" content="{{ meta_description }}" />
 
-        <h1 class="section-title">
-          {{ t.events.title }}<br />
-          <span class="section-title-line2">{{ t.events.subtitle }}</span>
-        </h1>
+    {# ---------- Open Graph / Twitter Card ----------
+       Bestimmt Bild + Text, den Messenger (WhatsApp, iMessage, Slack ...)
+       beim Teilen eines Links anzeigen. og:image MUSS eine absolute URL
+       mit Domain sein - deshalb hier site.baseUrl direkt (wie bei
+       hreflang/JSON-LD), NICHT der "| url"-Filter: der ist nur für den
+       lokalen/GitHub-Pages-Unterordner-Testfall gedacht, og:image soll
+       aber immer auf die echte, finale Domain zeigen.
+       t.meta.og_image kommt aus der jeweiligen Sprachdatei (de.json/
+       en.json/nl.json) - so kann jede Sprache ihr eigenes Vorschaubild
+       haben, genau wie bei title_home & Co. #}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ meta_title }}" />
+    <meta property="og:description" content="{{ meta_description }}" />
+    <meta property="og:image" content="{{ site.baseUrl }}{{ t.meta.og_image }}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="{{ site.baseUrl }}{{ page_urls[lang] }}" />
+    <meta property="og:locale" content="{{ lang }}" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-        <div
-          class="events-carousel events-future"
-          data-events-carousel
-          data-events-scope="future"
-          data-autoplay-ms="6500"
-          data-goto-aria="{{ t.events.carousel.goto_aria }}"
-          data-of-label="{{ t.events.carousel.of }}"
-          aria-roledescription="carousel"
-          aria-label="{{ t.events.eyebrow }}"
-        >
-          <div class="events-viewport" data-events-viewport>
-            <ul class="events-track" data-events-track>
-              {% for item in sortedEvents[lang] %}
-              <li
-                class="event-slide"
-                role="group"
-                aria-roledescription="slide"
-                aria-label="{{ item.title }} ({{ loop.index }} {{ t.events.carousel.of }} {{ sortedEvents[lang].length }})"
-                aria-hidden="true"
-                data-events-slide
-                data-title="{{ item.title }}"
-                data-date-start="{{ item.date_iso }}"
-                data-date-end="{{ item.date_end_iso | default(item.date_iso) }}"
-              >
-                <article class="event-card">
-                  <div class="event-photo">
-                    <img
-                      src="{{ item.image.src | url }}"
-                      alt="{{ item.image.alt }}"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div class="event-info">
-                    <p class="mono-label event-meta">
-                      <span class="event-date">{{ item.date }}</span>
-                      <span class="event-meta-dot" aria-hidden="true">&middot;</span>
-                      <span class="event-time">{{ item.time }}</span>
-                    </p>
-                    <h2 class="event-title">{{ item.title }}</h2>
-                    <p class="event-location">
-                      <svg class="event-location-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M12 21s-7-6.1-7-11.4A7 7 0 0 1 19 9.6C19 14.9 12 21 12 21Z"></path>
-                        <circle cx="12" cy="9.5" r="2.4"></circle>
-                      </svg>
-                      {{ item.location }}
-                    </p>
-                    <p class="event-description">{{ item.description }}</p>
-                    {% if item.link %}
-                    <a class="event-link" href="{{ item.link }}" target="_blank" rel="noopener">
-                      {{ t.events.carousel.more_info }}
-                      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <line x1="7" y1="17" x2="17" y2="7"></line>
-                        <polyline points="7 7 17 7 17 17"></polyline>
-                      </svg>
-                    </a>
-                    {% endif %}
-                  </div>
-                </article>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'none'; base-uri 'self'">
 
-          <p class="events-empty is-hidden" data-events-empty>{{ t.events.carousel.empty }}</p>
+    {# ---------- Unterordner-fest ----------
+       Statt fest eingetippter Pfade ("/assets/...") verwenden wir überall
+       den eingebauten Eleventy-"url"-Filter. Der hängt automatisch den
+       aktuellen pathPrefix davor (siehe .eleventy.js) - lokal "/",
+       auf GitHub Pages im Unterordner z.B. "/HausTillE/", später auf der
+       eigenen Domain wieder "/". Am Text hier ändert sich nichts, nur der
+       tatsächlich erzeugte Pfad im fertigen HTML passt sich automatisch an.
 
-          <div class="events-controls" data-events-controls>
-            <button type="button" class="events-arrow events-prev" data-events-prev aria-label="{{ t.events.carousel.prev_aria }}">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
-            </button>
+       Bewusst OHNE Hell/Dunkel-Unterscheidung (kein
+       prefers-color-scheme) - ein einziges Icon-Set für alle
+       Browser-Modi, passend zu den tatsächlich vorhandenen Dateien im
+       favicon-Ordner. #}
+    <link rel="icon" type="image/x-icon" href="{{ '/assets/media/favicon/favicon.ico' | url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/media/favicon/favicon-16x16.png' | url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/media/favicon/favicon-32x32.png' | url }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ '/assets/media/favicon/favicon-192x192.png' | url }}">
+    <link rel="icon" type="image/png" sizes="512x512" href="{{ '/assets/media/favicon/favicon-512x512.png' | url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/media/favicon/apple-touch-icon.png' | url }}">
+    <meta name="theme-color" content="#ffffff">
 
-            <button type="button" class="events-playpause" data-events-playpause data-play-label="{{ t.events.carousel.play_aria }}" aria-pressed="false" aria-label="{{ t.events.carousel.pause_aria }}">
-              <svg class="icon-pause" data-icon-pause viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"></rect><rect x="14" y="5" width="4" height="14"></rect></svg>
-              <svg class="icon-play" data-icon-play viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" hidden><polygon points="7 4 20 12 7 20"></polygon></svg>
-            </button>
+    {# ---------- hreflang: sagt Suchmaschinen "diese Seite gibt es auch
+       auf Englisch/Niederländisch, hier ist die jeweilige URL" ----------
+       site.baseUrl ist die VOLLE Domain (z.B. https://www.haus-till-e.com)
+       aus site.json - das ist unabhängig vom pathPrefix und bleibt hier
+       unverändert, da hreflang/canonical immer eine absolute URL mit
+       Domain brauchen, nicht nur einen Pfad. #}
+    {% for altLang, url in page_urls %}
+    <link rel="alternate" hreflang="{{ altLang }}" href="{{ site.baseUrl }}{{ url }}" />
+    {% endfor %}
+    <link rel="alternate" hreflang="x-default" href="{{ site.baseUrl }}{{ page_urls.de }}" />
+    <link rel="canonical" href="{{ site.baseUrl }}{{ page_urls[lang] }}" />
 
-            <div class="events-dots" data-events-dots role="tablist" aria-label="{{ t.events.carousel.dots_aria }}"></div>
+    <link rel="stylesheet" href="{{ '/assets/styles.css' | url }}" />
 
-            <button type="button" class="events-arrow events-next" data-events-next aria-label="{{ t.events.carousel.next_aria }}">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
-            </button>
-          </div>
+    {# ---------- Strukturierte Daten (Schema.org / JSON-LD) ----------
+       Nur auf der Startseite, weil dort die relevanten Inhalte (Haus,
+       FAQ) stehen. Beide Blöcke werden aus "t" (der aktiven Sprachdatei)
+       generiert - ändert sich ein Text/eine Frage in de.json/en.json/
+       nl.json, zieht das JSON-LD automatisch nach, ohne dass hier
+       irgendetwas von Hand angepasst werden muss.
 
-          <p class="visually-hidden" data-events-live aria-live="polite"></p>
-        </div>
+       Der "dump"-Filter von Nunjucks wandelt einen Wert sicher in
+       valides JSON um (inkl. Anführungszeichen/Sonderzeichen) - so
+       muss nichts manuell escaped werden und es kann kein kaputtes
+       JSON entstehen, selbst wenn in den Texten Anführungszeichen
+       vorkommen (z.B. „Zeller Schwarze Katz“).
+
+       HINWEIS: application/ld+json-Blöcke sind KEINE ausführbaren
+       Skripte (sie enthalten nur Daten, kein JavaScript) - die
+       Content-Security-Policy blockiert daher nur echte
+       <script>-Skriptblöcke wie den weiter unten entfernten
+       window.SITE_BASE_URL-Block, nicht diese hier. #}
+    {% if page_key == "home" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
+      "name": "Haus Till E",
+      "description": {{ t.meta.description_home | dump | safe }},
+      "url": "{{ site.baseUrl }}{{ pages.home[lang] }}",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Schloßstraße 10",
+        "postalCode": "56856",
+        "addressLocality": "Zell (Mosel)",
+        "addressCountry": "DE"
+      }
+    }
+    </script>
+
+    {% if t.home.area.faq %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {% for item in t.home.area.faq.items %}
+        {
+          "@type": "Question",
+          "name": {{ item.title | dump | safe }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ item.content | dump | safe }}
+          }
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    }
+    </script>
+    {% endif %}
+    {% endif %}
+  </head>
+  <body>
+    {% include "nav.njk" %}
+
+    {{ content | safe }}
+
+    {# ---------- Footer ----------
+       Auch hier: pages.imprint[lang], pages.privacy[lang], pages.home[lang]
+       sind rohe Pfade aus pages.json ("/de/impressum/" usw.) - ohne den
+       "url"-Filter würden sie im GitHub-Pages-Unterordner ins Leere
+       zeigen, genau wie vorher schon bei Favicons/CSS/Skripten. #}
+    <footer class="site-footer">
+      {% if page_key == "home" %}
+      <p class="mono-label footer-label">{{ t.home.footer.line1 }}</p>
+      <p class="mono-label footer-label footer-label-spaced">
+        <a href="{{ pages.imprint[lang] | url }}" class="footer-link">{{ t.imprint.title }}</a>
+        · <a href="{{ pages.privacy[lang] | url }}" class="footer-link">{{ t.privacy.title | safe }}</a>
+      </p>
+      {% else %}
+      <p class="mono-label footer-label">
+        <a href="{{ pages.home[lang] | url }}" class="footer-link">{{ t.meta.title_home }}</a>
+        · <a href="{{ pages.imprint[lang] | url }}" class="footer-link">{{ t.imprint.title }}</a>
+        · <a href="{{ pages.privacy[lang] | url }}" class="footer-link">{{ t.privacy.title | safe }}</a>
+      </p>
+      {% endif %}
+    </footer>
+
+    {% if page_key == "home" %}
+    {# Menü, Sprach-Kugel, Kontakt-Kugel + Lightbox nur auf der Startseite,
+       genau wie im Original (Impressum/Datenschutz hatten nur die
+       "Zurück"-Leiste). #}
+    <div class="lightbox" id="lightbox">
+      <div class="lightbox-frame">
+        <button class="lightbox-close" aria-label="Close">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"></line><line x1="19" y1="5" x2="5" y2="19"></line></svg>
+        </button>
+        <button class="lightbox-prev" aria-label="Previous photo">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
+        </button>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+        <video class="lightbox-video" id="lightbox-video" controls playsinline></video>
+        <div class="lightbox-info-slide" id="lightbox-info-slide"></div>
+        <button class="lightbox-next" aria-label="Next photo">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+        </button>
       </div>
     </div>
+    {% endif %}
 
-    {# ========== SPALTE 2 (1/3): VERGANGENE EVENTS ("Schöne Erinnerungen") ========== #}
-    <div class="past-events">
-      <div class="past-events-inner">
-        <div class="eyebrow-row past-eyebrow-row">
-          <span class="mono-label light-gold-label">{{ t.events.past.eyebrow }}</span>
-          <span class="eyebrow-line light-line"></span>
-        </div>
+    {# ---------- Basis-Pfad für "rohes" JavaScript ----------
+       WICHTIG - geändert gegenüber der vorherigen Fassung: Diese Zeile
+       stand früher als <script>window.SITE_BASE_URL = "...";</script>
+       DIREKT hier im HTML. Die Content-Security-Policy oben
+       (default-src 'self', kein 'unsafe-inline') blockiert aber genau
+       solche eingebetteten Skripte - der Browser hat sie zwar im HTML
+       gesehen, aber die Ausführung verweigert. Deshalb liegt der Wert
+       jetzt in einer eigenen, externen Datei (site-base.njk ->
+       /assets/site-base.js), die ganz normal per <script src="...">
+       eingebunden wird - das ist von "default-src 'self'" ausdrücklich
+       erlaubt, weil sie von derselben Domain/demselben Unterordner kommt.
 
-        <h2 class="past-heading">
-          {{ t.events.past.heading_line1 }}<br />
-          <span class="past-heading-line2">{{ t.events.past.heading_line2 }}</span>
-        </h2>
+       Muss weiterhin VOR dem type="module"-Skript stehen, damit die
+       Variable beim Ausführen von main.js/gallery.js bereits gesetzt ist. #}
+    <script src="{{ '/assets/site-base.js' | url }}"></script>
 
-        {# ---------- Desktop (ab 900px): Flip-Kalender-Effekt ----------
-           Unverändert wie bisher - wird per CSS unter 900px komplett
-           ausgeblendet (siehe .past-flip-desktop in styles.css). #}
-        <div
-          class="past-carousel past-flip-desktop"
-          data-past-carousel
-          data-of-label="{{ t.events.past.of }}"
-          aria-roledescription="carousel"
-          aria-label="{{ t.events.past.eyebrow }}"
-        >
-          <div class="past-body">
-            <div class="past-viewport" data-past-viewport>
-              <ul class="past-track" data-past-track>
-                {% for item in sortedEvents[lang] %}
-                <li
-                  class="past-slide"
-                  role="group"
-                  aria-roledescription="slide"
-                  aria-label="{{ item.title }}"
-                  aria-hidden="true"
-                  data-past-slide
-                  data-date-start="{{ item.date_iso }}"
-                  data-date-end="{{ item.date_end_iso | default(item.date_iso) }}"
-                >
-                  <article class="past-card">
-                    <p class="mono-label past-card-year">{{ (item.date_iso | default("")).slice(0, 4) }}</p>
-                    <h3 class="past-card-title">{{ item.title }}</h3>
-                    <p class="past-card-location">
-                      <svg class="past-card-location-icon" viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M12 21s-7-6.1-7-11.4A7 7 0 0 1 19 9.6C19 14.9 12 21 12 21Z"></path>
-                        <circle cx="12" cy="9.5" r="2.4"></circle>
-                      </svg>
-                      {{ item.location }}
-                    </p>
-                    <p class="past-card-description">
-                      <img
-                        class="past-card-photo"
-                        src="{{ item.image.src | url }}"
-                        alt="{{ item.image.alt }}"
-                        loading="lazy"
-                      />{{ item.description }}
-                    </p>
-                  </article>
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-
-            <div class="past-controls" data-past-controls>
-              <button type="button" class="past-arrow past-prev" data-past-prev aria-label="{{ t.events.past.prev_aria }}">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-              </button>
-              <span class="past-counter" data-past-counter aria-hidden="true"></span>
-              <button type="button" class="past-arrow past-next" data-past-next aria-label="{{ t.events.past.next_aria }}">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-              </button>
-            </div>
-          </div>
-
-          <p class="events-empty past-empty is-hidden" data-past-empty>{{ t.events.past.empty }}</p>
-
-          <p class="visually-hidden" data-past-live aria-live="polite"></p>
-        </div>
-
-        {# ---------- Mobile (unter 900px): struktureller Klon des Zukunfts-Karussells ----------
-           Identische CSS-Klassen (.events-carousel/.events-viewport/
-           .events-track/.event-slide/.event-card/.events-controls) UND
-           identischer JS-Regler (createCarouselController) wie das
-           Zukunfts-Karussell oben - dadurch exakt dasselbe, bereits
-           bewährte Verhalten (Pfeile, Punkte, Fingerwischen). Einzige
-           Inhalts-Unterschiede: nur Jahr statt Datum/Uhrzeit, keine
-           Location, kein "mehr erfahren"-Link. Kein Play/Pause-Button
-           (kein Autoplay gewünscht) - setupEventsCarousel() in
-           eventsCarousel.js pausiert diesen Regler nach der
-           Initialisierung explizit anhand von data-events-scope. Wird
-           per CSS ab 900px ausgeblendet (siehe .past-mobile-carousel in
-           styles.css), zeigt sich also nur dort, wo der Flip-Effekt
-           oben per CSS versteckt ist. #}
-        <div
-          class="events-carousel past-mobile-carousel"
-          data-events-carousel
-          data-events-scope="past-mobile"
-          data-goto-aria="{{ t.events.carousel.goto_aria }}"
-          data-of-label="{{ t.events.carousel.of }}"
-          aria-roledescription="carousel"
-          aria-label="{{ t.events.past.eyebrow }}"
-        >
-          <div class="events-viewport" data-events-viewport>
-            <ul class="events-track" data-events-track>
-              {% for item in sortedEvents[lang] %}
-              <li
-                class="event-slide"
-                role="group"
-                aria-roledescription="slide"
-                aria-label="{{ item.title }}"
-                aria-hidden="true"
-                data-events-slide
-                data-title="{{ item.title }}"
-                data-date-start="{{ item.date_iso }}"
-                data-date-end="{{ item.date_end_iso | default(item.date_iso) }}"
-              >
-                <article class="event-card">
-                  <div class="event-photo">
-                    <img
-                      src="{{ item.image.src | url }}"
-                      alt="{{ item.image.alt }}"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                  <div class="event-info">
-                    <p class="mono-label event-meta">
-                      <span class="event-date">{{ (item.date_iso | default("")).slice(0, 4) }}</span>
-                    </p>
-                    <h2 class="event-title">{{ item.title }}</h2>
-                    <p class="event-description">{{ item.description }}</p>
-                  </div>
-                </article>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-
-          <p class="events-empty is-hidden" data-events-empty>{{ t.events.past.empty }}</p>
-
-          <div class="events-controls" data-events-controls>
-            <button type="button" class="events-arrow events-prev" data-events-prev aria-label="{{ t.events.past.prev_aria }}">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
-            </button>
-
-            <div class="events-dots" data-events-dots role="tablist" aria-label="{{ t.events.carousel.dots_aria }}"></div>
-
-            <button type="button" class="events-arrow events-next" data-events-next aria-label="{{ t.events.past.next_aria }}">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
-            </button>
-          </div>
-
-          <p class="visually-hidden" data-events-live aria-live="polite"></p>
-        </div>
-
-        <div class="past-whatsapp">
-          <p class="past-whatsapp-text">{{ t.events.past.whatsapp_text }}</p>
-          <div data-phone-contact-theme="dark" data-copy-label="{{ t.nav.copy_phone_button }}" data-copied-label="{{ t.nav.copied_button }}"></div>
-          <p class="past-whatsapp-hint">{{ t.events.past.whatsapp_hint }}</p>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
+    <script type="module" src="{{ '/assets/media/js/main.js' | url }}"></script>
+    <script src="{{ '/assets/media/js/heroAmbient.js' | url }}" defer></script>
+    <script src="{{ '/assets/media/js/accordion.js' | url }}" defer></script>
+  </body>
+</html>
