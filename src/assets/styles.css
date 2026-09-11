@@ -2173,3 +2173,52 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   color: #7A7A76;
   margin: 16px 0 0 0;
 }
+
+/* ---------- Mobile: Erinnerungen-Karussell zeigt vollen Text ----------
+   Unter 900px stehen die Spalten gestapelt (siehe .events-page-row),
+   die rechte Spalte bekommt dadurch keine Höhe mehr vom Stretch-
+   Verhalten der linken Spalte geliehen - übrig blieb nur die feste
+   min-height:420px von .past-events. Da .past-slide absolut
+   positioniert ist (für den Flip-Effekt), trägt sie nichts zur
+   natürlichen Höhe ihres Elternelements bei - der Beschreibungstext
+   wurde dadurch hart abgeschnitten, das interne Scrollen griff nicht
+   zuverlässig. Lösung: Auf Mobile bekommt NUR die aktuell sichtbare
+   Karte (.is-current, sowie die Startkarte vor der JS-Initialisierung)
+   normalen Dokumentenfluss statt absoluter Positionierung - ihr echter
+   Inhalt bestimmt dadurch die Höhe des kompletten Blocks, der Text
+   muss nicht mehr intern scrollen. Der Flip-Effekt selbst bleibt
+   optisch unangetastet, weil die aktuelle Karte ohnehin transform:
+   rotateX(0deg) (identity) hat - nur die weggekippten Nachbarkarten
+   (.is-before/.is-after) bleiben absolut positioniert, damit sie
+   keinen zusätzlichen Platz beanspruchen. */
+@media (max-width: 899px) {
+  .past-events {
+    min-height: 0;
+  }
+
+  .past-viewport {
+    perspective: none;
+  }
+
+  .past-track {
+    height: auto;
+  }
+
+  .past-slide:first-child,
+  .past-slide.is-current {
+    position: relative;
+    inset: auto;
+  }
+
+  .past-card {
+    height: auto;
+    overflow: visible;
+  }
+
+  .past-card-description {
+    overflow-y: visible;
+    max-height: none;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
