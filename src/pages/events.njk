@@ -15,52 +15,37 @@ permalink: "{{ pages.events[lang] }}"
   "home").
 
   Struktur:
-  1. .events-page-row - NEUE, unbeschränkte Reihe auf Sektionsebene
-     (analog zu .hero-grid in der Hero-Sektion): zwei echte Spalten,
-     nicht länger beide innerhalb des padded/zentrierten .section-inner.
-       a) .events-main (2/3): behält das gewohnte .section-inner mit
-          Eyebrow "Events rund ums Haus Till E", Headline
-          "Veranstaltungen." + kursive Zeile, und darunter das
-          horizontale Zukunfts-Karussell - zeigt ALLE zukünftigen
-          Events inkl. heute
-       b) .past-events (1/3): das vertikale "Flip-Kalender"-Karussell
-          ("Schöne Erinnerungen") - zeigt alle vergangenen Events,
-          neuestes zuerst, nur mit Titel/Ort/Beschreibung auf der
-          Karte. Liegt jetzt AUSSERHALB von .section-inner, direkt als
-          zweite Spalte von .events-page-row - genau wie .hero-media
-          bei der Hero-Sektion reicht der dunkle Hintergrund dadurch
-          randlos bis zum echten Browserrand, nicht nur bis zum Rand
-          des zentrierten Seiteninhalts (siehe styles.css).
+  1. .events-page-row - unbeschränkte Reihe auf Sektionsebene: zwei
+     echte Spalten.
+       a) .events-main (2/3): Eyebrow, Headline, horizontales
+          Zukunfts-Karussell - zeigt ALLE zukünftigen Events inkl. heute
+       b) .past-events (1/3): "Erinnerungen" für vergangene Events.
+          ZWEI Darstellungen, per CSS ein-/ausgeblendet:
+            - .past-flip-desktop: ab 900px, vertikaler Flip-Kalender-
+              Effekt (unverändert wie bisher)
+            - .past-mobile-carousel: unter 900px, ein STRUKTURELLER
+              KLON des Zukunfts-Karussells (identische CSS-Klassen wie
+              .events-main, identischer JS-Regler
+              createCarouselController) - dadurch exakt dasselbe
+              Verhalten (inkl. Fingerwischen, Pfeile, Punkte) wie beim
+              Zukunfts-Karussell, nur mit Jahr statt Datum/Uhrzeit und
+              ohne Location/Link. Vermeidet die Layout-Bugs, die beim
+              Versuch entstanden, den Flip-Effekt selbst mobil-tauglich
+              zu machen (Karten außerhalb des Bildschirms, falsch
+              ausgerichtete Pfeil-Icons, abgeschnittene Fotos).
 
   WICHTIG zur Sortierung UND Datumsaufteilung: Die eigentliche
   Sortierung (chronologisch nach Startdatum) passiert NICHT mehr hier im
   Template, sondern schon vorher beim Bauen der Seite, in
-  src/_data/sortedEvents.js - "sortedEvents[lang]" ist also bereits die
-  fertig sortierte Liste (statt der unsortierten t.events.items). Das
-  spart jedem Website-Besucher das erneute Sortieren im Browser.
+  src/_data/sortedEvents.js. Die Aufteilung in "zukünftig" und
+  "vergangen" DARF dagegen nicht beim Bauen passieren (siehe
+  eventsCarousel.js/partitionEventsByDate()) - deshalb bekommen ALLE
+  DREI Karussells (Zukunft, Erinnerungen-Desktop, Erinnerungen-Mobile)
+  hier zunächst dieselben, ungefilterten sortedEvents[lang], und erst
+  eventsCarousel.js entscheidet beim Laden der Seite im Browser, welche
+  Folie in welchem Karussell bleibt.
 
-  Die Aufteilung in "zukünftig" und "vergangen" DARF dagegen nicht beim
-  Bauen passieren: Eleventy baut diese Seite nur bei jedem Deploy neu -
-  "heute" würde also einfrieren, wenn wir zukünftig/vergangen hier im
-  Template entscheiden würden. Deshalb werden BEIDE Karussells zunächst
-  mit ALLEN (schon sortierten) Events befüllt (jede Folie trägt
-  data-date-start/data-date-end als ISO-Datum), und erst
-  eventsCarousel.js entscheidet beim Laden der Seite im Browser - anhand
-  des tatsächlichen "heute" - welche Folie in welchem Karussell bleibt
-  (siehe partitionEventsByDate() dort). Weil die Reihenfolge dank
-  sortedEvents[lang] schon stimmt, muss dort nur noch gefiltert werden -
-  kein erneutes Sortieren nötig. So bleibt die Aufteilung auch Monate
-  nach dem letzten Deploy korrekt, ohne dass der Browser die teure
-  Sortierarbeit wiederholen muss.
-
-  Der Hintergrund bekommt denselben "Blob"-Effekt wie im Hero: ein
-  .ambient-bg mit fünf .ambient-layer-*-Kindern. heroAmbient.js sucht
-  automatisch ALLE .ambient-bg-Container auf der Seite ab (nicht nur die
-  der Startseite) - hier ist also nichts weiter nötig, damit sich die
-  Farbflächen auch auf dieser Seite sanft bewegen. Die Blobs liegen
-  ohnehin ganz hinten (z-index: -1) und werden im rechten Drittel vom
-  eigenen dunklen Hintergrund von .past-events überdeckt.
-#}
+  Der Hintergrund bekommt denselben "Blob"-Effekt wie im Hero. #}
 {% set t = de %}
 {% if lang == "en" %}{% set t = en %}{% endif %}
 {% if lang == "nl" %}{% set t = nl %}{% endif %}
@@ -76,11 +61,7 @@ permalink: "{{ pages.events[lang] }}"
 
   <div class="events-page-row">
 
-    {# ========== SPALTE 1 (2/3): EYEBROW, TITEL, ZUKÜNFTIGE EVENTS ==========
-       Der gewohnte .section-inner (mit der zentrierten/padded Breite)
-       lebt jetzt HIER drin statt auf Sektionsebene - dadurch bleibt der
-       Text schön eingerückt, während die rechte Spalte gleich daneben
-       ungehindert bis zum Browserrand reichen kann. #}
+    {# ========== SPALTE 1 (2/3): EYEBROW, TITEL, ZUKÜNFTIGE EVENTS ========== #}
     <div class="events-main">
       <div class="section-inner">
         <div class="eyebrow-row">
@@ -93,19 +74,6 @@ permalink: "{{ pages.events[lang] }}"
           <span class="section-title-line2">{{ t.events.subtitle }}</span>
         </h1>
 
-        {# ---------- Horizontales Zukunfts-Karussell ----------
-           Unverändert - einzige Ergänzung: data-events-scope="future"
-           (damit eventsCarousel.js dieses Karussell von "future"
-           unterscheiden kann) sowie data-date-start/data-date-end und
-           data-goto-aria/data-of-label (werden von der JS-Logik zum
-           Aufteilen und zum Nachbauen der Punkte-Navigation gebraucht -
-           siehe eventsCarousel.js). Die Punkte selbst werden nicht mehr
-           hier im Template vorgerendert, sondern von buildDots() in JS
-           erzeugt, weil erst zur Laufzeit feststeht, wie viele
-           zukünftige Events tatsächlich übrig bleiben. data-title trägt
-           den reinen Titel ohne die "(X von Y)"-Klammer, damit JS das
-           aria-label nach dem Aufteilen sauber mit der korrekten
-           (kleineren) Gesamtzahl neu zusammensetzen kann. #}
         <div
           class="events-carousel events-future"
           data-events-carousel
@@ -170,9 +138,6 @@ permalink: "{{ pages.events[lang] }}"
             </ul>
           </div>
 
-          {# Wird per JS eingeblendet, falls einmal ALLE Events in der
-             Vergangenheit liegen sollten (dann bleibt hier nichts
-             übrig) - siehe toggleEmptyState() in eventsCarousel.js. #}
           <p class="events-empty is-hidden" data-events-empty>{{ t.events.carousel.empty }}</p>
 
           <div class="events-controls" data-events-controls>
@@ -185,10 +150,6 @@ permalink: "{{ pages.events[lang] }}"
               <svg class="icon-play" data-icon-play viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true" hidden><polygon points="7 4 20 12 7 20"></polygon></svg>
             </button>
 
-            {# Bleibt leer - buildDots() in eventsCarousel.js füllt
-               diesen Container erst, nachdem feststeht, wie viele
-               zukünftige Folien nach der Datumsaufteilung übrig
-               bleiben. #}
             <div class="events-dots" data-events-dots role="tablist" aria-label="{{ t.events.carousel.dots_aria }}"></div>
 
             <button type="button" class="events-arrow events-next" data-events-next aria-label="{{ t.events.carousel.next_aria }}">
@@ -196,65 +157,34 @@ permalink: "{{ pages.events[lang] }}"
             </button>
           </div>
 
-          {# Für Screenreader: still (visuell versteckt), meldet bei
-             jedem Wechsel "Titel" - dieselbe .visually-hidden-Klasse
-             wie überall sonst auf der Seite. #}
           <p class="visually-hidden" data-events-live aria-live="polite"></p>
         </div>
       </div>
     </div>
 
-    {# ========== SPALTE 2 (1/3): VERGANGENE EVENTS ("Schöne Erinnerungen") ==========
-       Vertikales Karussell im Stil eines Tischkalenders zum
-       Umblättern: jede Karte liegt übereinandergestapelt, die aktuelle
-       Karte ist flach sichtbar, die anderen sind nach hinten
-       weggekippt (siehe .past-slide in styles.css). Zeigt bewusst NUR
-       Titel, Ort und Beschreibung - keine Fotos, kein Datum, kein
-       Link, wie gewünscht.
-
-       Liegt jetzt als direktes Geschwisterelement von .events-main auf
-       Ebene von .events-page-row - NICHT mehr innerhalb eines
-       zentrierten/padded Containers. Der dunkle Hintergrund (Bild +
-       Schleier, wie bei der Kontakt-Sektion) reicht dadurch randlos
-       bis zum echten Browserrand, genau wie .hero-media es bei der
-       Hero-Sektion tut. #}
+    {# ========== SPALTE 2 (1/3): VERGANGENE EVENTS ("Schöne Erinnerungen") ========== #}
     <div class="past-events">
-      {# ---------- Innerer Wrapper für den Innenabstand ----------
-         Der Innenabstand liegt hier, nicht direkt auf .past-events -
-         so kann der dunkle Hintergrund selbst randlos bis an alle vier
-         Kanten reichen, statt als "Kasten mit Rand" darin zu
-         schweben. #}
       <div class="past-events-inner">
         <div class="eyebrow-row past-eyebrow-row">
           <span class="mono-label light-gold-label">{{ t.events.past.eyebrow }}</span>
           <span class="eyebrow-line light-line"></span>
         </div>
 
-        {# ---------- Überschrift auf derselben Höhe wie links ----------
-           Gleiches Muster wie die Haupt-Headline links (Zeile 1 normal,
-           Zeile 2 kursiv) - hier halb so groß und in hellen Farbtönen
-           für den dunklen Hintergrund (var(--paper)/var(--gold-soft)
-           statt var(--ink)/var(--wine), die auf Stein kaum lesbar
-           wären). #}
         <h2 class="past-heading">
           {{ t.events.past.heading_line1 }}<br />
           <span class="past-heading-line2">{{ t.events.past.heading_line2 }}</span>
         </h2>
 
+        {# ---------- Desktop (ab 900px): Flip-Kalender-Effekt ----------
+           Unverändert wie bisher - wird per CSS unter 900px komplett
+           ausgeblendet (siehe .past-flip-desktop in styles.css). #}
         <div
-          class="past-carousel"
+          class="past-carousel past-flip-desktop"
           data-past-carousel
           data-of-label="{{ t.events.past.of }}"
           aria-roledescription="carousel"
           aria-label="{{ t.events.past.eyebrow }}"
         >
-          {# ---------- Karte + Pfeil-Spalte nebeneinander ----------
-             .past-body ordnet Kalenderkarte (links, nimmt den
-             Großteil der Breite ein) und die Steuerung (rechts,
-             schmale Spalte) per Flexbox nebeneinander an - siehe
-             styles.css. Die Pfeile zeigen bewusst hoch/runter, weil
-             sie dieselbe Richtung abbilden, in die die Karten kippen
-             (nach oben = neuere Erinnerung, nach unten = ältere). #}
           <div class="past-body">
             <div class="past-viewport" data-past-viewport>
               <ul class="past-track" data-past-track>
@@ -304,22 +234,87 @@ permalink: "{{ pages.events[lang] }}"
             </div>
           </div>
 
-          {# Wird eingeblendet, falls (noch) kein einziges Event in der
-             Vergangenheit liegt. #}
           <p class="events-empty past-empty is-hidden" data-past-empty>{{ t.events.past.empty }}</p>
 
           <p class="visually-hidden" data-past-live aria-live="polite"></p>
         </div>
 
-        {# ---------- WhatsApp-Hinweis unter dem Karussell ----------
-           Nutzt exakt dieselbe Technik wie die Kontakt-Sektion auf der
-           Startseite: ein leerer Platzhalter mit data-phone-contact-theme,
-           den renderPhoneContacts() (siehe phoneContact.js, läuft
-           bereits global über main.js auf jeder Seite) automatisch mit
-           Canvas-Bild + Kopieren-Button befüllt - keine weitere
-           JS-Änderung nötig. Bewusst die MOBILE Nummer
-           (data-phone-contact-theme, nicht data-phone-2-contact-theme),
-           da nur diese WhatsApp-fähig ist. #}
+        {# ---------- Mobile (unter 900px): struktureller Klon des Zukunfts-Karussells ----------
+           Identische CSS-Klassen (.events-carousel/.events-viewport/
+           .events-track/.event-slide/.event-card/.events-controls) UND
+           identischer JS-Regler (createCarouselController) wie das
+           Zukunfts-Karussell oben - dadurch exakt dasselbe, bereits
+           bewährte Verhalten (Pfeile, Punkte, Fingerwischen). Einzige
+           Inhalts-Unterschiede: nur Jahr statt Datum/Uhrzeit, keine
+           Location, kein "mehr erfahren"-Link. Kein Play/Pause-Button
+           (kein Autoplay gewünscht) - setupEventsCarousel() in
+           eventsCarousel.js pausiert diesen Regler nach der
+           Initialisierung explizit anhand von data-events-scope. Wird
+           per CSS ab 900px ausgeblendet (siehe .past-mobile-carousel in
+           styles.css), zeigt sich also nur dort, wo der Flip-Effekt
+           oben per CSS versteckt ist. #}
+        <div
+          class="events-carousel past-mobile-carousel"
+          data-events-carousel
+          data-events-scope="past-mobile"
+          data-goto-aria="{{ t.events.carousel.goto_aria }}"
+          data-of-label="{{ t.events.carousel.of }}"
+          aria-roledescription="carousel"
+          aria-label="{{ t.events.past.eyebrow }}"
+        >
+          <div class="events-viewport" data-events-viewport>
+            <ul class="events-track" data-events-track>
+              {% for item in sortedEvents[lang] %}
+              <li
+                class="event-slide"
+                role="group"
+                aria-roledescription="slide"
+                aria-label="{{ item.title }}"
+                aria-hidden="true"
+                data-events-slide
+                data-title="{{ item.title }}"
+                data-date-start="{{ item.date_iso }}"
+                data-date-end="{{ item.date_end_iso | default(item.date_iso) }}"
+              >
+                <article class="event-card">
+                  <div class="event-photo">
+                    <img
+                      src="{{ item.image.src | url }}"
+                      alt="{{ item.image.alt }}"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <div class="event-info">
+                    <p class="mono-label event-meta">
+                      <span class="event-date">{{ (item.date_iso | default("")).slice(0, 4) }}</span>
+                    </p>
+                    <h2 class="event-title">{{ item.title }}</h2>
+                    <p class="event-description">{{ item.description }}</p>
+                  </div>
+                </article>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+          <p class="events-empty is-hidden" data-events-empty>{{ t.events.past.empty }}</p>
+
+          <div class="events-controls" data-events-controls>
+            <button type="button" class="events-arrow events-prev" data-events-prev aria-label="{{ t.events.past.prev_aria }}">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 6 9 12 15 18"></polyline></svg>
+            </button>
+
+            <div class="events-dots" data-events-dots role="tablist" aria-label="{{ t.events.carousel.dots_aria }}"></div>
+
+            <button type="button" class="events-arrow events-next" data-events-next aria-label="{{ t.events.past.next_aria }}">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"></polyline></svg>
+            </button>
+          </div>
+
+          <p class="visually-hidden" data-events-live aria-live="polite"></p>
+        </div>
+
         <div class="past-whatsapp">
           <p class="past-whatsapp-text">{{ t.events.past.whatsapp_text }}</p>
           <div data-phone-contact-theme="dark" data-copy-label="{{ t.nav.copy_phone_button }}" data-copied-label="{{ t.nav.copied_button }}"></div>
