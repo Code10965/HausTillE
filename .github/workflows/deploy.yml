@@ -34,17 +34,19 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: Per SFTP (lftp) zu Manitu hochladen
-        # Dritter Anlauf für den Deploy-Mechanismus: FTPS (SamKirkland)
-        # produzierte wiederholt Timeouts beim Ersetzen bestehender
-        # Dateien, die reine SFTP-Action (wangyucode) blieb zweimal
-        # ohne jede Fehlermeldung einfach hängen (unbegrenzt lange, kein
-        # Fortschritt). lftp ist ein sehr ausgereiftes, seit Jahrzehnten
-        # für genau solche automatisierten Uploads genutztes Tool -
-        # spricht ebenfalls reines SFTP (kein Shell-Zugriff auf dem
-        # Server nötig), aber mit expliziten Timeout-/Retry-
-        # Einstellungen, die ein stilles Hängenbleiben verhindern.
-        # "mirror --only-newer" lädt zudem nur tatsächlich geänderte
-        # Dateien hoch statt jedes Mal alle 254.
+        # WICHTIG: KEIN "--only-newer" mehr! Das verglich Dateien anhand
+        # ihres Änderungsdatums (mtime) - bei jedem CI-Lauf wird das
+        # Repository frisch ausgecheckt, alle lokalen Dateien bekommen
+        # dadurch zwar ein neues Datum, aber falls die Uhr des
+        # GitHub-Runners und die des Manitu-Servers nicht exakt synchron
+        # laufen (auch nur Sekundenbruchteile Unterschied reichen),
+        # kann lftp fälschlich entscheiden, eine inhaltlich geänderte
+        # Datei sei "nicht neuer" und den Upload überspringen - genau
+        # das ist uns bei einer reinen Text-/JSON-Änderung passiert
+        # (Build lokal korrekt, Server blieb auf altem Stand). Ohne
+        # "--only-newer" vergleicht mirror stattdessen nach Dateigröße,
+        # was unabhängig von Uhrzeiten zuverlässig echte inhaltliche
+        # Änderungen erkennt.
         run: |
           lftp -u "${{ secrets.MANITU_FTP_USERNAME }},${{ secrets.MANITU_FTP_PASSWORD }}" -p 23 sftp://${{ secrets.MANITU_FTP_HOST }} <<'ENDSCRIPT'
           set sftp:auto-confirm yes
@@ -52,6 +54,6 @@ jobs:
           set net:max-retries 3
           set net:reconnect-interval-base 5
           set mirror:parallel-transfer-count 3
-          mirror --reverse --verbose --only-newer _site /web/haus-till-e.com/
+          mirror --reverse --verbose _site /web/haus-till-e.com/
           bye
           ENDSCRIPT
