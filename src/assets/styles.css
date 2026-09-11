@@ -1790,19 +1790,23 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
 }
 
 /* =========================================================================
-   Events-Seite: vertikales "Erinnerungen"-Karussell (vergangene Events)
+   Events-Seite: "Erinnerungen"-Karussell (vergangene Events)
    =========================================================================
-   Anders als das horizontale Zukunfts-Karussell KEIN seitliches Gleiten,
-   sondern ein Flip-Effekt, der an einen Tischkalender zum Umblättern
-   erinnert: alle Karten liegen absolut übereinander in .past-viewport
-   (mit CSS-perspective für die 3D-Kippung), nur die Karte mit
-   .is-current liegt flach und sichtbar oben. Karten VOR der aktuellen
-   (.is-before, schon "umgeblättert") sind nach oben weggekippt, Karten
-   NACH der aktuellen (.is-after, "noch nicht dran") liegen nach unten
-   weggekippt dahinter. Der Wechsel zwischen den drei Zuständen ist eine
-   reine CSS-Transition auf transform/opacity (siehe .past-slide) -
-   createPastCarouselController() in eventsCarousel.js vergibt bei jedem
-   Blättern nur die passenden Klassen neu. */
+   Ab 900px (Desktop): ein Flip-Effekt, der an einen Tischkalender zum
+   Umblättern erinnert - alle Karten liegen absolut übereinandergestapelt
+   in .past-viewport (mit CSS-perspective für die 3D-Kippung), nur die
+   Karte mit .is-current liegt flach und sichtbar oben. Karten VOR der
+   aktuellen (.is-before, schon "umgeblättert") sind nach oben
+   weggekippt, Karten NACH der aktuellen (.is-after, "noch nicht dran")
+   liegen nach unten weggekippt dahinter. Der Wechsel zwischen den drei
+   Zuständen ist eine reine CSS-Transition auf transform/opacity (siehe
+   .past-slide) - createPastCarouselController() in eventsCarousel.js
+   vergibt bei jedem Blättern nur die passenden Klassen neu.
+
+   Unter 900px (Mobile): siehe die eigene @media-Regel weiter unten -
+   dort wird derselbe JS-Zustand stattdessen als horizontales
+   Gleit-Karussell dargestellt (wie das Zukunfts-Karussell), inklusive
+   echtem Fingerwischen. */
 
 .past-events {
   position: relative;
@@ -1816,7 +1820,9 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
      Verhalten der Reihe geliehen (siehe .events-page-row weiter oben) -
      ohne eigene Mindesthöhe würde der Hintergrund dort nur so hoch wie
      sein eigener Inhalt sein. 420px passt zur Fotohöhe des
-     Zukunfts-Karussells und sorgt für ein ähnlich großzügiges Panel. */
+     Zukunfts-Karussells und sorgt für ein ähnlich großzügiges Panel.
+     Wird unter 900px per @media weiter unten wieder auf 0 gesetzt, da
+     dort .past-viewport selbst eine feste Höhe bekommt (siehe dort). */
   min-height: 420px;
   /* Bewusst KEIN eigener Innenabstand mehr hier (siehe .past-events-inner
      weiter unten) - der Hintergrund soll randlos bis an alle vier Kanten
@@ -1914,11 +1920,12 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   flex-direction: column;
 }
 
-/* ---------- Karte + Pfeil-Spalte nebeneinander ----------
-   Statt die Pfeile UNTER die Karte zu setzen, liegt die schmale
-   Steuerungs-Spalte (.past-controls) jetzt RECHTS daneben - passend zur
-   Blätterrichtung der Karten selbst (hoch = neuere Erinnerung, runter =
-   ältere, siehe eventsCarousel.js). */
+/* ---------- Karte + Pfeil-Spalte nebeneinander (Desktop) ----------
+   Ab 900px liegt die schmale Steuerungs-Spalte (.past-controls) RECHTS
+   neben der Karte - passend zur Blätterrichtung der Karten selbst
+   (hoch = neuere Erinnerung, runter = ältere, siehe eventsCarousel.js).
+   Unter 900px wird das per @media weiter unten auf "gestapelt"
+   umgestellt (Karte oben, Steuerung darunter, horizontal). */
 .past-body {
   display: flex;
   align-items: stretch;
@@ -2079,9 +2086,11 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
 }
 
 .past-controls {
-  /* Vertikale Spalte statt horizontaler Reihe unter der Karte - "hoch"
-     und "runter" liegen jetzt genau übereinander, in derselben Richtung,
-     in die auch die Karten selbst wegkippen (siehe .past-slide oben). */
+  /* Vertikale Spalte statt horizontaler Reihe unter der Karte (Desktop
+     ab 900px) - "hoch" und "runter" liegen genau übereinander, in
+     derselben Richtung, in die auch die Karten selbst wegkippen (siehe
+     .past-slide oben). Unter 900px wird das per @media weiter unten
+     wieder auf eine horizontale Reihe umgestellt. */
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;
@@ -2173,6 +2182,24 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   color: #7A7A76;
   margin: 16px 0 0 0;
 }
+
+/* =========================================================================
+   Events-Seite: "Erinnerungen"-Karussell auf Mobile (unter 900px)
+   =========================================================================
+   Unter 900px stehen die Spalten gestapelt (siehe .events-page-row),
+   die rechte Spalte bekommt dadurch keine Höhe mehr vom Stretch-
+   Verhalten der linken Spalte geliehen. Statt des Desktop-Flip-Effekts
+   (der bei absolut positionierten Karten keine natürliche Höhe an sein
+   Elternelement weitergibt) wird hier auf eine FESTE Höhe UND ein
+   horizontales Gleit-Layout umgestellt - wie beim Zukunfts-Karussell,
+   inklusive echtem Fingerwischen (siehe createPastCarouselController()
+   in eventsCarousel.js, das dafür die CSS-Variable --past-index auf
+   .past-track setzt). Der Beschreibungstext bleibt dabei bewusst NICHT
+   komplett sichtbar, sondern zeigt gut die Hälfte eines durchschnittlich
+   langen Texts an und lässt den Rest wie gehabt intern scrollen (die
+   Maske/das overflow-y von .past-card-description bleiben unverändert
+   aktiv) - so gibt nicht länger die längste Beschreibung aller Events
+   die Höhe für alle anderen (kürzeren) Karten vor. */
 @media (max-width: 899px) {
   .past-events {
     min-height: 0;
@@ -2181,12 +2208,14 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   .past-viewport {
     height: 480px;
     overflow: hidden;
-    /* Horizontales Gleiten statt Flip-Kipp-Effekt, wie beim
-       Zukunfts-Karussell (.events-viewport/.events-track) - auf
-       schmalen Screens ist "seitlich wischen" die vertrautere
-       Bediengeste als das Umblättern eines Kalenders. perspective wird
-       hier nicht mehr gebraucht (kein 3D-Kippen mehr nötig). */
     perspective: none;
+    /* Gleiche Breite wie das Foto im Zukunfts-Karussell (siehe
+       .event-photo: width/max-width 420px) - dadurch wirken beide
+       Karussells auf Mobile optisch gleich breit/konsistent, statt
+       dass die Erinnerungen-Karte über die volle Bildschirmbreite
+       geht. */
+    max-width: 420px;
+    margin: 0 auto;
   }
 
   .past-track {
@@ -2195,9 +2224,9 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
     height: 100%;
     width: 100%;
     /* --past-index wird von createPastCarouselController() in
-       eventsCarousel.js bei jedem render() aktuell gehalten (siehe
-       dort) - auf dem Desktop (Flip-Modus) bleibt diese Variable
-       einfach ungenutzt, da diese Regel nur unter 900px gilt. */
+       eventsCarousel.js bei jedem render() aktuell gehalten - auf dem
+       Desktop (Flip-Modus, siehe oben) bleibt diese Variable einfach
+       ungenutzt, da diese Regel nur unter 900px gilt. */
     transform: translateX(calc(var(--past-index, 0) * -100%));
     transition: transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
     touch-action: pan-y;
@@ -2221,5 +2250,24 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
 
   .past-card {
     height: 100%;
+  }
+
+  /* ---------- Steuerung unter statt neben der Karte ----------
+     Wie beim Zukunfts-Karussell (.events-controls): Pfeile links/rechts,
+     Zähler in der Mitte, alles UNTER der Karte statt seitlich daneben -
+     auf Mobile ist dafür schlicht nicht genug Breite neben einer
+     420px-breiten Karte übrig. */
+  .past-body {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .past-controls {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 0;
   }
 }
