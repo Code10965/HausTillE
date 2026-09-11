@@ -46,7 +46,7 @@ jobs:
           open -u "${{ secrets.MANITU_FTP_USERNAME }},${{ secrets.MANITU_FTP_PASSWORD }}" -p 23 sftp://${{ secrets.MANITU_FTP_HOST }}
           lcd _site
           cd /web/haus-till-e.com/
-          mirror --reverse --verbose --ignore-time
+          mirror --reverse --verbose --ignore-time --no-perms
           bye
           LFTPSCRIPT
         # WICHTIG - Ursache des "_site"-Verschachtelungs-Bugs: Wenn
@@ -62,6 +62,14 @@ jobs:
         # Argumente aufrufen - dann spiegelt es "aktueller lokaler
         # Ordner" -> "aktueller Remote-Ordner", ohne Verschachtelungs-
         # Mehrdeutigkeit.
+        #
+        # "--no-perms" verhindert zusätzlich, dass mirror versucht,
+        # Datei-/Ordnerberechtigungen vom lokalen Build auf den Server
+        # zu übertragen (chmod) - das schlug bei Manitus FTP-Benutzer
+        # reihenweise mit "Permission denied" fehl und ließ den
+        # kompletten Deploy-Schritt mit einem Fehler abbrechen, obwohl
+        # die eigentlichen Datei-Inhalte bereits erfolgreich
+        # hochgeladen waren.
 
       - name: Per SFTP (lftp) zu Manitu hochladen
         run: |
