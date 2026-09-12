@@ -1,39 +1,11 @@
 // eventsCarousel.js
 //
-// Vier Teile:
-//   1. EventsCarouselState        - reine Zustandsverwaltung (welcher
-//      Index ist aktiv?), kennt weder DOM noch Timer.
-//   2. createCarouselController   - verbindet EventsCarouselState mit
-//      dem tatsächlichen HTML (Pfeile, Punkte, optionaler
-//      Play/Pause-Button, optionaler Autoplay-Timer, echtes
-//      Fingerwischen über swipeGesture.js). Wird sowohl für das
-//      horizontale Zukunfts-Karussell ALS AUCH für den mobilen Klon des
-//      Erinnerungen-Karussells verwendet (siehe events.njk,
-//      data-events-scope="past-mobile") - dadurch verhalten sich beide
-//      strukturell identisch (Pfeile, Punkte, Wischen), nur der
-//      Play/Pause-Button/Autoplay ist beim Erinnerungen-Klon bewusst
-//      deaktiviert (siehe setupEventsCarousel() weiter unten).
-//   3. partitionEventsByDate       - entscheidet beim Laden der Seite
-//      im Browser (nicht beim Bauen der Seite!), welche Events
-//      "Zukunft" (inkl. heute) und welche "Vergangenheit" sind, und
-//      entfernt die jeweils falsche Hälfte aus JEDEM der drei
-//      Karussells (Zukunft, Erinnerungen-Desktop-Flip,
-//      Erinnerungen-Mobile-Klon).
-//   4. createPastCarouselController - das Desktop-Flip-Kalender-
-//      Karussell für vergangene Events (ab 900px sichtbar, siehe CSS
-//      .past-flip-desktop). Unter 900px wird stattdessen der mobile
-//      Klon aus Teil 2 gezeigt (siehe .past-mobile-carousel in CSS).
+// TEMPORÄR MIT DEBUG-LOGS (siehe "console.log('[carousel] ...')") zur
+// gezielten Fehlersuche beim Swipe-Problem. Diese Logs sollten nach
+// dem Debugging wieder entfernt werden.
 
 import { attachSwipeGesture } from "./swipeGesture.js";
 
-/**
- * Reine Index-Verwaltung für ein Karussell mit `count` Folien (die
- * Klasse selbst kennt keine Obergrenze - sie funktioniert für jede
- * Anzahl >= 1). next()/prev() springen am Rand jeweils zum anderen Ende
- * ("Endlos-Schleife"), goTo() prüft den übergebenen Index und wirft
- * einen Fehler bei ungültigen Werten, statt sich stillschweigend falsch
- * zu verhalten.
- */
 export class EventsCarouselState {
   constructor(count, startIndex = 0) {
     if (!Number.isInteger(count) || count < 1) {
@@ -69,27 +41,21 @@ export class EventsCarouselState {
 }
 
 const DEFAULT_AUTOPLAY_MS = 6000;
-// Ab wie viel Pixeln horizontaler Fingerbewegung ein Wisch als
-// "gemeint" zählt, statt als zufälliges Zittern/Antippen gewertet zu
-// werden.
 const SWIPE_THRESHOLD_PX = 40;
 
-/**
- * Verbindet EventsCarouselState mit einem einzelnen
- * [data-events-carousel] Container. Wird von setupEventsCarousel() pro
- * gefundenem Karussell aufgerufen (Muster wie heroAmbient.js: mehrere
- * Instanzen auf einer Seite sollen unabhängig voneinander laufen
- * können) - trifft sowohl auf das echte Zukunfts-Karussell als auch auf
- * den mobilen Erinnerungen-Klon zu (siehe Dateikopf-Kommentar).
- *
- * Gibt ein kleines Steuer-Objekt zurück (u.a. für Tests), das die Seite
- * selbst nicht braucht, aber die Testsuite nutzt, um ohne echte
- * Nutzerklicks Zustände zu prüfen.
- */
 export function createCarouselController(container, { setIntervalFn, clearIntervalFn } = {}) {
   const track = container.querySelector("[data-events-track]");
   const slides = Array.prototype.slice.call(container.querySelectorAll("[data-events-slide]"));
   if (!track || slides.length === 0) return null;
+
+  console.log(
+    "[carousel] createCarouselController für Container:",
+    container,
+    "- Anzahl Folien:",
+    slides.length,
+    "- data-events-scope:",
+    container.dataset.eventsScope
+  );
 
   const prevBtn = container.querySelector("[data-events-prev]");
   const nextBtn = container.querySelector("[data-events-next]");
@@ -112,13 +78,6 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   const autoplayMs = parseInt(container.dataset.autoplayMs, 10) || DEFAULT_AUTOPLAY_MS;
   const state = new EventsCarouselState(slides.length, 0);
 
-  // "userPlaying": will die Person Autoplay (Play/Pause-Button)?
-  // "hovering"/"focused": ist die Maus/Tastatur/der Finger gerade im
-  // Karussell? Nur wenn BEIDES stimmt (Person will Autoplay UND
-  // schaut/klickt/wischt gerade nicht hinein), läuft der Timer
-  // wirklich - reines Hovern pausiert also automatisch mit, ohne den
-  // eigentlichen Pause-Knopf umzuschalten (der behält seinen eigenen
-  // Zustand).
   let userPlaying = !prefersReducedMotion && slides.length > 1;
   let hovering = false;
   let timerId = null;
@@ -128,7 +87,21 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   }
 
   function render() {
-    track.style.transform = `translateX(-${state.index * 100}%)`;
+    const transformValue = `translateX(-${state.index * 100}%)`;
+    track.style.transform = transformValue;
+
+    console.log(
+      "[carousel] render() Scope:",
+      container.dataset.eventsScope,
+      "- neuer index:",
+      state.index,
+      "von",
+      state.count,
+      "- gesetztes transform:",
+      transformValue,
+      "- tatsächlicher computed transform:",
+      win.getComputedStyle(track).transform
+    );
 
     slides.forEach((slide, i) => {
       slide.setAttribute("aria-hidden", i === state.index ? "false" : "true");
@@ -168,6 +141,7 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     stopTimer();
     if (!isEffectivelyPlaying()) return;
     timerId = setTimer(() => {
+      console.log("[carousel] AUTOPLAY-Tick für Scope:", container.dataset.eventsScope);
       state.next();
       render();
     }, autoplayMs);
@@ -185,13 +159,31 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   }
 
   function next() {
+    const before = state.index;
     state.next();
+    console.log(
+      "[carousel] next() aufgerufen. Scope:",
+      container.dataset.eventsScope,
+      "- Index vorher:",
+      before,
+      "-> nachher:",
+      state.index
+    );
     render();
     restartTimer();
   }
 
   function prev() {
+    const before = state.index;
     state.prev();
+    console.log(
+      "[carousel] prev() aufgerufen. Scope:",
+      container.dataset.eventsScope,
+      "- Index vorher:",
+      before,
+      "-> nachher:",
+      state.index
+    );
     render();
     restartTimer();
   }
@@ -211,10 +203,6 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   if (playPauseBtn) playPauseBtn.addEventListener("click", togglePlaying);
   dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
 
-  // Pfeiltasten navigieren, sobald der Fokus irgendwo im Karussell
-  // liegt (auf einem der Buttons oder Punkte) - Leertaste auf dem
-  // Play/Pause-Button schaltet zusätzlich um (Standardverhalten von
-  // <button> macht das ohnehin, hier nur zur Robustheit explizit).
   container.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft") {
       event.preventDefault();
@@ -225,9 +213,6 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     }
   });
 
-  // Maus ODER Tastaturfokus irgendwo im Karussell pausiert den
-  // automatischen Ablauf - "entspannt" heißt auch: nicht weiterlaufen,
-  // während jemand gerade eine Beschreibung liest.
   container.addEventListener("mouseenter", () => {
     hovering = true;
     restartTimer();
@@ -245,14 +230,6 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     restartTimer();
   });
 
-  // ---------- Echtes Fingerwischen ----------
-  // Nutzt den gemeinsamen swipeGesture.js-Helfer (statt einer eigenen
-  // Pointer-Event-Implementierung): der kümmert sich korrekt um
-  // preventDefault() nur bei passender Achse, damit vertikales
-  // Scrollen der Seite währenddessen nicht blockiert wird, horizontales
-  // Wischen aber zuverlässig ankommt. Gilt für JEDES Karussell, das
-  // createCarouselController nutzt - also sowohl das Zukunfts-Karussell
-  // als auch den mobilen Erinnerungen-Klon (siehe events.njk).
   attachSwipeGesture(track, {
     axis: "horizontal",
     threshold: SWIPE_THRESHOLD_PX,
@@ -285,28 +262,12 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   };
 }
 
-// ---------- Einstiegspunkt: Zukunfts-Karussell UND mobiler Erinnerungen-Klon ----------
-// Wird aus main.js aufgerufen. Sucht ALLE [data-events-carousel] auf
-// der aktuellen Seite - das trifft sowohl auf das echte
-// Zukunfts-Karussell (data-events-scope="future") als auch auf den
-// mobilen Erinnerungen-Klon (data-events-scope="past-mobile") zu, da
-// createCarouselController generisch über data-events-*-Attribute
-// arbeitet, unabhängig vom Scope-Wert. WICHTIG: partitionEventsByDate()
-// muss VORHER gelaufen sein (siehe setupAllEventCarousels() weiter
-// unten), sonst zählt dieser Aufruf noch die ungefilterten,
-// kompletten Events.
 export function setupEventsCarousel(root = document) {
   const containers = Array.prototype.slice.call(root.querySelectorAll("[data-events-carousel]"));
+  console.log("[carousel] setupEventsCarousel gefunden:", containers.length, "Container(s)");
   return containers
     .map((container) => {
       const controller = createCarouselController(container);
-      // Der mobile Erinnerungen-Klon soll - wie sein
-      // Desktop-Flip-Pendant - KEIN automatisches Weiterlaufen haben:
-      // Erinnerungen sollen bewusst durchgeblättert werden. Da dieser
-      // Klon (anders als das echte Zukunfts-Karussell) keinen
-      // Play/Pause-Button im Markup hat, würde createCarouselController
-      // sonst standardmäßig trotzdem automatisch starten (siehe
-      // "userPlaying"-Startwert dort) - hier explizit abgeschaltet.
       if (controller && container.dataset.eventsScope === "past-mobile") {
         controller.setPlaying(false);
       }
@@ -315,11 +276,6 @@ export function setupEventsCarousel(root = document) {
     .filter(Boolean);
 }
 
-// =========================================================================
-// Datums-Aufteilung: Zukunft (inkl. heute) vs. Vergangenheit
-// =========================================================================
-
-/** Lokales Datum (nicht UTC!) als "YYYY-MM-DD"-String. */
 function localISODate(date = new Date()) {
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, "0");
@@ -327,14 +283,10 @@ function localISODate(date = new Date()) {
   return `${y}-${m}-${d}`;
 }
 
-/** Das für den Datumsvergleich relevante Ende eines Events. */
 function slideEndDate(slide) {
   return slide.dataset.dateEnd || slide.dataset.dateStart || null;
 }
 
-/** Baut die Punkte-Navigation dynamisch aus der tatsächlichen Anzahl
- * übrig gebliebener Folien - für Zukunfts-Karussell UND mobilen
- * Erinnerungen-Klon gleichermaßen nutzbar. */
 function buildDots(container, count) {
   const dotsWrap = container.querySelector("[data-events-dots]");
   if (!dotsWrap) return;
@@ -352,8 +304,6 @@ function buildDots(container, count) {
   }
 }
 
-/** Blendet Viewport + Regler aus und die "keine Events"-Meldung ein
- * (oder umgekehrt) - funktioniert für alle drei Karussell-Varianten. */
 function toggleEmptyState(container, isEmpty) {
   const empty = container.querySelector("[data-events-empty], [data-past-empty]");
   const controls = container.querySelector("[data-events-controls], [data-past-controls]");
@@ -363,22 +313,6 @@ function toggleEmptyState(container, isEmpty) {
   if (viewport) viewport.classList.toggle("is-hidden", isEmpty);
 }
 
-/**
- * Teilt die vorgerenderten Folien in allen drei Karussell-Varianten
- * nach Datum auf:
- *   - [data-events-scope="future"]: nur zukünftige (inkl. heute)
- *     bleiben, aufsteigend sortiert (Reihenfolge kommt schon so aus
- *     sortedEvents[lang]).
- *   - [data-events-scope="past-mobile"]: nur vergangene bleiben,
- *     UMGEKEHRT sortiert (neuestes zuerst) - der mobile Klon des
- *     Erinnerungen-Karussells.
- *   - [data-past-carousel]: dieselbe Vergangenheits-Filterung wie
- *     oben, aber für den Desktop-Flip-Effekt mit seinen eigenen
- *     data-past-*-Attributen.
- *
- * Muss VOR createCarouselController()/createPastCarouselController()
- * aufgerufen werden.
- */
 export function partitionEventsByDate(root = document, today = localISODate()) {
   root.querySelectorAll('[data-events-carousel][data-events-scope="future"]').forEach((container) => {
     const track = container.querySelector("[data-events-track]");
@@ -390,6 +324,7 @@ export function partitionEventsByDate(root = document, today = localISODate()) {
     });
 
     const remaining = Array.prototype.slice.call(track.querySelectorAll("[data-events-slide]"));
+    console.log("[carousel] partition FUTURE - verbleibende Folien:", remaining.length);
     const ofLabel = container.dataset.ofLabel || "";
     remaining.forEach((slide, i) => {
       slide.setAttribute("aria-hidden", i === 0 ? "false" : "true");
@@ -402,10 +337,6 @@ export function partitionEventsByDate(root = document, today = localISODate()) {
     toggleEmptyState(container, remaining.length === 0);
   });
 
-  // Mobiler Klon des Erinnerungen-Karussells (siehe events.njk) -
-  // "spiegelverkehrt" zum future-Zweig oben gefiltert (nur VERGANGENE
-  // Events bleiben, neuestes zuerst), ansonsten identisch verarbeitet
-  // (Punkte-Navigation, nummeriertes aria-label).
   root.querySelectorAll('[data-events-carousel][data-events-scope="past-mobile"]').forEach((container) => {
     const track = container.querySelector("[data-events-track]");
     if (!track) return;
@@ -417,6 +348,7 @@ export function partitionEventsByDate(root = document, today = localISODate()) {
 
     const remaining = Array.prototype.slice.call(track.querySelectorAll("[data-events-slide]")).reverse();
     remaining.forEach((slide) => track.appendChild(slide));
+    console.log("[carousel] partition PAST-MOBILE - verbleibende Folien:", remaining.length);
 
     const ofLabel = container.dataset.ofLabel || "";
     remaining.forEach((slide, i) => {
@@ -446,28 +378,8 @@ export function partitionEventsByDate(root = document, today = localISODate()) {
   });
 }
 
-// =========================================================================
-// Desktop: vertikales "Erinnerungen"-Karussell (Flip-Kalender-Optik)
-// =========================================================================
-// Nur noch für die Desktop-Darstellung (ab 900px, siehe
-// .past-flip-desktop in styles.css) - die mobile Darstellung nutzt
-// stattdessen createCarouselController() weiter oben (identisch zum
-// Zukunfts-Karussell).
-
 const DEFAULT_PAST_OF_LABEL = "von";
 
-/**
- * Verbindet ein einzelnes [data-past-carousel] mit seinem HTML:
- *   - KEINE Endlos-Schleife: Erinnerungen sind ein endlicher, geordneter
- *     Stapel - am Anfang/Ende angekommen, deaktiviert sich der jeweilige
- *     Pfeil, statt am anderen Ende weiterzuspringen.
- *   - KEIN Autoplay.
- *   - Flip-Effekt: alle Karten liegen übereinandergestapelt in
- *     .past-viewport (mit CSS-perspective), nur .is-current liegt
- *     flach/sichtbar oben. Die CSS-Klassen is-before/is-current/
- *     is-after erzeugen den Umblätter-Eindruck allein durch eine
- *     CSS-Transition auf transform/opacity.
- */
 export function createPastCarouselController(container) {
   const track = container.querySelector("[data-past-track]");
   const slides = Array.prototype.slice.call(container.querySelectorAll("[data-past-slide]"));
@@ -542,7 +454,6 @@ export function createPastCarouselController(container) {
   };
 }
 
-// ---------- Einstiegspunkt: Desktop-Erinnerungen-Karussell ----------
 export function setupPastEventsCarousel(root = document) {
   const containers = Array.prototype.slice.call(root.querySelectorAll("[data-past-carousel]"));
   return containers
@@ -550,7 +461,6 @@ export function setupPastEventsCarousel(root = document) {
     .filter(Boolean);
 }
 
-// ---------- Kombinierter Einstiegspunkt ----------
 export function setupAllEventCarousels(root = document) {
   partitionEventsByDate(root);
   return {
