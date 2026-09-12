@@ -298,15 +298,16 @@ export function setupGallery() {
 // mobile Browser können die Touch-Erkennung an einem Element verlieren,
 // das sich während der Geste selbst verändert).
 //
-// ignoreSelector sorgt dafür, dass ein Wisch, der im scrollbaren
-// Info-Text beginnt (.lightbox-info-slide, siehe styles.css:
-// overflow-y: auto), dort ganz normal scrollt statt versehentlich das
-// Bild zu wechseln - gleiches Prinzip wie beim "Erinnerungen"-Karussell
-// (.past-card-description).
+// KEIN ignoreSelector nötig: anders als beim "Erinnerungen"-Karussell
+// (.past-card-description, das bei langem Text tatsächlich scrollt)
+// schrumpft die Info-Seite hier ihre Schrift automatisch, bis der Text
+// ohne Scrollen passt (siehe fitInfoSlideText weiter unten) - es gibt
+// also keinen echten Scroll-Konflikt, den ein ignoreSelector schützen
+// müsste. Die Info-Seite soll ganz normal wischbar sein wie jede
+// andere Folie auch.
 function wireLightboxSwipe() {
   attachSwipeGesture(lightboxEl, {
     axis: "horizontal",
-    ignoreSelector: ".lightbox-info-slide",
     onNext: () => {
       if (currentSlides.length > 1) showNext();
     },
