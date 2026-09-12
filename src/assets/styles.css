@@ -2207,7 +2207,8 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   .past-mobile-carousel .event-title, 
   .past-mobile-carousel .event-date,
   .past-mobile-carousel .event-location,
-  .past-mobile-carousel .event-description {
+  .past-mobile-carousel .event-description,
+  .past-mobile-carousel .event-location-icon {
   color: #C7C6C1;
   }
 }

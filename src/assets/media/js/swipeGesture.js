@@ -1,5 +1,10 @@
 // swipeGesture.js
 //
+// TEMPORÄR MIT DEBUG-LOGS - siehe "console.log('[swipe] ...')"-Zeilen.
+// Diese Zeilen sind NUR zur Fehlersuche gedacht und sollten wieder
+// entfernt werden, sobald das Wisch-Problem gefunden ist (siehe
+// Originalversion ohne Logs).
+//
 // Allgemeiner Touch-Wisch-Helfer, unabhängig von Events/Karussell-
 // Details - kennt weder EventsCarouselState noch data-events-*-
 // Attribute, sondern nimmt nur ein beliebiges DOM-Element und ein paar
@@ -14,47 +19,17 @@
 /**
  * Verbindet ein Element mit Touch-Wisch-Erkennung (horizontal ODER
  * vertikal, je nach `axis`).
- *
- * Funktionsweise: touchstart merkt sich die Startposition. touchmove
- * "sperrt" nach den ersten ~10px Bewegung die Wisch-Richtung
- * (horizontal ODER vertikal, je nachdem was überwiegt) - erst danach
- * wird per preventDefault() verhindert, dass der Browser gleichzeitig
- * die Seite scrollt, und zwar NUR wenn die gesperrte Richtung zur
- * `axis` dieses Elements passt (ein vertikaler Wisch auf einem
- * horizontal ausgerichteten Element blockiert also z.B. nicht das
- * normale Scrollen der Seite). touchend vergleicht Start- und
- * Endposition; ist der Unterschied größer als `threshold` (in Pixeln),
- * wird onNext()/onPrev() ausgelöst.
- *
- * @param {Element} element - Das Element, auf dem gewischt werden soll.
- * @param {Object} options
- * @param {"horizontal"|"vertical"} options.axis - Welche Wisch-Richtung
- *   ausgewertet wird (die jeweils andere Richtung wird ignoriert, damit
- *   z.B. normales Scrollen der Seite bei einem horizontalen Karussell
- *   nicht blockiert wird).
- * @param {number} [options.threshold=40] - Mindest-Wegstrecke in Pixeln,
- *   ab der eine Bewegung als Wisch (statt als Tippen/Zittern) zählt.
- * @param {Function} [options.onNext] - Wird bei Wisch nach links (axis:
- *   horizontal) bzw. nach oben (axis: vertical) aufgerufen.
- * @param {Function} [options.onPrev] - Wird bei Wisch nach rechts (axis:
- *   horizontal) bzw. nach unten (axis: vertical) aufgerufen.
- * @param {Function} [options.onDragStart] - Wird bei touchstart
- *   aufgerufen (z.B. um währenddessen einen Autoplay-Timer zu
- *   pausieren).
- * @param {Function} [options.onDragEnd] - Wird bei touchend/touchcancel
- *   aufgerufen (z.B. um einen Autoplay-Timer wieder zu starten).
- * @param {string} [options.ignoreSelector] - Startet die Geste
- *   innerhalb eines Elements, das diesem CSS-Selector entspricht (z.B.
- *   ein Textblock, der selbst per overflow-y: auto scrollt), wird die
- *   gesamte Geste ignoriert - der Finger soll dort ganz normal den
- *   Inhalt scrollen können, statt versehentlich die Wisch-Aktion
- *   auszulösen.
  */
 export function attachSwipeGesture(
   element,
   { axis, threshold = 40, onPrev, onNext, onDragStart, onDragEnd, ignoreSelector } = {}
 ) {
-  if (!element) return;
+  if (!element) {
+    console.log("[swipe] KEIN element übergeben - attachSwipeGesture bricht sofort ab.");
+    return;
+  }
+
+  console.log("[swipe] attachSwipeGesture verbunden mit Element:", element, "axis:", axis);
 
   let startX = 0;
   let startY = 0;
@@ -65,9 +40,13 @@ export function attachSwipeGesture(
   element.addEventListener(
     "touchstart",
     (event) => {
+      console.log("[swipe] touchstart erkannt. touches:", event.touches.length, "target:", event.target);
       if (event.touches.length !== 1) return; // Pinch-Zoom o.ä. nicht als Wisch werten
       ignoring = Boolean(ignoreSelector && event.target.closest(ignoreSelector));
-      if (ignoring) return; // Finger startet z.B. im scrollbaren Text - normal scrollen lassen
+      if (ignoring) {
+        console.log("[swipe] wird ignoriert (ignoreSelector getroffen).");
+        return;
+      }
       const touch = event.touches[0];
       startX = touch.clientX;
       startY = touch.clientY;
@@ -88,6 +67,7 @@ export function attachSwipeGesture(
 
       if (lockedAxis === null && (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10)) {
         lockedAxis = Math.abs(deltaX) > Math.abs(deltaY) ? "horizontal" : "vertical";
+        console.log("[swipe] Achse gesperrt auf:", lockedAxis, "(deltaX:", deltaX, "deltaY:", deltaY, ")");
       }
 
       if (lockedAxis === axis) {
@@ -102,16 +82,27 @@ export function attachSwipeGesture(
   function finishGesture(touch) {
     tracking = false;
     if (onDragEnd) onDragEnd();
-    if (lockedAxis !== axis) return;
 
     const deltaX = touch.clientX - startX;
     const deltaY = touch.clientY - startY;
+    console.log("[swipe] touchend. lockedAxis:", lockedAxis, "erwartete axis:", axis, "deltaX:", deltaX, "deltaY:", deltaY);
+
+    if (lockedAxis !== axis) {
+      console.log("[swipe] ABBRUCH: gesperrte Achse passt nicht zur erwarteten Achse.");
+      return;
+    }
+
     const delta = axis === "horizontal" ? deltaX : deltaY;
-    if (Math.abs(delta) < threshold) return;
+    if (Math.abs(delta) < threshold) {
+      console.log("[swipe] ABBRUCH: Bewegung", delta, "px unter Schwellenwert", threshold, "px.");
+      return;
+    }
 
     if (delta < 0) {
+      console.log("[swipe] -> onNext() wird aufgerufen.");
       if (onNext) onNext();
     } else {
+      console.log("[swipe] -> onPrev() wird aufgerufen.");
       if (onPrev) onPrev();
     }
   }
@@ -132,6 +123,7 @@ export function attachSwipeGesture(
   element.addEventListener(
     "touchcancel",
     () => {
+      console.log("[swipe] touchcancel ausgelöst (Geste abgebrochen, z.B. durch System-Geste).");
       ignoring = false;
       if (!tracking) return;
       tracking = false;
