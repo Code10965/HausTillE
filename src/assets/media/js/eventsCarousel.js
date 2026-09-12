@@ -6,8 +6,8 @@
 //   2. createCarouselController   - verbindet EventsCarouselState mit
 //      dem tatsächlichen HTML (Pfeile, Punkte, optionaler
 //      Play/Pause-Button, optionaler Autoplay-Timer, echtes
-//      Fingerwischen). Wird sowohl für das horizontale
-//      Zukunfts-Karussell ALS AUCH für den mobilen Klon des
+//      Fingerwischen über swipeGesture.js). Wird sowohl für das
+//      horizontale Zukunfts-Karussell ALS AUCH für den mobilen Klon des
 //      Erinnerungen-Karussells verwendet (siehe events.njk,
 //      data-events-scope="past-mobile") - dadurch verhalten sich beide
 //      strukturell identisch (Pfeile, Punkte, Wischen), nur der
@@ -23,6 +23,8 @@
 //      Karussell für vergangene Events (ab 900px sichtbar, siehe CSS
 //      .past-flip-desktop). Unter 900px wird stattdessen der mobile
 //      Klon aus Teil 2 gezeigt (siehe .past-mobile-carousel in CSS).
+
+import { attachSwipeGesture } from "./swipeGesture.js";
 
 /**
  * Reine Index-Verwaltung für ein Karussell mit `count` Folien (die
@@ -111,11 +113,12 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   const state = new EventsCarouselState(slides.length, 0);
 
   // "userPlaying": will die Person Autoplay (Play/Pause-Button)?
-  // "hovering"/"focused": ist die Maus/Tastatur gerade im Karussell?
-  // Nur wenn BEIDES stimmt (Person will Autoplay UND schaut/klickt
-  // gerade nicht hinein), läuft der Timer wirklich - reines Hovern
-  // pausiert also automatisch mit, ohne den eigentlichen Pause-Knopf
-  // umzuschalten (der behält seinen eigenen Zustand).
+  // "hovering"/"focused": ist die Maus/Tastatur/der Finger gerade im
+  // Karussell? Nur wenn BEIDES stimmt (Person will Autoplay UND
+  // schaut/klickt/wischt gerade nicht hinein), läuft der Timer
+  // wirklich - reines Hovern pausiert also automatisch mit, ohne den
+  // eigentlichen Pause-Knopf umzuschalten (der behält seinen eigenen
+  // Zustand).
   let userPlaying = !prefersReducedMotion && slides.length > 1;
   let hovering = false;
   let timerId = null;
@@ -242,53 +245,27 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     restartTimer();
   });
 
-  // ---------- Echtes Fingerwischen (Pointer-Events) ----------
-  // Pointer-Events decken Maus UND Touch einheitlich mit derselben API
-  // ab. Ein Schwellenwert für die HORIZONTALE Bewegung verhindert, dass
-  // normales vertikales Scrollen der Seite versehentlich als
-  // Wisch-Navigation missverstanden wird - erst wenn die horizontale
-  // Bewegung klar überwiegt, zählt der Ausschlag als Wisch-Kandidat.
-  // Gilt für JEDES Karussell, das createCarouselController nutzt -
-  // also sowohl das Zukunfts-Karussell als auch den mobilen
-  // Erinnerungen-Klon (siehe events.njk).
-  let pointerId = null;
-  let startX = 0;
-  let startY = 0;
-  let isSwiping = false;
-
-  track.addEventListener("pointerdown", (event) => {
-    pointerId = event.pointerId;
-    startX = event.clientX;
-    startY = event.clientY;
-    isSwiping = false;
-  });
-
-  track.addEventListener("pointermove", (event) => {
-    if (event.pointerId !== pointerId) return;
-    const deltaX = event.clientX - startX;
-    const deltaY = event.clientY - startY;
-    if (!isSwiping && Math.abs(deltaX) > 10 && Math.abs(deltaX) > Math.abs(deltaY)) {
-      isSwiping = true;
-    }
-  });
-
-  track.addEventListener("pointerup", (event) => {
-    if (event.pointerId !== pointerId) return;
-    if (isSwiping) {
-      const deltaX = event.clientX - startX;
-      if (deltaX <= -SWIPE_THRESHOLD_PX) {
-        next();
-      } else if (deltaX >= SWIPE_THRESHOLD_PX) {
-        prev();
-      }
-    }
-    pointerId = null;
-    isSwiping = false;
-  });
-
-  track.addEventListener("pointercancel", () => {
-    pointerId = null;
-    isSwiping = false;
+  // ---------- Echtes Fingerwischen ----------
+  // Nutzt den gemeinsamen swipeGesture.js-Helfer (statt einer eigenen
+  // Pointer-Event-Implementierung): der kümmert sich korrekt um
+  // preventDefault() nur bei passender Achse, damit vertikales
+  // Scrollen der Seite währenddessen nicht blockiert wird, horizontales
+  // Wischen aber zuverlässig ankommt. Gilt für JEDES Karussell, das
+  // createCarouselController nutzt - also sowohl das Zukunfts-Karussell
+  // als auch den mobilen Erinnerungen-Klon (siehe events.njk).
+  attachSwipeGesture(track, {
+    axis: "horizontal",
+    threshold: SWIPE_THRESHOLD_PX,
+    onNext: next,
+    onPrev: prev,
+    onDragStart: () => {
+      hovering = true;
+      restartTimer();
+    },
+    onDragEnd: () => {
+      hovering = false;
+      restartTimer();
+    },
   });
 
   render();
