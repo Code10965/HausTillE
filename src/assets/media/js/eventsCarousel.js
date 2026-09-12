@@ -1,8 +1,10 @@
 // eventsCarousel.js
 //
-// TEMPORÄR MIT DEBUG-LOGS (siehe "console.log('[carousel] ...')") zur
-// gezielten Fehlersuche beim Swipe-Problem. Diese Logs sollten nach
-// dem Debugging wieder entfernt werden.
+// TEMPORÄR MIT DEBUG-LOGS zur Fehlersuche. Misst die ECHTE
+// Bildschirmposition der aktiven Folie vor und nach next()/prev() -
+// per getBoundingClientRect() (liefert echte Pixel-Koordinaten,
+// unabhängig von CSS-Transition-Timing), statt des ungenauen
+// getComputedStyle()-Werts von vorhin.
 
 import { attachSwipeGesture } from "./swipeGesture.js";
 
@@ -48,15 +50,6 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   const slides = Array.prototype.slice.call(container.querySelectorAll("[data-events-slide]"));
   if (!track || slides.length === 0) return null;
 
-  console.log(
-    "[carousel] createCarouselController für Container:",
-    container,
-    "- Anzahl Folien:",
-    slides.length,
-    "- data-events-scope:",
-    container.dataset.eventsScope
-  );
-
   const prevBtn = container.querySelector("[data-events-prev]");
   const nextBtn = container.querySelector("[data-events-next]");
   const playPauseBtn = container.querySelector("[data-events-playpause]");
@@ -87,21 +80,7 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   }
 
   function render() {
-    const transformValue = `translateX(-${state.index * 100}%)`;
-    track.style.transform = transformValue;
-
-    console.log(
-      "[carousel] render() Scope:",
-      container.dataset.eventsScope,
-      "- neuer index:",
-      state.index,
-      "von",
-      state.count,
-      "- gesetztes transform:",
-      transformValue,
-      "- tatsächlicher computed transform:",
-      win.getComputedStyle(track).transform
-    );
+    track.style.transform = `translateX(-${state.index * 100}%)`;
 
     slides.forEach((slide, i) => {
       slide.setAttribute("aria-hidden", i === state.index ? "false" : "true");
@@ -141,7 +120,6 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     stopTimer();
     if (!isEffectivelyPlaying()) return;
     timerId = setTimer(() => {
-      console.log("[carousel] AUTOPLAY-Tick für Scope:", container.dataset.eventsScope);
       state.next();
       render();
     }, autoplayMs);
@@ -152,6 +130,32 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     startTimer();
   }
 
+  // ---------- Präzise Positions-Messung (nur zur Fehlersuche) ----------
+  // Misst die ECHTE Bildschirmposition (linke Kante) der Folie, die
+  // GERADE JETZT sichtbar sein soll - einmal sofort nach der Aktion,
+  // einmal 800ms später (nach Ablauf der 750ms-CSS-Transition). Wenn
+  // sich diese Zahl NICHT ändert, bewegt sich die Karte nachweislich
+  // nicht - unabhängig von jeglicher Style-Ablesungs-Unsicherheit.
+  function logPositionCheck(label) {
+    const activeSlide = slides[state.index];
+    if (!activeSlide) return;
+    const before = activeSlide.getBoundingClientRect();
+    console.log(
+      `[carousel] ${label} - Scope:`, container.dataset.eventsScope,
+      "- Index:", state.index,
+      "- Position SOFORT (left):", before.left.toFixed(1), "px"
+    );
+    setTimeout(() => {
+      const after = activeSlide.getBoundingClientRect();
+      console.log(
+        `[carousel] ${label} - Scope:`, container.dataset.eventsScope,
+        "- Index:", state.index,
+        "- Position NACH 800ms (left):", after.left.toFixed(1), "px",
+        "- Differenz zu vorher:", (after.left - before.left).toFixed(1), "px"
+      );
+    }, 800);
+  }
+
   function goTo(index) {
     state.goTo(index);
     render();
@@ -159,33 +163,17 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
   }
 
   function next() {
-    const before = state.index;
     state.next();
-    console.log(
-      "[carousel] next() aufgerufen. Scope:",
-      container.dataset.eventsScope,
-      "- Index vorher:",
-      before,
-      "-> nachher:",
-      state.index
-    );
     render();
     restartTimer();
+    logPositionCheck("NACH next()");
   }
 
   function prev() {
-    const before = state.index;
     state.prev();
-    console.log(
-      "[carousel] prev() aufgerufen. Scope:",
-      container.dataset.eventsScope,
-      "- Index vorher:",
-      before,
-      "-> nachher:",
-      state.index
-    );
     render();
     restartTimer();
+    logPositionCheck("NACH prev()");
   }
 
   function setPlaying(playing) {
@@ -264,7 +252,6 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
 
 export function setupEventsCarousel(root = document) {
   const containers = Array.prototype.slice.call(root.querySelectorAll("[data-events-carousel]"));
-  console.log("[carousel] setupEventsCarousel gefunden:", containers.length, "Container(s)");
   return containers
     .map((container) => {
       const controller = createCarouselController(container);
@@ -324,7 +311,6 @@ export function partitionEventsByDate(root = document, today = localISODate()) {
     });
 
     const remaining = Array.prototype.slice.call(track.querySelectorAll("[data-events-slide]"));
-    console.log("[carousel] partition FUTURE - verbleibende Folien:", remaining.length);
     const ofLabel = container.dataset.ofLabel || "";
     remaining.forEach((slide, i) => {
       slide.setAttribute("aria-hidden", i === 0 ? "false" : "true");
@@ -348,7 +334,6 @@ export function partitionEventsByDate(root = document, today = localISODate()) {
 
     const remaining = Array.prototype.slice.call(track.querySelectorAll("[data-events-slide]")).reverse();
     remaining.forEach((slide) => track.appendChild(slide));
-    console.log("[carousel] partition PAST-MOBILE - verbleibende Folien:", remaining.length);
 
     const ofLabel = container.dataset.ofLabel || "";
     remaining.forEach((slide, i) => {
