@@ -3,6 +3,8 @@
 // Lightbox-Elemente enthalten (aktuell nur die Startseite) - setupGallery()
 // bricht sonst früh ab, kein Fehler auf Impressum/Datenschutz.
 
+import { attachSwipeGesture } from "./swipeGesture.js";
+
 // ---------- Medien (Name -> Bilder-Galerie ODER einzelnes Video) ----------
 // Jeder Eintrag trägt seinen Typ selbst - eine einzige "Source of Truth"
 // pro Name, statt getrennter Objekte für Bilder und Videos.
@@ -279,6 +281,39 @@ export function setupGallery() {
 
   renderPhotoGrids();
   wireLightboxControls();
+  wireLightboxSwipe();
+}
+
+// ---------- Touch-Swipe für die Lightbox (Haus/Zimmer/Gastgeber-Info) ----------
+// Anders als beim Events-Karussell gibt es hier keinen per transform
+// verschobenen "Track" - Vor/Zurück tauscht einfach lightboxImg.src aus
+// (siehe showNext()/showPrev() weiter unten). Deshalb genügt hier die
+// einfache Grundfunktion von attachSwipeGesture (kein Live-Mitziehen
+// nötig) - Wisch erkannt, direkt zur nächsten/vorherigen Folie.
+//
+// Angehängt an lightboxEl selbst (der äußere, unbewegliche Hintergrund-
+// Container, deckt Bild/Video/Info-Seite UND die Pfeile mit ab) - nicht
+// an ein sich veränderndes Element, aus demselben Grund wie beim
+// Events-Karussell (siehe ausführliche Begründung in swipeGesture.js:
+// mobile Browser können die Touch-Erkennung an einem Element verlieren,
+// das sich während der Geste selbst verändert).
+//
+// ignoreSelector sorgt dafür, dass ein Wisch, der im scrollbaren
+// Info-Text beginnt (.lightbox-info-slide, siehe styles.css:
+// overflow-y: auto), dort ganz normal scrollt statt versehentlich das
+// Bild zu wechseln - gleiches Prinzip wie beim "Erinnerungen"-Karussell
+// (.past-card-description).
+function wireLightboxSwipe() {
+  attachSwipeGesture(lightboxEl, {
+    axis: "horizontal",
+    ignoreSelector: ".lightbox-info-slide",
+    onNext: () => {
+      if (currentSlides.length > 1) showNext();
+    },
+    onPrev: () => {
+      if (currentSlides.length > 1) showPrev();
+    },
+  });
 }
 
 // ---------- Foto-Kacheln aus dem media-Objekt erzeugen ----------
