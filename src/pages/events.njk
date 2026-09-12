@@ -290,6 +290,13 @@ permalink: "{{ pages.events[lang] }}"
                       <span class="event-date">{{ (item.date_iso | default("")).slice(0, 4) }}</span>
                     </p>
                     <h2 class="event-title">{{ item.title }}</h2>
+                    <p class="event-location">
+                      <svg class="event-location-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 21s-7-6.1-7-11.4A7 7 0 0 1 19 9.6C19 14.9 12 21 12 21Z"></path>
+                        <circle cx="12" cy="9.5" r="2.4"></circle>
+                      </svg>
+                      {{ item.location }}
+                    </p>
                     <p class="event-description">{{ item.description }}</p>
                   </div>
                 </article>

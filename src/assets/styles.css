@@ -2206,7 +2206,22 @@ h1, h2 { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
   }
   .past-mobile-carousel .event-title, 
   .past-mobile-carousel .event-date,
+  .past-mobile-carousel .event-location,
   .past-mobile-carousel .event-description {
-  color: #ffffff;
+  color: #C7C6C1;
+  }
 }
+/* Sagt dem Browser VORAB: "vertikales Scrollen erlaubt, horizontal
+   übernimmt JavaScript" - verhindert, dass der Browser bei Touch
+   selbst schon über die Richtung entscheidet, bevor unser Code es tut. */
+.events-track {
+  touch-action: pan-y;
+}
+
+/* Verhindert, dass Fotos im Karussell als "verschiebbares Bild"
+   erkannt werden (natives Bild-Drag) - das würde sonst mit dem
+   Wisch-Karussell konkurrieren. */
+.event-card img {
+  -webkit-user-drag: none;
+  user-select: none;
 }
