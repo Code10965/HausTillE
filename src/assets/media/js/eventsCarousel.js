@@ -1,10 +1,12 @@
 // eventsCarousel.js
 //
-// TEMPORÄR MIT DEBUG-LOGS zur Fehlersuche. Misst die ECHTE
-// Bildschirmposition der aktiven Folie vor und nach next()/prev() -
-// per getBoundingClientRect() (liefert echte Pixel-Koordinaten,
-// unabhängig von CSS-Transition-Timing), statt des ungenauen
-// getComputedStyle()-Werts von vorhin.
+// Vier Teile:
+//   1. EventsCarouselState        - reine Zustandsverwaltung.
+//   2. createCarouselController   - verbindet EventsCarouselState mit
+//      dem tatsächlichen HTML, inkl. echtem Fingerwischen mit
+//      Live-Mitziehen über swipeGesture.js.
+//   3. partitionEventsByDate       - teilt Events in Zukunft/Vergangenheit.
+//   4. createPastCarouselController - Desktop-Flip-Kalender-Karussell.
 
 import { attachSwipeGesture } from "./swipeGesture.js";
 
@@ -130,32 +132,6 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     startTimer();
   }
 
-  // ---------- Präzise Positions-Messung (nur zur Fehlersuche) ----------
-  // Misst die ECHTE Bildschirmposition (linke Kante) der Folie, die
-  // GERADE JETZT sichtbar sein soll - einmal sofort nach der Aktion,
-  // einmal 800ms später (nach Ablauf der 750ms-CSS-Transition). Wenn
-  // sich diese Zahl NICHT ändert, bewegt sich die Karte nachweislich
-  // nicht - unabhängig von jeglicher Style-Ablesungs-Unsicherheit.
-  function logPositionCheck(label) {
-    const activeSlide = slides[state.index];
-    if (!activeSlide) return;
-    const before = activeSlide.getBoundingClientRect();
-    console.log(
-      `[carousel] ${label} - Scope:`, container.dataset.eventsScope,
-      "- Index:", state.index,
-      "- Position SOFORT (left):", before.left.toFixed(1), "px"
-    );
-    setTimeout(() => {
-      const after = activeSlide.getBoundingClientRect();
-      console.log(
-        `[carousel] ${label} - Scope:`, container.dataset.eventsScope,
-        "- Index:", state.index,
-        "- Position NACH 800ms (left):", after.left.toFixed(1), "px",
-        "- Differenz zu vorher:", (after.left - before.left).toFixed(1), "px"
-      );
-    }, 800);
-  }
-
   function goTo(index) {
     state.goTo(index);
     render();
@@ -166,14 +142,12 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     state.next();
     render();
     restartTimer();
-    logPositionCheck("NACH next()");
   }
 
   function prev() {
     state.prev();
     render();
     restartTimer();
-    logPositionCheck("NACH prev()");
   }
 
   function setPlaying(playing) {
@@ -218,14 +192,31 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     restartTimer();
   });
 
+  let dragBaseOffsetPx = 0;
+
   attachSwipeGesture(track, {
     axis: "horizontal",
     threshold: SWIPE_THRESHOLD_PX,
-    onNext: next,
-    onPrev: prev,
     onDragStart: () => {
       hovering = true;
       restartTimer();
+      dragBaseOffsetPx = -state.index * track.getBoundingClientRect().width;
+      track.style.transition = "none";
+    },
+    onDragMove: (deltaX) => {
+      track.style.transform = `translateX(${dragBaseOffsetPx + deltaX}px)`;
+    },
+    onDragCancel: () => {
+      track.style.transition = "";
+      render();
+    },
+    onNext: () => {
+      track.style.transition = "";
+      next();
+    },
+    onPrev: () => {
+      track.style.transition = "";
+      prev();
     },
     onDragEnd: () => {
       hovering = false;
