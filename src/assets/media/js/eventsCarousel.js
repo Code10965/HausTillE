@@ -5,6 +5,15 @@
 //   2. createCarouselController   - verbindet EventsCarouselState mit
 //      dem tatsächlichen HTML, inkl. echtem Fingerwischen mit
 //      Live-Mitziehen über swipeGesture.js.
+//
+//      WICHTIG: attachSwipeGesture wird an [data-events-viewport]
+//      gehängt (das stabile, sich selbst nie bewegende Sichtfenster),
+//      NICHT an [data-events-track] (das sich per translateX bewegende
+//      Element) - siehe ausführliche Begründung in swipeGesture.js.
+//      Das war der Kern eines hartnäckigen Bugs: an den Track gehängt
+//      funktionierte nur der allererste Wisch, danach nie wieder, weil
+//      mobile Safari die Touch-Erkennung an einem Element verlieren
+//      kann, das sich währenddessen per CSS-Transform bewegt.
 //   3. partitionEventsByDate       - teilt Events in Zukunft/Vergangenheit.
 //   4. createPastCarouselController - Desktop-Flip-Kalender-Karussell.
 
@@ -192,9 +201,39 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
     restartTimer();
   });
 
+  // ---------- Touch-Swipe (horizontal) mit Live-Mitziehen ----------
+  // WICHTIG: an [data-events-viewport] gehängt (stabil, bewegt sich
+  // nie), NICHT an track (bewegt sich per translateX) - siehe
+  // Begründung im Dateikopf-Kommentar und in swipeGesture.js. Die
+  // eigentliche visuelle Bewegung des Tracks steuern wir hier selbst
+  // über onDragMove/onNext/onPrev.
+  const viewport = container.querySelector("[data-events-viewport]");
   let dragBaseOffsetPx = 0;
+  let pendingDragDeltaX = null;
+  let dragRafId = null;
 
-  attachSwipeGesture(track, {
+  function applyPendingDrag() {
+    dragRafId = null;
+    if (pendingDragDeltaX === null) return;
+    track.style.transform = `translateX(${dragBaseOffsetPx + pendingDragDeltaX}px)`;
+  }
+
+  function scheduleDragUpdate(deltaX) {
+    pendingDragDeltaX = deltaX;
+    if (dragRafId === null) {
+      dragRafId = win.requestAnimationFrame(applyPendingDrag);
+    }
+  }
+
+  function cancelPendingDrag() {
+    if (dragRafId !== null) {
+      win.cancelAnimationFrame(dragRafId);
+      dragRafId = null;
+    }
+    pendingDragDeltaX = null;
+  }
+
+  attachSwipeGesture(viewport || track, {
     axis: "horizontal",
     threshold: SWIPE_THRESHOLD_PX,
     onDragStart: () => {
@@ -204,17 +243,20 @@ export function createCarouselController(container, { setIntervalFn, clearInterv
       track.style.transition = "none";
     },
     onDragMove: (deltaX) => {
-      track.style.transform = `translateX(${dragBaseOffsetPx + deltaX}px)`;
+      scheduleDragUpdate(deltaX);
     },
     onDragCancel: () => {
+      cancelPendingDrag();
       track.style.transition = "";
       render();
     },
     onNext: () => {
+      cancelPendingDrag();
       track.style.transition = "";
       next();
     },
     onPrev: () => {
+      cancelPendingDrag();
       track.style.transition = "";
       prev();
     },
