@@ -487,7 +487,55 @@
           "src": "/assets/media/events/collis.jpg",
           "alt": "De toren van Collis in Zell (Mosel)"
         }
-      }
+      },
+      {
+        "title": "Krimidiner: Een moorddadig goede jaargang",
+        "date": "12. März 2027",
+        "date_iso": "2027-03-12",
+        "time": "Inloop: 17.00 uur / Aanvang: 18.00 uur",
+        "location": "Gewelfkelder Haus Till E",
+        "description": "Een humoristisch krimidiner in vier gangen en vijf bedrijven: met veel Moezelwijn, veel verleden en veel te veel verdachten (Het stuk is in het Duits): Paul was op school altijd de buitenbeentje. Vandaag is hij rijker dan iedereen bij elkaar – en nodigt de hele jaargang uit voor een reünie in zijn wijnkelder. Wat hij zich daarbij dacht? Goede vraag. 30 jaar verleden, een moorddadig goede avond aan de Moezel, heel veel Riesling – en middenin een commissaris die eigenlijk op vakantie is aan de Moezel om zijn huwelijk te redden, een kandidate voor het landraadschap met latex handschoenen en te veel mensen met een heel goede reden om nerveus te zijn. Wat er precies gebeurt? Het publiek mag meeraden – latex handschoenen zijn niet verplicht. - Voor tickets graag bellen",
+        "image": {
+          "src": "/assets/media/events/krimidinner.jpg",
+          "alt": "Poster voor het krimidiner: Een moorddadig goede jaargang"
+        }
+    },
+    {
+        "title": "Krimidiner: Een moorddadig goede jaargang",
+        "date": "13. März 2027",
+        "date_iso": "2027-03-12",
+        "time": "Inloop: 17.00 uur / Aanvang: 18.00 uur",
+        "location": "Gewelfkelder Haus Till E",
+        "description": "Een humoristisch krimidiner in vier gangen en vijf bedrijven: met veel Moezelwijn, veel verleden en veel te veel verdachten (Het stuk is in het Duits): Paul was op school altijd de buitenbeentje. Vandaag is hij rijker dan iedereen bij elkaar – en nodigt de hele jaargang uit voor een reünie in zijn wijnkelder. Wat hij zich daarbij dacht? Goede vraag. 30 jaar verleden, een moorddadig goede avond aan de Moezel, heel veel Riesling – en middenin een commissaris die eigenlijk op vakantie is aan de Moezel om zijn huwelijk te redden, een kandidate voor het landraadschap met latex handschoenen en te veel mensen met een heel goede reden om nerveus te zijn. Wat er precies gebeurt? Het publiek mag meeraden – latex handschoenen zijn niet verplicht. - Voor tickets graag bellen",
+        "image": {
+          "src": "/assets/media/events/krimidinner.jpg",
+          "alt": "Poster voor het krimidiner: Een moorddadig goede jaargang"
+        }
+    },
+    {
+        "title": "Krimidiner: Een moorddadig goede jaargang",
+        "date": "19. März 2027",
+        "date_iso": "2027-03-12",
+        "time": "Inloop: 17.00 uur / Aanvang: 18.00 uur",
+        "location": "Gewelfkelder Haus Till E",
+        "description": "Een humoristisch krimidiner in vier gangen en vijf bedrijven: met veel Moezelwijn, veel verleden en veel te veel verdachten (Het stuk is in het Duits): Paul was op school altijd de buitenbeentje. Vandaag is hij rijker dan iedereen bij elkaar – en nodigt de hele jaargang uit voor een reünie in zijn wijnkelder. Wat hij zich daarbij dacht? Goede vraag. 30 jaar verleden, een moorddadig goede avond aan de Moezel, heel veel Riesling – en middenin een commissaris die eigenlijk op vakantie is aan de Moezel om zijn huwelijk te redden, een kandidate voor het landraadschap met latex handschoenen en te veel mensen met een heel goede reden om nerveus te zijn. Wat er precies gebeurt? Het publiek mag meeraden – latex handschoenen zijn niet verplicht. - Voor tickets graag bellen",
+        "image": {
+          "src": "/assets/media/events/krimidinner.jpg",
+          "alt": "Poster voor het krimidiner: Een moorddadig goede jaargang"
+        }
+    },
+    {
+        "title": "Krimidiner: Een moorddadig goede jaargang",
+        "date": "20. März 2027",
+        "date_iso": "2027-03-12",
+        "time": "Inloop: 16.00 uur / Aanvang: 17.00 uur",
+        "location": "Gewelfkelder Haus Till E",
+        "description": "Een humoristisch krimidiner in vier gangen en vijf bedrijven: met veel Moezelwijn, veel verleden en veel te veel verdachten (Het stuk is in het Duits): Paul was op school altijd de buitenbeentje. Vandaag is hij rijker dan iedereen bij elkaar – en nodigt de hele jaargang uit voor een reünie in zijn wijnkelder. Wat hij zich daarbij dacht? Goede vraag. 30 jaar verleden, een moorddadig goede avond aan de Moezel, heel veel Riesling – en middenin een commissaris die eigenlijk op vakantie is aan de Moezel om zijn huwelijk te redden, een kandidate voor het landraadschap met latex handschoenen en te veel mensen met een heel goede reden om nerveus te zijn. Wat er precies gebeurt? Het publiek mag meeraden – latex handschoenen zijn niet verplicht. - Voor tickets graag bellen",
+        "image": {
+          "src": "/assets/media/events/krimidinner.jpg",
+          "alt": "Poster voor het krimidiner: Een moorddadig goede jaargang"
+        }
+    }
     ]
   }
 }
