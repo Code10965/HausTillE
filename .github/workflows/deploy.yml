@@ -25,15 +25,24 @@ jobs:
 
       - name: Website bauen
         run: npm run build
-        # Kein ELEVENTY_PATH_PREFIX mehr nötig: die Seite liegt jetzt im
-        # Root der eigenen Domain, nicht mehr in einem GitHub-Pages-
-        # Unterordner. eleventy.config.js fällt dann automatisch auf "/"
-        # zurück (siehe pathPrefix: process.env.ELEVENTY_PATH_PREFIX || "/").
 
       - name: lftp installieren
         run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: lftp-Skript schreiben
+        # WICHTIG: "--ignore-time" reichte NICHT zuverlässig aus - bei
+        # einer Datumsänderung mit GLEICHER Zeichenanzahl ("20." ->
+        # "19.") blieb die Dateigröße identisch, und ein kompletter
+        # Deploy-Lauf hat daraufhin buchstäblich GAR NICHTS übertragen
+        # (leeres Transfer-Log, obwohl der Workflow grün war). Das ist
+        # jetzt der zweite bestätigte Fall dieser Art (erster Fall:
+        # "Fets"->"Fest" hatte wenigstens eine andere Größe und wurde
+        # noch erkannt). Robusteste Lösung: den Größen-/Zeit-Vergleich
+        # komplett abschalten und stattdessen JEDES Mal bedingungslos
+        # ALLES hochladen ("--newer-than=@0" erzwingt das explizit,
+        # unabhängig von Größe/Zeit/Cache). Bei der überschaubaren
+        # Projektgröße kostet das nur ein bis zwei Minuten mehr pro
+        # Deploy, garantiert dafür aber echte Zuverlässigkeit.
         run: |
           cat > /tmp/deploy.lftp << 'LFTPSCRIPT'
           set sftp:auto-confirm yes
@@ -46,30 +55,9 @@ jobs:
           open -u "${{ secrets.MANITU_FTP_USERNAME }},${{ secrets.MANITU_FTP_PASSWORD }}" -p 23 sftp://${{ secrets.MANITU_FTP_HOST }}
           lcd _site
           cd /web/haus-till-e.com/
-          mirror --reverse --verbose --ignore-time --no-perms
+          mirror --reverse --verbose --no-perms --newer-than=@0
           bye
           LFTPSCRIPT
-        # WICHTIG - Ursache des "_site"-Verschachtelungs-Bugs: Wenn
-        # mirror sowohl Quell- als auch Zielpfad als Argumente bekommt
-        # ("mirror _site /web/haus-till-e.com/"), hat lftp bei einem
-        # Teil-Update (nur eine geänderte Datei von 254) den lokalen
-        # Ordnernamen "_site" fälschlich als NEUEN Unterordner im Ziel
-        # angelegt (Ergebnis: /web/haus-till-e.com/_site/de/... statt
-        # /web/haus-till-e.com/de/...) - die eigentliche Zieldatei blieb
-        # dadurch unverändert. Der eindeutigste, unmissverständlichste
-        # lftp-Modus ist stattdessen: mit "lcd"/"cd" explizit in beide
-        # Verzeichnisse wechseln und "mirror" komplett OHNE Pfad-
-        # Argumente aufrufen - dann spiegelt es "aktueller lokaler
-        # Ordner" -> "aktueller Remote-Ordner", ohne Verschachtelungs-
-        # Mehrdeutigkeit.
-        #
-        # "--no-perms" verhindert zusätzlich, dass mirror versucht,
-        # Datei-/Ordnerberechtigungen vom lokalen Build auf den Server
-        # zu übertragen (chmod) - das schlug bei Manitus FTP-Benutzer
-        # reihenweise mit "Permission denied" fehl und ließ den
-        # kompletten Deploy-Schritt mit einem Fehler abbrechen, obwohl
-        # die eigentlichen Datei-Inhalte bereits erfolgreich
-        # hochgeladen waren.
 
       - name: Per SFTP (lftp) zu Manitu hochladen
         run: |
