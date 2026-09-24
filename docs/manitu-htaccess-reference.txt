@@ -1,0 +1,155 @@
+# ============================================================================
+# REFERENZ-KOPIE: .htaccess bei Manitu (web/haus-till-e.com/.htaccess)
+# ============================================================================
+# WICHTIG: Diese Datei wird NICHT automatisch deployed! Sie dient nur zur
+# Dokumentation, damit der aktuelle Stand der server-seitigen Apache-
+# Konfiguration nachvollziehbar bleibt, falls der Manitu-Webspace je neu
+# aufgesetzt werden muss oder jemand vergisst, was/warum dort konfiguriert
+# wurde. Änderungen an der ECHTEN .htaccess müssen weiterhin manuell per
+# FileZilla/WebFTP direkt auf dem Server vorgenommen werden (Pfad:
+# web/haus-till-e.com/.htaccess) - ein Commit hier hat KEINE Auswirkung
+# auf die Live-Seite.
+#
+# Stand: 24. September 2026
+# ============================================================================
+
+# BEGIN All In One WP Security
+#AIOWPS_BASIC_HTACCESS_RULES_START
+<Files .htaccess>
+<IfModule mod_authz_core.c>
+Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+Order deny,allow
+Deny from all
+</IfModule>
+</Files>
+ServerSignature Off
+LimitRequestBody 10485760
+<Files wp-config.php>
+<IfModule mod_authz_core.c>
+Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+Order deny,allow
+Deny from all
+</IfModule>
+</Files>
+#AIOWPS_BASIC_HTACCESS_RULES_END
+#AIOWPS_PREVENT_IMAGE_HOTLINKS_START
+# HINWEIS zur Korrektur vom 10.09.2026: Ursprünglich stand hier nur
+# "haus-till-e\.com" (ohne (www\.)?) - dadurch wurden Bilder blockiert,
+# sobald sie MIT Referrer von der eigenen www-Domain nachgeladen wurden
+# (z.B. beim normalen Browsen der Seite), weil "www.haus-till-e.com"
+# nicht mit dem Muster "^http(s)?://haus-till-e\.com" matchte. Direkter
+# Aufruf ohne Referrer funktionierte dagegen, was die Fehlersuche lange
+# erschwert hat.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{REQUEST_FILENAME} \.(gif|jpe?g?|png)$ [NC]
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?haus-till-e\.com [NC]
+RewriteRule \.(gif|jpe?g?|png)$ - [F,NC,L]
+</IfModule>
+#AIOWPS_PREVENT_IMAGE_HOTLINKS_END
+# END All In One WP Security
+
+# BEGIN GzipWpFastestCache
+# HINWEIS: Trotz des Namens ("WpFastestCache") ist dieser Block
+# CMS-unabhängig - reine Gzip-Kompression nach Dateityp, betrifft
+# WordPress nicht direkt. Bewusst BEHALTEN (im Gegensatz zum weiter
+# unten entfernten WpFastestCache-Rewrite-Block), da sinnvolle,
+# CMS-unabhängige Performance-Optimierung.
+<IfModule mod_deflate.c>
+AddType x-font/woff .woff
+AddType x-font/ttf .ttf
+AddOutputFilterByType DEFLATE image/svg+xml
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE text/javascript
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE application/x-font-ttf
+AddOutputFilterByType DEFLATE x-font/ttf
+AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+AddOutputFilterByType DEFLATE font/opentype font/ttf font/eot font/otf
+</IfModule>
+# END GzipWpFastestCache
+# BEGIN LBCWpFastestCache
+# HINWEIS: Ebenfalls CMS-unabhängig (Browser-Cache-Header/Expires nach
+# Dateityp) - bewusst behalten, sinnvolle Performance-Optimierung für
+# Bilder/CSS/JS/Fonts, unabhängig von WordPress.
+<FilesMatch "\.(webm|ogg|mp4|ico|pdf|flv|avif|jpg|jpeg|png|gif|webp|js|css|swf|x-html|css|xml|js|woff|woff2|otf|ttf|svg|eot)(\.gz)?$">
+<IfModule mod_expires.c>
+AddType application/font-woff2 .woff2
+AddType application/x-font-opentype .otf
+ExpiresActive On
+ExpiresDefault A0
+ExpiresByType video/webm A10368000
+ExpiresByType video/ogg A10368000
+ExpiresByType video/mp4 A10368000
+ExpiresByType image/avif A10368000
+ExpiresByType image/webp A10368000
+ExpiresByType image/gif A10368000
+ExpiresByType image/png A10368000
+ExpiresByType image/jpg A10368000
+ExpiresByType image/jpeg A10368000
+ExpiresByType image/ico A10368000
+ExpiresByType image/svg+xml A10368000
+ExpiresByType text/css A10368000
+ExpiresByType text/javascript A10368000
+ExpiresByType application/javascript A10368000
+ExpiresByType application/x-javascript A10368000
+ExpiresByType application/font-woff2 A10368000
+ExpiresByType application/x-font-opentype A10368000
+ExpiresByType application/x-font-truetype A10368000
+</IfModule>
+<IfModule mod_headers.c>
+Header set Expires "max-age=A10368000, public"
+Header unset ETag
+Header set Connection keep-alive
+FileETag None
+</IfModule>
+</FilesMatch>
+# END LBCWpFastestCache
+
+# HINWEIS zur Entfernung (10.09.2026): Hier stand ursprünglich ein
+# "# BEGIN WpFastestCache" ... "# END WpFastestCache"-Block, der
+# Anfragen an "haus-till-e.com" (OHNE www.) auf eine veraltete,
+# gecachte HTML-Kopie der alten WordPress-Startseite umleitete
+# (wp-content/cache/all/...). Das erklärte, warum haus-till-e.com und
+# www.haus-till-e.com lange unterschiedliche Inhalte zeigten. Block
+# wurde komplett entfernt, da WordPress nicht mehr die aktive Seite ist.
+
+# HINWEIS: Der Duplicator-Kommentarblock ("This file was updated by
+# Duplicator...") wurde ebenfalls entfernt, da rein WordPress-bezogen
+# und ohne Funktion für die neue Eleventy-Seite.
+
+# BEGIN Alte WordPress-URLs auf Startseite umleiten
+# HINZUGEFÜGT am 24.09.2026, ersetzt den früheren WordPress-Fallback-
+# Block ("# BEGIN WordPress" ... "# END WordPress"), der alle nicht
+# existierenden Pfade an index.php weiterleitete. Seit dem Löschen der
+# WordPress-Kerndateien (wp-load.php, wp-blog-header.php etc.) führte
+# das zu einem 500 Internal Server Error statt eines sauberen 404 bei
+# alten, noch bei Google indexierten URLs wie /gastgeber/, /kontakt/,
+# /gaestezimmer/, /anfahrt/, /veranstaltungen/, /buchungsanfrage/.
+#
+# Jede Anfrage, die auf keine echte Datei/keinen echten Ordner trifft
+# (RewriteCond !-f / !-d), wird jetzt stattdessen per 301 (dauerhafte
+# Weiterleitung) auf die Startseite umgeleitet. Echte, existierende
+# Pfade der neuen Eleventy-Seite (/de/, /en/, /nl/, /assets/,
+# sitemap.xml, ...) sind davon NICHT betroffen, da !-f/!-d nur bei
+# NICHT existierenden Zielen greift.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ https://www.haus-till-e.com/ [R=301,L]
+</IfModule>
+# END Alte WordPress-URLs auf Startseite umleiten
