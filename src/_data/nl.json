@@ -475,6 +475,18 @@
           "src": "/assets/media/events/music_canteen_nov.jpg",
           "alt": "Tuinconcert bij Haus Till E"
         }
+      },
+      {
+        "title": "Gieh roff of dat Häisje",
+        "date": "03. okt 2026",
+        "date_iso": "2026-10-03",
+        "time": "11:00 uur",
+        "location": "Collis-rondwandeling",
+        "description": "Gieh roff of dat Häisje – Wandelen, wijn & Moezelgenot: Op 3 oktober 2026 nodigt Zell je uit voor de wandeling ‘Ga naar het huisje’ door de wijngaarden. Op de Collis-rondwandeling, het themapad ‘Zeller Schwarze Katz’ of de Collissteig wachten zeven proeverijpunten met regionale specialiteiten, hapjes en de wijnen van de Zeller Schwarze Katz. Vanaf 11 uur openen de ‘Häisje’ (huisjes) hun deuren – met een herfstachtig uitzicht op het Moezeldal. Start en finish: wijnlounge op de Marktplatz, bij de ‘Zeller Schwarze Katz’-fontein.",
+        "image": {
+          "src": "/assets/media/events/collis.jpg",
+          "alt": "De toren van Collis in Zell (Mosel)"
+        }
       }
     ]
   }

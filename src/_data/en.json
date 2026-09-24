@@ -475,6 +475,18 @@
           "src": "/assets/media/events/music_canteen_nov.jpg",
           "alt": "Garden concert at Haus Till E"
         }
+      },
+      {
+        "title": "Gieh roff of dat Häisje",
+        "date": "Oct 3 2026",
+        "date_iso": "2026-10-03",
+        "time": "11:00 AM",
+        "location": "Collis Circular Trail",
+        "description": "Gieh roff of dat Häisje – hiking, wine & Moselle delights: On 3 October 2026, Zell invites you to join the ‘Head up to the little house’ hike through the vineyards. Along the Collis Circular Trail, the ‘Zeller Schwarze Katz’ themed trail or the Collissteig, seven refreshment stops await with regional specialities, canapés and wines from the Zeller Schwarze Katz. From 11.00 am, the ‘Häisje’ (little houses) open their doors – offering an autumnal view of the Moselle valley. Start and finish: Wine lounge on the market square, by the ‘Zeller Schwarze Katz’ fountain.",
+        "image": {
+          "src": "/assets/media/events/collis.jpg",
+          "alt": "Collis's Tower in Zell (Mosel)"
+        }
       }
     ]
   }

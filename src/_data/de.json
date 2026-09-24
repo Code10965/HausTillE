@@ -475,6 +475,18 @@
           "src": "/assets/media/events/music_canteen_nov.jpg",
           "alt": "Garten-Konzert Haus Till E"
         }
+      },
+      {
+        "title": "Gieh roff of dat Häisje",
+        "date": "03. Okt 2026",
+        "date_iso": "2026-10-03",
+        "time": "11:00 Uhr",
+        "location": "Collis Rundweg",
+        "description": "Gieh roff of dat Häisje – Wandern, Wein & Moselgenuss: Am 3. Oktober 2026 lädt Zell zur Wanderung 'Geh rauf auf das Häuschen' durch die Weinberge ein. Auf dem Collis-Rundweg, dem Themenweg ‘Zeller Schwarze Katz’ oder dem Collissteig warten sieben Genussstationen mit regionalen Spezialitäten, Häppchen und den Weinen der Zeller Schwarze Katz. Ab 11 Uhr öffnen die ‘Häisje’ (Häuschen) ihre Türen – mit herbstlichem Blick auf das Moseltal. Start und Ziel: Weinlounge am Marktplatz, am ‘Zeller Schwarze Katz’-Brunnen.",
+        "image": {
+          "src": "/assets/media/events/collis.jpg",
+          "alt": "Collis-Turm in Zell (Mosel)"
+        }
       }
     ]
   }
